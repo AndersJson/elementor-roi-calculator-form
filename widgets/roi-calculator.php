@@ -87,12 +87,8 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
         ?>
-        <div class="owl-carousel owl-theme logo-carousel" <?php echo $this->get_render_attribute_string( 'roi_calculator_options' ); ?>>
-            <?php foreach( $settings[ 'slider' ] as $slide ) : ?>
-                <div class="item">
-                    <img src="<?php echo esc_url( $slide[ 'slider_image' ][ 'url' ] ); ?>" alt="<?php esc_attr_e( $slide[ 'slider_title' ] ); ?>" />
-                </div>
-            <?php endforeach; ?>
+        <div class="content">
+            <h1>hello render()</h1>
         </div>
         <?php
     }
@@ -112,12 +108,8 @@ class ROI_Calculator_Widget extends Widget_Base {
             );
         #>
         <# if( settings.slider.length ) { #>
-        <div class="owl-carousel owl-theme logo-carousel" {{{ view.getRenderAttributeString( 'roi_calculator_options' ) }}}>
-            <# _.each( settings.slider, function( slide ) { #>
-            <div class="item">
-                <img src="{{ slide.slider_image.url }}" alt="{{ slide.slider_title }}" />
-            </div>
-            <# } ) #>
+        <div>
+            <h1>hello _content_temlate()</h1>
         </div>
         <# } #>
         <?php

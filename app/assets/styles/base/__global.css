@@ -1,7 +1,9 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body {
-  background-color: aquamarine;
+.content {
+	background-color: aquamarine;
+	width: 100%;
+	height: 100vh;
 }
