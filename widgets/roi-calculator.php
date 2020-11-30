@@ -45,6 +45,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            $repeater->add_control(
+                'checklist_icon',
+                [
+                    'label' => __( 'Checklist Icon', 'roi-elementor-widget' ),
+                    'type' => \Elementor\Controls_Manager::ICONS,
+                    'default' => [
+                        'value' => 'fas fa-check',
+                        'library' => 'regular',
+                    ],
+                ]
+            );
+
             $this->add_control(
                 'checklist',
                 [
@@ -91,7 +103,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         ?>
         */
         foreach( $settings[ 'checklist' ] as $item ) : ?>
-            <div><?php echo $item[ 'checklist_text' ]; ?></div>
+            <div><?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?> <?php echo $item[ 'checklist_text' ]; ?></div>
         <?php endforeach; ?>
         <?php
     }
