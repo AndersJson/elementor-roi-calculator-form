@@ -33,41 +33,42 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
-            // Slider Repeater
+            // Checklist Repeater
             $repeater = new \Elementor\Repeater();
             $repeater->add_control(
-                'slider_title',
+                'checklist_text',
                 [
-                    'label' => __( 'Title', 'roi-elementor-widget' ),
+                    'label' => __( 'Checklist Text', 'roi-elementor-widget' ),
                     'type' => \Elementor\Controls_Manager::TEXT,
-                    'default' => __( 'SLider Title #1', 'roi-elementor-widget' ),
-                    'label_block' => true
+                    'default' => __( '' , 'roi-elementor-widget' ),
+                    'label_block' => true,
                 ]
             );
-            $repeater->add_control(
-                'slider_image',
-                [
-                    'label'   => __( 'Image', 'roi-elementor-widget' ),
-                    'type'    => \Elementor\Controls_Manager::MEDIA,
-                    'default' => [
-                        'url' => \Elementor\Utils::get_placeholder_image_src(),
-                    ],
-                ],
-            );
+
             $this->add_control(
-                'slider',
+                'checklist',
                 [
-                    'label' => __( 'Slider Items', 'roi-elementor-widget' ),
+                    'label' => __( 'Checklist', 'roi-elementor-widget' ),
                     'type' => \Elementor\Controls_Manager::REPEATER,
                     'fields' => $repeater->get_controls(),
                     'default' => [
                         [
-                            'slider_title' => __( 'Slider title #1', 'roi-elementor-widget' ),
+                            'checklist_text' => __( 'Spending at least 3 hours/day maintaining sites', 'roi-elementor-widget' ),
+                        ],
+                        [
+                            'checklist_text' => __( 'Its my fulltime job', 'roi-elementor-widget' ),
+                        ],
+                        [
+                            'checklist_text' => __( 'Travelling more than 30 minutes to work', 'roi-elementor-widget' ),
+                        ],
+                        [
+                            'checklist_text' => __( 'Have 5 or more employees', 'roi-elementor-widget' ),
                         ],
                     ],
-                    'title_field' => '{{{ slider_title }}}',
+                    'title_field' => '{{{ checklist_text }}}',
                 ]
             );
+
         $this->end_controls_section();
 
     }
@@ -76,6 +77,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+        /*
         $this->add_render_attribute(
             'roi_calculator_options',
             [
@@ -87,13 +89,15 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
         ?>
-        <div class="content">
-            <h1>hello render()</h1>
-        </div>
+        */
+        foreach( $settings[ 'checklist' ] as $item ) : ?>
+            <div><?php echo $item[ 'checklist_text' ]; ?></div>
+        <?php endforeach; ?>
         <?php
     }
 
     protected function _content_template() {
+        /*
         ?>
         <#
             view.addRenderAttribute(
@@ -113,6 +117,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         </div>
         <# } #>
         <?php
+        */
     }
 
 }
