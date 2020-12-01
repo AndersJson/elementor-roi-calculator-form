@@ -105,7 +105,109 @@ class ROI_Calculator_Widget extends Widget_Base {
         foreach( $settings[ 'checklist' ] as $item ) : ?>
             <div><?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?> <?php echo $item[ 'checklist_text' ]; ?></div>
         <?php endforeach; ?>
-        <?php
+
+        <!-- *********************** -->
+        <div class="roi-wrapper">
+            <section class="inner-wrapper">
+                    <form class="roi-form" id="roi-form">
+                        <fieldset class="roi-row">
+                            <label class="roi-left">
+                                <br>How many sites do<br>you manage per month?
+                                <span class="roi__tip-trigger">?</span>
+                                <span class="roi__tip">
+                                    <p>If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
+                                    <p>If you generate less than 5 sites a month, you can still select “5” to get a solid idea of what your ROI would be if your business grew a little bit more!</p>
+                                </span>
+                            </label>
+                            <div class="roi-right --slider-contain">
+                                <div class="roi-thumb-contain">
+                                    <span type="range" id="js-roi-thumb" class="roi-thumb"></span>
+                                </div>
+                                <input type="range" id="js-roi-slider" class="range roi-slider" step="1" min="5" max="30" value="10">
+                                <ul class="roi-slider-labels">
+                                    <li>
+                                    <a href="#" class="js-roi-label" data-value="5">5</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="roi-row">
+                            <label class="roi-left">Which of the<br>following tasks do you<br>handle for your clients?</label>
+                            <div class="roi-right">
+                                <ul class="roi-checkmarks">
+                                    <li>
+                                    <label class="roi-checkmarks__label">
+                                        <input type="checkbox" name="struggles[]" class="roi-checkmarks__mark" value="Dealing with downtime">
+                                        <span>
+                                        <svg x="0px" y="0px" width="15.8px" height="14.3px" viewBox="0 0 15.8 14.3" style="enable-background:new 0 0 15.8 14.3;">
+                                            <polygon points="12.9,0 5.1,9 2.5,6.7 0,9.4 2.9,12.1 5.4,14.3 7.5,11.8 15.8,2.5 "/>
+                                        </svg>
+                                        </span>
+                                        Dealing with downtime
+                                    </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="roi-row">
+                            <label class="roi-left">
+                                <br>How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
+                                <span class="roi__tip-trigger">?</span>
+                                <span class="roi__tip">
+                                    <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
+                                </span>
+                            </label>
+                            <div class="roi-right --slider-contain">
+                                <div class="roi-thumb-contain">
+                                    <span type="range" id="js-roi-thumb1" class="roi-thumb"></span>
+                                </div>
+                        
+                                <input type="range" id="js-roi-slider1" class="range roi-slider" step=".25" min=".5" max="5.5" value="2.5">
+                        
+                                <ul class="roi-slider-labels">
+                                    <li>
+                                    <a href="#" class="js-roi-label" data-value=".5">.5</a>
+                                    </li>
+                                </ul>
+                                </div>
+                        </fieldset>
+                    
+                        <fieldset class="roi-row">
+                            <label class="roi-left"><br>What is your hourly rate?</label>
+                            <div class="roi-right --slider-contain">
+                                <div class="roi-thumb-contain">
+                                    <span type="range" id="js-roi-thumb2" class="roi-thumb"></span>
+                                </div>
+                        
+                                <input type="range" id="js-roi-slider2" class="range roi-slider" step="5" min="50" max="300" value="100">
+                        
+                                <ul class="roi-slider-labels">
+                                    <li>
+                                    <a href="#" class="js-roi-label" data-value="50">$50</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="roi-row">
+                            <label class="roi-left"><br>Tell us where to send your results.</label>
+                            <div class="roi-right">
+                                <input class="roi-pdf-form__input" name="firstname" placeholder="First name">
+                                <input class="roi-pdf-form__input" name="lastname" placeholder="Last name">
+                                <input class="roi-pdf-form__input" name="email" placeholder="Work email">
+                                <input class="roi-pdf-form__input" name="phone" placeholder="Phone number">
+                            </div>
+                        </fieldset>
+                        <fieldset class="roi-row text-center">
+                            <button type="submit" class="roi-btn" id="roi-calculate-btn">Calculate</button>
+                        </fieldset>    
+                    </form>
+            </section> 
+        </div>
+    
+    <!-- ************************************************* -->
     }
 
     protected function _content_template() {
