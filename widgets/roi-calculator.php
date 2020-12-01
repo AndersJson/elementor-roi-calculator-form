@@ -211,31 +211,28 @@ class ROI_Calculator_Widget extends Widget_Base {
         </div>
     
     <!-- ************************************************* -->
+    <?php
     }
 
     protected function _content_template() {
-        /*
-        ?>
-        <#
-            view.addRenderAttribute(
-                'roi_calculator_options',
-                {
-                    'id': 'roi-calculator-id',
-                    'data-loop': settings.loop,
-                    'data-dots': settings.dots,
-                    'data-navs': settings.navs,
-                    'data-margin': settings.margin
-                }
-            );
-        #>
-        <# if( settings.slider.length ) { #>
-        <div>
-            <h1>hello _content_temlate()</h1>
-        </div>
-        <# } #>
-        <?php
-        */
-    }
+    //    <#
+    //        view.addRenderAttribute(
+    //            'roi_calculator_options',
+    //            {
+    //                'id': 'roi-calculator-id',
+    //                'data-loop': settings.loop,
+    //                'data-dots': settings.dots,
+    //                'data-navs': settings.navs,
+    //                'data-margin': settings.margin
+    //            }
+    //        );
+    //    #>
+    //    <# if( settings.slider.length ) { #>
+    //    <div>
+    //        <h1>hello _content_temlate()</h1>
+    //    </div>
+    //    <# } #>
+        }
 
 }
 Plugin::instance()->widgets_manager->register_widget_type( new ROI_Calculator_Widget() );
