@@ -83,9 +83,97 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        //Trigger styles control-function
+        $this->style_tab();
     }
 
-    private function style_tab() {}
+    private function style_tab() {
+         // Image Style Settings
+         $this->start_controls_section(
+            'wrapper_style_section',
+            [
+                'label' => __( 'Wrapper', 'roi-elementor-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Padding
+        $this->add_responsive_control(
+            'wrapper_padding',
+            [
+                'label' => __( 'Padding', 'roi-elementor-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 40px 40px 40px 40px )',
+                'default' => [
+                    'top' => 40,
+                    'right' => 40,
+                    'bottom' => 40,
+                    'left' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Border Type
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'wrapper_border',
+                'label' => __( 'Border', 'roi-elementor-widget' ),
+                'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+            ]
+        );
+
+        // Border Radius
+        $this->add_responsive_control(
+            'wrapper_border_radius',
+            [
+                'label' => __( 'Border Radius', 'roi-elementor-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 10px 10px 10px 10px )',
+                'default' => [
+                    'top' => 10,
+                    'right' => 10,
+                    'bottom' => 10,
+                    'left' => 10,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                ],
+            ]
+        );
+
+        // Box Shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'wrapper_box_shadow',
+                'label' => __( 'Box Shadow', 'roi-elementor-widget' ),
+                'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+            ]
+        );
+
+        // Background Color
+        $this->add_control(
+            'wrapper_backgorund_color',
+            [
+                'label' => __( 'Background Color', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#FFFFFF',
+                'description' => 'Default: ( #FFFFFF ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+    }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
