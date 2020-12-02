@@ -1,0 +1,5 @@
+.roi-wrapper{
+  padding: var(--padding-lg);
+  border-radius: var(--border-radius-standard);
+  box-shadow: var(--box-shadow-standard);
+}

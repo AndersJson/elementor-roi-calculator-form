@@ -1,5 +1,12 @@
 .roi-wrapper *,
 .roi-wrapper *::before,
 .roi-wrapper *::after {
+  padding: 0;
   margin: 0;
+  box-sizing: inherit;
+}
+
+.roi-wrapper{
+  font-size: 10px;
+  box-sizing: border-box;
 }
