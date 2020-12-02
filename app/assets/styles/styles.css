@@ -1,2 +1,6 @@
 @import "./base/__global.css";
 @import "./abstracts/__vars.css";
+@import "./components/__roi-calculation-form.css";
+@import "./components/__roi-row.css";
+@import "./components/__roi-left.css";
+@import "./components/__roi-right.css";

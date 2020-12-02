@@ -189,18 +189,19 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
         ?>
-        */
+        
         foreach( $settings[ 'checklist' ] as $item ) : ?>
             <div><?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?> <?php echo $item[ 'checklist_text' ]; ?></div>
         <?php endforeach; ?>
-
+*/
+?>
         <!-- *********************** -->
         <div class="roi-outer-wrapper">
             <section class="roi-inner-wrapper">
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row">
                             <label class="roi-left">
-                                <br>How many sites do<br>you manage per month?
+                                How many sites do you manage per month?
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
                                     <p>If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
@@ -208,6 +209,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </span>
                             </label>
                             <div class="roi-right">
+                                <p>TEST--If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
+
 <!-- ******************************** Slider 
                                 <div class="roi-thumb-contain">
                                     <span type="range" id="js-roi-thumb" class="roi-thumb"></span>
@@ -223,7 +226,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left">Which of the<br>following tasks do you<br>handle for your clients?</label>
+                            <label class="roi-left">Which of the following tasks do you handle for your clients?</label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
                                     <li>
@@ -248,6 +251,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </span>
                             </label>
                             <div class="roi-right">
+                                <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
+
 <!-- ******************************** Slider 
                                 <div class="roi-thumb-contain">
                                     <span type="range" id="js-roi-thumb1" class="roi-thumb"></span>
@@ -266,6 +271,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                         <fieldset class="roi-row">
                             <label class="roi-left"><br>What is your hourly rate?</label>
                             <div class="roi-right">
+                                <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
+
 <!-- ******************************** Slider
                                 <div class="roi-thumb-contain">
                                     <span type="range" id="js-roi-thumb2" class="roi-thumb"></span>
