@@ -1,6 +1,5 @@
 .roi-left{
   display: block;
   width: 40%;
-  background-color: beige;
   padding: var(--padding-right-md);
 }

@@ -188,13 +188,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'data-margin' => $settings[ 'margin' ],
             ]
         );
+    */
         ?>
-        
-        foreach( $settings[ 'checklist' ] as $item ) : ?>
-            <div><?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?> <?php echo $item[ 'checklist_text' ]; ?></div>
-        <?php endforeach; ?>
-*/
-?>
+
+
         <!-- *********************** -->
         <div class="roi-outer-wrapper">
             <section class="roi-inner-wrapper">
@@ -229,15 +226,28 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">Which of the following tasks do you handle for your clients?</label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
+                                <?php
+                                foreach( $settings[ 'checklist' ] as $item ) : ?>
+                                    <label class="roi-checklist__label">
+                                        <li>
+                                            <input type="checkbox" name="struggles[]" class="roi-checklist__input" value="<?php echo $item[ 'checklist_text' ]; ?>">
+                                            <span class="roi-checklist__icon">
+                                                <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                            </span>
+                                            <?php echo $item[ 'checklist_text' ]; ?>
+                                        </li>
+                                    </label>
+                                <?php endforeach; ?>
+                                <!--
                                     <li>
                                     <label class="roi-checklist__label">
                                         <input type="checkbox" name="struggles[]" class="roi-checklist__mark" value="Dealing with downtime">
                                         <span>
-                                        <!-- icon -->
                                         </span>
                                         Dealing with downtime
                                     </label>
                                     </li>
+                                    -->
                                 </ul>
                             </div>
                         </fieldset>
