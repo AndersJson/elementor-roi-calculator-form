@@ -27,7 +27,7 @@ class ROI_Calculator_Widget extends Widget_Base {
     public function _register_controls() {
         // Content Settings
         $this->start_controls_section(
-            'content_settings',
+            'checklist_settings',
             [
                 'label' => __( 'Content Settings', 'roi-elementor-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -83,12 +83,61 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'first_label_settings',
+            [
+                'label' => __( 'First Label Settings', 'roi-elementor-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        // Label Text
+        $this->add_control(
+            'first_label_text',
+            [
+                'label' => __( 'Label text', 'roi-elementor-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Label text', 'roi-elementor-widget' ),
+                'placeholder' => __( 'Enter text for label', 'roi-elementor-widget' ),
+            ]
+        );
+
+        // Tip
+        $this->add_control(
+            'show_tip',
+            [
+                'label' => __( 'Show Tip', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'your-plugin' ),
+                'label_off' => __( 'Hide', 'your-plugin' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        // Top Badge Text
+        $this->add_control(
+            'first_tip_text',
+            [
+                'label' => __( 'Tip Text', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Explanation and tip goes here', 'plugin-domain' ),
+                'placeholder' => __( 'Type your tip here', 'plugin-domain' ),
+                'condition' => [
+                    'show_tip' => 'yes'
+                ]
+            ]
+        );
+
+        
+        $this->end_controls_section();
+
         //Trigger styles control-function
         $this->style_tab();
     }
 
     private function style_tab() {
-         // Image Style Settings
+         // Wrapper Style Settings
          $this->start_controls_section(
             'wrapper_style_section',
             [
@@ -97,80 +146,105 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Padding
-        $this->add_responsive_control(
-            'wrapper_padding',
+            // Padding
+            $this->add_responsive_control(
+                'wrapper_padding',
+                [
+                    'label' => __( 'Padding', 'roi-elementor-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 40px 40px 40px 40px )',
+                    'default' => [
+                        'top' => 40,
+                        'right' => 40,
+                        'bottom' => 40,
+                        'left' => 40,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            // Border Type
+            $this->add_group_control(
+                \Elementor\Group_Control_Border::get_type(),
+                [
+                    'name' => 'wrapper_border',
+                    'label' => __( 'Border', 'roi-elementor-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+                ]
+            );
+
+            // Border Radius
+            $this->add_responsive_control(
+                'wrapper_border_radius',
+                [
+                    'label' => __( 'Border Radius', 'roi-elementor-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 10px 10px 10px 10px )',
+                    'default' => [
+                        'top' => 10,
+                        'right' => 10,
+                        'bottom' => 10,
+                        'left' => 10,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                    ],
+                ]
+            );
+
+            // Box Shadow
+            $this->add_group_control(
+                \Elementor\Group_Control_Box_Shadow::get_type(),
+                [
+                    'name' => 'wrapper_box_shadow',
+                    'label' => __( 'Box Shadow', 'roi-elementor-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+                ]
+            );
+
+            // Background Color
+            $this->add_control(
+                'wrapper_backgorund_color',
+                [
+                    'label' => __( 'Background Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#FFFFFF',
+                    'description' => 'Default: ( #FFFFFF ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+        $this->end_controls_section();
+
+        // First Label Style Settings
+        $this->start_controls_section(
+            'first_label_style_section',
             [
-                'label' => __( 'Padding', 'roi-elementor-widget' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'rem' ],
-                'description' => 'Default: ( 40px 40px 40px 40px )',
-                'default' => [
-                    'top' => 40,
-                    'right' => 40,
-                    'bottom' => 40,
-                    'left' => 40,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
+                'label' => __( 'First Label', 'roi-elementor-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Border Type
-        $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
-            [
-                'name' => 'wrapper_border',
-                'label' => __( 'Border', 'roi-elementor-widget' ),
-                'selector' => '{{WRAPPER}} .roi-outer-wrapper',
-            ]
-        );
-
-        // Border Radius
-        $this->add_responsive_control(
-            'wrapper_border_radius',
-            [
-                'label' => __( 'Border Radius', 'roi-elementor-widget' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'rem' ],
-                'description' => 'Default: ( 10px 10px 10px 10px )',
-                'default' => [
-                    'top' => 10,
-                    'right' => 10,
-                    'bottom' => 10,
-                    'left' => 10,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-
-                ],
-            ]
-        );
-
-        // Box Shadow
-        $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'wrapper_box_shadow',
-                'label' => __( 'Box Shadow', 'roi-elementor-widget' ),
-                'selector' => '{{WRAPPER}} .roi-outer-wrapper',
-            ]
-        );
-
-        // Background Color
-        $this->add_control(
-            'wrapper_backgorund_color',
-            [
-                'label' => __( 'Background Color', 'plugin-domain' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#FFFFFF',
-                'description' => 'Default: ( #FFFFFF ) ',
-                'selectors' => [
-                    '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
-                ],
-            ]
-        );
+            // Text Color
+            $this->add_control(
+                'label_text_color',
+                [
+                    'label' => __( 'Text Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#54595f',
+                    'description' => 'Default: ( #54595f ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-left' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
 
         $this->end_controls_section();
     }
@@ -197,13 +271,14 @@ class ROI_Calculator_Widget extends Widget_Base {
             <section class="roi-inner-wrapper">
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row">
-                            <label class="roi-left text-right">
-                                How many sites do you manage per month?
+                            <label class="roi-left">
+                                <?php echo $settings[ 'first_label_text' ]; ?>
+                            <?php if( $settings[ 'show_tip' ] == 'yes') : ?>
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
-                                    <p>If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
-                                    <p>If you generate less than 5 sites a month, you can still select “5” to get a solid idea of what your ROI would be if your business grew a little bit more!</p>
+                                    <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
                                 </span>
+                            <?php endif; ?>
                             </label>
                             <div class="roi-right">
                                 <p>TEST--If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>

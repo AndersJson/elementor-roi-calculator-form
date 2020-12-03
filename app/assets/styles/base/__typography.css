@@ -1,11 +1,9 @@
 .roi-row {
   font-size: var(--fs-primary-paragraph);
-	color: var(--color-primary-grey);
   font-weight: var(--fw-primary);
 }
 
 .roi-tip-trigger{
-  color: var(--color-grey-light);
   font-size: 17px;
   font-weight: var(--fw-md);
 }
