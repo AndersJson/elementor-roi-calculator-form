@@ -1,5 +1,5 @@
-.roi-left{
-  display: block;
-  width: 40%;
-  padding: var(--padding-right-md);
+.roi-left {
+	display: block;
+	width: 40%;
+	padding: var(--padding-right-md);
 }

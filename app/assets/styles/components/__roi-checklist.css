@@ -1,6 +1,11 @@
-.roi-checklist{
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  padding: 0;
+.roi-checklist {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+
+	&__label {
+		&:not(:last-child) {
+			padding-bottom: var(--pb-sm);
+		}
+	}
 }

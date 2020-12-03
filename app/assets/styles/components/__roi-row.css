@@ -1,9 +1,7 @@
-.roi-row{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 2em;
-  border: none;
+.roi-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 2em;
+	border: none;
 }

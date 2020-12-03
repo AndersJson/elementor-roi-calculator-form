@@ -1,12 +1,13 @@
-.roi-wrapper *,
-.roi-wrapper *::before,
-.roi-wrapper *::after {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
+.roi-outer-wrapper *,
+.roi-outer-wrapper *::before,
+.roi-outer-wrapper *::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
 }
 
-.roi-wrapper{
-  font-size: 10px;
-  box-sizing: border-box;
+.roi-outer-wrapper {
+	font-size: 10px;
+	line-height: 1.7em;
+	box-sizing: border-box;
 }

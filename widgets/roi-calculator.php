@@ -197,7 +197,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             <section class="roi-inner-wrapper">
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row">
-                            <label class="roi-left">
+                            <label class="roi-left text-right">
                                 How many sites do you manage per month?
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
@@ -223,7 +223,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left">Which of the following tasks do you handle for your clients?</label>
+                            <label class="roi-left text-right">Which of the following tasks do you handle for your clients?</label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
                                 <?php
@@ -253,7 +253,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left">
+                            <label class="roi-left text-right">
                                 <br>How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
@@ -279,7 +279,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </div>
                         </fieldset>
                         <fieldset class="roi-row">
-                            <label class="roi-left"><br>What is your hourly rate?</label>
+                            <label class="roi-left text-right"><br>What is your hourly rate?</label>
                             <div class="roi-right">
                                 <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
 
@@ -300,7 +300,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left">Tell us where to send your results.</label>
+                            <label class="roi-left text-right">Tell us where to send your results.</label>
                             <div class="roi-right">
                                 <input class="roi-pdf-form__input" name="firstname" placeholder="First name">
                                 <input class="roi-pdf-form__input" name="lastname" placeholder="Last name">
