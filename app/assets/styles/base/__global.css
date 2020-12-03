@@ -4,10 +4,10 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: inherit;
+	line-height: inherit;
 }
 
 .roi-outer-wrapper {
-	font-size: 10px;
-	line-height: 1.7em;
 	box-sizing: border-box;
+	line-height: 20px;
 }

@@ -254,7 +254,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     
                         <fieldset class="roi-row">
                             <label class="roi-left text-right">
-                                <br>How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
+                                How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
                                     <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>

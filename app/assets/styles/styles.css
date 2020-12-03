@@ -1,8 +1,12 @@
-@import "./base/__global.css";
 @import "./abstracts/__vars.css";
+@import "./base/__global.css";
 @import "./base/__utilities.css";
+@import "./base/__typography.css";
 @import "./components/__roi-calculation-form.css";
 @import "./components/__roi-row.css";
 @import "./components/__roi-left.css";
 @import "./components/__roi-right.css";
 @import "./components/__roi-checklist.css";
+@import "./components/__tip-trigger.css";
+@import "./components/__roi-tip.css";
+

@@ -1,4 +1,18 @@
 :root {
-	--padding-right-md: 0 6em 0 0;
-	--pb-sm: 1rem;
+	/* Colors */
+	--color-grey-light: #e7e7e7;
+	--color-primary-gray: #54595f;
+
+
+	/* Text */
+	--fw-primary: 200;
+	--fw-md: 700;
+	--fs-primary-paragraph: 20px;
+	--fs-primary-sm: 16px;
+
+	/* Layout */
+	--padding-right-md: 0 60px 0 0;
+	--pb-sm: 10px;
+	--mb-sm: 20px;
+	--box-shadow-sm: 0 0 10px 0 rgba(0,0,0,.2);
 }
