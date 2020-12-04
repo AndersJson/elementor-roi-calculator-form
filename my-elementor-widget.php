@@ -10,9 +10,63 @@
 
 if (!defined('ABSPATH')) exit();
 
-
 global $wpdb;
 global $roi_db_version;
+$roi_db_version = '1.0';
+
+            /* Create table in SQL-db for roi-formsubscribers */
+            function roi_calculator_create_db() {
+                $table_name = $wpdb->prefix . "roi-formsubscribers";
+                $charset_collate = $wpdb->get_charset_collate();
+                $sql = "CREATE TABLE $table_name (
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `phone` varchar(255) CHARACTER SET utf8,
+                        PRIMARY KEY (`id`)
+                    ) $charset_collate; ";
+    
+                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                dbDelta($sql);
+                
+                add_option( 'roi_db_version', $roi_db_version );
+    
+                //Check for new db-version
+                $installed_ver = get_option( "roi_db_version" );
+    
+                if ( $installed_ver != $roi_db_version ) {
+    
+                    $table_name = $wpdb->prefix . "roi-formsubscribers";
+    
+                    $sql = "CREATE TABLE $table_name (
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+                        `phone` varchar(255) CHARACTER SET utf8,
+                        PRIMARY KEY (`id`)
+                    );";
+    
+                    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                    dbDelta( $sql );
+    
+                    update_option( "roi_db_version", $roi_db_version );
+                }
+            }
+
+            /* Run function on plugin activation. */
+            register_activation_hook(__FILE__, 'roi_calculator_create_db');
+
+        //Kör update-check plugins_loaded
+        function roi_update_db_check() {
+            global $roi_db_version;
+            if ( get_site_option( 'roi_db_version' ) != $roi_db_version ) {
+                roi_calculator_create_db();
+            }
+        }
+    
+        add_action( 'plugins_loaded', 'roi_update_db_check' );
 
 /**
  * Elementor Extension main CLass
@@ -94,10 +148,7 @@ final class ROI_Calculator_Widget
      * @since 1.0.0
      */
     public function init()
-    {
-        global $roi_db_version;
-        $roi_db_version = '1.0';
-
+    {  
         // Check if the ELementor installed and activated
         if (!did_action('elementor/loaded')) {
             add_action('admin_notices', [$this, 'admin_notice_missing_main_plugin']);
@@ -148,60 +199,6 @@ final class ROI_Calculator_Widget
 
         add_action('elementor/init', [$this, 'init_category']);
         add_action('elementor/widgets/widgets_registered', [$this, 'init_widgets']);
-
-        //Kör update-check plugins_loaded
-        function roi_update_db_check() {
-            global $roi_db_version;
-            if ( get_site_option( 'roi_db_version' ) != $roi_db_version ) {
-                jal_install();
-            }
-        }
-
-        add_action( 'plugins_loaded', 'roi_update_db_check' );
-
-
-            /* Create table in SQL-db for roi-formsubscribers */
-        function roi_calculator_create_db() {
-            $table_name = $wpdb->prefix . "roi-formsubscribers";
-            $charset_collate = $wpdb->get_charset_collate();
-            $sql = "CREATE TABLE $table_name (
-                    `id` int NOT NULL AUTO_INCREMENT,
-                    `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `email` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `phone` varchar(255) CHARACTER SET utf8,
-                    PRIMARY KEY (`id`)
-                ) $charset_collate; ";
-
-            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-            dbDelta($sql);
-            
-            add_option( 'roi_db_version', $roi_db_version );
-
-            //Check for new db-version
-            $installed_ver = get_option( "roi_db_version" );
-
-            if ( $installed_ver != $roi_db_version ) {
-
-                $table_name = $wpdb->prefix . "roi-formsubscribers";
-
-                $sql = "CREATE TABLE $table_name (
-                    `id` int NOT NULL AUTO_INCREMENT,
-                    `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `email` varchar(255) CHARACTER SET utf8 NOT NULL,
-                    `phone` varchar(255) CHARACTER SET utf8,
-                    PRIMARY KEY (`id`)
-                );";
-
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                dbDelta( $sql );
-
-                update_option( "roi_db_version", $roi_db_version );
-            }
-        }
-        /* Run function on plugin activation. */
-        register_activation_hook(__FILE__, 'roi_calculator_create_db');
     }
 
     /**
