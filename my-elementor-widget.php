@@ -107,6 +107,38 @@ final class ROI_Elementor_Widget
             return;
         }
 
+        //Ladda CSS till back-end
+        //function priskalkyl_back_scripts(){
+        //    wp_enqueue_media();
+        //    wp_register_style('priskalkyl_back_style', plugins_url('./css/backend_style.css', __FILE__));
+        //    wp_enqueue_style('priskalkyl_back_style');
+        //
+        //    wp_register_script('priskalkyl_back_script', plugins_url('./js/backend_script.js', __FILE__), array('jquery'), '1.0');
+        //    wp_enqueue_script('priskalkyl_back_script');
+        //
+        //    wp_register_style('google_fonts_admin', 'https://fonts.googleapis.com/css?family=Catamaran:500,700&display=swap|Exo+2:500,700&display=swap');
+        //    wp_enqueue_style( 'google_fonts_admin');
+        //}
+        
+        //Ladda CSS JS till back-end när admin-scripts laddas
+        
+        //add_action('admin_enqueue_scripts', 'priskalkyl_back_scripts');
+
+        //Skapar meny i wp-admin för att komma åt admin-gränssnitt och registrerar settings i options
+        function roi_calculator_create_menu(){
+            add_menu_page('Roi Calculator', 'Roi Calculator', 'administrator', __FILE__, 'roi_settings_page', 'dashicons-money-alt', 20);
+
+        }
+        //Lägg till i menyn när admin_menu körs
+        add_action('admin_menu', 'roi_calculator_create_menu');
+
+        //Funktion för att visa admin-gränssnittet
+        function roi_settings_page(){
+            ?>
+            <h1>Hello from Roi-admin!</h1>
+            <?php
+        }
+
         add_action('elementor/init', [$this, 'init_category']);
         add_action('elementor/widgets/widgets_registered', [$this, 'init_widgets']);
     }
