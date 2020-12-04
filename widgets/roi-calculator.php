@@ -7,7 +7,7 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__( 'ROI Calculator Form', 'roi-elementor-widget' );
+        return esc_html__( 'ROI Calculator Form', 'roi-calculator-widget' );
     }
 
     public function get_script_depends() {
@@ -29,7 +29,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'checklist_settings',
             [
-                'label' => __( 'Content Settings', 'roi-elementor-widget' ),
+                'label' => __( 'Content Settings', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -38,9 +38,9 @@ class ROI_Calculator_Widget extends Widget_Base {
             $repeater->add_control(
                 'checklist_text',
                 [
-                    'label' => __( 'Checklist Text', 'roi-elementor-widget' ),
+                    'label' => __( 'Checklist Text', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::TEXT,
-                    'default' => __( '' , 'roi-elementor-widget' ),
+                    'default' => __( '' , 'roi-calculator-widget' ),
                     'label_block' => true,
                 ]
             );
@@ -48,7 +48,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $repeater->add_control(
                 'checklist_icon',
                 [
-                    'label' => __( 'Checklist Icon', 'roi-elementor-widget' ),
+                    'label' => __( 'Checklist Icon', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::ICONS,
                     'default' => [
                         'value' => 'fas fa-check',
@@ -60,21 +60,21 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_control(
                 'checklist',
                 [
-                    'label' => __( 'Checklist', 'roi-elementor-widget' ),
+                    'label' => __( 'Checklist', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::REPEATER,
                     'fields' => $repeater->get_controls(),
                     'default' => [
                         [
-                            'checklist_text' => __( 'Spending at least 3 hours/day maintaining sites', 'roi-elementor-widget' ),
+                            'checklist_text' => __( 'Spending at least 3 hours/day maintaining sites', 'roi-calculator-widget' ),
                         ],
                         [
-                            'checklist_text' => __( 'Its my fulltime job', 'roi-elementor-widget' ),
+                            'checklist_text' => __( 'Its my fulltime job', 'roi-calculator-widget' ),
                         ],
                         [
-                            'checklist_text' => __( 'Travelling more than 30 minutes to work', 'roi-elementor-widget' ),
+                            'checklist_text' => __( 'Travelling more than 30 minutes to work', 'roi-calculator-widget' ),
                         ],
                         [
-                            'checklist_text' => __( 'Have 5 or more employees', 'roi-elementor-widget' ),
+                            'checklist_text' => __( 'Have 5 or more employees', 'roi-calculator-widget' ),
                         ],
                     ],
                     'title_field' => '{{{ checklist_text }}}',
@@ -86,7 +86,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'first_label_settings',
             [
-                'label' => __( 'First Label Settings', 'roi-elementor-widget' ),
+                'label' => __( 'First Label Settings', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -95,10 +95,10 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_control(
             'first_label_text',
             [
-                'label' => __( 'Label text', 'roi-elementor-widget' ),
+                'label' => __( 'Label text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Label text', 'roi-elementor-widget' ),
-                'placeholder' => __( 'Enter text for label', 'roi-elementor-widget' ),
+                'default' => __( 'Label text', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
             ]
         );
 
@@ -141,7 +141,7 @@ class ROI_Calculator_Widget extends Widget_Base {
          $this->start_controls_section(
             'wrapper_style_section',
             [
-                'label' => __( 'Wrapper', 'roi-elementor-widget' ),
+                'label' => __( 'Wrapper', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -150,7 +150,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_responsive_control(
                 'wrapper_padding',
                 [
-                    'label' => __( 'Padding', 'roi-elementor-widget' ),
+                    'label' => __( 'Padding', 'roi-calculator-widget' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'rem' ],
                     'description' => 'Default: ( 40px 40px 40px 40px )',
@@ -171,7 +171,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 \Elementor\Group_Control_Border::get_type(),
                 [
                     'name' => 'wrapper_border',
-                    'label' => __( 'Border', 'roi-elementor-widget' ),
+                    'label' => __( 'Border', 'roi-calculator-widget' ),
                     'selector' => '{{WRAPPER}} .roi-outer-wrapper',
                 ]
             );
@@ -180,7 +180,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_responsive_control(
                 'wrapper_border_radius',
                 [
-                    'label' => __( 'Border Radius', 'roi-elementor-widget' ),
+                    'label' => __( 'Border Radius', 'roi-calculator-widget' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'rem' ],
                     'description' => 'Default: ( 10px 10px 10px 10px )',
@@ -202,7 +202,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 \Elementor\Group_Control_Box_Shadow::get_type(),
                 [
                     'name' => 'wrapper_box_shadow',
-                    'label' => __( 'Box Shadow', 'roi-elementor-widget' ),
+                    'label' => __( 'Box Shadow', 'roi-calculator-widget' ),
                     'selector' => '{{WRAPPER}} .roi-outer-wrapper',
                 ]
             );
@@ -227,7 +227,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'first_label_style_section',
             [
-                'label' => __( 'Label', 'roi-elementor-widget' ),
+                'label' => __( 'Label', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );

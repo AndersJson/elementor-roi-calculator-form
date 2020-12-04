@@ -1,20 +1,24 @@
 <?php
 
 /**
- * Plugin Name: ROI Elementor Widget
+ * Plugin Name: ROI Calculator Widget
  * Description: A form-widget for Elementor to calculate ROI. 
  * Version: 1.0.0
  * Author: andersjson
- * Text Domain: roi-elementor-widget
+ * Text Domain: roi-calculator-widget
  */
 
 if (!defined('ABSPATH')) exit();
+
+
+global $wpdb;
+global $roi_db_version;
 
 /**
  * Elementor Extension main CLass
  * @since 1.0.0
  */
-final class ROI_Elementor_Widget
+final class ROI_Calculator_Widget
 {
     // Plugin version
     const VERSION = '1.0.0';
@@ -82,7 +86,7 @@ final class ROI_Elementor_Widget
      * @since 1.0.0
      */
     //    public function i18n() {
-    //       load_plugin_textdomain( 'roi-elementor-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    //       load_plugin_textdomain( 'roi-calculator-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     //    }
 
     /**
@@ -91,6 +95,9 @@ final class ROI_Elementor_Widget
      */
     public function init()
     {
+        global $roi_db_version;
+        $roi_db_version = '1.0';
+
         // Check if the ELementor installed and activated
         if (!did_action('elementor/loaded')) {
             add_action('admin_notices', [$this, 'admin_notice_missing_main_plugin']);
@@ -141,6 +148,60 @@ final class ROI_Elementor_Widget
 
         add_action('elementor/init', [$this, 'init_category']);
         add_action('elementor/widgets/widgets_registered', [$this, 'init_widgets']);
+
+        //Kör update-check plugins_loaded
+        function roi_update_db_check() {
+            global $roi_db_version;
+            if ( get_site_option( 'roi_db_version' ) != $roi_db_version ) {
+                jal_install();
+            }
+        }
+
+        add_action( 'plugins_loaded', 'roi_update_db_check' );
+
+
+            /* Create table in SQL-db for roi-formsubscribers */
+        function roi_calculator_create_db() {
+            $table_name = $wpdb->prefix . "roi-formsubscribers";
+            $charset_collate = $wpdb->get_charset_collate();
+            $sql = "CREATE TABLE $table_name (
+                    `id` int NOT NULL AUTO_INCREMENT,
+                    `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `phone` varchar(255) CHARACTER SET utf8,
+                    PRIMARY KEY (`id`)
+                ) $charset_collate; ";
+
+            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+            dbDelta($sql);
+            
+            add_option( 'roi_db_version', $roi_db_version );
+
+            //Check for new db-version
+            $installed_ver = get_option( "roi_db_version" );
+
+            if ( $installed_ver != $roi_db_version ) {
+
+                $table_name = $wpdb->prefix . "roi-formsubscribers";
+
+                $sql = "CREATE TABLE $table_name (
+                    `id` int NOT NULL AUTO_INCREMENT,
+                    `firstname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `lastname` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+                    `phone` varchar(255) CHARACTER SET utf8,
+                    PRIMARY KEY (`id`)
+                );";
+
+                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                dbDelta( $sql );
+
+                update_option( "roi_db_version", $roi_db_version );
+            }
+        }
+        /* Run function on plugin activation. */
+        register_activation_hook(__FILE__, 'roi_calculator_create_db');
     }
 
     /**
@@ -178,9 +239,9 @@ final class ROI_Elementor_Widget
     {
         if (isset($_GET['activate'])) unset($_GET['activate']);
         $message = sprintf(
-            esc_html__('"%1$s" requires "%2$s" to be installed and activated', 'roi-elementor-widget'),
-            '<strong>' . esc_html__('ROI Elementor Widget', 'roi-elementor-widget') . '</strong>',
-            '<strong>' . esc_html__('Elementor', 'roi-elementor-widget') . '</strong>'
+            esc_html__('"%1$s" requires "%2$s" to be installed and activated', 'roi-calculator-widget'),
+            '<strong>' . esc_html__('ROI Calculator Widget', 'roi-calculator-widget') . '</strong>',
+            '<strong>' . esc_html__('Elementor', 'roi-calculator-widget') . '</strong>'
         );
 
         printf('<div class="notice notice-warning is-dimissible"><p>%1$s</p></div>', $message);
@@ -195,9 +256,9 @@ final class ROI_Elementor_Widget
     {
         if (isset($_GET['activate'])) unset($_GET['activate']);
         $message = sprintf(
-            esc_html__('"%1$s" requires "%2$s" version %3$s or greater', 'roi-elementor-widget'),
-            '<strong>' . esc_html__('ROI Elementor Widget', 'roi-elementor-widget') . '</strong>',
-            '<strong>' . esc_html__('Elementor', 'roi-elementor-widget') . '</strong>',
+            esc_html__('"%1$s" requires "%2$s" version %3$s or greater', 'roi-calculator-widget'),
+            '<strong>' . esc_html__('ROI Calculator Widget', 'roi-calculator-widget') . '</strong>',
+            '<strong>' . esc_html__('Elementor', 'roi-calculator-widget') . '</strong>',
             self::MINIMUM_ELEMENTOR_VERSION
         );
 
@@ -213,9 +274,9 @@ final class ROI_Elementor_Widget
     {
         if (isset($_GET['activate'])) unset($_GET['activate']);
         $message = sprintf(
-            esc_html__('"%1$s" requires "%2$s" version %3$s or greater', 'roi-elementor-widget'),
-            '<strong>' . esc_html__('ROI Elementor Widget', 'roi-elementor-widget') . '</strong>',
-            '<strong>' . esc_html__('PHP', 'roi-elementor-widget') . '</strong>',
+            esc_html__('"%1$s" requires "%2$s" version %3$s or greater', 'roi-calculator-widget'),
+            '<strong>' . esc_html__('ROI Calculator Widget', 'roi-calculator-widget') . '</strong>',
+            '<strong>' . esc_html__('PHP', 'roi-calculator-widget') . '</strong>',
             self::MINIMUM_PHP_VERSION
         );
 
@@ -223,4 +284,4 @@ final class ROI_Elementor_Widget
     }
 }
 
-ROI_Elementor_Widget::instance();
+ROI_Calculator_Widget::instance();
