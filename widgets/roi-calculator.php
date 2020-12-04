@@ -223,11 +223,11 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-        // First Label Style Settings
+        // Label Style Settings
         $this->start_controls_section(
             'first_label_style_section',
             [
-                'label' => __( 'First Label', 'roi-elementor-widget' ),
+                'label' => __( 'Label', 'roi-elementor-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -241,7 +241,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
-                        '{{WRAPPER}} .roi-left' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .roi-left__label' => 'color: {{VALUE}}',
                     ],
                 ]
             );
@@ -272,7 +272,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row">
                             <label class="roi-left">
-                                <?php echo $settings[ 'first_label_text' ]; ?>
+                            <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_tip' ] == 'yes') : ?>
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
@@ -298,7 +298,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left text-right">Which of the following tasks do you handle for your clients?</label>
+                            <label class="roi-left">
+                                <p class="roi-left__label">Which of the following tasks do you handle for your clients?</p>
+                            </label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
                                 <?php
@@ -328,8 +330,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left text-right">
-                                How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
+                            <label class="roi-left">
+                                <p class="roi-left__label">How many hours (per month) do you spend managing all of the above tasks for just one of your sites?</p>
                                 <span class="roi-tip-trigger">?</span>
                                 <span class="roi-tip">
                                     <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
@@ -354,7 +356,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </div>
                         </fieldset>
                         <fieldset class="roi-row">
-                            <label class="roi-left text-right"><br>What is your hourly rate?</label>
+                            <label class="roi-left">
+                                <p class="roi-left__label">What is your hourly rate?</p>
+                            </label>
                             <div class="roi-right">
                                 <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
 
@@ -375,7 +379,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                     
                         <fieldset class="roi-row">
-                            <label class="roi-left text-right">Tell us where to send your results.</label>
+                            <label class="roi-left">
+                                <p class="roi-left__label">Tell us where to send your results.</p>
+                            </label>
                             <div class="roi-right">
                                 <input class="roi-pdf-form__input" name="firstname" placeholder="First name">
                                 <input class="roi-pdf-form__input" name="lastname" placeholder="Last name">
