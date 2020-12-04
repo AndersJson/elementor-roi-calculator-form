@@ -10,12 +10,14 @@
 
 if (!defined('ABSPATH')) exit();
 
-global $wpdb;
 global $roi_db_version;
 $roi_db_version = '1.0';
 
             /* Create table in SQL-db for roi-formsubscribers */
             function roi_calculator_create_db() {
+                global $wpdb;
+                global $roi_db_version;
+
                 $table_name = $wpdb->prefix . "roi-formsubscribers";
                 $charset_collate = $wpdb->get_charset_collate();
                 $sql = "CREATE TABLE $table_name (
@@ -61,6 +63,7 @@ $roi_db_version = '1.0';
         //Kör update-check plugins_loaded
         function roi_update_db_check() {
             global $roi_db_version;
+            
             if ( get_site_option( 'roi_db_version' ) != $roi_db_version ) {
                 roi_calculator_create_db();
             }
