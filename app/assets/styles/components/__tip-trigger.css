@@ -7,7 +7,6 @@
 	right: 20px;
 	height: 30px;
 	width: 30px;
-  border: 2px solid var(--color-grey-light);
   border-radius: 50%;
 
   &:hover + .roi-tip{

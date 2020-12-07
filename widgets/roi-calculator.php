@@ -115,11 +115,11 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Top Badge Text
+        // First tip text
         $this->add_control(
             'first_tip_text',
             [
-                'label' => __( 'Tip Text', 'plugin-domain' ),
+                'label' => __( 'First Tip Text', 'plugin-domain' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __( 'Explanation and tip goes here', 'plugin-domain' ),
                 'placeholder' => __( 'Type your tip here', 'plugin-domain' ),
@@ -242,6 +242,48 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
                         '{{WRAPPER}} .roi-left__label' => 'color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+            // Tip-Icon Color
+            $this->add_control(
+                'tip_icon_color',
+                [
+                    'label' => __( 'Tip-Icon Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#54595f',
+                    'description' => 'Default: ( #54595f ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'color: {{VALUE}};',
+                    ],
+                ]
+            );
+
+            // Tip-Icon Color
+            $this->add_control(
+                'tip_icon_border_color',
+                [
+                    'label' => __( 'Tip-Icon Border-Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#54595f',
+                    'description' => 'Default: ( #54595f ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'border: 2px solid {{VALUE}};',
+                    ],
+                ]
+            );
+
+            //Tip text-color
+            $this->add_control(
+                'tip_text_color',
+                [
+                    'label' => __( 'Tip Text Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#54595f',
+                    'description' => 'Default: ( #54595f ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip' => 'color: {{VALUE}};',
                     ],
                 ]
             );
