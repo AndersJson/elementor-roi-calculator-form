@@ -12,7 +12,8 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     public function get_script_depends() {
         return [
-            'roi-calc-script'
+            'roi-calc-script',
+            'rangeslider-script'
         ];
     }
 
