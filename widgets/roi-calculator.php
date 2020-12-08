@@ -91,22 +91,40 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Label Text
+        // First Label Text
         $this->add_control(
             'first_label_text',
             [
-                'label' => __( 'Label text', 'roi-calculator-widget' ),
+                'label' => __( 'First Label text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __( 'Label text', 'roi-calculator-widget' ),
                 'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
             ]
         );
 
-        // Tip
+        // First Label Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'first_label_typography',
+				'label' => __( 'Typography', 'plugin-domain' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .first-label',
+			]
+        );
+        
         $this->add_control(
-            'show_tip',
+            'first_label_hr',
             [
-                'label' => __( 'Show Tip', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
+        // First Label Tip
+        $this->add_control(
+            'show_first_label_tip',
+            [
+                'label' => __( 'Show First Label Tip', 'plugin-domain' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __( 'Show', 'your-plugin' ),
                 'label_off' => __( 'Hide', 'your-plugin' ),
@@ -115,7 +133,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // First tip text
+        // First Tip text
         $this->add_control(
             'first_tip_text',
             [
@@ -124,9 +142,20 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'default' => __( 'Explanation and tip goes here', 'plugin-domain' ),
                 'placeholder' => __( 'Type your tip here', 'plugin-domain' ),
                 'condition' => [
-                    'show_tip' => 'yes'
+                    'show_first_label_tip' => 'yes'
                 ]
             ]
+        );
+
+        // First Tip Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'first_tip_typography',
+				'label' => __( 'Typography', 'plugin-domain' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .first-tip',
+			]
         );
 
         
@@ -246,6 +275,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            $this->add_control(
+                'tip_icon_hr',
+                [
+                    'type' => \Elementor\Controls_Manager::DIVIDER,
+                ]
+            );
+
             // Tip-Icon Color
             $this->add_control(
                 'tip_icon_color',
@@ -255,22 +291,16 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .roi-tip-trigger' => 'border: 2px solid {{VALUE}};',
+                        '{{WRAPPER}} .roi-tip-trigger p' => 'color: {{VALUE}};'
                     ],
                 ]
             );
 
-            // Tip-Icon Color
             $this->add_control(
-                'tip_icon_border_color',
+                'tip_hr',
                 [
-                    'label' => __( 'Tip-Icon Border-Color', 'plugin-domain' ),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'default' => '#54595f',
-                    'description' => 'Default: ( #54595f ) ',
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'border: 2px solid {{VALUE}};',
-                    ],
+                    'type' => \Elementor\Controls_Manager::DIVIDER,
                 ]
             );
 
@@ -284,6 +314,71 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
                         '{{WRAPPER}} .roi-tip' => 'color: {{VALUE}};',
+                    ],
+                ]
+            );
+
+            // Tip Padding
+            $this->add_responsive_control(
+                'tip_padding',
+                [
+                    'label' => __( 'Tip Padding', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 15px 20px 15px 20px )',
+                    'default' => [
+                        'top' => 15,
+                        'right' => 20,
+                        'bottom' => 15,
+                        'left' => 20,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            // Tip Border Radius
+            $this->add_responsive_control(
+                'tip_border_radius',
+                [
+                    'label' => __( 'Border Radius', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 3px 3px 3px 3px )',
+                    'default' => [
+                        'top' => 3,
+                        'right' => 3,
+                        'bottom' => 3,
+                        'left' => 3,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                    ],
+                ]
+            );
+
+            // Tip Box Shadow
+            $this->add_group_control(
+                \Elementor\Group_Control_Box_Shadow::get_type(),
+                [
+                    'name' => 'tip_box_shadow',
+                    'label' => __( 'Tip Box Shadow', 'roi-calculator-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-tip',
+                ]
+            );
+
+            // Tip Background Color
+            $this->add_control(
+                'tip_backgorund_color',
+                [
+                    'label' => __( 'Tip Background Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#FFFFFF',
+                    'description' => 'Default: ( #FFFFFF ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip ' => 'background-color: {{VALUE}}',
                     ],
                 ]
             );
@@ -314,10 +409,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row">
                             <label class="roi-left">
-                            <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
-                            <?php if( $settings[ 'show_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger">?</span>
-                                <span class="roi-tip">
+                            <p class="roi-left__label first-label"><?php echo $settings[ 'first_label_text' ]; ?></p>
+                            <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
+                                <span class="roi-tip-trigger"><p>?</p></span>
+                                <span class="roi-tip first-tip">
                                     <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
                                 </span>
                             <?php endif; ?>
@@ -374,7 +469,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         <fieldset class="roi-row">
                             <label class="roi-left">
                                 <p class="roi-left__label">How many hours (per month) do you spend managing all of the above tasks for just one of your sites?</p>
-                                <span class="roi-tip-trigger">?</span>
+                                <span class="roi-tip-trigger"><p>?</p></span>
                                 <span class="roi-tip">
                                     <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
                                 </span>
