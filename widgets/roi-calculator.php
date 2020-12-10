@@ -194,7 +194,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         
         $this->end_controls_section();
 
-        // Submitbutton Settings
+        // Submit-button Settings
         $this->start_controls_section(
             'submit_button_settings',
             [
@@ -203,9 +203,48 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        // Submit-button Text
+        $this->add_control(
+            'submit_button_text',
+            [
+                'label' => __( 'Button Text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Default', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter button-text here', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Submit-button Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'submit_button_label_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} #roi-submit-button',
+			]
+        );
+
+        // Submit-button Link
+        $this->add_control(
+            'submit_button_link',
+            [
+                'label' => __( 'Button Link', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::URL,
+                'placeholder' => __( 'https://your-link.com', 'roi-calculator-widget' ),
+                'show_external' => true,
+                'default' => [
+                    'url' => '',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ]
+            ]
+        );
+
         $this->end_controls_section();
 
-        
+
         //Trigger styles control-function
         $this->style_tab();
     }
@@ -416,7 +455,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
             // Tip Background Color
             $this->add_control(
-                'tip_backgorund_color',
+                'tip_background_color',
                 [
                     'label' => __( 'Tip Background Color', 'plugin-domain' ),
                     'type' => \Elementor\Controls_Manager::COLOR,
@@ -429,10 +468,128 @@ class ROI_Calculator_Widget extends Widget_Base {
             );
 
         $this->end_controls_section();
+
+
+        // Submit-button Style Settings
+        $this->start_controls_section(
+            'submit_button_style_section',
+            [
+                'label' => __( 'Submit-button', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        //Submit-button text-color
+        $this->add_control(
+            'submit_button_text_color',
+            [
+                'label' => __( 'Button Text Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-submit-button' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Submit Padding
+        $this->add_responsive_control(
+            'submit_button_padding',
+            [
+                'label' => __( 'Button Padding', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'rem', '%', 'px' ],
+                'description' => 'Default: ( 1rem 2rem 1rem 2rem )',
+                'default' => [
+                    'top' => 1,
+                    'right' => 2,
+                    'bottom' => 1,
+                    'left' => 2,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} #roi-submit-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'submit_button_border_hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
+        // Submit-button Border
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'submit-button_border',
+                'label' => __( 'Button Border', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} #roi-submit-button',
+            ]
+        );
+
+         // Submit-button Border Radius
+         $this->add_responsive_control(
+            'submit_button_border_radius',
+            [
+                'label' => __( 'Button Border Radius', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 26px 26px 26px 26px )',
+                'default' => [
+                    'top' => 26,
+                    'right' => 26,
+                    'bottom' => 26,
+                    'left' => 26,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} #roi-submit-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'submit_button_shadow_hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
+        // Submit-button Shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'submit_button_box_shadow',
+                'label' => __( 'Button Box Shadow', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} #roi-submit-button',
+            ]
+        );
+
+        // Submit-button Background Color
+        $this->add_control(
+            'submit_button_background_color',
+            [
+                'label' => __( 'Button Background Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#FFFFFF',
+                'description' => 'Default: ( #FFFFFF ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-submit-button ' => 'background-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+        // Button
+        $button_target = $settings[ 'submit_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
+        $button_nofollow = $settings[ 'submit_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
         /*
         $this->add_render_attribute(
             'roi_calculator_options',
@@ -532,7 +689,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </fieldset>
                         <fieldset class="roi-row flex-center">
-                            <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button">Calculate</button>
+                            <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
                         </fieldset>    
                     </form>
             </section> 
