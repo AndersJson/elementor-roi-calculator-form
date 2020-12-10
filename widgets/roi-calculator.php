@@ -536,13 +536,13 @@ class ROI_Calculator_Widget extends Widget_Base {
             [
                 'label' => __( 'Button Border Radius', 'roi-calculator-widget' ),
                 'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'rem' ],
-                'description' => 'Default: ( 26px 26px 26px 26px )',
+                'size_units' => [ 'rem', '%', 'px' ],
+                'description' => 'Default: ( 3rem 3rem 3rem 3rem )',
                 'default' => [
-                    'top' => 26,
-                    'right' => 26,
-                    'bottom' => 26,
-                    'left' => 26,
+                    'top' => 3,
+                    'right' => 3,
+                    'bottom' => 3,
+                    'left' => 3,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} #roi-submit-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
