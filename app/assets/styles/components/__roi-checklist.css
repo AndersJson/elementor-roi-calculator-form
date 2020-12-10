@@ -3,9 +3,33 @@
 	flex-direction: column;
 	list-style-type: none;
 
-	&__label {
-		&:not(:last-child) {
-			padding-bottom: var(--pb-sm);
+	&__label li {
+			margin: 10px 0 25px;
+			cursor: pointer;
+			display: flex;
+	}
+
+	&__checkbox{
+		display: none;
+	}
+
+	&__icon{
+		display: flex;
+		flex: 0 0 30px;
+		color: var(--color-grey-light);
+    height: 30px;
+    margin: -4px 16px 0 0;
+    border-radius: 50%;
+    border: 2px solid #e7e7e7;
+    transition: transform .2s;
+    cursor: pointer;
+		
+		&:hover{
+			transform: scale(1.1);
 		}
+	}
+
+	&__checkbox:checked + &__icon{
+		color: var(--color-primary-teal);
 	}
 }

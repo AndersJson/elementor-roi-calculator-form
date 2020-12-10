@@ -1,7 +1,8 @@
 .roi-left {
 	display: block;
 	width: 40%;
-	padding: var(--padding-right-md);
+	padding: var(--padding-column-md);
 	position: relative;
 	text-align: right;
 }
+

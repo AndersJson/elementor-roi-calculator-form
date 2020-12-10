@@ -72,12 +72,10 @@ final class ROI_Calculator_Widget
     public function scripts_styles()
     {
         wp_register_style('roi-calc-style', ROI_PLUGIN_URL . 'docs/styles.min.css', [], rand(), 'all');
-        wp_register_script('rangeslider-script', ROI_PLUGIN_URL . 'docs/rangeslider.min.js', ['jquery'], rand(), true);
         wp_register_script('roi-calc-script', ROI_PLUGIN_URL . 'docs/bundled.min.js', ['jquery'], rand(), true);
 
 
         wp_enqueue_style('roi-calc-style');
-        wp_enqueue_script('rangeslider-script');
         wp_enqueue_script('roi-calc-script');
     }
 

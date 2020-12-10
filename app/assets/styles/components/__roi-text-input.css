@@ -1,0 +1,11 @@
+.roi-form{
+  &__textinput{
+    width: 46%;
+    margin: 0 2% 20px 0;
+    padding: 1em 1em!important;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    box-shadow: var(--input-box-shadow);
+  }
+}

@@ -1,8 +1,8 @@
 :root {
 	/* Colors */
 	--color-grey-light: #e7e7e7;
-	--color-primary-gray: #54595f;
-
+	--color-primary-grey: #54595f;
+	--color-primary-teal: #2AAECD;
 
 	/* Text */
 	--fw-primary: 200;
@@ -11,8 +11,11 @@
 	--fs-primary-sm: 16px;
 
 	/* Layout */
-	--padding-right-md: 0 60px 0 0;
+	--padding-column-md: 0 60px 0 60px;
+	--padding-column-lg: 0 15% 0 0;
 	--pb-sm: 10px;
-	--mb-sm: 20px;
+	--mb-sm: 2.5em;
 	--box-shadow-sm: 0 0 10px 0 rgba(0,0,0,.2);
+	--input-box-shadow: inset 0 0 0 1px #c7c4c4;
+	--button-primary-padding: 1em 2em .875em; 
 }

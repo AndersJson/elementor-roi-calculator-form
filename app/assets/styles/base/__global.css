@@ -9,4 +9,5 @@
 
 .roi-outer-wrapper {
 	box-sizing: border-box;
+	line-height: 20px;
 }

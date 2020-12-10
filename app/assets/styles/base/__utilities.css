@@ -1,0 +1,9 @@
+.flex-center{
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-space-between{
+  flex-direction: row;
+  justify-content: space-between;
+}

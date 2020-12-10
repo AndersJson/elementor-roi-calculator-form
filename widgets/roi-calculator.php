@@ -12,8 +12,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     public function get_script_depends() {
         return [
-            'roi-calc-script',
-            'rangeslider-script'
+            'roi-calc-script'
         ];
     }
 
@@ -195,6 +194,18 @@ class ROI_Calculator_Widget extends Widget_Base {
         
         $this->end_controls_section();
 
+        // Submitbutton Settings
+        $this->start_controls_section(
+            'submit_button_settings',
+            [
+                'label' => __( 'Submit-button Settings', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->end_controls_section();
+
+        
         //Trigger styles control-function
         $this->style_tab();
     }
@@ -441,36 +452,25 @@ class ROI_Calculator_Widget extends Widget_Base {
         <div class="roi-outer-wrapper">
             <section class="roi-inner-wrapper">
                     <form class="roi-calculation-form" id="roi-calculation-form">
-                        <fieldset class="roi-row">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                            <p class="roi-left__label label first-label"><?php echo $settings[ 'first_label_text' ]; ?></p>
+                            <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger"><p>?</p></span>
-                                <span class="roi-tip first-tip">
+                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                <span class="roi-tip">
                                     <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
                                 </span>
                             <?php endif; ?>
                             </label>
                             <div class="roi-right">
-                                <p>TEST--If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
-
-<!-- ******************************** Slider 
-                                <div class="roi-thumb-contain">
-                                    <span type="range" id="js-roi-thumb" class="roi-thumb"></span>
-                                </div>
-                                <input type="range" id="js-roi-slider" class="range roi-slider" step="1" min="5" max="30" value="10">
-                                <ul class="roi-slider-labels">
-                                    <li>
-                                    <a href="#" class="js-roi-label" data-value="5">5</a>
-                                    </li>
-                                </ul>
--->
+                                <div class="range__value" id="rangeV"></div>
+                                <input id="range__input" type="range" min="0" max="10" step="1">
                             </div>
                         </fieldset>
                     
-                        <fieldset class="roi-row">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label label">Which of the following tasks do you handle for your clients?</p>
+                                <p class="roi-left__label">Which of the following tasks do you handle for your clients?</p>
                             </label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
@@ -478,96 +478,65 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 foreach( $settings[ 'checklist' ] as $item ) : ?>
                                     <label class="roi-checklist__label">
                                         <li>
-                                            <input type="checkbox" name="struggles[]" class="roi-checklist__input" value="<?php echo $item[ 'checklist_text' ]; ?>">
-                                            <span class="roi-checklist__icon">
+                                            <input type="checkbox" name="struggles[]" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>">
+                                            <span class="roi-checklist__icon flex-center">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                             </span>
                                             <?php echo $item[ 'checklist_text' ]; ?>
                                         </li>
                                     </label>
                                 <?php endforeach; ?>
-                                <!--
-                                    <li>
-                                    <label class="roi-checklist__label">
-                                        <input type="checkbox" name="struggles[]" class="roi-checklist__mark" value="Dealing with downtime">
-                                        <span>
-                                        </span>
-                                        Dealing with downtime
-                                    </label>
-                                    </li>
-                                    -->
                                 </ul>
                             </div>
                         </fieldset>
-                    
-                        <fieldset class="roi-row">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label label">How many hours (per month) do you spend managing all of the above tasks for just one of your sites?</p>
-                                <span class="roi-tip-trigger"><p>?</p></span>
+                                <p class="roi-left__label">How many hours (per month) do you spend managing all of the above tasks for just one of your sites?</p>
+                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
                                 <span class="roi-tip">
                                     <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
                                 </span>
                             </label>
-                            <div class="roi-right">
-                                <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
-
-<!-- ******************************** Slider 
-                                <div class="roi-thumb-contain">
-                                    <span type="range" id="js-roi-thumb1" class="roi-thumb"></span>
-                                </div>
-                        
-                                <input type="range" id="js-roi-slider1" class="range roi-slider" step=".25" min=".5" max="5.5" value="2.5">
-                        
+                            <div class="roi-right range">
+                                    <div class="range__value" id="rangeV"></div>
+                                    <input id="range__input" type="range" min="0" max="10" step="1">
+ 
+                        <!--
                                 <ul class="roi-slider-labels">
                                     <li>
                                     <a href="#" class="js-roi-label" data-value=".5">.5</a>
                                     </li>
                                 </ul>
 -->
-                                </div>
+                            </div>
                         </fieldset>
-                        <fieldset class="roi-row">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label label">What is your hourly rate?</p>
+                                <p class="roi-left__label">What is your hourly rate?</p>
                             </label>
                             <div class="roi-right">
-                                <p>TEST If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
-
-<!-- ******************************** Slider
-                                <div class="roi-thumb-contain">
-                                    <span type="range" id="js-roi-thumb2" class="roi-thumb"></span>
-                                </div>
-                        
-                                <input type="range" id="js-roi-slider2" class="range roi-slider" step="5" min="50" max="300" value="100">
-                        
-                                <ul class="roi-slider-labels">
-                                    <li>
-                                    <a href="#" class="js-roi-label" data-value="50">$50</a>
-                                    </li>
-                                </ul>
--->
+                                <div class="range__value" id="rangeV"></div>
+                                <input id="range__input" type="range" min="0" max="10" step="1">
                             </div>
                         </fieldset>
                     
-                        <fieldset class="roi-row">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label label">Tell us where to send your results.</p>
+                                <p class="roi-left__label">Tell us where to send your results.</p>
                             </label>
                             <div class="roi-right">
-                                <input class="roi-pdf-form__input" name="firstname" placeholder="First name">
-                                <input class="roi-pdf-form__input" name="lastname" placeholder="Last name">
-                                <input class="roi-pdf-form__input" name="email" placeholder="Work email">
-                                <input class="roi-pdf-form__input" name="phone" placeholder="Phone number">
+                                <input class="roi-form__textinput" name="firstname" placeholder="First name">
+                                <input class="roi-form__textinput" name="lastname" placeholder="Last name">
+                                <input class="roi-form__textinput" name="email" placeholder="Work email">
+                                <input class="roi-form__textinput" name="phone" placeholder="Phone number">
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row content-center">
-                            <button type="submit" class="roi-button" id="roi-calculate-button">Calculate</button>
+                        <fieldset class="roi-row flex-center">
+                            <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button">Calculate</button>
                         </fieldset>    
                     </form>
             </section> 
         </div>
-    
-    <!-- ************************************************* -->
     <?php
     }
 

@@ -1,1 +1,14 @@
+.roi-row {
+  font-size: var(--fs-primary-paragraph);
+  font-weight: var(--fw-primary);
+}
 
+.roi-tip-trigger{
+  font-size: 17px;
+  font-weight: var(--fw-md);
+}
+
+.roi-tip{
+  text-align: left;
+  font-size: var(--fs-primary-sm);
+}

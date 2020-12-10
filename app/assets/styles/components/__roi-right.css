@@ -1,4 +1,5 @@
 .roi-right{
   display: block;
+  padding: var(--padding-column-lg);
   width: 60%;
 }
