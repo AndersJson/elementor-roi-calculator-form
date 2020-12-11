@@ -25,6 +25,84 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     public function _register_controls() {
+        // Row Settings
+        $this->start_controls_section(
+            'form_row_settings',
+            [
+                'label' => __( 'Row Settings', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        //Row order 1
+        $this->add_control(
+			'row_order_first',
+			[
+				'label' => __( 'Slider-row 1', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 5,
+				'step' => 1,
+				'default' => 1,
+			]
+        );
+        
+        //Row order 2
+        $this->add_control(
+			'row_order_second',
+			[
+				'label' => __( 'Checklist-row', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 5,
+				'step' => 1,
+				'default' => 2,
+			]
+        );
+        
+        //Row order 3
+        $this->add_control(
+			'row_order_third',
+			[
+				'label' => __( 'Slider-row 2', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 5,
+				'step' => 1,
+				'default' => 3,
+			]
+        );
+        
+        //Row order 4
+        $this->add_control(
+			'row_order_fourth',
+			[
+				'label' => __( 'Slider-row 3', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 5,
+				'step' => 1,
+				'default' => 4,
+			]
+        );
+        
+        //Row order 5
+        $this->add_control(
+			'row_order_fifth',
+			[
+				'label' => __( 'Form-row', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 5,
+				'step' => 1,
+				'default' => 5,
+			]
+		);
+
+
+
+        $this->end_controls_section();
+
         // Checklist Settings
         $this->start_controls_section(
             'checklist_settings',
@@ -226,22 +304,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Submit-button Link
-        $this->add_control(
-            'submit_button_link',
-            [
-                'label' => __( 'Button Link', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => __( 'https://your-link.com', 'roi-calculator-widget' ),
-                'show_external' => true,
-                'default' => [
-                    'url' => '',
-                    'is_external' => true,
-                    'nofollow' => true,
-                ]
-            ]
-        );
-
         $this->end_controls_section();
 
 
@@ -349,7 +411,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_control(
                 'label_text_color',
                 [
-                    'label' => __( 'Text Color', 'plugin-domain' ),
+                    'label' => __( 'Text Color', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::COLOR,
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
@@ -370,7 +432,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_control(
                 'tip_icon_color',
                 [
-                    'label' => __( 'Tip-Icon Color', 'plugin-domain' ),
+                    'label' => __( 'Tip-Icon Color', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::COLOR,
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
@@ -588,8 +650,8 @@ class ROI_Calculator_Widget extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         // Button
-        $button_target = $settings[ 'submit_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
-        $button_nofollow = $settings[ 'submit_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
+        //$button_target = $settings[ 'submit_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
+        //$button_nofollow = $settings[ 'submit_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
         /*
         $this->add_render_attribute(
             'roi_calculator_options',
@@ -609,7 +671,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         <div class="roi-outer-wrapper">
             <section class="roi-inner-wrapper">
                     <form class="roi-calculation-form" id="roi-calculation-form">
-                        <fieldset class="roi-row flex-row-space-between">
+                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_first' ] ?>;">
                             <label class="roi-left">
                             <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
@@ -625,7 +687,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </fieldset>
                     
-                        <fieldset class="roi-row flex-row-space-between">
+                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_second' ] ?>;">
                             <label class="roi-left">
                                 <p class="roi-left__label">Which of the following tasks do you handle for your clients?</p>
                             </label>
@@ -646,7 +708,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </ul>
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-row-space-between">
+                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_third' ] ?>;">
                             <label class="roi-left">
                                 <p class="roi-left__label">How many hours (per month) do you spend managing all of the above tasks for just one of your sites?</p>
                                 <span class="roi-tip-trigger flex-center"><p>?</p></span>
@@ -667,7 +729,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 -->
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-row-space-between">
+                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_fourth' ] ?>;">
                             <label class="roi-left">
                                 <p class="roi-left__label">What is your hourly rate?</p>
                             </label>
@@ -677,7 +739,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </fieldset>
                     
-                        <fieldset class="roi-row flex-row-space-between">
+                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_fifth' ] ?>;">
                             <label class="roi-left">
                                 <p class="roi-left__label">Tell us where to send your results.</p>
                             </label>
@@ -688,7 +750,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <input class="roi-form__textinput" name="phone" placeholder="Phone number">
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-center">
+                        <fieldset class="roi-row flex-center" style="order: 6;">
                             <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
                         </fieldset>    
                     </form>
