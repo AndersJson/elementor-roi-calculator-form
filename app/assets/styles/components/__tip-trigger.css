@@ -1,14 +1,12 @@
 .roi-tip-trigger {
-  display: flex;
+	display: flex;
 	position: absolute;
 	top: 0;
 	right: 20px;
-	height: 30px;
-	width: 30px;
-  border-radius: 50%;
+	border-radius: 50%;
 
-  &:hover + .roi-tip{
-      visibility: visible;
-      z-index: 5;
-    }
+	&:hover + .roi-tip {
+		visibility: visible;
+		z-index: 5;
+	}
 }

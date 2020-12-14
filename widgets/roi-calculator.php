@@ -455,6 +455,65 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Tip-Icon Height
+            $this->add_responsive_control(
+                'tip-icon_height',
+                [
+                    'label' => __( 'Tip-Icon Height', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', '%' ],
+                    'description' => 'Default: ( 30px )',
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 100,
+                            'step' => 1,
+                        ],
+                        '%' => [
+                            'min' => 0,
+                            'max' => 100,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 30,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'height: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            // Tip-Icon Width
+            $this->add_responsive_control(
+                'tip-icon_width',
+                [
+                    'label' => __( 'Tip-Icon Width', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', '%' ],
+                    'description' => 'Default: ( 30px )',
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 100,
+                            'step' => 1,
+                        ],
+                        '%' => [
+                            'min' => 0,
+                            'max' => 100,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 30,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'width: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+
             $this->add_control(
                 'tip_hr',
                 [
@@ -466,7 +525,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->add_control(
                 'tip_text_color',
                 [
-                    'label' => __( 'Tip Text Color', 'plugin-domain' ),
+                    'label' => __( 'Tip Text Color', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::COLOR,
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
