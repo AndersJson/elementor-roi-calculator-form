@@ -602,6 +602,89 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        // Checklist Style Settings
+        $this->start_controls_section(
+            'checklist_style_section',
+            [
+                'label' => __( 'Checklist', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Checklist Icon Un-Checked Color
+        $this->add_control(
+            'checklist_unchecked_color',
+            [
+                'label' => __( 'Checbox-Icon Inactive Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#e7e7e7',
+                'description' => 'Default: ( #e7e7e7 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__icon ' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Checklist-Icon Width
+        $this->add_responsive_control(
+            'checklist-icon_width',
+            [
+                'label' => __( 'Checklist-Icon Width', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'description' => 'Default: ( 30px )',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 30,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__icon' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Checklist-Icon Height
+        $this->add_responsive_control(
+            'checklist-icon_height',
+            [
+                'label' => __( 'Checklist-Icon Height', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'description' => 'Default: ( 30px )',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 30,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__icon' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
 
         // Submit-button Style Settings
         $this->start_controls_section(
