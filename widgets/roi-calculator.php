@@ -576,10 +576,22 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'size_units' => [ 'rem', '%', 'px' ],
                 'description' => 'Default: ( 1rem 2rem 1rem 2rem )',
                 'default' => [
-                    'top' => 1,
-                    'right' => 2,
-                    'bottom' => 1,
-                    'left' => 2,
+                    'top' => [
+                        'unit' => 'rem',
+                        'size' => 1
+                    ],
+                    'right' => [
+                        'unit' => 'rem',
+                        'size' => 2
+                    ],
+                    'bottom' => [
+                        'unit' => 'rem',
+                        'size' => 1
+                    ],
+                    'left' => [
+                        'unit' => 'rem',
+                        'size' => 1
+                    ],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} #roi-submit-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
