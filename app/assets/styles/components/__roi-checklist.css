@@ -17,7 +17,6 @@
 		display: flex;
 		margin: -2px 16px 0 0;
 		border-radius: 50%;
-		border: 2px solid #e7e7e7;
 		transition: transform 0.2s;
 		cursor: pointer;
 
@@ -31,9 +30,5 @@
 			align-items: center;
 			font-size: inherit;
 		}
-	}
-
-	&__checkbox:checked + &__icon {
-		color: var(--color-primary-teal);
 	}
 }

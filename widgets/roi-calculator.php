@@ -615,7 +615,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_control(
             'checklist_unchecked_color',
             [
-                'label' => __( 'Checbox-Icon Inactive Color', 'roi-calculator-widget' ),
+                'label' => __( 'Checklist-Icon Inactive Color', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#e7e7e7',
                 'description' => 'Default: ( #e7e7e7 ) ',
@@ -624,6 +624,31 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ],
             ]
         );
+
+        // Checklist Icon Checked Color
+        $this->add_control(
+            'checklist_checked_color',
+            [
+                'label' => __( 'Checklist-Icon Active Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Checklist-Icon Border
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'submit-button_border',
+                'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} .roi-checklist__icon',
+            ]
+        );
+        
 
         // Checklist-Icon Width
         $this->add_responsive_control(
