@@ -111,6 +111,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
+
+        // Checklist Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'general_label_typography',
+				'label' => __( 'Icon Size', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-checklist__icon',
+			]
+        );
+
             // Checklist Repeater
             $repeater = new \Elementor\Repeater();
             $repeater->add_control(
@@ -358,12 +370,12 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Border Radius', 'roi-calculator-widget' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 10px 10px 10px 10px )',
+                    'description' => 'Default: ( 0px 0px 0px 0px )',
                     'default' => [
-                        'top' => 10,
-                        'right' => 10,
-                        'bottom' => 10,
-                        'left' => 10,
+                        'top' => 0,
+                        'right' => 0,
+                        'bottom' => 0,
+                        'left' => 0,
                     ],
                     'selectors' => [
                         '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'

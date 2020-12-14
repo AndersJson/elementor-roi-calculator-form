@@ -4,32 +4,39 @@
 	list-style-type: none;
 
 	&__label li {
-			margin: 10px 0 25px;
-			cursor: pointer;
-			display: flex;
+		margin: 10px 0 25px;
+		cursor: pointer;
+		display: flex;
 	}
 
-	&__checkbox{
+	&__checkbox {
 		display: none;
 	}
 
-	&__icon{
+	&__icon {
 		display: flex;
 		flex: 0 0 30px;
 		color: var(--color-grey-light);
-    height: 30px;
-    margin: -4px 16px 0 0;
-    border-radius: 50%;
-    border: 2px solid #e7e7e7;
-    transition: transform .2s;
-    cursor: pointer;
-		
-		&:hover{
+		height: 30px;
+		margin: -2px 16px 0 0;
+		border-radius: 50%;
+		border: 2px solid #e7e7e7;
+		transition: transform 0.2s;
+		cursor: pointer;
+
+		&:hover {
 			transform: scale(1.1);
+		}
+
+		& i {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: inherit;
 		}
 	}
 
-	&__checkbox:checked + &__icon{
+	&__checkbox:checked + &__icon {
 		color: var(--color-primary-teal);
 	}
 }

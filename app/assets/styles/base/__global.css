@@ -9,5 +9,6 @@
 
 .roi-outer-wrapper {
 	box-sizing: border-box;
-	line-height: 20px;
+	width: 100vw;
+	line-height: inherit;
 }
