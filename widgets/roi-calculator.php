@@ -218,7 +218,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'name' => 'general_label_typography',
 				'label' => __( 'Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .label',
+				'selector' => '{{WRAPPER}} .roi-left__label',
 			]
         );
 
@@ -1029,7 +1029,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <form class="roi-calculation-form" id="roi-calculation-form">
                         <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_first' ] ?>;">
                             <label class="roi-left">
-                            <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
+                            <p class="roi-left__label first-label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
                                 <span class="roi-tip-trigger flex-center"><p>?</p></span>
                                 <span class="roi-tip first-tip">
