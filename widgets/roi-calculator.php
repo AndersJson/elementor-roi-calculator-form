@@ -806,17 +806,12 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        //Submit-button text-color
         $this->add_control(
-            'submit_button_text_color',
+            'more_options_submit_button_base',
             [
-                'label' => __( 'Button Text Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#2AAECD',
-                'description' => 'Default: ( #2AAECD ) ',
-                'selectors' => [
-                    '{{WRAPPER}} #roi-submit-button' => 'color: {{VALUE}};',
-                ],
+                'label' => __( 'Basic Styles', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
             ]
         );
 
@@ -902,13 +897,6 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'submit_button_shadow_hr',
-            [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
-            ]
-        );
-
         // Submit-button Shadow
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
@@ -919,19 +907,98 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Submit-button Background Color
-        $this->add_control(
-            'submit_button_background_color',
-            [
-                'label' => __( 'Button Background Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#FFFFFF',
-                'description' => 'Default: ( #FFFFFF ) ',
-                'selectors' => [
-                    '{{WRAPPER}} #roi-submit-button ' => 'background-color: {{VALUE}}',
-                ],
-            ]
-        );
+            $this->add_control(
+                'more_options_submit_button_hover',
+                [
+                    'label' => __( 'Default/Hover Styles', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
+                ]
+            );
+
+            // Submit-Button Tabs
+            $this->start_controls_tabs(
+                'submit_button_style_tabs'
+            );
+
+            /* ********** NORMAL STATE BEGIN ************* */
+
+            $this->start_controls_tab(
+                'submit_button_normal_state',
+                [
+                    'label' => __( 'Default Style', 'roi-calculator-widget' ),
+                ]
+            );
+                // Submit-button Background Color
+                $this->add_control(
+                    'submit_button_background_color',
+                    [
+                        'label' => __( 'Button Background Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#FFFFFF',
+                        'description' => 'Default: ( #FFFFFF ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button ' => 'background-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+                //Submit-button text-color
+                $this->add_control(
+                    'submit_button_text_color',
+                    [
+                        'label' => __( 'Button Text Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button' => 'color: {{VALUE}};',
+                        ],
+                    ]
+                );
+
+            $this->end_controls_tab();
+            /* ********** NORMAL STATE END ************* */
+
+            /* ********** HOVER STATE BEGIN ************* */
+
+            $this->start_controls_tab(
+                'submit_button_hover_state',
+                [
+                    'label' => __( 'Hover-Style', 'roi-calculator-widget' ),
+                ]
+            );
+                // Background Color
+                $this->add_control(
+                    'submit_button_hover_bg_color',
+                    [
+                        'label' => __( 'Background Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button:hover' => 'background-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+                // Text Color
+                $this->add_control(
+                    'submit_button_hover_text_color',
+                    [
+                        'label' => __( 'Text Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#FFFFFF',
+                        'description' => 'Default: ( #FFFFFF ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button:hover' => 'color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+            $this->end_controls_tab();
+            /* ********** HOVER STATE END ************* */
+            
+            $this->end_controls_tabs();
 
         $this->end_controls_section();
     }
@@ -965,7 +1032,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <p class="roi-left__label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
                                 <span class="roi-tip-trigger flex-center"><p>?</p></span>
-                                <span class="roi-tip">
+                                <span class="roi-tip first-tip">
                                     <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
                                 </span>
                             <?php endif; ?>
