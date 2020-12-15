@@ -33,12 +33,53 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
+        $this->add_control(
+            'more_options_general typography',
+            [
+                'label' => __( 'Default Typography', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // General Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'general_typography',
+				'label' => __( 'General Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-row',
+			]
+        );
+
+        // Label Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'general_label_typography',
+				'label' => __( 'Label Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-left__label',
+			]
+        );
+
+        // Tip-Trigger Typography
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'first_tip_trigger_typography',
+                'label' => __( 'Tip Trigger Font', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .roi-tip-trigger',
+            ]
+        );
 
         $this->add_control(
             'more_options_row_order',
             [
                 'label' => __( 'Row order', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
             ]
         );
 
@@ -203,37 +244,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-        $this->start_controls_section(
-            'general_label_settings',
-            [
-                'label' => __( 'General Label Settings', 'roi-calculator-widget' ),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-            ]
-        );
-
-        // Label Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'general_label_typography',
-				'label' => __( 'Typography', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .roi-left__label',
-			]
-        );
-
-        // Tip-Trigger Typography
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'first_tip_trigger_typography',
-                'label' => __( 'Tip Trigger Font', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .roi-tip-trigger',
-            ]
-        );
-
-        $this->end_controls_section();
 
         $this->start_controls_section(
             'first_label_settings',
