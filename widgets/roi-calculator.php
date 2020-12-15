@@ -29,8 +29,16 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'form_row_settings',
             [
-                'label' => __( 'Row Settings', 'roi-calculator-widget' ),
+                'label' => __( 'General Settings', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'more_options_row_order',
+            [
+                'label' => __( 'Row order', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
             ]
         );
 
@@ -112,16 +120,38 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+
         // Checklist Typography
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'general_label_typography',
+				'name' => 'checklist_label_typography',
+				'label' => __( 'Checklist Fontsize', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-checklist__labeltext',
+			]
+        );
+
+
+        // Checklist Typography(Icon Size)
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'checklist_icon_typography',
 				'label' => __( 'Icon Size', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .roi-checklist__icon',
 			]
         );
+
+            $this->add_control(
+                'more_options_checklist_items',
+                [
+                    'label' => __( 'Checklist items and icons', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
+                ]
+            );
 
             // Checklist Repeater
             $repeater = new \Elementor\Repeater();
@@ -213,6 +243,14 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'more_options_first_label',
+            [
+                'label' => __( 'Label', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
         // First Label Text
         $this->add_control(
             'first_label_text',
@@ -236,9 +274,11 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
         
         $this->add_control(
-            'first_label_hr',
+            'more_options_first_label_tip',
             [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
+                'label' => __( 'Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
             ]
         );
 
@@ -419,6 +459,14 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+            $this->add_control(
+                'more_options_label_text',
+                [
+                    'label' => __( 'Label text', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                ]
+            );
+
             // Text Color
             $this->add_control(
                 'label_text_color',
@@ -434,9 +482,11 @@ class ROI_Calculator_Widget extends Widget_Base {
             );
 
             $this->add_control(
-                'tip_icon_hr',
+                'more_options_tip_icon',
                 [
-                    'type' => \Elementor\Controls_Manager::DIVIDER,
+                    'label' => __( 'Tip Icon', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
                 ]
             );
 
@@ -513,11 +563,12 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-
             $this->add_control(
-                'tip_hr',
+                'more_options_tip_text',
                 [
-                    'type' => \Elementor\Controls_Manager::DIVIDER,
+                    'label' => __( 'Tip Popup', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
                 ]
             );
 
@@ -606,7 +657,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'checklist_style_section',
             [
-                'label' => __( 'Checklist', 'roi-calculator-widget' ),
+                'label' => __( 'Checklist-Icon', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -639,20 +690,34 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'checklist_border_before_hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
         // Checklist-Icon Border
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
-                'name' => 'submit-button_border',
+                'name' => 'checklist_icon_border',
                 'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
                 'selector' => '{{WRAPPER}} .roi-checklist__icon',
+            ]
+        );
+
+        $this->add_control(
+            'checklist_border_after_hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
             ]
         );
         
 
         // Checklist-Icon Width
         $this->add_responsive_control(
-            'checklist-icon_width',
+            'checklist_icon_width',
             [
                 'label' => __( 'Checklist-Icon Width', 'roi-calculator-widget' ),
                 'type' => Controls_Manager::SLIDER,
@@ -681,7 +746,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         // Checklist-Icon Height
         $this->add_responsive_control(
-            'checklist-icon_height',
+            'checklist_icon_height',
             [
                 'label' => __( 'Checklist-Icon Height', 'roi-calculator-widget' ),
                 'type' => Controls_Manager::SLIDER,
@@ -704,6 +769,27 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .roi-checklist__icon' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Checklist-Icon Margin
+        $this->add_responsive_control(
+            'checklist_icon_margin',
+            [
+                'label' => __( 'Margin', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 7px 16px 0px 0px )',
+                'default' => [
+                    'top' => 7,
+                    'right' => 16,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'isLinked' => 'false'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__icon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -904,7 +990,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             <span class="roi-checklist__icon flex-center">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                             </span>
-                                            <?php echo $item[ 'checklist_text' ]; ?>
+                                            <span class="roi-checklist__labeltext">
+                                                <?php echo $item[ 'checklist_text' ]; ?>
+                                            </span>
                                         </li>
                                     </label>
                                 <?php endforeach; ?>

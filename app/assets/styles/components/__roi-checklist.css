@@ -15,7 +15,8 @@
 
 	&__icon {
 		display: flex;
-		margin: -2px 16px 0 0;
+		flex-shrink: 0;
+		flex-grow: 0;
 		border-radius: 50%;
 		transition: transform 0.2s;
 		cursor: pointer;
