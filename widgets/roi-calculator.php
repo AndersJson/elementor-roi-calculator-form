@@ -706,6 +706,76 @@ class ROI_Calculator_Widget extends Widget_Base {
         
         $this->end_controls_section();
 
+        //Form Settings
+        $this->start_controls_section(
+            'form_settings',
+            [
+                'label' => __( 'Form', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        // Form Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'form_input_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-form__textinput',
+			]
+        );
+
+        // Firstname Placeholder Text
+        $this->add_control(
+            'firstname_placeholder_text',
+            [
+                'label' => __( 'Firstname Placeholder', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Firstname', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter placeholder-text here', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Firstname Placeholder Text
+        $this->add_control(
+            'lastname_placeholder_text',
+            [
+                'label' => __( 'Lastname Placeholder', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Lastname', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter placeholder-text here', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Firstname Placeholder Text
+        $this->add_control(
+            'email_placeholder_text',
+            [
+                'label' => __( 'Lastname Placeholder', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Email', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter placeholder-text here', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Firstname Placeholder Text
+        $this->add_control(
+            'phone_placeholder_text',
+            [
+                'label' => __( 'Phone Placeholder', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Phone', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter placeholder-text here', 'roi-calculator-widget' ),
+            ]
+        );
+
+        $this->end_controls_section();
+
         // Submit-button Settings
         $this->start_controls_section(
             'submit_button_settings',
@@ -1513,10 +1583,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <?php endif; ?>
                             </label>
                             <div class="roi-right">
-                                <input class="roi-form__textinput" name="firstname" placeholder="First name">
-                                <input class="roi-form__textinput" name="lastname" placeholder="Last name">
-                                <input class="roi-form__textinput" name="email" placeholder="Work email">
-                                <input class="roi-form__textinput" name="phone" placeholder="Phone number">
+                                <input class="roi-form__textinput" name="firstname" placeholder="<?php echo $settings[ 'firstname_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" name="lastname" placeholder="<?php echo $settings[ 'lastname_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
                             </div>
                         </fieldset>
                         <fieldset class="roi-row flex-center" style="order: 6;">
