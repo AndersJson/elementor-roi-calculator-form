@@ -762,12 +762,12 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Padding', 'roi-calculator-widget' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 40px 40px 40px 40px )',
+                    'description' => 'Default: ( 0px 0px 0px 0px )',
                     'default' => [
-                        'top' => 40,
-                        'right' => 40,
-                        'bottom' => 40,
-                        'left' => 40,
+                        'top' => 0,
+                        'right' => 0,
+                        'bottom' => 0,
+                        'left' => 0,
                     ],
                     'selectors' => [
                         '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -834,9 +834,9 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         // Label Style Settings
         $this->start_controls_section(
-            'first_label_style_section',
+            'general_style_section',
             [
-                'label' => __( 'Label', 'roi-calculator-widget' ),
+                'label' => __( 'General styling', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -881,9 +881,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => '#54595f',
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'border: 2px solid {{VALUE}};',
                         '{{WRAPPER}} .roi-tip-trigger p' => 'color: {{VALUE}};'
                     ],
+                ]
+            );
+
+            //Tip-Icon Border
+            $this->add_group_control(
+                \Elementor\Group_Control_Border::get_type(),
+                [
+                    'name' => 'tip_icon_border',
+                    'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-tip-trigger',
                 ]
             );
 
