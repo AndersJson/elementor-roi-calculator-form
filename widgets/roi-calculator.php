@@ -29,7 +29,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'form_row_settings',
             [
-                'label' => __( 'General Settings', 'roi-calculator-widget' ),
+                'label' => __( 'General', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -72,6 +72,17 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .roi-tip-trigger',
             ]
+        );
+
+        // Tip Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'first_tip_typography',
+				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-tip',
+			]
         );
 
         $this->add_control(
@@ -152,11 +163,192 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+
+        //Slider-Label 1
+        $this->start_controls_section(
+            'first_label_settings',
+            [
+                'label' => __( 'Slider-Label 1', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'more_options_first_label',
+            [
+                'label' => __( 'Label', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Slider-Label 1 Text
+        $this->add_control(
+            'first_label_text',
+            [
+                'label' => __( 'First Label text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Label text', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Slider-Label 1 Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'first_label_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .first-label',
+			]
+        );
+        
+        $this->add_control(
+            'more_options_first_label_tip',
+            [
+                'label' => __( 'Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        // Slider-Label 1 Tip
+        $this->add_control(
+            'show_first_label_tip',
+            [
+                'label' => __( 'Show First Label Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator' ),
+                'label_off' => __( 'Hide', 'roi-calculator' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+
+        // Slider-Tip 1 text
+        $this->add_control(
+            'first_tip_text',
+            [
+                'label' => __( 'First Tip Text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
+                'condition' => [
+                    'show_first_label_tip' => 'yes'
+                ]
+            ]
+        );
+
+        // Slider-Tip 1 Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'first_tip_typography',
+				'label' => __( 'First Tip Font', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .first-tip',
+			]
+        );
+
+        
+        $this->end_controls_section();
+
+        //Checklist-Label
+        $this->start_controls_section(
+            'checklist_label_settings',
+            [
+                'label' => __( 'Checklist-Label', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'more_options_checklist_label',
+            [
+                'label' => __( 'Label', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Checkist Label Text
+        $this->add_control(
+            'checklist_label_text',
+            [
+                'label' => __( 'Checklist Label text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Label text', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Checklist Label Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'checklist_label_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .second-label',
+			]
+        );
+        
+        $this->add_control(
+            'more_options_first_label_tip',
+            [
+                'label' => __( 'Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        // Checklist Label Tip
+        $this->add_control(
+            'show_checklist_label_tip',
+            [
+                'label' => __( 'Show Checklist Label Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator' ),
+                'label_off' => __( 'Hide', 'roi-calculator' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+
+        // Checklist Tip text
+        $this->add_control(
+            'checklist_tip_text',
+            [
+                'label' => __( 'Checklist Tip Text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
+                'condition' => [
+                    'show_checklist_label_tip' => 'yes'
+                ]
+            ]
+        );
+
+        // Checklist Tip Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'checklist_tip_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .second-tip',
+			]
+        );
+
+        
+        $this->end_controls_section();
+
         // Checklist Settings
         $this->start_controls_section(
             'checklist_settings',
             [
-                'label' => __( 'Checklist Settings', 'roi-calculator-widget' ),
+                'label' => __( 'Checklist', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -244,101 +436,11 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
-
-        $this->start_controls_section(
-            'first_label_settings',
-            [
-                'label' => __( 'First Label Settings', 'roi-calculator-widget' ),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-            ]
-        );
-
-        $this->add_control(
-            'more_options_first_label',
-            [
-                'label' => __( 'Label', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-            ]
-        );
-
-        // First Label Text
-        $this->add_control(
-            'first_label_text',
-            [
-                'label' => __( 'First Label text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Label text', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
-            ]
-        );
-
-        // First Label Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'first_label_typography',
-				'label' => __( 'Typography', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .first-label',
-			]
-        );
-        
-        $this->add_control(
-            'more_options_first_label_tip',
-            [
-                'label' => __( 'Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        // First Label Tip
-        $this->add_control(
-            'show_first_label_tip',
-            [
-                'label' => __( 'Show First Label Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'roi-calculator' ),
-                'label_off' => __( 'Hide', 'roi-calculator' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-
-        // First Tip text
-        $this->add_control(
-            'first_tip_text',
-            [
-                'label' => __( 'First Tip Text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
-                'condition' => [
-                    'show_first_label_tip' => 'yes'
-                ]
-            ]
-        );
-
-        // First Tip Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'first_tip_typography',
-				'label' => __( 'First Tip Font', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .first-tip',
-			]
-        );
-
-        
-        $this->end_controls_section();
-
         // Submit-button Settings
         $this->start_controls_section(
             'submit_button_settings',
             [
-                'label' => __( 'Submit-button Settings', 'roi-calculator-widget' ),
+                'label' => __( 'Submit-button', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -1055,7 +1157,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                     
                         <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_second' ] ?>;">
                             <label class="roi-left">
-                                <p class="roi-left__label">Which of the following tasks do you handle for your clients?</p>
+                            <p class="roi-left__label second-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
+                            <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
+                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                <span class="roi-tip second-tip">
+                                    <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
+                                </span>
+                            <?php endif; ?>
                             </label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
