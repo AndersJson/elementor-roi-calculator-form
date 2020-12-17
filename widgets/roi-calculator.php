@@ -1258,6 +1258,157 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->end_controls_section();
 
 
+        // Form Style Settings
+        $this->start_controls_section(
+            'form_style_section',
+            [
+                'label' => __( 'Contact Form', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Form Input Width
+        $this->add_responsive_control(
+            'form_input_width',
+            [
+                'label' => __( 'Input Width', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 46% )',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    'rem' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 46,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-form__textinput' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Form Input Border Radius
+        $this->add_responsive_control(
+            'form_input_border_radius',
+            [
+                'label' => __( 'Border Radius', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'rem', '%', 'px' ],
+                'description' => 'Default: ( 2px 2px 2px 2px )',
+                'default' => [
+                    'top' => [
+                        'unit' => 'px',
+                        'size' => 2
+                    ],
+                    'right' => [
+                        'unit' => 'px',
+                        'size' => 2
+                    ],
+                    'bottom' => [
+                        'unit' => 'px',
+                        'size' => 2
+                    ],
+                    'left' => [
+                        'unit' => 'px',
+                        'size' => 2
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-form__textinput' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                ],
+            ]
+        );
+
+        // Form Inputs Margin
+        $this->add_responsive_control(
+            'form_input_margin',
+            [
+                'label' => __( 'Margin', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem' ],
+                'description' => 'Default: ( 0px 20px 20px 0px )',
+                'default' => [
+                    'top' => 7,
+                    'right' => 16,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'isLinked' => 'false'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-form__textinput' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Form Input Padding
+        $this->add_responsive_control(
+            'form_input_padding',
+            [
+                'label' => __( 'Padding', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'rem', '%', 'px', 'em' ],
+                'description' => 'Default: ( 1em 1em 1em 1em )',
+                'default' => [
+                    'top' => [
+                        'unit' => 'em',
+                        'size' => 1
+                    ],
+                    'right' => [
+                        'unit' => 'em',
+                        'size' => 1
+                    ],
+                    'bottom' => [
+                        'unit' => 'em',
+                        'size' => 1
+                    ],
+                    'left' => [
+                        'unit' => 'em',
+                        'size' => 1
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-form__textinput' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'more_options_form_input_box_shadow',
+            [
+                'label' => __( 'Box-Shadow : inset 0 0 0 1px #c7c4c4', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        // Form Input Shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'form_input_box_shadow',
+                'label' => __( 'Input Box Shadow', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} .roi-form__textinput',
+            ]
+        );
+
+        $this->end_controls_section();
+
+
         // Submit-button Style Settings
         $this->start_controls_section(
             'submit_button_style_section',
