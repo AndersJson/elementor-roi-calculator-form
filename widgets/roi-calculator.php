@@ -816,6 +816,74 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     private function style_tab() {
+        //Basic Layout
+        $this->start_controls_section(
+            'layout_style_section',
+            [
+                'label' => __( 'Basic Layout', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'more_options_label_column',
+            [
+                'label' => __( 'Label-Column', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Label Column Width
+        $this->add_responsive_control(
+            'label_column_width',
+            [
+                'label' => __( 'Width', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%' ],
+                'description' => 'Default: ( Desktop: 40%, Tablet: 100% )',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 2000,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-left' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+            //Roi Left Padding
+            $this->add_responsive_control(
+                'label_column_padding',
+                [
+                    'label' => __( 'Padding', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 0px 60px 0px 60px )',
+                    'default' => [
+                        'top' => 0,
+                        'right' => 60,
+                        'bottom' => 0,
+                        'left' => 60,
+                        'isLinked' => 'false'
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-left' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+        $this->end_controls_section();
+
          // Wrapper Style Settings
          $this->start_controls_section(
             'wrapper_style_section',

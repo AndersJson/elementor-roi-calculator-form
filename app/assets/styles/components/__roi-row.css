@@ -1,5 +1,6 @@
 .roi-row {
 	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: var(--mb-sm);
 	border: none;
 }
