@@ -882,6 +882,33 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            $this->add_responsive_control(
+                'label_column_text_align',
+                [
+                    'label' => __( 'Text Alignment', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::CHOOSE,
+                    'options' => [
+                        'left' => [
+                            'title' => __( 'Left', 'roi-calculator-widget' ),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __( 'Center', 'roi-calculator-widget' ),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'right' => [
+                            'title' => __( 'Right', 'roi-calculator-widget' ),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'default' => 'right',
+                    'toggle' => true,
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-left ' => 'text-align: {{VALUE}}',
+                    ],
+                ]
+            );
+
         $this->end_controls_section();
 
          // Wrapper Style Settings
