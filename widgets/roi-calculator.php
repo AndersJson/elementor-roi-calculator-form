@@ -826,6 +826,35 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
 
         $this->add_control(
+            'more_options_row',
+            [
+                'label' => __( 'Row', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Row Margin
+        $this->add_responsive_control(
+            'row_margin',
+            [
+                'label' => __( 'Row Margin', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'rem', 'em' ],
+                'description' => 'Default: ( 0px 0px 30px 0px )',
+                'default' => [
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 30,
+                    'left' => 0,
+                    'isLinked' => 'false'
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .roi-row' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'more_options_label_column',
             [
                 'label' => __( 'Label-Column', 'roi-calculator-widget' ),
