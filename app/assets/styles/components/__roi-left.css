@@ -5,7 +5,7 @@
 	width: 40%;
 	text-align: right;
 
-	@mixin tab-port{
+	@mixin phone{
 		width: 100%;
 		text-align: left;
 		padding: 0 0 0 5%;

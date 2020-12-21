@@ -3,7 +3,7 @@
   padding: 0 10% 0 5%;
   width: 60%;
 
-  @mixin tab-port{
+  @mixin phone{
 		width: 100%;
 		padding: 0 5%;
 	}
