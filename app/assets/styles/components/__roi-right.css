@@ -1,5 +1,10 @@
 .roi-right{
   display: block;
-  padding: var(--padding-column-lg);
+  padding: 0 10% 0 5%;
   width: 60%;
+
+  @mixin tab-port{
+		width: 100%;
+		padding: 0 5%;
+	}
 }

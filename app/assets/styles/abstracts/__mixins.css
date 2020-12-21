@@ -1,11 +1,11 @@
 @define-mixin tab-port {
-		@media (max-width: 1024px) {
+		@media (max-width: 900px) {
 			@mixin-content;
 		}
 	}
 
 @define-mixin phone {
-  @media (max-width: 767px) {
+  @media (max-width: 500px) {
     @mixin-content;
   }
 }

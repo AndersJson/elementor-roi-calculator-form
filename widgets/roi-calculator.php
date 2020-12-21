@@ -1401,7 +1401,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ],
                 'default' => [
                     'unit' => '%',
-                    'size' => 46,
+                    'size' => 45,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .roi-form__textinput' => 'width: {{SIZE}}{{UNIT}};',

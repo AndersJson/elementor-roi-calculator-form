@@ -1,14 +1,14 @@
 .roi-left {
 	display: block;
 	position: relative;
-	padding: 0 60px;
+	padding: 0 7% 0 0;
 	width: 40%;
 	text-align: right;
 
 	@mixin tab-port{
 		width: 100%;
 		text-align: left;
-		padding: 0 0 0 20px;
+		padding: 0 0 0 5%;
 		margin-bottom: 30px;
 	}
 }
