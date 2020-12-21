@@ -816,11 +816,11 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     private function style_tab() {
-        //Basic Layout
+        // General Style Settings
         $this->start_controls_section(
-            'layout_style_section',
+            'general_style_section',
             [
-                'label' => __( 'Basic Layout', 'roi-calculator-widget' ),
+                'label' => __( 'General styling', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -854,109 +854,12 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-
-        $this->end_controls_section();
-
-         // Wrapper Style Settings
-         $this->start_controls_section(
-            'wrapper_style_section',
-            [
-                'label' => __( 'Wrapper', 'roi-calculator-widget' ),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-            // Padding
-            $this->add_responsive_control(
-                'wrapper_padding',
-                [
-                    'label' => __( 'Padding', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 0px 0px 0px 0px )',
-                    'default' => [
-                        'top' => 0,
-                        'right' => 0,
-                        'bottom' => 0,
-                        'left' => 0,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            // Border Type
-            $this->add_group_control(
-                \Elementor\Group_Control_Border::get_type(),
-                [
-                    'name' => 'wrapper_border',
-                    'label' => __( 'Border', 'roi-calculator-widget' ),
-                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
-                ]
-            );
-
-            // Border Radius
-            $this->add_responsive_control(
-                'wrapper_border_radius',
-                [
-                    'label' => __( 'Border Radius', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 0px 0px 0px 0px )',
-                    'default' => [
-                        'top' => 0,
-                        'right' => 0,
-                        'bottom' => 0,
-                        'left' => 0,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-
-                    ],
-                ]
-            );
-
-            // Box Shadow
-            $this->add_group_control(
-                \Elementor\Group_Control_Box_Shadow::get_type(),
-                [
-                    'name' => 'wrapper_box_shadow',
-                    'label' => __( 'Box Shadow', 'roi-calculator-widget' ),
-                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
-                ]
-            );
-
-            // Background Color
-            $this->add_control(
-                'wrapper_backgorund_color',
-                [
-                    'label' => __( 'Background Color', 'plugin-domain' ),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'default' => '#FFFFFF',
-                    'description' => 'Default: ( #FFFFFF ) ',
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
-                    ],
-                ]
-            );
-
-        $this->end_controls_section();
-
-        // Label Style Settings
-        $this->start_controls_section(
-            'general_style_section',
-            [
-                'label' => __( 'General styling', 'roi-calculator-widget' ),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
-
             $this->add_control(
                 'more_options_label_text',
                 [
                     'label' => __( 'Label text', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
                 ]
             );
 
@@ -1065,6 +968,84 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Tip-Icon Position Right
+            $this->add_responsive_control(
+                'tip-icon_position_right',
+                [
+                    'label' => __( 'Tip-Icon Position Right', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'rem', 'em', '%' ],
+                    'description' => 'Default: ( 20px )',
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        'rem' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        'em' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        '%' => [
+                            'min' => 0,
+                            'max' => 100,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 20,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'right: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            // Tip-Icon Position Top
+            $this->add_responsive_control(
+                'tip-icon_position_top',
+                [
+                    'label' => __( 'Tip-Icon Position Top', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::SLIDER,
+                    'size_units' => [ 'px', 'rem', 'em', '%' ],
+                    'description' => 'Default: ( 0px )',
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        'rem' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        'em' => [
+                            'min' => 0,
+                            'max' => 500,
+                            'step' => 1,
+                        ],
+                        '%' => [
+                            'min' => 0,
+                            'max' => 100,
+                        ],
+                    ],
+                    'default' => [
+                        'unit' => 'px',
+                        'size' => 0,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-tip-trigger' => 'top: {{SIZE}}{{UNIT}};',
+                    ],
+                ]
+            );
+
             $this->add_control(
                 'more_options_tip_text',
                 [
@@ -1149,6 +1130,92 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'description' => 'Default: ( #FFFFFF ) ',
                     'selectors' => [
                         '{{WRAPPER}} .roi-tip ' => 'background-color: {{VALUE}}',
+                    ],
+                ]
+            );
+
+        $this->end_controls_section();
+
+         // Wrapper Style Settings
+         $this->start_controls_section(
+            'wrapper_style_section',
+            [
+                'label' => __( 'Wrapper', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+            // Padding
+            $this->add_responsive_control(
+                'wrapper_padding',
+                [
+                    'label' => __( 'Padding', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 0px 0px 0px 0px )',
+                    'default' => [
+                        'top' => 0,
+                        'right' => 0,
+                        'bottom' => 0,
+                        'left' => 0,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    ],
+                ]
+            );
+
+            // Border Type
+            $this->add_group_control(
+                \Elementor\Group_Control_Border::get_type(),
+                [
+                    'name' => 'wrapper_border',
+                    'label' => __( 'Border', 'roi-calculator-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+                ]
+            );
+
+            // Border Radius
+            $this->add_responsive_control(
+                'wrapper_border_radius',
+                [
+                    'label' => __( 'Border Radius', 'roi-calculator-widget' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', '%', 'rem' ],
+                    'description' => 'Default: ( 0px 0px 0px 0px )',
+                    'default' => [
+                        'top' => 0,
+                        'right' => 0,
+                        'bottom' => 0,
+                        'left' => 0,
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+
+                    ],
+                ]
+            );
+
+            // Box Shadow
+            $this->add_group_control(
+                \Elementor\Group_Control_Box_Shadow::get_type(),
+                [
+                    'name' => 'wrapper_box_shadow',
+                    'label' => __( 'Box Shadow', 'roi-calculator-widget' ),
+                    'selector' => '{{WRAPPER}} .roi-outer-wrapper',
+                ]
+            );
+
+            // Background Color
+            $this->add_control(
+                'wrapper_backgorund_color',
+                [
+                    'label' => __( 'Background Color', 'plugin-domain' ),
+                    'type' => \Elementor\Controls_Manager::COLOR,
+                    'default' => '#FFFFFF',
+                    'description' => 'Default: ( #FFFFFF ) ',
+                    'selectors' => [
+                        '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
                     ],
                 ]
             );

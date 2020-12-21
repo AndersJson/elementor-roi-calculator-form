@@ -1,8 +1,6 @@
 .roi-tip-trigger {
 	display: flex;
 	position: absolute;
-	top: 0;
-	right: 20px;
 	border-radius: 50%;
 
 	&:hover + .roi-tip {
