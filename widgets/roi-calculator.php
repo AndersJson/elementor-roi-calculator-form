@@ -1804,9 +1804,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </span>
                                 <?php endif; ?>
                             </label>
-                            <div class="roi-right rangewrapper">
-                                    <div class="range__value" id="rangeV"></div>
+                            <div class="roi-right">
+                                <div class="rangewrapper">
+                                    <div class="range__value" id="second-rangevalue"></div>
                                     <input id="second-range" type="range" min="0" max="10" step="1">
+                                </div>
  
                         <!--
                                 <ul class="roi-slider-labels">
@@ -1827,9 +1829,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         </span>
                                     <?php endif; ?>
                             </label>
-                            <div class="roi-right rangewrapper">
-                                <div class="range__value" id="rangeV"></div>
-                                <input id="third-range" type="range" min="0" max="10" step="1">
+                            <div class="roi-right">
+                                <div class="rangewrapper">
+                                    <div class="range__value" id="third-rangevalue"></div>
+                                    <input id="third-range" type="range" min="0" max="10" step="1">
+                                </div>
                             </div>
                         </fieldset>
                     

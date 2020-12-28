@@ -3,19 +3,16 @@ class RangeInput {
     this.rangeinput = $(inputId);
     this.rangevalue = $(valueId);
     this.events();
+    this.setValue();
   }
   events() {
-    this.setValue.bind(this);
     this.rangeinput.on("input", this.setValue.bind(this));
   }
 
   setValue(){
-    console.log(this.rangeinput.val());
-    console.log(this.rangevalue);
-  
-   let newValue = Number( (this.rangeinput.val() - this.rangeinput.min) * 100 / (this.rangeinput.max - this.rangeinput.min) );
+   let newValue = Number( (this.rangeinput.val() - this.rangeinput.attr("min")) * 100 / (this.rangeinput.attr("max") - this.rangeinput.attr("min")) );
    let newPosition = 10 - (newValue * 0.2);
-   this.rangevalue.innerHTML = `<span>${this.rangeinput.val()}</span>`;
+   this.rangevalue.html(`<span>${this.rangeinput.val()}</span>`);
    this.rangevalue.css("left", `calc(${newValue}% + (${newPosition}px))`);
   }
 
@@ -24,4 +21,6 @@ class RangeInput {
 const $ = jQuery;
 $(function() {
   const firstRange = new RangeInput("#first-range", "#first-rangevalue");
+  const secondRange = new RangeInput("#second-range", "#second-rangevalue");
+  const thirdRange = new RangeInput("#third-range", "#third-rangevalue");
 });
