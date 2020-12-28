@@ -1757,9 +1757,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </span>
                             <?php endif; ?>
                             </label>
-                            <div class="roi-right">
+                            <div class="roi-right rangewrapper">
                                 <div class="range__value" id="rangeV"></div>
-                                <input id="range__input" type="range" min="0" max="10" step="1">
+                                <input id="first-range" type="range" min="0" max="10" step="1">
                             </div>
                         </fieldset>
                     
@@ -1802,9 +1802,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </span>
                                 <?php endif; ?>
                             </label>
-                            <div class="roi-right range">
+                            <div class="roi-right rangewrapper">
                                     <div class="range__value" id="rangeV"></div>
-                                    <input id="range__input" type="range" min="0" max="10" step="1">
+                                    <input id="second-range" type="range" min="0" max="10" step="1">
  
                         <!--
                                 <ul class="roi-slider-labels">
@@ -1825,9 +1825,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         </span>
                                     <?php endif; ?>
                             </label>
-                            <div class="roi-right">
+                            <div class="roi-right rangewrapper">
                                 <div class="range__value" id="rangeV"></div>
-                                <input id="range__input" type="range" min="0" max="10" step="1">
+                                <input id="third-range" type="range" min="0" max="10" step="1">
                             </div>
                         </fieldset>
                     
