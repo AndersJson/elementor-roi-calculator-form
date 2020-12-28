@@ -92,12 +92,17 @@
 }
 
 /* ---------------------------------------------------------------------- */
+.rangewrapper {
+  width: 100%; 
+  position: relative;
+}
 
-.range-value{
+.range__value{
   position: absolute;
   top: -50%;
 }
-.range-value span{
+
+.range__value span{
   width: 30px;
   height: 24px;
   line-height: 24px;
@@ -111,7 +116,7 @@
   transform: translate(-50%, 0);
   border-radius: 6px;
 }
-.range-value span:before{
+.range__value span:before{
   content: "";
   position: absolute;
   width: 0;
