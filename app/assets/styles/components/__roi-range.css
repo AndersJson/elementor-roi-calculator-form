@@ -1,8 +1,15 @@
 .range{
 
   &__wrapper {
-  width: 300px; 
+  width: 100%; 
   position: relative;
+  padding: 0 !important;
+
+    & ul {
+      margin: 0 -8%;
+      padding: 0;
+      list-style-type: none !important;
+    }
 
     /* Basic resets and styles for range-inputs*/
     & input[type=range] {
@@ -105,22 +112,22 @@
 
   &__value{
     position: absolute;
-    top: -50%;
+    top: -70%;
+    cursor: pointer;
   }
 
   &__value span{
-    width: 30px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    background: #03a9f4;
-    color: #fff;
-    font-size: 12px;
     display: block;
     position: absolute;
+    padding: 0 .6em;
     left: 50%;
     transform: translate(-50%, 0);
-    border-radius: 6px;
+    /*settings for color in border only*/
+    border: 2px solid var(--color-primary-teal);
+    text-align: center;
+    background: #fff;
+    font-size: 20px;
+    border-radius: 2px;
   }
 
   &__value span:before{
@@ -128,12 +135,44 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 10px solid #03a9f4;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    top: 100%;
+    /*settings for color in border only*/
+    border-top: 18px solid var(--color-primary-teal);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    top: 102%;
     left: 50%;
-    margin-left: -5px;
-    margin-top: -1px;
+    margin-left: -9px;
+  }
+
+  &__value span:after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 16px solid #fff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: 102%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -2px;
+  }
+
+  &__label{
+    position: relative;
+    float: left;
+    width: 16.66%;
+    text-align: center;
+  }
+
+  &__label:before{
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background-color: rgba(0,0,0,.2);
   }
 }

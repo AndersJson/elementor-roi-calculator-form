@@ -1760,7 +1760,15 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <div class="roi-right">
                                 <div class="range__wrapper">
                                     <div class="range__value" id="first-rangevalue"></div>
-                                    <input id="first-range" type="range" min="0" max="10" step="1">
+                                    <input id="first-range" type="range" min="0" max="10000" step="10">
+                                    <ul id="range__labellist">
+                                        <li class="range__label">0</li>
+                                        <li class="range__label">2</li>
+                                        <li class="range__label">4</li>
+                                        <li class="range__label">6</li>
+                                        <li class="range__label">8</li>
+                                        <li class="range__label">10</li>
+                                    </ul>
                                 </div>
                             </div>
                         </fieldset>
