@@ -25,11 +25,11 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     public function _register_controls() {
-        // Row Settings
+        // Typography Settings
         $this->start_controls_section(
-            'form_row_settings',
+            'typography_settings',
             [
-                'label' => __( 'General', 'roi-calculator-widget' ),
+                'label' => __( 'Typography', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -85,86 +85,10 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        $this->add_control(
-            'more_options_row_order',
-            [
-                'label' => __( 'Row order', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        //Row order 1
-        $this->add_control(
-			'row_order_first',
-			[
-				'label' => __( 'Slider-row 1', 'roi-calculator-widget' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 5,
-				'step' => 1,
-				'default' => 1,
-			]
-        );
-        
-        //Row order 2
-        $this->add_control(
-			'row_order_second',
-			[
-				'label' => __( 'Checklist-row', 'roi-calculator-widget' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 5,
-				'step' => 1,
-				'default' => 2,
-			]
-        );
-        
-        //Row order 3
-        $this->add_control(
-			'row_order_third',
-			[
-				'label' => __( 'Slider-row 2', 'roi-calculator-widget' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 5,
-				'step' => 1,
-				'default' => 3,
-			]
-        );
-        
-        //Row order 4
-        $this->add_control(
-			'row_order_fourth',
-			[
-				'label' => __( 'Slider-row 3', 'roi-calculator-widget' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 5,
-				'step' => 1,
-				'default' => 4,
-			]
-        );
-        
-        //Row order 5
-        $this->add_control(
-			'row_order_fifth',
-			[
-				'label' => __( 'Form-row', 'roi-calculator-widget' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 5,
-				'step' => 1,
-				'default' => 5,
-			]
-		);
-
-
-
         $this->end_controls_section();
 
 
-        //Slider-Label 1
+        //Labels
         $this->start_controls_section(
             'label_settings',
             [
@@ -178,88 +102,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             'label_tabs'
         );
 
-        //Slider label 1
-
-        $this->start_controls_tab(
-            'first_slider_label_tab',
-            [
-                'label' => __( 'Orders', 'roi-calculator-widget' ),
-            ]
-        );
-
-        // Slider-Label 1 Text
-        $this->add_control(
-            'first_label_text',
-            [
-                'label' => __( 'Label text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Label text', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
-            ]
-        );
-
-        // Slider-Label 1 Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'first_label_typography',
-				'label' => __( 'Typography', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .first-label',
-			]
-        );
-        
-        $this->add_control(
-            'more_options_first_label_tip',
-            [
-                'label' => __( 'Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        // Slider-Label 1 Tip
-        $this->add_control(
-            'show_first_label_tip',
-            [
-                'label' => __( 'Show Label Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'roi-calculator' ),
-                'label_off' => __( 'Hide', 'roi-calculator' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-
-        // Slider-Tip 1 text
-        $this->add_control(
-            'first_tip_text',
-            [
-                'label' => __( 'Tip Text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
-                'condition' => [
-                    'show_first_label_tip' => 'yes'
-                ]
-            ]
-        );
-
-        // Slider-Tip 1 Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'first_tip_typography',
-				'label' => __( 'Typography', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .first-tip',
-			]
-        );
-
-        $this->end_controls_tab();
-
-        //Checklist-Label 2
+        //Checklist-Label
         $this->start_controls_tab(
             'checklist_slider_label_tab',
             [
@@ -290,7 +133,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
         
         $this->add_control(
-            'more_options_first_label_tip',
+            'more_options_checklis_label_tip',
             [
                 'label' => __( 'Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
@@ -709,7 +552,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Firstname Placeholder Text
+        // Lastname Placeholder Text
         $this->add_control(
             'lastname_placeholder_text',
             [
@@ -721,7 +564,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Firstname Placeholder Text
+        // Lastname Placeholder Text
         $this->add_control(
             'email_placeholder_text',
             [
@@ -733,7 +576,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Firstname Placeholder Text
+        // Phone Placeholder Text
         $this->add_control(
             'phone_placeholder_text',
             [
@@ -1665,34 +1508,8 @@ class ROI_Calculator_Widget extends Widget_Base {
         <!-- *********************** -->
         <div class="roi-outer-wrapper">
             <section class="roi-inner-wrapper">
-                    <form class="roi-calculation-form" id="roi-calculation-form">
-                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_first' ] ?>;">
-                            <label class="roi-left">
-                            <p class="roi-left__label first-label"><?php echo $settings[ 'first_label_text' ]; ?></p>
-                            <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit']?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
-                                <span class="roi-tip first-tip">
-                                    <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
-                                </span>
-                            <?php endif; ?>
-                            </label>
-                            <div class="roi-right">
-                                <div class="range__wrapper">
-                                    <div class="range__value" id="first-rangevalue"></div>
-                                    <input id="first-range" type="range" min="0" max="10000" step="10">
-                                    <ul id="range__labellist">
-                                        <li class="range__label">0</li>
-                                        <li class="range__label">2</li>
-                                        <li class="range__label">4</li>
-                                        <li class="range__label">6</li>
-                                        <li class="range__label">8</li>
-                                        <li class="range__label">10</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </fieldset>
-                    
-                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_second' ] ?>;">
+                    <form class="roi-calculation-form" id="roi-calculation-form">                    
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                             <p class="roi-left__label second-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
@@ -1721,7 +1538,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </ul>
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_third' ] ?>;">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label third-label"><?php echo $settings[ 'third_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_third_label_tip' ] == 'yes') : ?>
@@ -1735,6 +1552,14 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <div class="range__wrapper">
                                     <div class="range__value" id="second-rangevalue"></div>
                                     <input id="second-range" type="range" min="0" max="10" step="1">
+                                    <ul id="range__labellist">
+                                        <li class="range__label">0</li>
+                                        <li class="range__label">2</li>
+                                        <li class="range__label">4</li>
+                                        <li class="range__label">6</li>
+                                        <li class="range__label">8</li>
+                                        <li class="range__label">10</li>
+                                    </ul>
                                 </div>
  
                         <!--
@@ -1746,7 +1571,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 -->
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_fourth' ] ?>;">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label forth-label"><?php echo $settings[ 'forth_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_forth_label_tip' ] == 'yes') : ?>
@@ -1764,7 +1589,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </fieldset>
                     
-                        <fieldset class="roi-row flex-row-space-between" style="order: <?php echo $settings[ 'row_order_fifth' ] ?>;">
+                        <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label fifth-label"><?php echo $settings[ 'fifth_label_text' ]; ?></p>
                                     <?php if( $settings[ 'show_fifth_label_tip' ] == 'yes') : ?>
@@ -1781,7 +1606,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <input class="roi-form__textinput" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
                             </div>
                         </fieldset>
-                        <fieldset class="roi-row flex-center" style="order: 6;">
+                        <fieldset class="roi-row flex-center">
                             <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
                         </fieldset>    
                     </form>
