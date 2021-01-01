@@ -20,7 +20,6 @@ class RangeInput {
 
 const $ = jQuery;
 $(function() {
-  const firstRange = new RangeInput("#first-range", "#first-rangevalue");
   const secondRange = new RangeInput("#second-range", "#second-rangevalue");
   const thirdRange = new RangeInput("#third-range", "#third-rangevalue");
 });
