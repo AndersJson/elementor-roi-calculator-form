@@ -910,13 +910,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-            // Tip-Icon Height
+            // Tip-Icon Size
             $this->add_responsive_control(
-                'tip-icon_height',
+                'tip-icon_size',
                 [
-                    'label' => __( 'Tip-Icon Height', 'roi-calculator-widget' ),
+                    'label' => __( 'Tip-Icon Size', 'roi-calculator-widget' ),
                     'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px', '%' ],
+                    'size_units' => [ 'px', 'em', 'rem' ],
                     'description' => 'Default: ( 30px )',
                     'range' => [
                         'px' => [
@@ -924,46 +924,20 @@ class ROI_Calculator_Widget extends Widget_Base {
                             'max' => 100,
                             'step' => 1,
                         ],
-                        '%' => [
-                            'min' => 0,
-                            'max' => 100,
-                        ],
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 30,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'height: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            // Tip-Icon Width
-            $this->add_responsive_control(
-                'tip-icon_width',
-                [
-                    'label' => __( 'Tip-Icon Width', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px', '%' ],
-                    'description' => 'Default: ( 30px )',
-                    'range' => [
-                        'px' => [
+                        'em' => [
                             'min' => 0,
                             'max' => 100,
                             'step' => 1,
                         ],
-                        '%' => [
+                        'rem' => [
                             'min' => 0,
                             'max' => 100,
+                            'step' => 1,
                         ],
                     ],
                     'default' => [
                         'unit' => 'px',
                         'size' => 30,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'width: {{SIZE}}{{UNIT}};',
                     ],
                 ]
             );
@@ -1284,60 +1258,34 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
         
 
-        // Checklist-Icon Width
+        // Checklist-Icon Size
         $this->add_responsive_control(
-            'checklist_icon_width',
+            'checklist-icon_size',
             [
-                'label' => __( 'Checklist-Icon Width', 'roi-calculator-widget' ),
+                'label' => __( 'Checklist-Icon Size', 'roi-calculator-widget' ),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
-                'description' => 'Default: ( 30px )',
+                'size_units' => [ 'px', 'em', 'rem' ],
+                'description' => 'Default: ( 35px )',
                 'range' => [
                     'px' => [
                         'min' => 0,
                         'max' => 100,
                         'step' => 1,
                     ],
-                    '%' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 30,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__icon' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        // Checklist-Icon Height
-        $this->add_responsive_control(
-            'checklist_icon_height',
-            [
-                'label' => __( 'Checklist-Icon Height', 'roi-calculator-widget' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
-                'description' => 'Default: ( 30px )',
-                'range' => [
-                    'px' => [
+                    'em' => [
                         'min' => 0,
                         'max' => 100,
                         'step' => 1,
                     ],
-                    '%' => [
+                    'rem' => [
                         'min' => 0,
                         'max' => 100,
+                        'step' => 1,
                     ],
                 ],
                 'default' => [
                     'unit' => 'px',
-                    'size' => 30,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__icon' => 'height: {{SIZE}}{{UNIT}};',
+                    'size' => 35,
                 ],
             ]
         );
@@ -1751,7 +1699,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                             <p class="roi-left__label first-label"><?php echo $settings[ 'first_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_first_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit']?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
                                 <span class="roi-tip first-tip">
                                     <p><?php echo $settings[ 'first_tip_text' ]; ?></p>
                                 </span>
@@ -1777,7 +1725,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                             <p class="roi-left__label second-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
                                 <span class="roi-tip second-tip">
                                     <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
                                 </span>
@@ -1790,7 +1738,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <label class="roi-checklist__label">
                                         <li>
                                             <input type="checkbox" name="struggles[]" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>">
-                                            <span class="roi-checklist__icon flex-center">
+                                            <span class="roi-checklist__icon flex-center" style="height: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>;">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                             </span>
                                             <span class="roi-checklist__labeltext">
@@ -1806,7 +1754,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                                 <p class="roi-left__label third-label"><?php echo $settings[ 'third_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_third_label_tip' ] == 'yes') : ?>
-                                    <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                    <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
                                     <span class="roi-tip third-tip">
                                         <p><?php echo $settings[ 'third_tip_text' ]; ?></p>
                                     </span>
@@ -1831,7 +1779,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                                 <p class="roi-left__label forth-label"><?php echo $settings[ 'forth_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_forth_label_tip' ] == 'yes') : ?>
-                                        <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                        <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
                                         <span class="roi-tip forth-tip">
                                             <p><?php echo $settings[ 'forth_tip_text' ]; ?></p>
                                         </span>
@@ -1849,7 +1797,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                                 <p class="roi-left__label fifth-label"><?php echo $settings[ 'fifth_label_text' ]; ?></p>
                                     <?php if( $settings[ 'show_fifth_label_tip' ] == 'yes') : ?>
-                                            <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                            <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
                                             <span class="roi-tip fifth-tip">
                                                 <p><?php echo $settings[ 'fifth_tip_text' ]; ?></p>
                                             </span>
