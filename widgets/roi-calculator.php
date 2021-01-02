@@ -1525,7 +1525,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 $checklist_count = 1;
                                 foreach( $settings[ 'checklist' ] as $item ) : ?>
                                     <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
-                                        <li>
+                                        <li class="roi-checklist__item">
                                             <input type="checkbox" name="struggles[]" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>">
                                             <span class="roi-checklist__icon flex-center" style="height: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>;">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
