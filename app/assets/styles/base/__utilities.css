@@ -1,3 +1,7 @@
+.flex{
+  display: flex;
+}
+
 .flex-center{
   justify-content: center;
   align-items: center;
@@ -6,4 +10,17 @@
 .flex-row-space-between{
   flex-direction: row;
   justify-content: space-between;
+}
+
+.flex-row-end{
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.w-80{
+  width: 80%;
+}
+
+.mb-small{
+  margin-bottom: 30px;
 }

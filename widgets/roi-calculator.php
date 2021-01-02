@@ -1522,6 +1522,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <div class="roi-right">
                                 <ul class="roi-checklist">
                                 <?php
+                                $checklist_count = 1;
                                 foreach( $settings[ 'checklist' ] as $item ) : ?>
                                     <label class="roi-checklist__label">
                                         <li>
@@ -1534,7 +1535,36 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </span>
                                         </li>
                                     </label>
-                                <?php endforeach; ?>
+                                    <div class="range__wrapper flex flex-row-end ">
+                                        <div class="w-80">
+                                            <div class="range__header" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
+                                            <div class="range__value" id="amountvalue_<?php echo $checklist_count ?>"></div>
+                                            <input id="amountinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
+                                            <ul id="amountlabellist_<?php echo $checklist_count ?>">
+                                                <li class="range__label">0</li>
+                                                <li class="range__label">2</li>
+                                                <li class="range__label">4</li>
+                                                <li class="range__label">6</li>
+                                                <li class="range__label">8</li>
+                                                <li class="range__label">10</li>
+                                            </ul>
+                                            <div class="range__header" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
+                                            <div class="range__value" id="timevalue_<?php echo $checklist_count ?>"></div>
+                                            <input id="timeinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
+                                            <ul id="timelabellist_<?php echo $checklist_count ?>">
+                                                <li class="range__label">0</li>
+                                                <li class="range__label">2</li>
+                                                <li class="range__label">4</li>
+                                                <li class="range__label">6</li>
+                                                <li class="range__label">8</li>
+                                                <li class="range__label">10</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <?php 
+                                    $checklist_count++;
+                                    endforeach; 
+                                ?>
                                 </ul>
                             </div>
                         </fieldset>
