@@ -1524,7 +1524,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <?php
                                 $checklist_count = 1;
                                 foreach( $settings[ 'checklist' ] as $item ) : ?>
-                                    <label class="roi-checklist__label">
+                                    <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
                                         <li>
                                             <input type="checkbox" name="struggles[]" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>">
                                             <span class="roi-checklist__icon flex-center" style="height: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>;">
@@ -1535,8 +1535,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </span>
                                         </li>
                                     </label>
-                                    <div class="range__wrapper flex flex-row-end ">
-                                        <div class="w-80">
+                                    <div class="range__wrapper flex flex-column-end" id="checklist-range_<?php echo $checklist_count ?>">
+                                        <div class="w-80 mb-small">
                                             <div class="range__header" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
                                             <div class="range__value" id="amountvalue_<?php echo $checklist_count ?>"></div>
                                             <input id="amountinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
@@ -1548,6 +1548,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                 <li class="range__label">8</li>
                                                 <li class="range__label">10</li>
                                             </ul>
+                                        </div>
+                                        <div class="w-80 mb-small">
                                             <div class="range__header" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
                                             <div class="range__value" id="timevalue_<?php echo $checklist_count ?>"></div>
                                             <input id="timeinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
