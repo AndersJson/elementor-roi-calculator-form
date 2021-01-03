@@ -15,6 +15,7 @@
 .flex-column-end{
   flex-direction: column;
   align-items: flex-end;
+  justify-content: 
 }
 
 .w-80{
@@ -25,8 +26,24 @@
   width: 100%;
 }
 
+.abs-top-70 {
+  top: -70%;
+}
+
+.abs-top-40 {
+  top: -40%;
+}
+
 .mb-small{
   margin-bottom: 30px;
+}
+
+.mb-medium{
+  margin-bottom: 40px;
+}
+
+.mb-large{
+  margin-bottom: 80px;
 }
 
 .hidden {

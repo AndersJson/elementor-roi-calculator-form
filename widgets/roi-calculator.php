@@ -1111,7 +1111,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Margin', 'roi-calculator-widget' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'rem' ],
-                'description' => 'Default: ( 7px 16px 0px 0px )',
+                'description' => 'Default: ( 0px 16px 0px 0px )',
                 'default' => [
                     'top' => 7,
                     'right' => 16,
@@ -1535,10 +1535,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </span>
                                         </li>
                                     </label>
-                                    <div class="flex flex-column-end">
-                                        <div class="range__header" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
-                                        <div class="range__wrapper w-80" id="checklist-amountrange_<?php echo $checklist_count ?>">
-                                            <div class="range__value checklist-range__value" id="amountvalue_<?php echo $checklist_count ?>"></div>
+                                    <div class="flex flex-column-end mb-medium">
+                                        <div class="range__header mb-medium" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
+                                        <div class="range__wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
+                                            <div class="range__value checklist-range__value abs-top-40" id="amountvalue_<?php echo $checklist_count ?>"></div>
                                             <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
                                             <ul id="amountlabellist_<?php echo $checklist_count ?>">
                                                 <li class="range__label">0</li>
@@ -1549,9 +1549,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                 <li class="range__label">10</li>
                                             </ul>
                                         </div>
-                                        <div class="range__header" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
-                                        <div class="range__wrapper w-80" id="checklist-timerange_<?php echo $checklist_count ?>">
-                                            <div class="range__value checklist-range__value" id="timevalue_<?php echo $checklist_count ?>"></div>
+                                        <div class="range__header mb-medium" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
+                                        <div class="range__wrapper w-80 mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
+                                            <div class="range__value checklist-range__value abs-top-40" id="timevalue_<?php echo $checklist_count ?>"></div>
                                             <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
                                             <ul id="timelabellist_<?php echo $checklist_count ?>">
                                                 <li class="range__label">0</li>
@@ -1582,7 +1582,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </label>
                             <div class="roi-right">
                                 <div class="range__wrapper w-100">
-                                    <div class="range__value" id="second-rangevalue"></div>
+                                    <div class="range__value abs-top-70" id="second-rangevalue"></div>
                                     <input id="second-range" type="range" min="0" max="10" step="1">
                                     <ul id="range__labellist">
                                         <li class="range__label">0</li>
@@ -1615,7 +1615,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </label>
                             <div class="roi-right">
                                 <div class="range__wrapper w-100">
-                                    <div class="range__value" id="third-rangevalue"></div>
+                                    <div class="range__value abs-top-70" id="third-rangevalue"></div>
                                     <input id="third-range" type="range" min="0" max="10" step="1">
                                 </div>
                             </div>

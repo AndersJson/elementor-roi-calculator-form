@@ -111,7 +111,6 @@
 
   &__value{
     position: absolute;
-    top: -70%;
     cursor: pointer;
   }
 
