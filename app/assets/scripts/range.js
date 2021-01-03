@@ -20,8 +20,11 @@ class RangeInput {
 
 const $ = jQuery;
 $(function() {
-  const checklistItems = $(".roi-checklist__item");
-  console.log(checklistItems);
-  const secondRange = new RangeInput("#second-range", "#second-rangevalue");
-  const thirdRange = new RangeInput("#third-range", "#third-rangevalue");
+  const checklistRangeValues = $(".checklist-range__value");
+  const checklistRangeInputs = $(".checklist-range__input");
+  for (let i = 0; i < checklistRangeValues.length; i++){
+    new RangeInput(`#${checklistRangeInputs[i].id}`, `#${checklistRangeValues[i].id}`);
+  }
+  new RangeInput("#second-range", "#second-rangevalue");
+  new RangeInput("#third-range", "#third-rangevalue");
 });
