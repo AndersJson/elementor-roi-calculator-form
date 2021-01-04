@@ -1,19 +1,33 @@
 class RangeInput {
   constructor(inputId, valueId) {
     this.rangeinput = $(inputId);
-    this.rangevalue = $(valueId);
+    this.valueBubble = $(valueId);
+    this.value;
     this.events();
     this.setValue();
   }
   events() {
     this.rangeinput.on("input", this.setValue.bind(this));
+    this.valueBubble.on("mousedown", this.connectBubble.bind(this));
+    this.valueBubble.on("mouseup", this.disconnectBubble.bind(this));
   }
 
   setValue(){
+   this.value = this.rangeinput.val();
    let newValue = Number( (this.rangeinput.val() - this.rangeinput.attr("min")) * 100 / (this.rangeinput.attr("max") - this.rangeinput.attr("min")) );
    let newPosition = 10 - (newValue * 0.2);
-   this.rangevalue.html(`<span>${this.rangeinput.val()}</span>`);
-   this.rangevalue.css("left", `calc(${newValue}% + (${newPosition}px))`);
+   this.valueBubble.html(`<span>${this.value}</span>`);
+   this.valueBubble.css("left", `calc(${newValue}% + (${newPosition}px))`);
+  }
+
+  connectBubble(){
+    console.log("connectBubble");
+    this.rangeinput.trigger("click");
+  }
+
+  disconnectBubble(){
+    console.log("disconnectBubble");
+    this.rangeinput.trigger("mouseup");
   }
 
 }
