@@ -5,14 +5,18 @@ class Checklist {
     this.events();
   }
   events() {
-    //toggle display of ranges
     for (let i = 0; i < this.checkboxes.length; i++){
-      $(this.checkboxes[i]).change( ()=>{
-        $(this.rangewrappers[i]).slideDown();
+      $(this.checkboxes[i]).change(()=>{
+        {
+          if ($(this.checkboxes[i]).is(':checked') ){
+              $(this.rangewrappers[i]).slideDown();
+            }else{
+              $(this.rangewrappers[i]).slideUp();
+            }
+        }
       });
-   }
+    }
   }
-
 }
 
 const $ = jQuery;

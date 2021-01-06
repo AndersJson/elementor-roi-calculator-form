@@ -1535,32 +1535,34 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </span>
                                         </li>
                                     </label>
-                                    <div class="checklist-rangewrapper flex flex-column-end mb-medium hidden">
-                                        <div class="range__header mb-medium" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
-                                        <div class="range__wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
-                                            <div class="range__value checklist-range__value" id="amountvalue_<?php echo $checklist_count ?>"></div>
-                                            <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
-                                            <ul id="amountlabellist_<?php echo $checklist_count ?>">
-                                                <li class="range__label">0</li>
-                                                <li class="range__label">2</li>
-                                                <li class="range__label">4</li>
-                                                <li class="range__label">6</li>
-                                                <li class="range__label">8</li>
-                                                <li class="range__label">10</li>
-                                            </ul>
-                                        </div>
-                                        <div class="range__header mb-medium" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
-                                        <div class="range__wrapper w-80 mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
-                                            <div class="range__value checklist-range__value" id="timevalue_<?php echo $checklist_count ?>"></div>
-                                            <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
-                                            <ul id="timelabellist_<?php echo $checklist_count ?>">
-                                                <li class="range__label">0</li>
-                                                <li class="range__label">2</li>
-                                                <li class="range__label">4</li>
-                                                <li class="range__label">6</li>
-                                                <li class="range__label">8</li>
-                                                <li class="range__label">10</li>
-                                            </ul>
+                                    <div class="checklist-rangewrapper hidden">
+                                        <div class="flex flex-column-end mb-medium">
+                                            <div class="range__header w-80 mb-medium" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
+                                            <div class="range__wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
+                                                <div class="range__value checklist-range__value" id="amountvalue_<?php echo $checklist_count ?>"></div>
+                                                <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
+                                                <ul id="amountlabellist_<?php echo $checklist_count ?>">
+                                                    <li class="range__label">0</li>
+                                                    <li class="range__label">2</li>
+                                                    <li class="range__label">4</li>
+                                                    <li class="range__label">6</li>
+                                                    <li class="range__label">8</li>
+                                                    <li class="range__label">10</li>
+                                                </ul>
+                                            </div>
+                                            <div class="range__header mb-medium" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
+                                            <div class="range__wrapper w-80 mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
+                                                <div class="range__value checklist-range__value" id="timevalue_<?php echo $checklist_count ?>"></div>
+                                                <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="0" max="10" step="1">
+                                                <ul id="timelabellist_<?php echo $checklist_count ?>">
+                                                    <li class="range__label">0</li>
+                                                    <li class="range__label">2</li>
+                                                    <li class="range__label">4</li>
+                                                    <li class="range__label">6</li>
+                                                    <li class="range__label">8</li>
+                                                    <li class="range__label">10</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 <?php 
