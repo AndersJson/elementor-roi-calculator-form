@@ -8,8 +8,6 @@ class RangeInput {
   }
   events() {
     this.rangeinput.on("input", this.setValue.bind(this));
-    this.valueBubble.on("mousedown", this.connectBubble.bind(this));
-    this.valueBubble.on("mouseup", this.disconnectBubble.bind(this));
   }
 
   setValue(){
@@ -18,16 +16,6 @@ class RangeInput {
    let newPosition = 10 - (newValue * 0.2);
    this.valueBubble.html(`<span>${this.value}</span>`);
    this.valueBubble.css("left", `calc(${newValue}% + (${newPosition}px))`);
-  }
-
-  connectBubble(){
-    console.log("connectBubble");
-    this.rangeinput.trigger("click");
-  }
-
-  disconnectBubble(){
-    console.log("disconnectBubble");
-    this.rangeinput.trigger("mouseup");
   }
 
 }

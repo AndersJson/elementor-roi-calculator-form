@@ -119,6 +119,7 @@
     position: absolute;
     padding: 0 .6em;
     left: 50%;
+    top: -35px;
     transform: translate(-50%, 0);
     /*settings for color in border only*/
     border: 2px solid var(--color-primary-teal);
