@@ -25,7 +25,6 @@
       width: 100%;
       height: 8.4px;
       cursor: pointer;
-      background: #fff;
       border-radius: 1.3px;
       border: 0.2px solid #ccc;
     }
@@ -41,15 +40,10 @@
       margin-top: -8px;
     }
 
-    & input[type=range]:focus::-webkit-slider-runnable-track {
-      background: #fff;
-    }
-
     & input[type=range]::-moz-range-track {
       width: 100%;
       height: 8.4px;
       cursor: pointer;
-      background: #fff;
       border-radius: 1.3px;
       border: 0.2px solid #ccc;
     }
