@@ -186,7 +186,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_tab(
             'second_slider_label_tab',
             [
-                'label' => __( 'Salary-Range', 'roi-calculator-widget' ),
+                'label' => __( 'Money-Range', 'roi-calculator-widget' ),
             ]
         );
 
@@ -438,12 +438,118 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        //Money-Range Settings
+        $this->start_controls_section(
+            'money_range_settings',
+            [
+                'label' => __( 'Money-Range', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        // Money-Range Min
+        $this->add_control(
+			'money_range_min',
+			[
+				'label' => __( 'Min-value', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 0,
+				'max' => 1000000000,
+				'step' => 1,
+				'default' => 0,
+			]
+        );
+        
+        // Money-Range Max
+        $this->add_control(
+			'money_range_max',
+			[
+				'label' => __( 'Max-value', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 1000000000,
+				'step' => 1,
+				'default' => 10,
+			]
+        );
+
+        // Money-Range Step
+        $this->add_control(
+			'money_range_step',
+			[
+				'label' => __( 'Step', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 1000000000,
+				'step' => 1,
+				'default' => 1,
+			]
+        );
+        
+        //Money-Range Fillcolor
+        $this->add_control(
+			'money_range_color',
+			[
+				'label' => __( 'Track Fill-Color', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'scheme' => [
+					'type' => \Elementor\Scheme_Color::get_type(),
+					'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+			]
+        );
+
+        // Money-Range labels
+        $this->add_control(
+            'show_money_range_labels',
+            [
+                'label' => __( 'Show Labels', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+        
+        // Money-Range max-suffix
+        $this->add_control(
+            'show_money_range_max_suffix',
+            [
+                'label' => __( 'Show Max-Suffix: + ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'condition' => [
+                    'show_money_range_labels' => 'yes'
+                ]
+            ]
+        ); 
+
+        // Money-Range dollar-prefix
+        $this->add_control(
+            'show_money_range_dollar_prefix',
+            [
+                'label' => __( 'Show Prefixes: $ ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        $this->end_controls_section();
 
         //Form Settings
         $this->start_controls_section(
             'form_settings',
             [
-                'label' => __( 'Form', 'roi-calculator-widget' ),
+                'label' => __( 'Contact Form', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -1504,24 +1610,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <div class="roi-right">
                                 <div class="range__wrapper w-100">
                                     <div class="range__value" id="second-rangevalue"></div>
-                                    <input id="second-range" type="range" min="0" max="10" step="1" data-fill="#2AAECD">
-                                    <ul id="range__labellist">
-                                        <li class="range__label">0</li>
-                                        <li class="range__label">2</li>
-                                        <li class="range__label">4</li>
-                                        <li class="range__label">6</li>
-                                        <li class="range__label">8</li>
-                                        <li class="range__label">10</li>
-                                    </ul>
+                                    <input id="second-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
+                                    <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
+                                        <ul id="range__labellist">
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>0</li>
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>2</li>
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>4</li>
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>6</li>
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>8</li>
+                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>10<?php if( $settings[ 'show_money_range_max_suffix' ] == 'yes') : ?>&#43;<?php endif; ?></li>
+                                        </ul>
+                                    <?php endif; ?>
                                 </div>
- 
-                        <!--
-                                <ul class="roi-slider-labels">
-                                    <li>
-                                    <a href="#" class="js-roi-label" data-value=".5">.5</a>
-                                    </li>
-                                </ul>
--->
                             </div>
                         </fieldset>                    
                         <fieldset class="roi-row flex-row-space-between">
