@@ -186,7 +186,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_tab(
             'second_slider_label_tab',
             [
-                'label' => __( 'Salary', 'roi-calculator-widget' ),
+                'label' => __( 'Salary-Range', 'roi-calculator-widget' ),
             ]
         );
 
@@ -262,92 +262,11 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_tab();
 
-         //Slider-Label 3
-         $this->start_controls_tab(
-            'forth_slider_label_tab',
-            [
-                'label' => __( 'Time', 'roi-calculator-widget' ),
-            ]
-        );
-
-
-        // Slider-Label 3 Text
-        $this->add_control(
-            'forth_label_text',
-            [
-                'label' => __( 'Label text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Label text', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Enter text for label', 'roi-calculator-widget' ),
-            ]
-        );
-
-        // Slider-Label 3 Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'forth_label_typography',
-				'label' => __( 'Typography', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .forth-label',
-			]
-        );
-        
-        $this->add_control(
-            'more_options_forth_label_tip',
-            [
-                'label' => __( 'Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        // Slider-Label 3 Tip
-        $this->add_control(
-            'show_forth_label_tip',
-            [
-                'label' => __( 'Show Label Tip', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'roi-calculator' ),
-                'label_off' => __( 'Hide', 'roi-calculator' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-
-        // Slider-Tip 3 text
-        $this->add_control(
-            'forth_tip_text',
-            [
-                'label' => __( 'Tip Text', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
-                'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
-                'condition' => [
-                    'show_forth_label_tip' => 'yes'
-                ]
-            ]
-        );
-
-        // Slider-Tip 3 Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'forth_tip_typography',
-				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .forth-tip',
-			]
-        );
-
-        $this->end_controls_tab();
-
         //Form-Label
         $this->start_controls_tab(
             'form_label_tab',
             [
-                'label' => __( 'Form', 'roi-calculator-widget' ),
+                'label' => __( 'Contact Form', 'roi-calculator-widget' ),
             ]
         );
 
@@ -1604,25 +1523,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </ul>
 -->
                             </div>
-                        </fieldset>
-                        <fieldset class="roi-row flex-row-space-between">
-                            <label class="roi-left">
-                                <p class="roi-left__label forth-label"><?php echo $settings[ 'forth_label_text' ]; ?></p>
-                                <?php if( $settings[ 'show_forth_label_tip' ] == 'yes') : ?>
-                                        <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
-                                        <span class="roi-tip forth-tip">
-                                            <p><?php echo $settings[ 'forth_tip_text' ]; ?></p>
-                                        </span>
-                                    <?php endif; ?>
-                            </label>
-                            <div class="roi-right">
-                                <div class="range__wrapper w-100">
-                                    <div class="range__value abs-top-70" id="third-rangevalue"></div>
-                                    <input id="third-range" type="range" min="0" max="10" step="1" data-fill="#2AAECD">
-                                </div>
-                            </div>
-                        </fieldset>
-                    
+                        </fieldset>                    
                         <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label fifth-label"><?php echo $settings[ 'fifth_label_text' ]; ?></p>
