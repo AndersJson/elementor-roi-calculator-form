@@ -1618,6 +1618,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             $min = (float)$settings [ 'money_range_min' ];
                                             $max = (float)$settings [ 'money_range_max' ];
                                             $interval = ($max - $min) / 5;
+                                            $nextstep = $min;
                                             $value = $min;
 
                                             for ($x = 0; $x < 6; $x++){
@@ -1627,7 +1628,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                 else{
                                                     echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
                                                 }
-                                                $value = number_format(ceil($value+$interval), 0, ',', '.');
+                                                $nextstep = $nextstep + $interval;
+                                                $value = number_format(ceil($nextstep), 0, ',', '.');
                                             }
                                         ?>
                                         </ul>
