@@ -1613,12 +1613,23 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <input id="second-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
                                     <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
                                         <ul id="range__labellist">
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>0</li>
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>2</li>
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>4</li>
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>6</li>
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>8</li>
-                                            <li class="range__label"><?php if( $settings[ 'show_money_range_dollar_prefix' ] == 'yes') : ?>&#36;<?php endif; ?>10<?php if( $settings[ 'show_money_range_max_suffix' ] == 'yes') : ?>&#43;<?php endif; ?></li>
+                                        <?php
+                                            //Dynamic money-range labels
+                                            $min = (float)$settings [ 'money_range_min' ];
+                                            $max = (float)$settings [ 'money_range_max' ];
+                                            $interval = ($max - $min) / 5;
+                                            $value = $min;
+
+                                            for ($x = 0; $x < 6; $x++){
+                                                if ($x == 5){ 
+                                                    echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $value . ($settings[ 'show_money_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                }
+                                                else{
+                                                    echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
+                                                }
+                                                $value = number_format(ceil($value+$interval), 0, ',', '.');
+                                            }
+                                        ?>
                                         </ul>
                                     <?php endif; ?>
                                 </div>
