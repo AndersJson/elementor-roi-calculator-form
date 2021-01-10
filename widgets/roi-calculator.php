@@ -67,7 +67,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'first_tip_trigger_typography',
+                'name' => 'tip_trigger_typography',
                 'label' => __( 'Tip Trigger Font', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .roi-tip-trigger',
@@ -78,7 +78,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'first_tip_typography',
+				'name' => 'tip_typography',
 				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .roi-tip',
@@ -128,7 +128,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'name' => 'checklist_label_typography',
 				'label' => __( 'Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .second-label',
+				'selector' => '{{WRAPPER}} .checklist-label',
 			]
         );
         
@@ -176,23 +176,23 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'name' => 'checklist_tip_typography',
 				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .second-tip',
+				'selector' => '{{WRAPPER}} .checklist-tip',
 			]
         );
 
         $this->end_controls_tab();
 
-        //Slider-Label 2
+        //Money-Range
         $this->start_controls_tab(
-            'second_slider_label_tab',
+            'money_range_label_tab',
             [
                 'label' => __( 'Money-Range', 'roi-calculator-widget' ),
             ]
         );
 
-        // Slider-Label 2 Text
+        // Money-Range Text
         $this->add_control(
-            'third_label_text',
+            'money_range_label_text',
             [
                 'label' => __( 'Label text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
@@ -201,19 +201,19 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Slider-Label 2 Typography
+        // Money-Range Typography
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'third_label_typography',
+				'name' => 'money_range_label_typography',
 				'label' => __( 'Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .third-label',
+				'selector' => '{{WRAPPER}} .money-range-label',
 			]
         );
         
         $this->add_control(
-            'more_options_third_label_tip',
+            'more_options_money_range_label_tip',
             [
                 'label' => __( 'Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
@@ -221,9 +221,9 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Slider-Label 2 Tip
+        // Money-Range Tip
         $this->add_control(
-            'show_third_label_tip',
+            'show_money_range_label_tip',
             [
                 'label' => __( 'Show Label Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
@@ -235,28 +235,28 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
 
 
-        // Slider-Tip 2 text
+        // Money-Range Tip text
         $this->add_control(
-            'third_tip_text',
+            'money_range_tip_text',
             [
                 'label' => __( 'Tip Text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
                 'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
                 'condition' => [
-                    'show_third_label_tip' => 'yes'
+                    'show_money_range_label_tip' => 'yes'
                 ]
             ]
         );
 
-        // Slider-Tip 2 Typography
+        // Money-Range Tip Typography
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'third_tip_typography',
+				'name' => 'money_range_tip_typography',
 				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .third-tip',
+				'selector' => '{{WRAPPER}} .money-range-tip',
 			]
         );
 
@@ -272,7 +272,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         // Form-Label Text
         $this->add_control(
-            'fifth_label_text',
+            'form_label_text',
             [
                 'label' => __( 'Label text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
@@ -285,15 +285,15 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'fifth_label_typography',
+				'name' => 'form_label_typography',
 				'label' => __( 'Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .fifth-label',
+				'selector' => '{{WRAPPER}} .form-label',
 			]
         );
         
         $this->add_control(
-            'more_options_fifth_label_tip',
+            'more_options_form_label_tip',
             [
                 'label' => __( 'Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
@@ -303,7 +303,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         // Form-Label Tip
         $this->add_control(
-            'show_fifth_label_tip',
+            'show_form_label_tip',
             [
                 'label' => __( 'Show Label Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
@@ -317,14 +317,14 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         // Form-Tip text
         $this->add_control(
-            'fifth_tip_text',
+            'form_tip_text',
             [
                 'label' => __( 'Tip Text', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'default' => __( 'Explanation and tip goes here', 'roi-calculator-widget' ),
                 'placeholder' => __( 'Type your tip here', 'roi-calculator-widget' ),
                 'condition' => [
-                    'show_fifth_label_tip' => 'yes'
+                    'show_form_label_tip' => 'yes'
                 ]
             ]
         );
@@ -333,10 +333,10 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'fifth_tip_typography',
+				'name' => 'form_tip_typography',
 				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .fifth-tip',
+				'selector' => '{{WRAPPER}} .form-tip',
 			]
         );
 
@@ -1536,10 +1536,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <form class="roi-calculation-form" id="roi-calculation-form">                    
                         <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                            <p class="roi-left__label second-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
+                            <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
                                 <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
-                                <span class="roi-tip second-tip">
+                                <span class="roi-tip checklist-tip">
                                     <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
                                 </span>
                             <?php endif; ?>
@@ -1599,18 +1599,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>
                         <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label third-label"><?php echo $settings[ 'third_label_text' ]; ?></p>
-                                <?php if( $settings[ 'show_third_label_tip' ] == 'yes') : ?>
+                                <p class="roi-left__label money-range-label"><?php echo $settings[ 'money_range_label_text' ]; ?></p>
+                                <?php if( $settings[ 'show_money_range_label_tip' ] == 'yes') : ?>
                                     <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
-                                    <span class="roi-tip third-tip">
-                                        <p><?php echo $settings[ 'third_tip_text' ]; ?></p>
+                                    <span class="roi-tip money-range-tip">
+                                        <p><?php echo $settings[ 'money_range_tip_text' ]; ?></p>
                                     </span>
                                 <?php endif; ?>
                             </label>
                             <div class="roi-right">
                                 <div class="range__wrapper w-100">
-                                    <div class="range__value" id="second-rangevalue"></div>
-                                    <input id="second-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
+                                    <div class="range__value" id="money-range__value"></div>
+                                    <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
                                     <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
                                         <ul id="range__labellist">
                                         <?php
@@ -1639,11 +1639,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>                    
                         <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
-                                <p class="roi-left__label fifth-label"><?php echo $settings[ 'fifth_label_text' ]; ?></p>
-                                    <?php if( $settings[ 'show_fifth_label_tip' ] == 'yes') : ?>
+                                <p class="roi-left__label form-label"><?php echo $settings[ 'form_label_text' ]; ?></p>
+                                    <?php if( $settings[ 'show_form_label_tip' ] == 'yes') : ?>
                                             <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
-                                            <span class="roi-tip fifth-tip">
-                                                <p><?php echo $settings[ 'fifth_tip_text' ]; ?></p>
+                                            <span class="roi-tip form-tip">
+                                                <p><?php echo $settings[ 'form_tip_text' ]; ?></p>
                                             </span>
                                         <?php endif; ?>
                             </label>

@@ -33,8 +33,6 @@ $(function() {
   for (let i = 0; i < checklistRangeValues.length; i++){
     new RangeInput(`#${checklistRangeInputs[i].id}`, `#${checklistRangeValues[i].id}`, $(checklistRangeInputs[i]).data("fill"));
   }
-  const thirdRange = $("#third-range");
-  const secondRange = $("#second-range");
-  new RangeInput("#second-range", "#second-rangevalue", $(secondRange).data("fill"));
-  new RangeInput("#third-range", "#third-rangevalue", $(thirdRange).data("fill"));
+  const moneyRange = $("#money-range");
+  new RangeInput("#money-range", "#money-range__value", $(moneyRange).data("fill"));
 });
