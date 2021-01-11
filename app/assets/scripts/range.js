@@ -28,7 +28,7 @@ class RangeInput {
 
 const $ = jQuery;
 $(function() {
-  const checklistRangeValues = $(".checklist-range__value");
+  const checklistRangeValues = $(".checklist-range-value");
   const checklistRangeInputs = $(".checklist-range__input");
   for (let i = 0; i < checklistRangeValues.length; i++){
     new RangeInput(`#${checklistRangeInputs[i].id}`, `#${checklistRangeValues[i].id}`, $(checklistRangeInputs[i]).data("fill"));
