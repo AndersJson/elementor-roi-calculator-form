@@ -360,7 +360,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'checklist_label_typography',
+				'name' => 'checklist_text_typography',
 				'label' => __( 'Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .roi-checklist__labeltext',
