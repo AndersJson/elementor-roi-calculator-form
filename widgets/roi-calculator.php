@@ -446,6 +446,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Checklist Amount-Range Heading
+            $repeater->add_control(
+                'checklist_amount_range_header_text',
+                [
+                    'label' => __( 'Amount-range Heading', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::TEXT,
+                    'default' => __( 'Heading for Amount-range', 'roi-calculator-widget' ),
+                    'label_block' => true,
+                    'placeholder' => __( 'Header for amount-range', 'roi-calculator-widget' ),
+                ]
+            );
+
             // Checklist Amount-Range Min
             $repeater->add_control(
                 'checklist_amount_range_min',
@@ -551,6 +563,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Checklist Time-Range Heading
+            $repeater->add_control(
+                'checklist_time_range_header_text',
+                [
+                    'label' => __( 'Time-range Heading', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::TEXT,
+                    'default' => __( 'Heading for Time-range', 'roi-calculator-widget' ),
+                    'label_block' => true,
+                    'placeholder' => __( 'Header for Time-range', 'roi-calculator-widget' ),
+                ]
+            );
+
             // Checklist Time-Range Min
             $repeater->add_control(
                 'checklist_time_range_min',
@@ -647,8 +671,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-            // anchor add repeater-settings for checklist ranges
-
             $this->add_control(
                 'checklist',
                 [
@@ -671,6 +693,17 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'checklist_range_tab',
                 [
                     'label' => __( 'Ranges', 'roi-calculator-widget' ),
+                ]
+            );
+
+              // Checklist-Range Heading Typography
+            $this->add_group_control(
+                \Elementor\Group_Control_Typography::get_type(),
+                [
+                    'name' => 'checklist_range_header',
+                    'label' => __( 'Heading', 'roi-calculator-widget' ),
+                    'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                    'selector' => '{{WRAPPER}} .range__header',
                 ]
             );
 
@@ -1910,12 +1943,12 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </label>
                                     <div class="checklist-rangewrapper hidden">
                                         <div class="flex flex-column-end mb-medium">
-                                            <div class="range__header w-80 mb-medium" id="amountheader_<?php echo $checklist_count ?>">Header for amount</div>
+                                            <div class="range__header mb-medium" id="amountheader_<?php echo $checklist_count ?>"><?php echo $item[ 'checklist_amount_range_header_text' ] ?></div>
                                             <div class="range__wrapper checklist-range-wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value" id="amountvalue_<?php echo $checklist_count ?>"></div>
                                                 <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_amount_range_min' ]; ?>" max="<?php echo $item[ 'checklist_amount_range_max' ]; ?>" step="<?php echo $item[ 'checklist_amount_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_amount_range_color' ]; ?>">
                                                 <?php if( $item[ 'show_checklist_amount_range_labels' ] == 'yes' ) : ?>
-                                                <ul id="amountlabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist">
+                                                <ul id="amountlabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist mb-small">
                                                 <?php
                                                     //Dynamic cheklist amount-range labels
                                                     $amountmin = (float)$item [ 'checklist_amount_range_min' ];
@@ -1938,7 +1971,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                 </ul>
                                                 <?php endif; ?>
                                             </div>
-                                            <div class="range__header mb-medium" id="timeheader_<?php echo $checklist_count ?>">Header for time</div>
+                                            <div class="range__header mb-medium" id="timeheader_<?php echo $checklist_count ?>"><?php echo $item[ 'checklist_time_range_header_text' ] ?></div>
                                             <div class="range__wrapper checklist-range-wrapper w-80 mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value" id="timevalue_<?php echo $checklist_count ?>"></div>
                                                 <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
