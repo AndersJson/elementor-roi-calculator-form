@@ -1,155 +1,144 @@
-.range{
+.range {
+	&__wrapper {
+		position: relative;
+		padding: 0 !important;
 
-  &__wrapper {
-  position: relative;
-  padding: 0 !important;
+		& ul {
+			margin: 0 -8%;
+			padding: 0;
+			list-style-type: none !important;
+		}
 
-    & ul {
-      margin: 0 -8%;
-      padding: 0;
-      list-style-type: none !important;
-    }
+		/* Basic resets and styles for range-inputs*/
+		& input[type="range"] {
+			-webkit-appearance: none;
+			margin: 18px 0;
+			width: 100%;
+		}
 
-    /* Basic resets and styles for range-inputs*/
-    & input[type=range] {
-      -webkit-appearance: none;
-      margin: 18px 0;
-      width: 100%;
-    }
+		& input[type="range"]:focus {
+			outline: none;
+		}
 
-    & input[type=range]:focus {
-      outline: none;
-    }
+		& input[type="range"]::-webkit-slider-runnable-track {
+			width: 100%;
+			height: 8.4px;
+			cursor: pointer;
+			border-radius: 1.3px;
+			border: 0.2px solid #ccc;
+		}
 
-    & input[type=range]::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 8.4px;
-      cursor: pointer;
-      border-radius: 1.3px;
-      border: 0.2px solid #ccc;
-    }
+		& input[type="range"]::-webkit-slider-thumb {
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+			box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+			cursor: pointer;
+			-webkit-appearance: none;
+			margin-top: -8px;
+		}
 
-    & input[type=range]::-webkit-slider-thumb {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 4px 0 rgba(0,0,0, 1);
-      cursor: pointer;
-      -webkit-appearance: none;
-      margin-top: -8px;
-    }
+		& input[type="range"]::-moz-range-track {
+			width: 100%;
+			height: 8.4px;
+			cursor: pointer;
+			border-radius: 1.3px;
+			border: 0.2px solid #ccc;
+		}
 
-    & input[type=range]::-moz-range-track {
-      width: 100%;
-      height: 8.4px;
-      cursor: pointer;
-      border-radius: 1.3px;
-      border: 0.2px solid #ccc;
-    }
+		& input[type="range"]::-moz-range-thumb {
+			box-shadow: 1px 1px 1px #000000;
+			border: 1px solid #000000;
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+			cursor: pointer;
+		}
 
-    input[type=range]::-moz-range-progress {
-      background-color: var(--color-primary-teal); 
-    }
+		& input[type="range"]::-ms-track {
+			width: 100%;
+			height: 8.4px;
+			cursor: pointer;
+			border-color: transparent;
+			border-width: 16px 0;
+			color: transparent;
+		}
 
-    & input[type=range]::-moz-range-thumb {
-      box-shadow: 1px 1px 1px #000000;
-      border: 1px solid #000000;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
-    }
+		& input[type="range"]::-ms-thumb {
+			box-shadow: 1px 1px 1px #000000;
+			border: 1px solid #000000;
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+	}
 
-    & input[type=range]::-ms-track {
-      width: 100%;
-      height: 8.4px;
-      cursor: pointer;
-      border-color: transparent;
-      border-width: 16px 0;
-      color: transparent;
-    }
+	&__value {
+		position: absolute;
+	}
 
-    & input[type=range]::-ms-thumb {
-      box-shadow: 1px 1px 1px #000000;
-      border: 1px solid #000000;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #fff;
-      cursor: pointer;
-    }
-  }
+	&__value span {
+		display: block;
+		position: absolute;
+		padding: 0 0.6em;
+		left: 50%;
+		top: -35px;
+		height: 35px;
+		transform: translate(-50%, 0);
+		text-align: center;
+		background: #fff;
+		font-size: 20px;
+		border-radius: 2px;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 
-  &__value{
-    position: absolute;
-  }
+	&__value span:before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-left: 9px solid transparent;
+		border-right: 9px solid transparent;
+		top: 100%;
+		left: 50%;
+		margin-left: -9px;
+		margin-top: 2px;
+	}
 
-  &__value span{
-    display: block;
-    position: absolute;
-    padding: 0 .6em;
-    left: 50%;
-    top: -35px;
-    transform: translate(-50%, 0);
-    /*settings for color in border only*/
-    border: 2px solid var(--color-primary-teal);
-    text-align: center;
-    background: #fff;
-    font-size: 20px;
-    border-radius: 2px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+	&__value span:after {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-top: 16px solid #fff;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		top: 100%;
+		left: 50%;
+		margin-left: -8px;
+	}
 
-  &__value span:before{
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    /*settings for color in border only*/
-    border-top: 18px solid var(--color-primary-teal);
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-    top: 100%;
-    left: 50%;
-    margin-left: -9px;
-    margin-top: 2px;
-  }
+	&__label {
+		position: relative;
+		float: left;
+		width: 16.66%;
+		text-align: center;
+	}
 
-  &__value span:after{
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-top: 16px solid #fff;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    top: 100%;
-    left: 50%;
-    margin-left: -8px;
-  }
-
-  &__label{
-    position: relative;
-    float: left;
-    width: 16.66%;
-    text-align: center;
-  }
-
-  &__label:before{
-    content: "";
-    position: absolute;
-    top: -13px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 10px;
-    background-color: rgba(0,0,0,.2);
-  }
+	&__label:before {
+		content: "";
+		position: absolute;
+		top: -13px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2px;
+		height: 10px;
+		background-color: rgba(0, 0, 0, 0.2);
+	}
 }

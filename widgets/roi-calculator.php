@@ -543,6 +543,37 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'more_options_money_range_text',
+            [
+                'label' => __( 'Typography', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        // Money-Range Value Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'money_range_value_typography',
+				'label' => __( 'Value-Bubble', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .money-range-value span',
+			]
+        );
+
+        // Money-Range Labellist Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'money_range_labellist_typography',
+				'label' => __( 'Labels', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .money-range-labellist li',
+			]
+        );
+
         $this->end_controls_section();
 
         //Form Settings
@@ -1152,6 +1183,59 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        // Money-Range Style Settings
+        $this->start_controls_section(
+            'money_range_style_section',
+            [
+                'label' => __( 'Money-Range', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Money-Range Value Border-color
+        $this->add_control(
+            'money_range_value_border_color',
+            [
+                'label' => __( 'Value-Bubble border-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .money-range-value span ' => 'border: 2px solid {{VALUE}}',
+                    '{{WRAPPER}} .money-range-value span:before ' => 'border-top: 18px solid {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Form Input Shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'money_range_value_shadow',
+                'label' => __( 'Value-Bubble shadow', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} .money-range-value span',
+            ]
+        );
+
+        // Money-Range Thumb-color
+        $this->add_control(
+            'money_range_thumb_color',
+            [
+                'label' => __( 'Handle-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#FFF',
+                'description' => 'Default: ( #FFF ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .money-range-wrapper input[type="range"]::-webkit-slider-thumb ' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .money-range-wrapper input[type="range"]::-moz-range-thumb ' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .money-range-wrapper input[type="range"]::-ms-thumb ' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+
+        $this->end_controls_section();
+
 
         // Form Style Settings
         $this->start_controls_section(
@@ -1608,32 +1692,32 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <?php endif; ?>
                             </label>
                             <div class="roi-right">
-                                <div class="range__wrapper w-100">
-                                    <div class="range__value" id="money-range__value"></div>
-                                    <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
-                                    <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
-                                        <ul id="range__labellist">
-                                        <?php
-                                            //Dynamic money-range labels
-                                            $min = (float)$settings [ 'money_range_min' ];
-                                            $max = (float)$settings [ 'money_range_max' ];
-                                            $interval = ($max - $min) / 5;
-                                            $nextstep = $min;
-                                            $value = $min;
+                                <div class="range__wrapper money-range-wrapper w-100">
+                                        <div class="range__value money-range-value" id="money-range__value"></div>
+                                        <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
+                                        <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
+                                            <ul id="range__labellist" class="money-range-labellist">
+                                            <?php
+                                                //Dynamic money-range labels
+                                                $min = (float)$settings [ 'money_range_min' ];
+                                                $max = (float)$settings [ 'money_range_max' ];
+                                                $interval = ($max - $min) / 5;
+                                                $nextstep = $min;
+                                                $value = $min;
 
-                                            for ($x = 0; $x < 6; $x++){
-                                                if ($x == 5){ 
-                                                    echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $value . ($settings[ 'show_money_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                for ($x = 0; $x < 6; $x++){
+                                                    if ($x == 5){ 
+                                                        echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $value . ($settings[ 'show_money_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                    }
+                                                    else{
+                                                        echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
+                                                    }
+                                                    $nextstep = $nextstep + $interval;
+                                                    $value = number_format(ceil($nextstep), 0, ',', '.');
                                                 }
-                                                else{
-                                                    echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
-                                                }
-                                                $nextstep = $nextstep + $interval;
-                                                $value = number_format(ceil($nextstep), 0, ',', '.');
-                                            }
-                                        ?>
-                                        </ul>
-                                    <?php endif; ?>
+                                            ?>
+                                            </ul>
+                                        <?php endif; ?>
                                 </div>
                             </div>
                         </fieldset>                    
