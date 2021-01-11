@@ -424,6 +424,19 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Checklist Save Percent
+            $repeater->add_control(
+                'checklist_save_percent',
+                [
+                    'label' => __( 'Save-percent', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::NUMBER,
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                    'default' => 0,
+                ]
+            );
+
             $repeater->add_control(
                 'more_options_checklist_amount_range',
                 [
@@ -1886,7 +1899,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 foreach( $settings[ 'checklist' ] as $item ) : ?>
                                     <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
                                         <li class="roi-checklist__item">
-                                            <input type="checkbox" name="struggles[]" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>">
+                                            <input type="checkbox" name="struggles[]" id="checklist-checkbox_<?php echo $checklist_count ?>" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>" data-save="<?php echo $item[ 'checklist_save_percent' ] ?>">
                                             <span class="roi-checklist__icon flex-center" style="height: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>;">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                             </span>
