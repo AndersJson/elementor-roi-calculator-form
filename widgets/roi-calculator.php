@@ -1367,8 +1367,20 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'checklist_style_section',
             [
-                'label' => __( 'Checklist-Icon', 'roi-calculator-widget' ),
+                'label' => __( 'Checklist', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->start_controls_tabs(
+            'checklist_style_tabs'
+        );
+
+        //Checklist-icon tab
+        $this->start_controls_tab(
+            'checklist_style_tab',
+            [
+                'label' => __( 'Icon', 'roi-calculator-widget' ),
             ]
         );
 
@@ -1478,6 +1490,89 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        $this->end_controls_tab();
+
+        //Checklist-range tab
+        $this->start_controls_tab(
+            'checklist__range_style_tab',
+            [
+                'label' => __( 'Range', 'roi-calculator-widget' ),
+            ]
+        );
+
+
+        // Checklist-Range Value Border-color
+        $this->add_control(
+            'checklist_range_value_border_color',
+            [
+                'label' => __( 'Value-Bubble border-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .checklist-range-value span ' => 'border: 2px solid {{VALUE}}',
+                    '{{WRAPPER}} .checklist-range-value span:before ' => 'border-top: 18px solid {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Checklist-Range Value Border-color
+        $this->add_control(
+            'checklist_range_value_text_color',
+            [
+                'label' => __( 'Value-Bubble text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#000000',
+                'description' => 'Default: ( #000000 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .checklist-range-value span ' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Checklist-Range Value Shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'checklist_range_value_shadow',
+                'label' => __( 'Value-Bubble shadow', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} .checklist-range-value span',
+            ]
+        );
+
+        // Checklist-Range Thumb-color
+        $this->add_control(
+            'checklist_range_thumb_color',
+            [
+                'label' => __( 'Handle-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#FFF',
+                'description' => 'Default: ( #FFF ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .checklist-range-wrapper input[type="range"]::-webkit-slider-thumb ' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .checklist-range-wrapper input[type="range"]::-moz-range-thumb ' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .checklist-range-wrapper input[type="range"]::-ms-thumb ' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Checklist-Range Labellist text-color
+        $this->add_control(
+            'checklist_range_labellist_text_color',
+            [
+                'label' => __( 'Labels text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#000000',
+                'description' => 'Default: ( #000000 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .checklist-range-labellist ' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+
+        $this->end_controls_tabs();
+
         $this->end_controls_section();
 
         // Money-Range Style Settings
@@ -1504,7 +1599,21 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Form Input Shadow
+        // Money-Range Value Border-color
+        $this->add_control(
+            'money_range_value_text_color',
+            [
+                'label' => __( 'Value-Bubble text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#000000',
+                'description' => 'Default: ( #000000 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .money-range-value span ' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Money-Range Value Shadow
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
             [
@@ -1526,6 +1635,20 @@ class ROI_Calculator_Widget extends Widget_Base {
                     '{{WRAPPER}} .money-range-wrapper input[type="range"]::-webkit-slider-thumb ' => 'background: {{VALUE}}',
                     '{{WRAPPER}} .money-range-wrapper input[type="range"]::-moz-range-thumb ' => 'background: {{VALUE}}',
                     '{{WRAPPER}} .money-range-wrapper input[type="range"]::-ms-thumb ' => 'background: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Money-Range Labellist text-color
+        $this->add_control(
+            'money_range_labellist_text_color',
+            [
+                'label' => __( 'Labels text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#000000',
+                'description' => 'Default: ( #000000 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .money-range-labellist ' => 'color: {{VALUE}}',
                 ],
             ]
         );
