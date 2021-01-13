@@ -8,8 +8,541 @@
   <link href="styles.min.css" rel="stylesheet"></head>
   <body>
     
-        
-    <!-- Result -->
+    <section class="roi-contain">
+      <div class="roi-inner">
+        <form class="roi-form" id="roi-form">
+          <fieldset class="roi-row">
+            <label class="roi-left">
+              <br>How many sites do<br>you manage per month?
+              <span class="roi__tip-trigger">?</span>
+              <span class="roi__tip">
+                <p>If you manage more than 30 sites/month, you’re ready for your very own custom plan. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a68656c7a496e6c7d6f65707e616c6c65276a6664">[email&#160;protected]</a> and we’ll generate a tailor-made ROI report and quote for you!</p>
+                <p>If you generate less than 5 sites a month, you can still select “5” to get a solid idea of what your ROI would be if your business grew a little bit more!</p>
+              </span>
+            </label>
+            <div class="roi-right --slider-contain">
+              <div class="roi-thumb-contain">
+                <span type="range" id="js-roi-thumb" class="roi-thumb"></span>
+              </div>
+              <input type="range" id="js-roi-slider" class="range roi-slider" step="1" min="5" max="30" value="10">
+              <ul class="roi-slider-labels">
+                <li>
+                  <a href="#" class="js-roi-label" data-value="5">5</a>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
     
+          <fieldset class="roi-row">
+            <label class="roi-left">Which of the<br>following tasks do you<br>handle for your clients?</label>
+            <div class="roi-right">
+              <ul class="roi-checkmarks">
+                <li>
+                  <label class="roi-checkmarks__label">
+                    <input type="checkbox" name="struggles[]" class="roi-checkmarks__mark" value="Dealing with downtime">
+                    <span>
+                      <svg x="0px" y="0px" width="15.8px" height="14.3px" viewBox="0 0 15.8 14.3" style="enable-background:new 0 0 15.8 14.3;">
+                        <polygon points="12.9,0 5.1,9 2.5,6.7 0,9.4 2.9,12.1 5.4,14.3 7.5,11.8 15.8,2.5 "/>
+                      </svg>
+                    </span>
+                    Dealing with downtime
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
+    
+          <fieldset class="roi-row">
+            <label class="roi-left">
+              <br>How many hours (per month) do you spend managing all of the above tasks for just one of your sites?
+              <span class="roi__tip-trigger">?</span>
+              <span class="roi__tip">
+                <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
+              </span>
+            </label>
+            <div class="roi-right --slider-contain">
+              <div class="roi-thumb-contain">
+                <span type="range" id="js-roi-thumb1" class="roi-thumb"></span>
+              </div>
+    
+              <input type="range" id="js-roi-slider1" class="range roi-slider" step=".25" min=".5" max="5.5" value="2.5">
+    
+              <ul class="roi-slider-labels">
+                <li>
+                  <a href="#" class="js-roi-label" data-value=".5">.5</a>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
+    
+          <fieldset class="roi-row">
+            <label class="roi-left"><br>What is your hourly rate?</label>
+            <div class="roi-right --slider-contain">
+              <div class="roi-thumb-contain">
+                <span type="range" id="js-roi-thumb2" class="roi-thumb"></span>
+              </div>
+    
+              <input type="range" id="js-roi-slider2" class="range roi-slider" step="5" min="50" max="300" value="100">
+    
+              <ul class="roi-slider-labels">
+                <li>
+                  <a href="#" class="js-roi-label" data-value="50">$50</a>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
+    
+          <fieldset class="roi-row">
+            <label class="roi-left"><br>Tell us where to send your results.</label>
+            <div class="roi-right">
+              <input class="roi-pdf-form__input" name="firstname" placeholder="First name">
+              <input class="roi-pdf-form__input" name="lastname" placeholder="Last name">
+              <input class="roi-pdf-form__input" name="email" placeholder="Work email">
+              <input class="roi-pdf-form__input" name="phone" placeholder="Phone number">
+            </div>
+          </fieldset>
+          <fieldset class="roi-row text-center">
+            <button type="submit" class="roi-btn" id="roi-calculate-btn">Calculate</button>
+          </fieldset>    
+        </form>
+      </div>
+    </section>
+    
+    <!-- Result -->
+    <section id="roi-results" class="roi-contain --light">
+      <div class="roi-inner --small">
+        <h1 class="roi-section-title">Summary of your results</h1>
+    
+        <section class="tabs roi-tabs" id="js-tabs">
+          <ul class="tabs__nav text-center" role="tablist">
+             <li class="tabs__link" tabindex="0" role="tab" aria-controls="one-month" aria-selected="true">
+               <span>
+                <h3>1 Month</h3>
+              </span>
+                </li>
+                <li class="tabs__link" tabindex="-1" role="tab" aria-controls="one-year">
+              <span>
+                <h3>1 Year</h3>
+              </span>
+             </li>
+             <li class="tabs__link" tabindex="-1" role="tab" aria-controls="five-years">
+              <span>
+                <h3>5 Years</h3>
+              </span>
+             </li>
+          </ul>
+    
+          <section class="tabs__panel" id="one-month" role="tabpanel">
+            <div class="roi-tabs__numbers">
+              <div id="monthly-money-saved" class="roi-tab__number --left">
+                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
+                <span class="roi-tab__saved">
+                  saved per month
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
+                  </span>
+                </span>
+              </div>
+    
+              <div class="roi-tab__number --right">
+                <h1 id="hours-saved-month"></h1>
+                <span class="roi-tab__saved">hours saved per month</span>
+              </div>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__graph">
+              <div class="roi-tabs__circle" id="roi-month"></div>
+            </div>
+    
+            <div class="roi-tabs__info">
+              <h2 class="roi-tabs__info-heading">
+                Estimated ROI
+    
+                <span class="roi__tip-trigger">?</span>
+                <span class="roi__tip">
+                  <p>This number includes the cost of hosting on Flywheel for your particular business, and takes into account your hourly rate and number of sites you build in a month.</p>
+                </span>
+              </h2>
+              <p class="roi-tabs__info-text">This percentage includes the cost of hosting and represents the estimated return on investment by partnering with Flywheel for your WordPress sites. Keep in mind that this number has the potential to increase drastically if your agency takes on more clients (which you’ll have more time to do, once you’re on Flywheel)!</p>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__bottom">
+    
+    
+            </div>
+    
+            <div class="roi-bottom-graphs">
+              <div class="roi-tabs__employment monthly">
+                <h2 class="roi-tabs__employment-heading">Employment savings</h2>
+    
+                <span class="roi-bar__number --left price-month"></span>
+                <span class="roi-bar__number --right">$6.7k</span>
+    
+                <div class="roi-bar">
+                  <div class="roi-bar__bar price-perc-month"></div>
+                </div>
+    
+                <ul class="roi-bar-increments">
+                  <li class="roi-bar-increment hide">$0</li>
+                  <li class="roi-bar-increment">$1K</li>
+                  <li class="roi-bar-increment hide">$2K</li>
+                  <li class="roi-bar-increment">$3K</li>
+                  <li class="roi-bar-increment hide">$4K</li>
+                  <li class="roi-bar-increment">$5K</li>
+                  <li class="roi-bar-increment hide">$6K</li>
+                  <li class="roi-bar-increment">$7K</li>
+                  <li class="roi-bar-increment hide">$8K+</li>
+                </ul>
+    
+                <div class="roi-bar-key --flyplan">
+                  Estimated monthly cost of your Flywheel plan
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Calculated based on our standard plan pricing. Traffic, storage, and quantity of sites can all affect this number.</p>
+                  </span>
+                </div>
+                <p class="roi-bar-key --sysadmin">Average monthly salary of a system administrator (<a href="http://www.bls.gov/oes/current/oes151142.htm">source</a>)</p>
+              </div>
+    
+              <hr class="roi-tabs__divider">
+    
+              <div class="roi-tabs__could">
+    
+                <div class="roi-pdf-thanks">
+                  <svg x="0px" y="0px" width="153.8px" height="81px" viewBox="0 0 153.8 80.9" enable-background="new 0 0 153.8 80.9" xml:space="preserve">
+                    <path fill="#4EC6DD" d="M2.9,28.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,28.9,2.9,28.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,28.9,10.8,28.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,28.9,26.6,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,28.9,18.7,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,68.9,18.7,68.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,68.9,26.6,68.9z"/>
+                    <path fill="#4EC6DD" d="M2.9,68.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,68.9,2.9,68.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,68.9,10.8,68.9z"/>
+                    <path fill="#4EC6DD" d="M17.8,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C17.4,50.9,17.8,50.4,17.8,49.9z"/>
+                    <path fill="#4EC6DD" d="M25.7,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C25.3,50.9,25.7,50.4,25.7,49.9z"/>
+                    <path fill="#4EC6DD" d="M32.6,48.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S33.2,48.9,32.6,48.9z"/>
+                    <path fill="#4EC6DD" d="M8.9,50.9c0.6,0,1-0.4,1-1s-0.4-1-1-1H7c-0.6,0-1,0.4-1,1s0.4,1,1,1H8.9z"/>
+                    <path fill="#4EC6DD" d="M133.5,0c-10.7,0-19.5,8.3-20.2,18.9H42.3h-0.7c-0.6,0-1,0.4-1,1v60c0,0.6,0.4,1,1,1h92c0.6,0,1-0.4,1-1
+                      V40.5c10.7-0.6,19.2-9.4,19.2-20.2C153.8,9.1,144.7,0,133.5,0z M113.3,20.9c0.1,4.7,1.9,9.1,4.8,12.4L88.3,60.5L44.8,20.9H113.3z
+                       M132.6,76.8l-28.2-28.2l15.1-13.8c3.4,3.3,8.1,5.5,13.2,5.7V76.8z M42.6,78.9V21.5l29.6,27L43.5,77.2c-0.4,0.4-0.4,1,0,1.4
+                      c0.1,0.1,0.3,0.2,0.5,0.3H42.6z M44.4,78.9c0.2,0,0.4-0.1,0.5-0.3l28.7-28.7l13.9,12.7c0.2,0.2,0.4,0.3,0.7,0.3s0.5-0.1,0.7-0.3
+                      l13.9-12.7l28.7,28.7c0.1,0.1,0.3,0.2,0.5,0.3H44.4z M132.6,78.9L132.6,78.9C132.5,78.9,132.6,78.9,132.6,78.9L132.6,78.9z
+                       M133.5,38.5c-10.1,0-18.3-8.2-18.3-18.3S123.5,2,133.5,2s18.3,8.2,18.3,18.3S143.6,38.5,133.5,38.5z"/>
+                    <path fill="#4EC6DD" d="M145.1,18.8h-10.5V8.3c0-0.6-0.4-1-1-1s-1,0.4-1,1v10.5h-10.5c-0.6,0-1,0.4-1,1s0.4,1,1,1h10.5v10.5
+                      c0,0.6,0.4,1,1,1s1-0.4,1-1V20.8h10.5c0.6,0,1-0.4,1-1S145.7,18.8,145.1,18.8z"/>
+                  </svg>
+                  Keep an eye on your inbox!<br>Your report is on its way.
+                </div>
+    
+                <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+    
+                <ul class="roi-tabs__extra">
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
+                    <p>Buy <span id="coffee-month"></span> cups of coffee</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
+                    <p>Build <span id="sites-month"></span> more site(s)</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
+                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                  </li>
+                </ul>
+              </div>
+    
+              <form class="roi-pdf-form">
+                <div class="roi-pdf-form__title">
+                  <h1>Get your full ROI report!</h1>
+                  <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                </div>
+    
+                <button class="roi-pdf-form__btn">Send my report</button>
+              </form>
+            </div>
+          </section>
+    
+          <section class="tabs__panel" id="one-year" role="tabpanel" aria-hidden="true">
+            <div class="roi-tabs__numbers">
+              <div id="yearly-money-saved" class="roi-tab__number --left money-saved-contain">
+                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-year"></span></h1>
+                <span class="roi-tab__saved">
+                  saved per year
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
+                  </span>
+                </span>
+              </div>
+    
+              <div class="roi-tab__number --right">
+                <h1 id="hours-saved-year"></h1>
+                <span class="roi-tab__saved">hours saved per year</span>
+              </div>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__graph">
+              <div class="roi-tabs__circle" id="roi-year">120%</div>
+            </div>
+    
+            <div class="roi-tabs__info">
+              <h2 class="roi-tabs__info-heading">
+                Estimated ROI
+    
+                <span class="roi__tip-trigger">?</span>
+                <span class="roi__tip">
+                  <p>This number includes the cost of hosting on Flywheel for your particular business, and takes into account your hourly rate and number of sites you build in a month.</p>
+                </span>
+              </h2>
+              <p class="roi-tabs__info-text">This percentage includes the cost of hosting and represents the estimated return on investment by partnering with Flywheel for your WordPress sites. Keep in mind that this number has the potential to increase drastically if your agency takes on more clients (which you’ll have more time to do, once you’re on Flywheel)!</p>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__bottom">
+    
+    
+    
+    
+    
+            <div class="roi-bottom-graphs">
+              <div class="roi-tabs__employment yearly">
+                <h2 class="roi-tabs__employment-heading">Employment savings</h2>
+    
+                <span class="roi-bar__number --left price-year"></span>
+                <span class="roi-bar__number --right">$80k</span>
+    
+                <div class="roi-bar">
+                  <div class="roi-bar__bar price-perc-year"></div>
+                </div>
+    
+                <ul class="roi-bar-increments">
+                  <li class="roi-bar-increment hide">$0</li>
+                  <li class="roi-bar-increment">$10K</li>
+                  <li class="roi-bar-increment hide">$20K</li>
+                  <li class="roi-bar-increment">$30K</li>
+                  <li class="roi-bar-increment hide">$40K</li>
+                  <li class="roi-bar-increment">$50K</li>
+                  <li class="roi-bar-increment hide">$60K</li>
+                  <li class="roi-bar-increment">$70K</li>
+                  <li class="roi-bar-increment hide">$80K</li>
+                  <li class="roi-bar-increment">$90K+</li>
+                </ul>
+    
+                <div class="roi-bar-key --flyplan">
+                  Estimated yearly cost of your Flywheel plan
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Calculated based on our standard plan pricing. Traffic, storage, and quantity of sites can all affect this number.</p>
+                  </span>
+                </div>
+                <p class="roi-bar-key --sysadmin">Average yearly salary of a system administrator (<a href="http://www.bls.gov/oes/current/oes151142.htm">source</a>)</p>
+              </div>
+    
+              <hr class="roi-tabs__divider">
+    
+              <div class="roi-tabs__could">
+    
+                <div class="roi-pdf-thanks">
+                  <svg x="0px" y="0px" width="153.8px" height="81px" viewBox="0 0 153.8 80.9" enable-background="new 0 0 153.8 80.9" xml:space="preserve">
+                    <path fill="#4EC6DD" d="M2.9,28.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,28.9,2.9,28.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,28.9,10.8,28.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,28.9,26.6,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,28.9,18.7,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,68.9,18.7,68.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,68.9,26.6,68.9z"/>
+                    <path fill="#4EC6DD" d="M2.9,68.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,68.9,2.9,68.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,68.9,10.8,68.9z"/>
+                    <path fill="#4EC6DD" d="M17.8,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C17.4,50.9,17.8,50.4,17.8,49.9z"/>
+                    <path fill="#4EC6DD" d="M25.7,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C25.3,50.9,25.7,50.4,25.7,49.9z"/>
+                    <path fill="#4EC6DD" d="M32.6,48.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S33.2,48.9,32.6,48.9z"/>
+                    <path fill="#4EC6DD" d="M8.9,50.9c0.6,0,1-0.4,1-1s-0.4-1-1-1H7c-0.6,0-1,0.4-1,1s0.4,1,1,1H8.9z"/>
+                    <path fill="#4EC6DD" d="M133.5,0c-10.7,0-19.5,8.3-20.2,18.9H42.3h-0.7c-0.6,0-1,0.4-1,1v60c0,0.6,0.4,1,1,1h92c0.6,0,1-0.4,1-1
+                      V40.5c10.7-0.6,19.2-9.4,19.2-20.2C153.8,9.1,144.7,0,133.5,0z M113.3,20.9c0.1,4.7,1.9,9.1,4.8,12.4L88.3,60.5L44.8,20.9H113.3z
+                       M132.6,76.8l-28.2-28.2l15.1-13.8c3.4,3.3,8.1,5.5,13.2,5.7V76.8z M42.6,78.9V21.5l29.6,27L43.5,77.2c-0.4,0.4-0.4,1,0,1.4
+                      c0.1,0.1,0.3,0.2,0.5,0.3H42.6z M44.4,78.9c0.2,0,0.4-0.1,0.5-0.3l28.7-28.7l13.9,12.7c0.2,0.2,0.4,0.3,0.7,0.3s0.5-0.1,0.7-0.3
+                      l13.9-12.7l28.7,28.7c0.1,0.1,0.3,0.2,0.5,0.3H44.4z M132.6,78.9L132.6,78.9C132.5,78.9,132.6,78.9,132.6,78.9L132.6,78.9z
+                       M133.5,38.5c-10.1,0-18.3-8.2-18.3-18.3S123.5,2,133.5,2s18.3,8.2,18.3,18.3S143.6,38.5,133.5,38.5z"/>
+                    <path fill="#4EC6DD" d="M145.1,18.8h-10.5V8.3c0-0.6-0.4-1-1-1s-1,0.4-1,1v10.5h-10.5c-0.6,0-1,0.4-1,1s0.4,1,1,1h10.5v10.5
+                      c0,0.6,0.4,1,1,1s1-0.4,1-1V20.8h10.5c0.6,0,1-0.4,1-1S145.7,18.8,145.1,18.8z"/>
+                  </svg>
+                  Keep an eye on your inbox!<br>Your report is on its way.
+                </div>
+    
+                <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+    
+                <ul class="roi-tabs__extra">
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
+                    <p>Buy <span id="coffee-year"></span> cups of coffee</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
+                    <p>Build <span id="sites-year"></span> more site(s)</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
+                    <p>Snooze <span id="snooze-year"></span> extra hours</p>
+                  </li>
+                </ul>
+              </div>
+    
+              <form class="roi-pdf-form">
+                <div class="roi-pdf-form__title">
+                  <h1>Get your full ROI report!</h1>
+                  <p>To download your complete, customized report, fill out the following information and we’ll generate it for you in a flash.</p>
+                </div>
+    
+                <button class="roi-pdf-form__btn">Send my report</button>
+              </form>
+            </div>
+          </section>
+    
+          <section class="tabs__panel" id="five-years" role="tabpanel" aria-hidden="true">
+            <div class="roi-tabs__numbers">
+              <div id="five-money-saved" class="roi-tab__number --left large-text">
+                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-five"></span></h1>
+                <span class="roi-tab__saved">
+                  saved over five years
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
+                  </span>
+                </span>
+              </div>
+    
+              <div class="roi-tab__number --right large-text">
+                <h1 id="hours-saved-five"></h1>
+                <span class="roi-tab__saved">hours saved over five years</span>
+              </div>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__graph">
+              <div class="roi-tabs__circle" id="roi-five">120%</div>
+            </div>
+    
+            <div class="roi-tabs__info">
+              <h2 class="roi-tabs__info-heading">
+                Estimated ROI
+    
+                <span class="roi__tip-trigger">?</span>
+                <span class="roi__tip">
+                  <p>This number includes the cost of hosting on Flywheel for your particular business, and takes into account your hourly rate and number of sites you build in a month.</p>
+                </span>
+              </h2>
+              <p class="roi-tabs__info-text">This percentage includes the cost of hosting and represents the estimated return on investment by partnering with Flywheel for your WordPress sites. Keep in mind that this number has the potential to increase drastically if your agency takes on more clients (which you’ll have more time to do, once you’re on Flywheel)!</p>
+            </div>
+    
+            <hr class="roi-tabs__divider">
+    
+            <div class="roi-tabs__bottom">
+    
+    
+            </div>
+    
+            <div class="roi-bottom-graphs">
+              <div class="roi-tabs__employment five">
+                <h2 class="roi-tabs__employment-heading">Employment savings</h2>
+    
+                <span class="roi-bar__number --left price-five"></span>
+                <span class="roi-bar__number --right">$400k</span>
+    
+                <div class="roi-bar">
+                  <div class="roi-bar__bar price-perc-year"></div>
+                </div>
+    
+                <ul class="roi-bar-increments">
+                  <li class="roi-bar-increment hide">$0</li>
+                  <li class="roi-bar-increment">$50K</li>
+                  <li class="roi-bar-increment hide">$100K</li>
+                  <li class="roi-bar-increment">$150K</li>
+                  <li class="roi-bar-increment hide">$200K</li>
+                  <li class="roi-bar-increment">$250K</li>
+                  <li class="roi-bar-increment hide">$300K</li>
+                  <li class="roi-bar-increment">$350K</li>
+                  <li class="roi-bar-increment hide">$400K</li>
+                  <li class="roi-bar-increment">$450K+</li>
+                </ul>
+    
+                <div class="roi-bar-key --flyplan">
+                  Estimated 5-year cost of your Flywheel plan
+                  <span class="roi__tip-trigger">?</span>
+                  <span class="roi__tip">
+                    <p>Calculated based on our standard plan pricing. Traffic, storage, and quantity of sites can all affect this number.</p>
+                  </span>
+                </div>
+                <p class="roi-bar-key --sysadmin">Average 5-year salary of a system administrator (<a href="http://www.bls.gov/oes/current/oes151142.htm">source</a>)</p>
+              </div>
+    
+              <hr class="roi-tabs__divider">
+    
+                <div class="roi-tabs__could">
+                  <div class="roi-pdf-thanks">
+                  <svg x="0px" y="0px" width="153.8px" height="81px" viewBox="0 0 153.8 80.9" enable-background="new 0 0 153.8 80.9" xml:space="preserve">
+                    <path fill="#4EC6DD" d="M2.9,28.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,28.9,2.9,28.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,28.9,10.8,28.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,28.9,26.6,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,28.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,28.9,18.7,28.9z"/>
+                    <path fill="#4EC6DD" d="M18.7,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S19.3,68.9,18.7,68.9z"/>
+                    <path fill="#4EC6DD" d="M26.6,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S27.2,68.9,26.6,68.9z"/>
+                    <path fill="#4EC6DD" d="M2.9,68.9H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1.9c0.6,0,1-0.4,1-1S3.5,68.9,2.9,68.9z"/>
+                    <path fill="#4EC6DD" d="M10.8,68.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S11.4,68.9,10.8,68.9z"/>
+                    <path fill="#4EC6DD" d="M17.8,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C17.4,50.9,17.8,50.4,17.8,49.9z"/>
+                    <path fill="#4EC6DD" d="M25.7,49.9c0-0.6-0.4-1-1-1h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3C25.3,50.9,25.7,50.4,25.7,49.9z"/>
+                    <path fill="#4EC6DD" d="M32.6,48.9h-3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S33.2,48.9,32.6,48.9z"/>
+                    <path fill="#4EC6DD" d="M8.9,50.9c0.6,0,1-0.4,1-1s-0.4-1-1-1H7c-0.6,0-1,0.4-1,1s0.4,1,1,1H8.9z"/>
+                    <path fill="#4EC6DD" d="M133.5,0c-10.7,0-19.5,8.3-20.2,18.9H42.3h-0.7c-0.6,0-1,0.4-1,1v60c0,0.6,0.4,1,1,1h92c0.6,0,1-0.4,1-1
+                      V40.5c10.7-0.6,19.2-9.4,19.2-20.2C153.8,9.1,144.7,0,133.5,0z M113.3,20.9c0.1,4.7,1.9,9.1,4.8,12.4L88.3,60.5L44.8,20.9H113.3z
+                       M132.6,76.8l-28.2-28.2l15.1-13.8c3.4,3.3,8.1,5.5,13.2,5.7V76.8z M42.6,78.9V21.5l29.6,27L43.5,77.2c-0.4,0.4-0.4,1,0,1.4
+                      c0.1,0.1,0.3,0.2,0.5,0.3H42.6z M44.4,78.9c0.2,0,0.4-0.1,0.5-0.3l28.7-28.7l13.9,12.7c0.2,0.2,0.4,0.3,0.7,0.3s0.5-0.1,0.7-0.3
+                      l13.9-12.7l28.7,28.7c0.1,0.1,0.3,0.2,0.5,0.3H44.4z M132.6,78.9L132.6,78.9C132.5,78.9,132.6,78.9,132.6,78.9L132.6,78.9z
+                       M133.5,38.5c-10.1,0-18.3-8.2-18.3-18.3S123.5,2,133.5,2s18.3,8.2,18.3,18.3S143.6,38.5,133.5,38.5z"/>
+                    <path fill="#4EC6DD" d="M145.1,18.8h-10.5V8.3c0-0.6-0.4-1-1-1s-1,0.4-1,1v10.5h-10.5c-0.6,0-1,0.4-1,1s0.4,1,1,1h10.5v10.5
+                      c0,0.6,0.4,1,1,1s1-0.4,1-1V20.8h10.5c0.6,0,1-0.4,1-1S145.7,18.8,145.1,18.8z"/>
+                  </svg>
+                  Keep an eye on your inbox!<br>Your report is on its way.
+                </div>
+    
+                <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+    
+                <ul class="roi-tabs__extra">
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
+                    <p>Buy <span id="coffee-five"></span> cups of coffee</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
+                    <p>Build <span id="sites-five"></span> more site(s)</p>
+                  </li>
+                  <li>
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
+                    <p>Snooze <span id="snooze-five"></span> extra hours</p>
+                  </li>
+                </ul>
+              </div>
+    
+              <form class="roi-pdf-form">
+                <div class="roi-pdf-form__title">
+                  <h1>Get your full ROI report!</h1>
+                  <p>To download your complete, customized report, fill out the following information and we’ll generate it for you in a flash.</p>
+                </div>
+    
+                <button class="roi-pdf-form__btn">Send my report</button>
+              </form>
+            </div>
+          </section>
+        </section>
+      </div>
+    </section>
   <script type="text/javascript" src="bundled.min.js"></script></body>
 </html>

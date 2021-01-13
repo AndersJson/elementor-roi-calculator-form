@@ -3,7 +3,8 @@
 @import "./base/__global.css";
 @import "./base/__typography.css";
 @import "./base/__utilities.css";
-@import "./components/__roi-calculation-form.css";
+@import "./components/__roi-display-section.css";
+@import "./components/__roi-inner-wrapper.css";
 @import "./components/__roi-row.css";
 @import "./components/__roi-left.css";
 @import "./components/__roi-right.css";
@@ -13,4 +14,8 @@
 @import "./components/__roi-range.css";
 @import "./components/__roi-text-input.css";
 @import "./components/__button.css";
+@import "./components/__roi-tabs.css";
+@import "./components/__roi-result-wrapper.css";
+
+
 

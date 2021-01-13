@@ -1,0 +1,8 @@
+.roi-inner-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	&__small{
+		width: 80%;
+	}
+}

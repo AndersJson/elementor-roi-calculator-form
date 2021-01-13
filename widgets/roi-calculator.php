@@ -2037,7 +2037,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         <!-- *********************** -->
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
-                    <form class="roi-calculation-form" id="roi-calculation-form">                    
+                    <form class="roi-display-section mb-large" id="roi-calculation-form">                    
                         <fieldset class="roi-row flex-row-space-between">
                             <label class="roi-left">
                             <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
@@ -2193,170 +2193,78 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </fieldset>    
                     </form>
             <!-- End of form / Start of result -->
-            <section id="roi-results" class="roi-contain --light">
-                <div class="roi-inner --small">
-                    <h1 class="roi-section-title">Summary of your results</h1>
-                    <section class="tabs roi-tabs" id="js-tabs">
-                        <ul class="tabs__nav text-center" role="tablist">
-                            <li class="tabs__link" tabindex="0" role="tab" aria-controls="one-month" aria-selected="true">
+            <section id="roi-results" class="flex flex-center">
+                <div class="roi-inner-wrapper__small">
+                    <h1 id="result-heading" class="flex flex-center mb-medium">Summary of your results</h1>
+                    <section class="tabs__wrapper">
+                        <ul class="tabs__nav text-center">
+                            <li class="tabs__link tabs__link--active" data-time="one-month">
                                 <span>
                                     <h3>1 Month</h3>
                                 </span>
                             </li>
-                            <li class="tabs__link" tabindex="-1" role="tab" aria-controls="one-year">
+                            <li class="tabs__link tabs__link--inactive" data-time="one-year">
                                 <span>
                                     <h3>1 Year</h3>
                                 </span>
                             </li>
-                            <li class="tabs__link" tabindex="-1" role="tab" aria-controls="five-years">
+                            <li class="tabs__link tabs__link--inactive" data-time="five-years">
                                 <span>
                                     <h3>5 Years</h3>
                                 </span>
                             </li>
                         </ul>
                     </section>
-                    <section class="tabs__panel" id="one-month" role="tabpanel">
-                        <div class="roi-tabs__numbers">
-                            <div id="monthly-money-saved" class="roi-tab__number --left">
-                                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
-                                <span class="roi-tab__saved">
-                                saved per month
-                                <span class="roi__tip-trigger">?</span>
-                                <span class="roi__tip">
-                                    <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
-                                </span>
-                                </span>
-                            </div>
-                            <div class="roi-tab__number --right">
-                                <h1 id="hours-saved-month"></h1>
-                                <span class="roi-tab__saved">hours saved per month</span>
-                            </div>
-                            <hr class="roi-tabs__divider">
-                            <div class="roi-bottom-graphs">   
-                                <div class="roi-tabs__could">   
-                                    <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
-                        
-                                    <ul class="roi-tabs__extra">
-                                    <li>
-                                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
-                                        <p>Buy <span id="coffee-month"></span> cups of coffee</p>
-                                    </li>
-                                    <li>
-                                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
-                                        <p>Build <span id="sites-month"></span> more site(s)</p>
-                                    </li>
-                                    <li>
-                                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
-                                        <p>Snooze <span id="snooze-month"></span> extra hours</p>
-                                    </li>
-                                    </ul>
+                    <div class="roi-result-wrapper">
+                        <section class="roi-display-section" id="roi-calculation-result">
+                            <div class="roi-tabs__numbers">
+                                <div id="monthly-money-saved" class="roi-tab__number --left">
+                                    <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
+                                    <span class="roi-tab__saved">
+                                    saved per month
+                                    <span class="roi__tip-trigger">?</span>
+                                    <span class="roi__tip">
+                                        <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
+                                    </span>
+                                    </span>
                                 </div>
-                        
-                                <form class="roi-pdf-form">
-                                    <div class="roi-pdf-form__title">
-                                    <h1>Get your full ROI report!</h1>
-                                    <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                <div class="roi-tab__number --right">
+                                    <h1 id="hours-saved-month"></h1>
+                                    <span class="roi-tab__saved">hours saved per month</span>
+                                </div>
+                                <hr class="roi-tabs__divider">
+                                <div class="roi-bottom-graphs">   
+                                    <div class="roi-tabs__could">   
+                                        <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+                            
+                                        <ul class="roi-tabs__extra">
+                                        <li>
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
+                                            <p>Buy <span id="coffee-month"></span> cups of coffee</p>
+                                        </li>
+                                        <li>
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
+                                            <p>Build <span id="sites-month"></span> more site(s)</p>
+                                        </li>
+                                        <li>
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
+                                            <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                        </li>
+                                        </ul>
                                     </div>
-                        
-                                    <button class="roi-pdf-form__btn">Send my report</button>
-                                </form>
-                            </div>
-                        </div>
-                    </section>
-            
-                    <section class="tabs__panel" id="one-year" role="tabpanel" aria-hidden="true">
-                        <div class="roi-tabs__numbers">
-                            <div id="yearly-money-saved" class="roi-tab__number --left money-saved-contain">
-                                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-year"></span></h1>
-                                <span class="roi-tab__saved">
-                                saved per year
-                                <span class="roi__tip-trigger">?</span>
-                                <span class="roi__tip">
-                                    <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
-                                </span>
-                                </span>
-                            </div>
-                            <div class="roi-tab__number --right">
-                                <h1 id="hours-saved-year"></h1>
-                                <span class="roi-tab__saved">hours saved per year</span>
-                            </div>
-                        </div>   
-                        <hr class="roi-tabs__divider">    
-                        <div class="roi-bottom-graphs">    
-                            <div class="roi-tabs__could">    
-                                <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
-                    
-                                <ul class="roi-tabs__extra">
-                                <li>
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
-                                    <p>Buy <span id="coffee-year"></span> cups of coffee</p>
-                                </li>
-                                <li>
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
-                                    <p>Build <span id="sites-year"></span> more site(s)</p>
-                                </li>
-                                <li>
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
-                                    <p>Snooze <span id="snooze-year"></span> extra hours</p>
-                                </li>
-                                </ul>
-                            </div>
-                            <form class="roi-pdf-form">
-                                <div class="roi-pdf-form__title">
-                                <h1>Get your full ROI report!</h1>
-                                <p>To download your complete, customized report, fill out the following information and we’ll generate it for you in a flash.</p>
+                            
+                                    <form class="roi-pdf-form">
+                                        <div class="roi-pdf-form__title">
+                                        <h1>Get your full ROI report!</h1>
+                                        <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                        </div>
+                            
+                                        <button class="roi-pdf-form__btn">Send my report</button>
+                                    </form>
                                 </div>
-                    
-                                <button class="roi-pdf-form__btn">Send my report</button>
-                            </form>
-                        </div>
-                    </section>
-                
-                    <section class="tabs__panel" id="five-years" role="tabpanel" aria-hidden="true">
-                        <div class="roi-tabs__numbers">
-                            <div id="five-money-saved" class="roi-tab__number --left large-text">
-                                <h1><span class="roi-tab__dollar">$</span><span id="money-saved-five"></span></h1>
-                                <span class="roi-tab__saved">
-                                saved over five years
-                                <span class="roi__tip-trigger">?</span>
-                                <span class="roi__tip">
-                                    <p>Consider how much time it takes you or your team to deal with malware, downtime, WordPress updates, or slow site speeds. For each site, how much time do you spend on these issues? </p>
-                                </span>
-                                </span>
                             </div>
-                            <div class="roi-tab__number --right large-text">
-                                <h1 id="hours-saved-five"></h1>
-                                <span class="roi-tab__saved">hours saved over five years</span>
-                            </div>
-                        </div>    
-                        <hr class="roi-tabs__divider">    
-                        <div class="roi-bottom-graphs">    
-                            <div class="roi-tabs__could">    
-                            <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
-                
-                            <ul class="roi-tabs__extra">
-                            <li>
-                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
-                                <p>Buy <span id="coffee-five"></span> cups of coffee</p>
-                            </li>
-                            <li>
-                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
-                                <p>Build <span id="sites-five"></span> more site(s)</p>
-                            </li>
-                            <li>
-                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
-                                <p>Snooze <span id="snooze-five"></span> extra hours</p>
-                            </li>
-                            </ul>
-                        </div>
-                        <form class="roi-pdf-form">
-                            <div class="roi-pdf-form__title">
-                            <h1>Get your full ROI report!</h1>
-                            <p>To download your complete, customized report, fill out the following information and we’ll generate it for you in a flash.</p>
-                            </div>
-                            <button class="roi-pdf-form__btn">Send my report</button>
-                        </form>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </section>
         </section>
