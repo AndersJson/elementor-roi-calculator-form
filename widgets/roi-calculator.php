@@ -2217,7 +2217,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </section>
                     <div class="roi-result-wrapper">
                         <section class="roi-display-section" id="roi-calculation-result">
-                            <div class="roi-tabs__numbers">
+                            <div class="roi-result-row roi-result-row--border">
                                 <div id="monthly-money-saved" class="roi-tab__number --left">
                                     <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
                                     <span class="roi-tab__saved">
@@ -2232,7 +2232,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <h1 id="hours-saved-month"></h1>
                                     <span class="roi-tab__saved">hours saved per month</span>
                                 </div>
-                                <hr class="roi-tabs__divider">
+                            </div>
+                                <hr class="roi-divider">
                                 <div class="roi-bottom-graphs">   
                                     <div class="roi-tabs__could">   
                                         <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
@@ -2262,7 +2263,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <button class="roi-pdf-form__btn">Send my report</button>
                                     </form>
                                 </div>
-                            </div>
                         </section>
                     </div>
                 </div>

@@ -3,6 +3,14 @@
 	flex-direction: column;
 
 	&__small{
-		width: 80%;
+		width: 85%;
+
+		@mixin tab{
+			width: 90%;
+		}
+
+		@mixin phone{
+			width: 100%;
+		}
 	}
 }

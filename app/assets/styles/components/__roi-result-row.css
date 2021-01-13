@@ -1,0 +1,9 @@
+.roi-result-row{
+  display: flex;
+	flex-wrap: wrap;
+
+  &--border{
+    border-radius: 10px;
+    border: 2px solid #e7e7e7;
+  }
+}

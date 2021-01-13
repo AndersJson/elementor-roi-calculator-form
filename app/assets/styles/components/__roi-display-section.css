@@ -1,4 +1,13 @@
 .roi-display-section {
 	display: flex;
 	flex-direction: column;
+	padding: 4.5em;
+
+	@mixin tab{
+		padding: 2.5em;
+	}
+
+	@mixin phone{
+		padding: 1em;
+	}
 }
