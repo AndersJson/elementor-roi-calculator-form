@@ -2197,24 +2197,24 @@ class ROI_Calculator_Widget extends Widget_Base {
                 <div class="roi-inner-wrapper__small">
                     <h1 id="result-heading" class="flex flex-center mb-medium">Summary of your results</h1>
                     <section class="tabs__wrapper">
-                        <ul class="tabs__nav text-center">
-                            <li class="tabs__link tabs__link--active" data-time="one-month">
-                                <span>
-                                    <h3>1 Month</h3>
-                                </span>
-                            </li>
-                            <li class="tabs__link tabs__link--inactive" data-time="one-year">
-                                <span>
-                                    <h3>1 Year</h3>
-                                </span>
-                            </li>
-                            <li class="tabs__link tabs__link--inactive" data-time="five-years">
-                                <span>
-                                    <h3>5 Years</h3>
-                                </span>
-                            </li>
-                        </ul>
-                    </section>
+                            <ul class="tabs__nav text-center">
+                                <li class="tabs__link tabs__link--active" data-time="one-month">
+                                    <span>
+                                        <h3>1 Month</h3>
+                                    </span>
+                                </li>
+                                <li class="tabs__link tabs__link--inactive" data-time="one-year">
+                                    <span>
+                                        <h3>1 Year</h3>
+                                    </span>
+                                </li>
+                                <li class="tabs__link tabs__link--inactive" data-time="five-years">
+                                    <span>
+                                        <h3>5 Years</h3>
+                                    </span>
+                                </li>
+                            </ul>
+                        </section>
                     <div class="roi-result-wrapper">
                         <section class="roi-display-section" id="roi-calculation-result">
                             <div class="roi-tabs__numbers">

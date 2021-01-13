@@ -9,8 +9,8 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-end;
-    margin: 1.5em 0 -2px;
-    z-index: 1;
+    margin: 1.625em 0 -1px;
+    z-index: 2;
   }
 
   &__link{
@@ -20,16 +20,26 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background-color: #fff;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+    cursor: pointer;
+
+    &:not(:last-child){
+      margin-right: .5em;
+    }
 
     &--active{
       height: 6em;
       border-bottom: 0;
       z-index: 5;
-      transform: translateY(3px);
     }
 
     &--inactive{
-      height: 4em;
+      background-color: #e7e7e7;
+      height: 5em;
       border-bottom: 0;
     }
   }
