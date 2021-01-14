@@ -1,0 +1,7 @@
+.could-do{
+  &__text{
+    margin: 14px 0;
+    padding: 14px 0;
+    border-top: 2px solid #e7e7e7;
+  }
+}

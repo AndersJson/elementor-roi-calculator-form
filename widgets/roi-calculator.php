@@ -63,25 +63,47 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Tip-Trigger Typography
+        // Form Tip-Trigger Typography
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'tip_trigger_typography',
-                'label' => __( 'Tip Trigger Font', 'roi-calculator-widget' ),
+                'name' => 'form_tip_trigger_typography',
+                'label' => __( '(Form)Tip Trigger Font', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .roi-tip-trigger',
             ]
         );
 
-        // Tip Typography
+        // Form Tip Typography
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'tip_typography',
-				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
+				'name' => 'form_tip_typography',
+				'label' => __( '(Form)Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .roi-tip',
+			]
+        );
+
+        // Result Tip-Trigger Typography
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'result_tip_trigger_typography',
+                'label' => __( '(Result)Tip Trigger Font', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .result-box__tip-trigger',
+            ]
+        );
+
+        // Result Tip Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_tip_typography',
+				'label' => __( '(Result)Tip Typography', 'roi-calculator-widget' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .result-box__tip',
 			]
         );
 
@@ -977,6 +999,296 @@ class ROI_Calculator_Widget extends Widget_Base {
 
         $this->end_controls_section();
 
+        // Result Settings
+        $this->start_controls_section(
+            'result_tabs_settings',
+            [
+                'label' => __( 'Result', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        // Result-Tabs
+        $this->start_controls_tabs(
+            'result_tabs'
+        );
+
+        //Result-years tab
+        $this->start_controls_tab(
+            'result_year_tabs_tab',
+            [
+                'label' => __( 'Year-tabs', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result-years Typography 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_tabs_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .tabs__link',
+			]
+        );
+
+        // Result-years active text-color
+        $this->add_control(
+            'result_tabs_active_text_color',
+            [
+                'label' => __( 'Active Tab text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__link--active' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Result-years inactive text-color
+        $this->add_control(
+            'result_tabs_inactive_text_color',
+            [
+                'label' => __( 'Inative Tabs text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#B3B3B3',
+                'description' => 'Default: ( #B3B3B3 ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__link--inactive' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        //Result-saved tab
+        $this->start_controls_tab(
+            'result_saved_tab',
+            [
+                'label' => __( 'Saved', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result-saved Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_saved_typography',
+				'label' => __( 'Saved Money/Time Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .result-box__saved',
+			]
+        );
+
+        // Result-saved money/time Color
+        $this->add_control(
+            'result_saved_money_time_color',
+            [
+                'label' => __( 'Saved Money/Time Text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .result-box__saved' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Saved money one year sub-text 
+        $this->add_control(
+            'saved_money_sub_text',
+            [
+                'label' => __( 'Saved Money Sub-text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'SEK Saved', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter sub-text', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Saved time one year sub-text 
+        $this->add_control(
+            'saved_time_sub_text',
+            [
+                'label' => __( 'Saved Time Sub-text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Hours Saved', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter sub-text', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result-saved text Typography 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_saved_text_typography',
+				'label' => __( 'Sub-text Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .result-box__text',
+			]
+        );
+
+        // Result-saved Text text-color
+        $this->add_control(
+            'result_saved_text_textcolor',
+            [
+                'label' => __( 'Sub-text Text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .result-box__text' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Result-saved dollar-prefix 
+        $this->add_control(
+            'show_saved_money_dollar_prefix',
+            [
+                'label' => __( 'Show money-prefix: $ ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        // Result-saved dollar-prefix Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_saved_dollar_typography',
+				'label' => __( 'Dollar-prefix Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .result-box__dollar',
+                'condition' => [
+                    'show_saved_money_dollar_prefix' => 'yes'
+                ],
+			]
+        );
+
+        ##begin
+
+        // Result Tip-Icon Color
+        $this->add_control(
+            'result_tip_icon_color',
+            [
+                'label' => __( 'Tip-Icon Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .result-box__tip-trigger p' => 'color: {{VALUE}};'
+                ],
+            ]
+        );
+
+        // Result Tip-Icon Border
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'result_tip_icon_border',
+                'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
+                'selector' => '{{WRAPPER}} .result-box__tip-trigger',
+            ]
+        );
+
+        // Result Tip-Icon Size 
+        $this->add_responsive_control(
+            'result_tip_icon_size',
+            [
+                'label' => __( 'Tip-Icon Size', 'roi-calculator-widget' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem' ],
+                'description' => 'Default: ( 25px )',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    'rem' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 25,
+                ],
+            ]
+        );
+
+        ##end
+
+        // Result-saved show money tip-trigger 
+        $this->add_control(
+            'show_saved_money_tip_trigger',
+            [
+                'label' => __( 'Saved Money Tip-trigger ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        // Saved money tip Text
+        $this->add_control(
+            'saved_money_tip_text',
+            [
+                'label' => __( 'Saved Money Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Tip text goes here', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for tip', 'roi-calculator-widget' ),
+                'condition' => [
+                    'show_saved_money_tip_trigger' => 'yes'
+                ]
+            ]
+        );
+
+        // Result-saved show time tip-trigger 
+        $this->add_control(
+            'show_saved_time_tip_trigger',
+            [
+                'label' => __( 'Saved Time Tip-trigger ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator-widget' ),
+                'label_off' => __( 'Hide', 'roi-calculator-widget' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        // Saved time tip-text 
+        $this->add_control(
+            'saved_time_tip_text',
+            [
+                'label' => __( 'Saved Time Tip', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'Tip text goes here', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for tip', 'roi-calculator-widget' ),
+                'condition' => [
+                    'show_saved_time_tip_trigger' => 'yes'
+                ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+        $this->end_controls_section();
+
+
 
         //Trigger styles control-function
         $this->style_tab();
@@ -1016,7 +1328,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'isLinked' => 'false'
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .roi-row' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .roi-row:not(:last-child)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2198,20 +2510,14 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <h1 id="result-heading" class="flex flex-center mb-medium">Summary of your results</h1>
                     <section class="tabs__wrapper">
                             <ul class="tabs__nav text-center">
-                                <li class="tabs__link tabs__link--active" data-time="one-month">
-                                    <span>
-                                        <h3>1 Month</h3>
-                                    </span>
+                                <li class="tabs__link tabs__link--active" data-time="12">
+                                    <h3 id="tabs-one-year">1 Month</h3>
                                 </li>
-                                <li class="tabs__link tabs__link--inactive" data-time="one-year">
-                                    <span>
-                                        <h3>1 Year</h3>
-                                    </span>
+                                <li class="tabs__link tabs__link--inactive" data-time="36">
+                                    <h3 id="tabs-three-year">1 Year</h3>
                                 </li>
-                                <li class="tabs__link tabs__link--inactive" data-time="five-years">
-                                    <span>
-                                        <h3>5 Years</h3>
-                                    </span>
+                                <li class="tabs__link tabs__link--inactive" data-time="60">
+                                    <h3 id="tabs-five-year">5 Years</h3>
                                 </li>
                             </ul>
                         </section>
@@ -2219,52 +2525,67 @@ class ROI_Calculator_Widget extends Widget_Base {
                         <section class="roi-display-section" id="roi-calculation-result">
                             <div class="roi-row roi-row--border">
                                 <div class="result-box result-box--border-right max-half-col flex flex-column flex-center">
-                                    <h1 class="result-box__saved"><span class="result-box__dollar">$</span><span id="money-saved">5</span></h1>
+                                    <h1 class="result-box__saved">
+                                    <?php if ($settings[ 'show_saved_money_dollar_prefix' ] == 'yes') : ?>
+                                        <span class="result-box__dollar">$</span>
+                                    <?php endif; ?>
+                                    <span id="money-saved">5</span></h1>
                                     <span class="result-box__text">
-                                    saved per month
-                                    <span class="result-box__tip-trigger flex flex-center">?</span>
-                                    <span class="result-box__tip">
-                                        <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
-                                    </span>
+                                    <?php echo $settings[ 'saved_money_sub_text' ] ?>
+                                    <?php if ($settings[ 'show_saved_money_tip_trigger' ]) : ?> 
+                                        <span class="result-box__tip-trigger flex flex-center" style="height: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                        <span class="result-box__tip">
+                                            <p><?php echo $settings[ 'saved_money_tip_text' ] ?></p>
+                                        </span>
+                                    <?php endif; ?>
                                     </span>
                                 </div>
                                 <div class="result-box max-half-col flex flex-column flex-center">
                                     <h1 class="result-box__saved" id="hours-saved">20</h1>
-                                    <span class="result-box__text">hours saved per month</span>
+                                    <span class="result-box__text"><?php echo $settings[ 'saved_time_sub_text' ] ?>
+                                    <?php if ($settings[ 'show_saved_time_tip_trigger' ]) : ?> 
+                                        <span class="result-box__tip-trigger flex flex-center" style="height: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                        <span class="result-box__tip">
+                                            <p><?php echo $settings[ 'saved_time_tip_text' ] ?></p>
+                                        </span>
+                                    <?php endif; ?>
+                                    </span>
                                 </div>
                             </div>
                             <hr class="roi-divider" />
-                            <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+                            <div class="roi-row flex-center">
+                                <h2 id="header__could-do">With all that extra money and time you could...</h2>
+                            </div>
                             <div class="roi-row">   
                                 <div class="result-box max-third-col">
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee">
-                                    <p>Buy <span id="coffee-month"></span> cups of coffee</p>
+                                <span class="could-do__icon"></span>
+                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites">
-                                    <p>Build <span id="sites-month"></span> more site(s)</p>
+                                    <span class="could-do__icon"></span>
+                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
-                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                <span class="could-do__icon"></span>
+                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
-                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                <span class="could-do__icon"></span>
+                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
-                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                <span class="could-do__icon"></span>
+                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                             </div>
                             <div class="roi-row flex-center">
-                                <div class="flex flex-column flex-center">
-                                    <h1>Get your full ROI report!</h1>
-                                    <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                <div class="result-summary flex flex-column flex-center">
+                                    <h1 class="result-summary__heading">Get your full ROI report!</h1>
+                                    <p class="result-summary__text">To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
                                 </div>
                             </div>
                             <div class="roi-row flex-center">
-                                <button class="roi-pdf-form__btn">Send my report</button>
+                                <button class="roi-button roi-button--primary" id="roi-cta-button">Send my report</button>
                             </div>
                         </section>
                     </div>

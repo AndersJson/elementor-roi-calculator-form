@@ -1,0 +1,10 @@
+.result-summary{
+  &__heading{
+
+  }
+
+  &__text{
+    margin: .5em 0 0;
+  }
+
+}

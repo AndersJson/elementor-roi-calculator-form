@@ -23,15 +23,20 @@
   }
 
   & h1{
+    display: block;
     margin: 0 0 0.4em;
+    width: 100%;
+    text-align: center;
   }
 
   &__text{
     position: relative;
     display: block;
+    width: 100%;
     margin: 0.3em 0 0;
     padding: 0.3em 0 0;
     border-top: 2px solid #e7e7e7;
+    text-align: center;
   }
 
   &__tip{
@@ -39,11 +44,10 @@
     position: absolute;
     top: 10px;
     right: auto;
-    right: 0;
+    right: 40px;
     background-color: #fff;
     padding: 15px 20px;
     border-radius: 3px;
-    box-shadow: var(--box-shadow-sm);
     width: 250px;
     visibility: hidden;
   }
@@ -51,11 +55,8 @@
   &__tip-trigger{
     position: absolute;
     top: 5px;
-    right: -40px;
-    border: 1px solid #e7e7e7;
+    right: 0;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
 
     &:hover + .result-box__tip {
       visibility: visible;
