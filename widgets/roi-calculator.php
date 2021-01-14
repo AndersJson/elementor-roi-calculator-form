@@ -2038,7 +2038,7 @@ class ROI_Calculator_Widget extends Widget_Base {
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
                     <form class="roi-display-section mb-large" id="roi-calculation-form">                    
-                        <fieldset class="roi-row flex-row-space-between">
+                        <div class="roi-row flex-space-between">
                             <label class="roi-left">
                             <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
@@ -2065,7 +2065,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         </li>
                                     </label>
                                     <div class="checklist-rangewrapper hidden">
-                                        <div class="flex flex-column-end mb-medium">
+                                        <div class="flex flex-column flex-end mb-medium">
                                             <div class="range__header mb-medium w-80" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
                                             <div class="range__wrapper checklist-range-wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value" id="amountvalue_<?php echo $checklist_count ?>"></div>
@@ -2130,8 +2130,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 ?>
                                 </ul>
                             </div>
-                        </fieldset>
-                        <fieldset class="roi-row flex-row-space-between">
+                        </div>
+                        <div class="roi-row flex-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label money-range-label"><?php echo $settings[ 'money_range_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_money_range_label_tip' ] == 'yes') : ?>
@@ -2170,8 +2170,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <?php endif; ?>
                                 </div>
                             </div>
-                        </fieldset>                    
-                        <fieldset class="roi-row flex-row-space-between">
+                        </div>                    
+                        <div class="roi-row flex-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label form-label"><?php echo $settings[ 'form_label_text' ]; ?></p>
                                     <?php if( $settings[ 'show_form_label_tip' ] == 'yes') : ?>
@@ -2187,10 +2187,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <input class="roi-form__textinput" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
                                 <input class="roi-form__textinput" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
                             </div>
-                        </fieldset>
-                        <fieldset class="roi-row flex-center">
+                        </div>
+                        <div class="roi-row flex-center">
                             <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
-                        </fieldset>    
+                        </div>    
                     </form>
             <!-- End of form / Start of result -->
             <section id="roi-results" class="flex flex-center">
@@ -2217,8 +2217,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </section>
                     <div class="roi-result-wrapper">
                         <section class="roi-display-section" id="roi-calculation-result">
-                            <div class="roi-result-row roi-result-row--border">
-                                <div class="result-box result-box--border-right">
+                            <div class="roi-row roi-row--border">
+                                <div class="result-box result-box--border-right max-half-col">
                                     <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
                                     <span class="roi-tab__saved">
                                     saved per month
@@ -2230,32 +2230,42 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 -->
                                     </span>
                                 </div>
-                                <div class="result-box">
+                                <div class="result-box max-half-col">
                                     <h1 id="hours-saved-month"></h1>
                                     <span class="roi-tab__saved">hours saved per month</span>
                                 </div>
                             </div>
                             <hr class="roi-divider" />
                             <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
-                            <div class="roi-result-row">   
-                                <div class="result-box max-one-third-col">
+                            <div class="roi-row">   
+                                <div class="result-box max-third-col">
                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee">
                                     <p>Buy <span id="coffee-month"></span> cups of coffee</p>
                                 </div>
-                                <div class="result-box max-one-third-col">
+                                <div class="result-box max-third-col">
                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites">
                                     <p>Build <span id="sites-month"></span> more site(s)</p>
                                 </div>
-                                <div class="result-box max-one-third-col">
+                                <div class="result-box max-third-col">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
+                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                </div>
+                                <div class="result-box max-third-col">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
+                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                </div>
+                                <div class="result-box max-third-col">
                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
                                     <p>Snooze <span id="snooze-month"></span> extra hours</p>
                                 </div>
                             </div>
-                            <div class="roi-pdf-form">
-                                <div class="roi-pdf-form__title">
+                            <div class="roi-row flex-center">
+                                <div class="flex flex-column flex-center">
                                     <h1>Get your full ROI report!</h1>
                                     <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
                                 </div>
+                            </div>
+                            <div class="roi-row flex-center">
                                 <button class="roi-pdf-form__btn">Send my report</button>
                             </div>
                         </section>

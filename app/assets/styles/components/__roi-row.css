@@ -1,5 +1,13 @@
 .roi-row {
 	display: flex;
 	flex-wrap: wrap;
-	border: none;
+
+  @mixin phone{
+    flex-direction: column;
+  }
+
+  &--border{
+    border-radius: 10px;
+    border: 2px solid #e7e7e7;
+  }
 }

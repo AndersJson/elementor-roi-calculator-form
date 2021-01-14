@@ -7,13 +7,15 @@
 	align-items: center;
 }
 
-.flex-row-space-between {
-	flex-direction: row;
+.flex-column{
+	flex-direction: column;
+}
+
+.flex-space-between {
 	justify-content: space-between;
 }
 
-.flex-column-end {
-	flex-direction: column;
+.flex-end {
 	align-items: flex-end;
 }
 
@@ -41,7 +43,15 @@
 	display: none;
 }
 
-.max-one-third-col{
+.max-half-col{
+	width: 50%;
+
+	@mixin phone{
+		width: 100%;
+	}
+}
+
+.max-third-col{
 	width: 33.3%;
 
 	@mixin phone{
