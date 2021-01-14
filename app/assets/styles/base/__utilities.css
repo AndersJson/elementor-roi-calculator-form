@@ -41,4 +41,10 @@
 	display: none;
 }
 
+.max-one-third-col{
+	width: 33.3%;
 
+	@mixin phone{
+		width: 100%;
+	}
+}

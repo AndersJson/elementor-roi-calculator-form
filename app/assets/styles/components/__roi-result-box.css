@@ -1,0 +1,13 @@
+.result-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 1.8em;
+
+  &--border-right{
+    border-right: 1px solid #e7e7e7;
+  }
+
+}

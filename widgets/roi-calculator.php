@@ -2218,51 +2218,46 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <div class="roi-result-wrapper">
                         <section class="roi-display-section" id="roi-calculation-result">
                             <div class="roi-result-row roi-result-row--border">
-                                <div id="monthly-money-saved" class="roi-tab__number --left">
+                                <div class="result-box result-box--border-right">
                                     <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
                                     <span class="roi-tab__saved">
                                     saved per month
                                     <span class="roi__tip-trigger">?</span>
+                                   <!--
                                     <span class="roi__tip">
                                         <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
                                     </span>
+                                -->
                                     </span>
                                 </div>
-                                <div class="roi-tab__number --right">
+                                <div class="result-box">
                                     <h1 id="hours-saved-month"></h1>
                                     <span class="roi-tab__saved">hours saved per month</span>
                                 </div>
                             </div>
-                                <hr class="roi-divider">
-                                <div class="roi-bottom-graphs">   
-                                    <div class="roi-tabs__could">   
-                                        <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
-                            
-                                        <ul class="roi-tabs__extra">
-                                        <li>
-                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-cup.svg" alt="Buy more coffee"></noscript>
-                                            <p>Buy <span id="coffee-month"></span> cups of coffee</p>
-                                        </li>
-                                        <li>
-                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-computer.svg" alt="Build more sites"></noscript>
-                                            <p>Build <span id="sites-month"></span> more site(s)</p>
-                                        </li>
-                                        <li>
-                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer" data-lazy-src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg"><noscript><img src="https://p08cv792n4-flywheel.netdna-ssl.com/wp-content/themes/flywheel15/images/icon-hourglass.svg" alt="Snooze longer"></noscript>
-                                            <p>Snooze <span id="snooze-month"></span> extra hours</p>
-                                        </li>
-                                        </ul>
-                                    </div>
-                            
-                                    <form class="roi-pdf-form">
-                                        <div class="roi-pdf-form__title">
-                                        <h1>Get your full ROI report!</h1>
-                                        <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
-                                        </div>
-                            
-                                        <button class="roi-pdf-form__btn">Send my report</button>
-                                    </form>
+                            <hr class="roi-divider" />
+                            <h2 class="roi-tabs__could-heading">With all that extra money and time you could...</h2>
+                            <div class="roi-result-row">   
+                                <div class="result-box max-one-third-col">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Buy more coffee">
+                                    <p>Buy <span id="coffee-month"></span> cups of coffee</p>
                                 </div>
+                                <div class="result-box max-one-third-col">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Build more sites">
+                                    <p>Build <span id="sites-month"></span> more site(s)</p>
+                                </div>
+                                <div class="result-box max-one-third-col">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Snooze longer">
+                                    <p>Snooze <span id="snooze-month"></span> extra hours</p>
+                                </div>
+                            </div>
+                            <div class="roi-pdf-form">
+                                <div class="roi-pdf-form__title">
+                                    <h1>Get your full ROI report!</h1>
+                                    <p>To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                </div>
+                                <button class="roi-pdf-form__btn">Send my report</button>
+                            </div>
                         </section>
                     </div>
                 </div>
