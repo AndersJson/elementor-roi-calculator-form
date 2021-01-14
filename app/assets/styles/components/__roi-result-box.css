@@ -3,18 +3,64 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2em 1.8em;
+  padding: 2em 1.8em 2em;
 
   @mixin tab{
-    padding: 1em 0.4em;
+    padding: 2em 0.4em 1.5em;
   }
 
   @mixin phone{
-    padding: 0.7em 0;
+    padding: 2em 0 1.5em;
   }
 
   &--border-right{
     border-right: 1px solid #e7e7e7;
+
+    @mixin phone{
+      border-right: none;
+      border-bottom:1px solid #e7e7e7;
+    }
+  }
+
+  & h1{
+    margin: 0 0 0.4em;
+  }
+
+  &__text{
+    position: relative;
+    display: block;
+    margin: 0.3em 0 0;
+    padding: 0.3em 0 0;
+    border-top: 2px solid #e7e7e7;
+  }
+
+  &__tip{
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: auto;
+    right: 0;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 3px;
+    box-shadow: var(--box-shadow-sm);
+    width: 250px;
+    visibility: hidden;
+  }
+
+  &__tip-trigger{
+    position: absolute;
+    top: 5px;
+    right: -40px;
+    border: 1px solid #e7e7e7;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+
+    &:hover + .result-box__tip {
+      visibility: visible;
+      z-index: 5;
+    }
   }
 
 }

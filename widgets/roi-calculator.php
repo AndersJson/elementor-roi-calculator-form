@@ -2218,21 +2218,19 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <div class="roi-result-wrapper">
                         <section class="roi-display-section" id="roi-calculation-result">
                             <div class="roi-row roi-row--border">
-                                <div class="result-box result-box--border-right max-half-col">
-                                    <h1><span class="roi-tab__dollar">$</span><span id="money-saved-month"></span></h1>
-                                    <span class="roi-tab__saved">
+                                <div class="result-box result-box--border-right max-half-col flex flex-column flex-center">
+                                    <h1 class="result-box__saved"><span class="result-box__dollar">$</span><span id="money-saved">5</span></h1>
+                                    <span class="result-box__text">
                                     saved per month
-                                    <span class="roi__tip-trigger">?</span>
-                                   <!--
-                                    <span class="roi__tip">
+                                    <span class="result-box__tip-trigger flex flex-center">?</span>
+                                    <span class="result-box__tip">
                                         <p>Flywheel handles approximately 80% of the above tasks, based on client case studies and real customer data. We calculate money and hours saved using your hourly rate and the number of sites you build in a month. Please note that your actual results may vary.</p>
                                     </span>
-                                -->
                                     </span>
                                 </div>
-                                <div class="result-box max-half-col">
-                                    <h1 id="hours-saved-month"></h1>
-                                    <span class="roi-tab__saved">hours saved per month</span>
+                                <div class="result-box max-half-col flex flex-column flex-center">
+                                    <h1 class="result-box__saved" id="hours-saved">20</h1>
+                                    <span class="result-box__text">hours saved per month</span>
                                 </div>
                             </div>
                             <hr class="roi-divider" />
