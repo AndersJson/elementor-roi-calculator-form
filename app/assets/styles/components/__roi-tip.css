@@ -3,11 +3,15 @@
   position: absolute;
   top: 0;
   right: auto;
-  left: calc(100% - 15px);
+  left: 100%;
   background-color: #fff;
   padding: 15px 20px;
   border-radius: 3px;
   box-shadow: var(--box-shadow-sm);
   width: 250px;
   visibility: hidden;
+
+  @mixin phone{
+    left: calc(100% - 300px);
+  }
 }

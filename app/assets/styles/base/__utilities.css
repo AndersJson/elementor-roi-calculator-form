@@ -19,12 +19,12 @@
 	align-items: flex-end;
 }
 
-.w-80 {
+.inset-small {
 	width: 80%;
-}
 
-.w-100 {
-	width: 100%;
+	@mixin phone{
+		width: 90%;
+	}
 }
 
 .mb-small {

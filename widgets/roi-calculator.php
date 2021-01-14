@@ -2066,8 +2066,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </label>
                                     <div class="checklist-rangewrapper hidden">
                                         <div class="flex flex-column flex-end mb-medium">
-                                            <div class="range__header mb-medium w-80" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
-                                            <div class="range__wrapper checklist-range-wrapper w-80 mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
+                                            <div class="range__header mb-medium inset-small" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
+                                            <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value" id="amountvalue_<?php echo $checklist_count ?>"></div>
                                                 <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_amount_range_min' ]; ?>" max="<?php echo $item[ 'checklist_amount_range_max' ]; ?>" step="<?php echo $item[ 'checklist_amount_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_amount_range_color' ]; ?>">
                                                 <?php if( $item[ 'show_checklist_amount_range_labels' ] == 'yes' ) : ?>
@@ -2094,8 +2094,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                 </ul>
                                                 <?php endif; ?>
                                             </div>
-                                            <div class="range__header mb-medium w-80" id="timeheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_time_range_header_text' ] ?></p></div>
-                                            <div class="range__wrapper checklist-range-wrapper w-80 mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
+                                            <div class="range__header mb-medium inset-small" id="timeheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_time_range_header_text' ] ?></p></div>
+                                            <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value" id="timevalue_<?php echo $checklist_count ?>"></div>
                                                 <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
                                                 <?php if( $item[ 'show_checklist_time_range_labels' ] == 'yes' ) : ?>
@@ -2142,7 +2142,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <?php endif; ?>
                             </label>
                             <div class="roi-right">
-                                <div class="range__wrapper money-range-wrapper w-100">
+                                <div class="range__wrapper money-range-wrapper">
                                         <div class="range__value money-range-value" id="money-range__value"></div>
                                         <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
                                         <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
