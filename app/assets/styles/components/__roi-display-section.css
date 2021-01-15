@@ -8,6 +8,6 @@
 	}
 
 	@mixin phone{
-		padding: 2.5em 1em;
+		padding: 2.5em 0.7em;
 	}
 }

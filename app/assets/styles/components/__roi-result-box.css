@@ -6,7 +6,7 @@
   padding: 2em 1.8em 2em;
 
   @mixin tab{
-    padding: 2em 1em 1.5em;
+    padding: 2em 1.8em 1.5em;
   }
 
   &--border-right{
