@@ -335,7 +335,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'form_tip_typography',
+				'name' => 'form_label_tip_typography',
 				'label' => __( 'Tip Typography', 'roi-calculator-widget' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .form-tip',
@@ -381,17 +381,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-
-        // Checklist Typography(Icon Size)
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'checklist_icon_typography',
-				'label' => __( 'Icon Size', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .roi-checklist__icon',
-			]
-        );
 
             $this->add_control(
                 'more_options_checklist_items',
@@ -1150,39 +1139,6 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
 
 
-        // Result Tip-Icon Size 
-        $this->add_responsive_control(
-            'result_tip_icon_size',
-            [
-                'label' => __( 'Tip-Icon Size', 'roi-calculator-widget' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', 'rem' ],
-                'description' => 'Default: ( 25px )',
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                    'rem' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 25,
-                ],
-            ]
-        );
-
-
         // Result-saved show money tip-trigger 
         $this->add_control(
             'show_saved_money_tip_trigger',
@@ -1282,124 +1238,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-            $this->add_control(
-                'more_options_tip_icon',
-                [
-                    'label' => __( 'Tip Icon', 'roi-calculator-widget' ),
-                    'type' => \Elementor\Controls_Manager::HEADING,
-                    'separator' => 'before'
-                ]
-            );
-
-            // Tip-Icon Size
-            $this->add_responsive_control(
-                'tip-icon_size',
-                [
-                    'label' => __( 'Tip-Icon Size', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px', 'em', 'rem' ],
-                    'description' => 'Default: ( 30px )',
-                    'range' => [
-                        'px' => [
-                            'min' => 0,
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                        'em' => [
-                            'min' => 0,
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                        'rem' => [
-                            'min' => 0,
-                            'max' => 100,
-                            'step' => 1,
-                        ],
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 30,
-                    ],
-                ]
-            );
-
-            // Tip-Icon Position Right
-            $this->add_responsive_control(
-                'tip-icon_position_right',
-                [
-                    'label' => __( 'Tip-Icon Position Right', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px', 'rem', 'em', '%' ],
-                    'description' => 'Default: ( 20px )',
-                    'range' => [
-                        'px' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        'rem' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        'em' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        '%' => [
-                            'min' => 0,
-                            'max' => 100,
-                        ],
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 20,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'right: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            // Tip-Icon Position Top
-            $this->add_responsive_control(
-                'tip-icon_position_top',
-                [
-                    'label' => __( 'Tip-Icon Position Top', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::SLIDER,
-                    'size_units' => [ 'px', 'rem', 'em', '%' ],
-                    'description' => 'Default: ( 0px )',
-                    'range' => [
-                        'px' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        'rem' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        'em' => [
-                            'min' => 0,
-                            'max' => 500,
-                            'step' => 1,
-                        ],
-                        '%' => [
-                            'min' => 0,
-                            'max' => 100,
-                        ],
-                    ],
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => 0,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger' => 'top: {{SIZE}}{{UNIT}};',
-                    ],
-                ]
-            );
 
             $this->add_control(
                 'more_options_tip_text',
@@ -1420,6 +1258,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
                         '{{WRAPPER}} .roi-tip' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .result-box__tip' => 'color: {{VALUE}};',
                     ],
                 ]
             );
@@ -1434,26 +1273,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-
-            // Padding
-            $this->add_responsive_control(
-                'wrapper_padding',
-                [
-                    'label' => __( 'Padding', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 0px 0px 0px 0px )',
-                    'default' => [
-                        'top' => 0,
-                        'right' => 0,
-                        'bottom' => 0,
-                        'left' => 0,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-outer-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
 
             // Border Type
             $this->add_group_control(
@@ -1496,19 +1315,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-            // Background Color
-            $this->add_control(
-                'wrapper_backgorund_color',
-                [
-                    'label' => __( 'Background Color', 'plugin-domain' ),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'default' => '#FFFFFF',
-                    'description' => 'Default: ( #FFFFFF ) ',
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-outer-wrapper ' => 'background-color: {{VALUE}}',
-                    ],
-                ]
-            );
 
         $this->end_controls_section();
 
@@ -1533,19 +1339,6 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Checklist Icon Un-Checked Color
-        $this->add_control(
-            'checklist_unchecked_color',
-            [
-                'label' => __( 'Checklist-Icon Inactive Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#e7e7e7',
-                'description' => 'Default: ( #e7e7e7 ) ',
-                'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__icon ' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
 
         // Checklist Icon Checked Color
         $this->add_control(
@@ -1557,84 +1350,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'description' => 'Default: ( #2AAECD ) ',
                 'selectors' => [
                     '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'checklist_border_before_hr',
-            [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
-            ]
-        );
-
-        // Checklist-Icon Border
-        $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
-            [
-                'name' => 'checklist_icon_border',
-                'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
-                'selector' => '{{WRAPPER}} .roi-checklist__icon',
-            ]
-        );
-
-        $this->add_control(
-            'checklist_border_after_hr',
-            [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
-            ]
-        );
-        
-
-        // Checklist-Icon Size
-        $this->add_responsive_control(
-            'checklist-icon_size',
-            [
-                'label' => __( 'Checklist-Icon Size', 'roi-calculator-widget' ),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', 'rem' ],
-                'description' => 'Default: ( 35px )',
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                    'rem' => [
-                        'min' => 0,
-                        'max' => 100,
-                        'step' => 1,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 35,
-                ],
-            ]
-        );
-
-        // Checklist-Icon Margin
-        $this->add_responsive_control(
-            'checklist_icon_margin',
-            [
-                'label' => __( 'Margin', 'roi-calculator-widget' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'rem' ],
-                'description' => 'Default: ( 0px 16px 0px 0px )',
-                'default' => [
-                    'top' => 7,
-                    'right' => 16,
-                    'bottom' => 0,
-                    'left' => 0,
-                    'isLinked' => 'false'
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__icon' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2191,7 +1906,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                             <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
                             <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
                                 <span class="roi-tip checklist-tip">
                                     <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
                                 </span>
@@ -2205,7 +1920,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
                                         <li class="roi-checklist__item">
                                             <input type="checkbox" name="struggles[]" id="checklist-checkbox_<?php echo $checklist_count ?>" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>" data-save="<?php echo $item[ 'checklist_save_percent' ] ?>">
-                                            <span class="roi-checklist__icon flex-center" style="height: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'checklist-icon_size' ]['size']?><?php echo $settings[ 'checklist-icon_size' ]['unit'] ?>;">
+                                            <span class="roi-checklist__icon flex-center">
                                                 <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                             </span>
                                             <span class="roi-checklist__labeltext">
@@ -2284,7 +1999,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                                 <p class="roi-left__label money-range-label"><?php echo $settings[ 'money_range_label_text' ]; ?></p>
                                 <?php if( $settings[ 'show_money_range_label_tip' ] == 'yes') : ?>
-                                    <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                    <span class="roi-tip-trigger flex-center"><p>?</p></span>
                                     <span class="roi-tip money-range-tip">
                                         <p><?php echo $settings[ 'money_range_tip_text' ]; ?></p>
                                     </span>
@@ -2324,7 +2039,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <label class="roi-left">
                                 <p class="roi-left__label form-label"><?php echo $settings[ 'form_label_text' ]; ?></p>
                                     <?php if( $settings[ 'show_form_label_tip' ] == 'yes') : ?>
-                                            <span class="roi-tip-trigger flex-center" style="height: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'tip-icon_size' ]['size']?><?php echo $settings[ 'tip-icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                            <span class="roi-tip-trigger flex-center"><p>?</p></span>
                                             <span class="roi-tip form-tip">
                                                 <p><?php echo $settings[ 'form_tip_text' ]; ?></p>
                                             </span>
@@ -2370,7 +2085,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <span class="result-box__text">
                                     <?php echo $settings[ 'saved_money_sub_text' ] ?>
                                     <?php if ($settings[ 'show_saved_money_tip_trigger' ]) : ?> 
-                                        <span class="result-box__tip-trigger flex flex-center" style="height: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                        <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
                                         <span class="result-box__tip">
                                             <p><?php echo $settings[ 'saved_money_tip_text' ] ?></p>
                                         </span>
@@ -2381,7 +2096,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <h1 class="result-box__saved" id="hours-saved">20</h1>
                                     <span class="result-box__text"><?php echo $settings[ 'saved_time_sub_text' ] ?>
                                     <?php if ($settings[ 'show_saved_time_tip_trigger' ]) : ?> 
-                                        <span class="result-box__tip-trigger flex flex-center" style="height: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>; width: <?php echo $settings[ 'result_tip_icon_size' ]['size']?><?php echo $settings[ 'result_tip_icon_size' ]['unit'] ?>;"><p>?</p></span>
+                                        <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
                                         <span class="result-box__tip">
                                             <p><?php echo $settings[ 'saved_time_tip_text' ] ?></p>
                                         </span>

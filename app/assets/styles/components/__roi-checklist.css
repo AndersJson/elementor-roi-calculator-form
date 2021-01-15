@@ -17,9 +17,21 @@
 		display: flex;
 		flex-shrink: 0;
 		flex-grow: 0;
+		height: 35px;
+		width: 35px;
+		border: 3px solid #e7e7e7;
 		border-radius: 50%;
 		transition: transform 0.2s;
+		font-size: 20px;
+		color: #e7e7e7;
+		margin: 0px 16px 0 0;
 		cursor: pointer;
+
+		@mixin phone{
+			height: 30px;
+			width: 30px;
+			font-size: 17px;
+		}
 
 		&:hover {
 			transform: scale(1.1);

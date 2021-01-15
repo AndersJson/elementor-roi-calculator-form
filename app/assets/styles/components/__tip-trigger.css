@@ -1,11 +1,22 @@
 .roi-tip-trigger {
 	display: flex;
 	position: absolute;
+	top: 0;
+	right: 20px;
+	width: 30px;
+	height: 30px;
 	border: 2px solid #e7e7e7;
 	border-radius: 50%;
 	font-size: 20px !important;
 	font-weight: 400;
   font-family: "Lato" sans-serif;
+
+	@mixin phone{
+			height: 25px;
+			width: 25px;
+			font-size: 17px !important;
+			right: 10px;
+		}
 
 	& p {
 		color: #e7e7e7 !important;

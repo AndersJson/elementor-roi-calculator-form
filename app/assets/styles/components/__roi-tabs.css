@@ -54,11 +54,11 @@
       }
 
       &--active{
-        height: 4em;
+        height: 3em;
       }
 
       &--inactive{
-        height: 4em;
+        height: 3em;
       }
     }
   }
