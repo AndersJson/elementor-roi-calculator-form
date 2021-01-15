@@ -48,15 +48,24 @@
     background-color: #fff;
     padding: 15px 20px;
     border-radius: 3px;
+    box-shadow: var(--box-shadow-sm);
     width: 250px;
     visibility: hidden;
   }
 
   &__tip-trigger{
     position: absolute;
+    font-family: "Lato" sans-serif;
     top: 5px;
     right: 0;
+    border: 2px solid #e7e7e7;
     border-radius: 50%;
+    font-size: 16px !important;
+    font-weight: 500;
+
+    & p{
+      color: #e7e7e7 !important;
+    }
 
     &:hover + .result-box__tip {
       visibility: visible;

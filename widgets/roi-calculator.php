@@ -63,16 +63,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Form Tip-Trigger Typography
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'form_tip_trigger_typography',
-                'label' => __( '(Form)Tip Trigger Font', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .roi-tip-trigger',
-            ]
-        );
 
         // Form Tip Typography
         $this->add_group_control(
@@ -85,16 +75,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Result Tip-Trigger Typography
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'result_tip_trigger_typography',
-                'label' => __( '(Result)Tip Trigger Font', 'roi-calculator-widget' ),
-                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .result-box__tip-trigger',
-            ]
-        );
 
         // Result Tip Typography
         $this->add_group_control(
@@ -1169,31 +1149,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        ##begin
-
-        // Result Tip-Icon Color
-        $this->add_control(
-            'result_tip_icon_color',
-            [
-                'label' => __( 'Tip-Icon Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#54595f',
-                'description' => 'Default: ( #54595f ) ',
-                'selectors' => [
-                    '{{WRAPPER}} .result-box__tip-trigger p' => 'color: {{VALUE}};'
-                ],
-            ]
-        );
-
-        // Result Tip-Icon Border
-        $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
-            [
-                'name' => 'result_tip_icon_border',
-                'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
-                'selector' => '{{WRAPPER}} .result-box__tip-trigger',
-            ]
-        );
 
         // Result Tip-Icon Size 
         $this->add_responsive_control(
@@ -1227,7 +1182,6 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        ##end
 
         // Result-saved show money tip-trigger 
         $this->add_control(
@@ -1304,34 +1258,6 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'more_options_row',
-            [
-                'label' => __( 'Row', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-            ]
-        );
-
-        // Row Margin
-        $this->add_responsive_control(
-            'row_margin',
-            [
-                'label' => __( 'Row Margin', 'roi-calculator-widget' ),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'rem', 'em' ],
-                'description' => 'Default: ( 0px 0px 30px 0px )',
-                'default' => [
-                    'top' => 0,
-                    'right' => 0,
-                    'bottom' => 30,
-                    'left' => 0,
-                    'isLinked' => 'false'
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .roi-row:not(:last-child)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
 
             $this->add_control(
                 'more_options_label_text',
@@ -1362,30 +1288,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Tip Icon', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::HEADING,
                     'separator' => 'before'
-                ]
-            );
-
-            // Tip-Icon Color
-            $this->add_control(
-                'tip_icon_color',
-                [
-                    'label' => __( 'Tip-Icon Color', 'roi-calculator-widget' ),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'default' => '#54595f',
-                    'description' => 'Default: ( #54595f ) ',
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip-trigger p' => 'color: {{VALUE}};'
-                    ],
-                ]
-            );
-
-            //Tip-Icon Border
-            $this->add_group_control(
-                \Elementor\Group_Control_Border::get_type(),
-                [
-                    'name' => 'tip_icon_border',
-                    'label' => __( 'Checklist Icon Border', 'roi-calculator-widget' ),
-                    'selector' => '{{WRAPPER}} .roi-tip-trigger',
                 ]
             );
 
@@ -1518,71 +1420,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'description' => 'Default: ( #54595f ) ',
                     'selectors' => [
                         '{{WRAPPER}} .roi-tip' => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
-
-            // Tip Padding
-            $this->add_responsive_control(
-                'tip_padding',
-                [
-                    'label' => __( 'Tip Padding', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 15px 20px 15px 20px )',
-                    'default' => [
-                        'top' => 15,
-                        'right' => 20,
-                        'bottom' => 15,
-                        'left' => 20,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                ]
-            );
-
-            // Tip Border Radius
-            $this->add_responsive_control(
-                'tip_border_radius',
-                [
-                    'label' => __( 'Border Radius', 'roi-calculator-widget' ),
-                    'type' => Controls_Manager::DIMENSIONS,
-                    'size_units' => [ 'px', '%', 'rem' ],
-                    'description' => 'Default: ( 3px 3px 3px 3px )',
-                    'default' => [
-                        'top' => 3,
-                        'right' => 3,
-                        'bottom' => 3,
-                        'left' => 3,
-                    ],
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-
-                    ],
-                ]
-            );
-
-            // Tip Box Shadow
-            $this->add_group_control(
-                \Elementor\Group_Control_Box_Shadow::get_type(),
-                [
-                    'name' => 'tip_box_shadow',
-                    'label' => __( 'Tip Box Shadow', 'roi-calculator-widget' ),
-                    'selector' => '{{WRAPPER}} .roi-tip',
-                ]
-            );
-
-            // Tip Background Color
-            $this->add_control(
-                'tip_background_color',
-                [
-                    'label' => __( 'Tip Background Color', 'plugin-domain' ),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'default' => '#FFFFFF',
-                    'description' => 'Default: ( #FFFFFF ) ',
-                    'selectors' => [
-                        '{{WRAPPER}} .roi-tip ' => 'background-color: {{VALUE}}',
                     ],
                 ]
             );

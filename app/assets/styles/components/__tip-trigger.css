@@ -1,7 +1,15 @@
 .roi-tip-trigger {
 	display: flex;
 	position: absolute;
+	border: 2px solid #e7e7e7;
 	border-radius: 50%;
+	font-size: 20px !important;
+	font-weight: 400;
+  font-family: "Lato" sans-serif;
+
+	& p {
+		color: #e7e7e7 !important;
+	}
 
 	&:hover + .roi-tip {
 		visibility: visible;
