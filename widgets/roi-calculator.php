@@ -33,7 +33,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
-        
+
 
         // General Typography
         $this->add_group_control(
@@ -1826,7 +1826,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             <!-- End of form / Start of result -->
             <section id="roi-results" class="flex flex-center">
                 <div class="roi-inner-wrapper__small">
-                    <h1 id="result-heading" class="flex flex-center mb-medium">Summary of your results</h1>
+                    <h1 id="roi-result-heading" class="heading--primary flex flex-center">Summary of your results</h1>
                     <section class="tabs__wrapper">
                             <ul class="tabs__nav text-center">
                                 <li class="tabs__link tabs__link--active" data-time="12">
@@ -1873,38 +1873,38 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                             <hr class="roi-divider" />
                             <div class="roi-row flex-center">
-                                <h2 id="header__could-do">With all that extra money and time you could...</h2>
+                                <h2 id="roi-result-could-do-heading" class="heading--primary">With all that extra money and time you could...</h2>
                             </div>
                             <div class="roi-row">   
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon"></span>
+                                <span class="could-do__icon flex flex-center"></span>
                                     <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                    <span class="could-do__icon"></span>
+                                    <span class="could-do__icon flex flex-center"></span>
                                     <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon"></span>
+                                <span class="could-do__icon flex flex-center"></span>
                                     <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon"></span>
+                                <span class="could-do__icon flex flex-center"></span>
                                     <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon"></span>
+                                <span class="could-do__icon flex flex-center"></span>
                                     <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
                                 </div>
                             </div>
                             <div class="roi-row flex-center">
                                 <div class="result-summary flex flex-column flex-center">
-                                    <h1 class="result-summary__heading">Get your full ROI report!</h1>
-                                    <p class="result-summary__text">To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                    <h1 id="roi-result-summary-heading" class="heading--primary">Get your full ROI report!</h1>
+                                    <p id="roi-result-summary-text" class="result-summary__text">To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
                                 </div>
                             </div>
                             <div class="roi-row flex-center">
-                                <button class="roi-button roi-button--primary" id="roi-cta-button">Send my report</button>
+                                <button class="roi-button roi-button--primary" id="roi-result-cta-button">Send my report</button>
                             </div>
                         </section>
                     </div>

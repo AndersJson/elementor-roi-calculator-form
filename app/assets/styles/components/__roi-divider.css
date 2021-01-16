@@ -3,13 +3,13 @@
   height: 2px;
   background: #e7e7e7 !important;
   border: 0;
-  margin: 4.5em 0 !important;
+  margin: 3em 0 !important;
 
   @mixin tab{
-      margin: 3.5em 0 !important;
+      margin: 2.5em 0 !important;
   }
 
   @mixin phone{
-      margin: 2.5em 0 !important;
+      margin: 2em 0 !important;
   }
 }

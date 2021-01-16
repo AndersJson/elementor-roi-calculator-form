@@ -1,0 +1,5 @@
+.heading{
+  &--primary{
+    margin: 20px 0;
+  }
+}

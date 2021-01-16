@@ -37,6 +37,10 @@
 
 .mb-large {
 	margin-bottom: 80px !important;
+
+	@mixin phone{
+		margin-bottom: 50px !important;
+	}
 }
 
 .hidden {
