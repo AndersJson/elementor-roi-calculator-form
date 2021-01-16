@@ -29,17 +29,11 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_section(
             'typography_settings',
             [
-                'label' => __( 'Typography', 'roi-calculator-widget' ),
+                'label' => __( 'Base Typography', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
-        $this->add_control(
-            'more_options_general typography',
-            [
-                'label' => __( 'Default Typography', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-            ]
-        );
+        
 
         // General Typography
         $this->add_group_control(
@@ -49,17 +43,6 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'label' => __( 'General Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .roi-row',
-			]
-        );
-
-        // Label Typography
-        $this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'general_label_typography',
-				'label' => __( 'Label Typography', 'roi-calculator-widget' ),
-				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .roi-left__label',
 			]
         );
 
@@ -97,6 +80,17 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Labels', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
+        );
+
+        // Label Typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'general_label_typography',
+				'label' => __( 'General Label Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .roi-left__label',
+			]
         );
 
         // Lable-Tabs
