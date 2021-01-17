@@ -971,6 +971,44 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+
+        // Result main heading 
+        $this->add_control(
+            'result_main_heading',
+            [
+                'label' => __( 'Heading for result', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Summary of your calculation' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter heading-text', 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+        // Result main heading typography 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_main_heading_typography',
+				'label' => __( 'Heading typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} #roi-result-heading',
+			]
+        );
+
+        // Result-years active text-color anchor
+        $this->add_control(
+            'result_main_heading_color',
+            [
+                'label' => __( 'Heading text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-result-heading' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
         // Result-Tabs
         $this->start_controls_tabs(
             'result_tabs'
@@ -1826,7 +1864,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             <!-- End of form / Start of result -->
             <section id="roi-results" class="flex flex-center">
                 <div class="roi-inner-wrapper__small">
-                    <h1 id="roi-result-heading" class="heading--primary flex flex-center">Summary of your results</h1>
+                    <h1 id="roi-result-heading" class="heading--primary flex flex-center"><?php echo $settings[ 'result_main_heading' ] ?></h1>
                     <section class="tabs__wrapper">
                             <ul class="tabs__nav text-center">
                                 <li class="tabs__link tabs__link--active" data-time="12">
