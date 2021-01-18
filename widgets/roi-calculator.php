@@ -1279,6 +1279,44 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
         
+
+        // List Repeater
+        $candorepeater = new \Elementor\Repeater();
+        $candorepeater->add_control(
+            'cando_title',
+            [
+                'label' => __( 'Title', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '' , 'plugin-domain' ),
+                'label_block' => true,
+            ]
+        );
+        $candorepeater->add_control(
+            'cando_icon',
+            [
+                'label' => __( 'Icon', 'text-domain' ),
+                'type' => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-check',
+                    'library' => 'solid',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'cando_boxes',
+            [
+                'label' => __( 'Repeater List', 'plugin-domain' ),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $candorepeater->get_controls(),
+                'default' => [
+                    [
+                        'cando_title' => __( 'Coffee', 'plugin-domain' ),
+                    ],
+                ],
+                'title_field' => '{{{ cando_title }}}',
+            ]
+        );
         
 
         $this->end_controls_tab();
@@ -1971,9 +2009,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <h2 id="roi-result-could-do-heading" class="heading--primary"><?php echo $settings[ 'result_cando_heading_text' ] ?></h2>
                             </div>
                             <div class="roi-row">   
+                            <?php foreach( $settings[ 'cando_boxes' ] as $candoitem  ) : ?>
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon flex flex-center">
-                                </span>
+                                    <span class="could-do__icon flex flex-center">
+                                        <?php \Elementor\Icons_Manager::render_icon( $candoitem['cando_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                    </span>
                                     <p class="could-do__text">
                                         <span class="could-do__pre-text">Buy</span>
                                         <span class="could-do__cost" data-cost="5">
@@ -1981,6 +2021,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <span class="could-do__sub-text">cups of coffee</span>
                                     </p>
                                 </div>
+                            <?php endforeach; ?>
                             </div>
                             <div class="roi-row flex-center">
                                 <div class="result-summary flex flex-column flex-center">
