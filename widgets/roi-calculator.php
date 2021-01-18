@@ -995,7 +995,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Result-years active text-color
+        // Result heading text-color
         $this->add_control(
             'result_main_heading_color',
             [
@@ -1009,7 +1009,16 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Result-Tabs
+        $this->add_control(
+            'more_options_result_tabs',
+            [
+                'label' => __( 'Result-sections', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
+
+        // Result-Tabs 
         $this->start_controls_tabs(
             'result_tabs'
         );
@@ -1258,7 +1267,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Result-years active text-color
+        // Result cando heading text-color
         $this->add_control(
             'result_cando_heading_color',
             [
@@ -1297,7 +1306,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Icon', 'text-domain' ),
                 'type' => \Elementor\Controls_Manager::ICONS,
                 'default' => [
-                    'value' => 'fas fa-check',
+                    'value' => 'fas fa-coffee',
                     'library' => 'solid',
                 ],
             ]
@@ -1426,6 +1435,132 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
         
+
+        $this->end_controls_tab();
+
+        //Result Summary tab 
+        $this->start_controls_tab(
+            'result_summary_tab',
+            [
+                'label' => __( 'Summary', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result Summary heading 
+        $this->add_control(
+            'result_summary_heading_text',
+            [
+                'label' => __( 'Heading', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Summary of your ROI-calculation' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter heading-text', 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+
+        // Result Summary heading typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_summary_heading_typography',
+				'label' => __( 'Heading typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} #roi-result-summary-heading',
+			]
+        );
+
+        // Result Summary heading text-color
+        $this->add_control(
+            'result_summary_heading_color',
+            [
+                'label' => __( 'Heading text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-result-summary-heading' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Result Summary Text
+        $this->add_control(
+            'result_summary_text',
+            [
+                'label' => __( 'Summary text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( 'The summarytext of your ROI-calculation...', 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter text for summary', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result Summary text typography 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_summary_text_typography',
+				'label' => __( 'Summary-text typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} #roi-result-summary-text',
+			]
+        );
+
+        // Result Summary text text-color
+        $this->add_control(
+            'result_summary_text_color',
+            [
+                'label' => __( 'Summary-text color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-result-summary-text' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Show Summary CTA-button
+        $this->add_control(
+            'show_result_summary_cta',
+            [
+                'label' => __( 'Show CTA-button', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'roi-calculator' ),
+                'label_off' => __( 'Hide', 'roi-calculator' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        // CTA-button Text 
+        $this->add_control(
+            'result_cta_button_text',
+            [
+                'label' => __( 'Button Text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Go', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter button-text here', 'roi-calculator-widget' ),
+                'condition' => [
+                    'show_result_summary_cta' => 'yes'
+                ]
+            ]
+        );
+
+        // CTA-button Typography 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'cta_button_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} #roi-result-cta-button',
+                'condition' => [
+                    'show_result_summary_cta' => 'yes'
+                ]
+			]
+        );
 
         $this->end_controls_tab();
 
@@ -2134,13 +2269,15 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                             <div class="roi-row flex-center">
                                 <div class="result-summary flex flex-column flex-center">
-                                    <h1 id="roi-result-summary-heading" class="heading--primary">Get your full ROI report!</h1>
-                                    <p id="roi-result-summary-text" class="result-summary__text">To download a complete, customized report, use the button below and we’ll generate it for you in a flash.</p>
+                                    <h1 id="roi-result-summary-heading" class="heading--primary"><?php echo $settings[ 'result_summary_heading_text' ] ?></h1>
+                                    <p id="roi-result-summary-text" class="result-summary__text"><?php echo $settings[ 'result_summary_text' ] ?></p>
                                 </div>
                             </div>
+                            <?php if ($settings[ 'show_result_summary_cta' ] == 'yes' ) : ?>
                             <div class="roi-row flex-center">
-                                <button class="roi-button roi-button--primary" id="roi-result-cta-button">Send my report</button>
+                                <button class="roi-button roi-button--primary" id="roi-result-cta-button"><?php echo $settings[ 'result_cta_button_text' ] ?></button>
                             </div>
+                            <?php endif; ?>
                         </section>
                     </div>
                 </div>
