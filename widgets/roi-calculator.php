@@ -129,7 +129,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
         
         $this->add_control(
-            'more_options_checklis_label_tip',
+            'more_options_checklist_label_tip',
             [
                 'label' => __( 'Tip', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
@@ -995,7 +995,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 			]
         );
 
-        // Result-years active text-color anchor
+        // Result-years active text-color
         $this->add_control(
             'result_main_heading_color',
             [
@@ -1226,6 +1226,63 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
 
         $this->end_controls_tab();
+
+        //Result Can-do tab 
+        $this->start_controls_tab(
+            'result_cando_tab',
+            [
+                'label' => __( 'Can-do', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result Can-do heading 
+        $this->add_control(
+            'result_cando_heading_text',
+            [
+                'label' => __( 'Heading', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'With all that extra money and time you could...' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter heading-text', 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+        // Result Can-do heading typography
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'result_cando_heading_typography',
+				'label' => __( 'Heading typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} #roi-result-could-do-heading',
+			]
+        );
+
+        // Result-years active text-color
+        $this->add_control(
+            'result_cando_heading_color',
+            [
+                'label' => __( 'Heading text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} #roi-result-could-do-heading' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+			'cando_boxes_hr',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+        );
+        
+        
+
+        $this->end_controls_tab();
+
 
         $this->end_controls_tabs();
         $this->end_controls_section();
@@ -1911,28 +1968,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                             <hr class="roi-divider" />
                             <div class="roi-row flex-center">
-                                <h2 id="roi-result-could-do-heading" class="heading--primary">With all that extra money and time you could...</h2>
+                                <h2 id="roi-result-could-do-heading" class="heading--primary"><?php echo $settings[ 'result_cando_heading_text' ] ?></h2>
                             </div>
                             <div class="roi-row">   
                                 <div class="result-box max-third-col">
-                                <span class="could-do__icon flex flex-center"></span>
-                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
-                                </div>
-                                <div class="result-box max-third-col">
-                                    <span class="could-do__icon flex flex-center"></span>
-                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
-                                </div>
-                                <div class="result-box max-third-col">
-                                <span class="could-do__icon flex flex-center"></span>
-                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
-                                </div>
-                                <div class="result-box max-third-col">
-                                <span class="could-do__icon flex flex-center"></span>
-                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
-                                </div>
-                                <div class="result-box max-third-col">
-                                <span class="could-do__icon flex flex-center"></span>
-                                    <p class="could-do__text"><span class="could-do__pre-text">Buy</span> <span class="could-do__cost" data-cost="5"></span> <span class="could-do__sub-text">cups of coffee</span></p>
+                                <span class="could-do__icon flex flex-center">
+                                </span>
+                                    <p class="could-do__text">
+                                        <span class="could-do__pre-text">Buy</span>
+                                        <span class="could-do__cost" data-cost="5">
+                                        </span>
+                                        <span class="could-do__sub-text">cups of coffee</span>
+                                    </p>
                                 </div>
                             </div>
                             <div class="roi-row flex-center">
