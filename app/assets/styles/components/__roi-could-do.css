@@ -5,6 +5,14 @@
     @mixin phone{
       width: 70%;
     }
+
+    & i{
+      font-size: 68px;
+
+      @mixin phone{
+        font-size: 54px;
+      }
+    }
   }
   &__text{
     margin: 14px 0;

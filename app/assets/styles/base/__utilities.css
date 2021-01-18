@@ -19,6 +19,10 @@
 	align-items: flex-end;
 }
 
+.flex-start{
+	align-items: flex-start;
+}
+
 .inset-small {
 	width: 80%;
 

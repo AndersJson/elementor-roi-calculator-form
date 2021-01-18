@@ -1303,6 +1303,114 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        // Icon Color 
+        $candorepeater->add_control(
+            'cando_icon_color',
+            [
+                'label' => __( 'Icon Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .could-do__icon' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        // Can-do time or price
+        $candorepeater->add_control(
+			'show_cando_price_money',
+			[
+				'label' => __( 'Calculate using:', 'plugin-domain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'price',
+				'options' => [
+					'price'  => __( 'Price', 'plugin-domain' ),
+					'time' => __( 'Time', 'plugin-domain' ),
+				],
+			]
+		);
+
+        // Can-do price
+        $candorepeater->add_control(
+            'cando_price',
+            [
+                'label' => __( 'Price per each:', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 1000000000,
+                'step' => 1,
+                'default' => 1,
+                'condition' => [
+                    'show_cando_price_money' => 'price'
+                ],
+            ]
+        );
+
+        // Can-do time
+        $candorepeater->add_control(
+            'cando_time',
+            [
+                'label' => __( 'Time spent in minutes per each:', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 1000000000,
+                'step' => 1,
+                'default' => 1,
+                'condition' => [
+                    'show_cando_price_money' => 'time'
+                ],
+            ]
+        );
+
+        // Can-do pre-text
+        $candorepeater->add_control(
+            'cando_pre_amount_text',
+            [
+                'label' => __( 'Pre-amount text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '' , 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+        // Can-do after-text
+        $candorepeater->add_control(
+            'cando_after_amount_text',
+            [
+                'label' => __( 'After-amount text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '' , 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+
+        // Can-do Typohraphy 
+        $candorepeater->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'cando_typography',
+				'label' => __( 'Typography', 'roi-calculator-widget' ),
+				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .could-do__text',
+			]
+        );
+
+        // Can-do Text Color 
+        $candorepeater->add_control(
+            'cando_text_color',
+            [
+                'label' => __( 'Icon Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .could-do__text' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
         $this->add_control(
             'cando_boxes',
             [
@@ -2008,17 +2116,18 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <div class="roi-row flex-center">
                                 <h2 id="roi-result-could-do-heading" class="heading--primary"><?php echo $settings[ 'result_cando_heading_text' ] ?></h2>
                             </div>
-                            <div class="roi-row">   
+                            <div class="roi-row flex-start">   
                             <?php foreach( $settings[ 'cando_boxes' ] as $candoitem  ) : ?>
                                 <div class="result-box max-third-col">
                                     <span class="could-do__icon flex flex-center">
                                         <?php \Elementor\Icons_Manager::render_icon( $candoitem['cando_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                     </span>
                                     <p class="could-do__text">
-                                        <span class="could-do__pre-text">Buy</span>
-                                        <span class="could-do__cost" data-cost="5">
-                                        </span>
-                                        <span class="could-do__sub-text">cups of coffee</span>
+                                        <span class="could-do__pre-text"><?php echo $candoitem[ 'cando_pre_amount_text' ] ?></span>
+                                        <?php
+                                            echo '<span class="could-do__cost"' . ($candoitem[ 'show_cando_price_money' ] == 'price' ?  'data-cost="' . $candoitem[ 'cando_price' ] .'">' : 'data-time="' . $candoitem[ 'cando_time' ] . '">') . '</span>';
+                                        ?>
+                                        <span class="could-do__sub-text"><?php echo $candoitem[ 'cando_after_amount_text' ] ?></span>
                                     </p>
                                 </div>
                             <?php endforeach; ?>
