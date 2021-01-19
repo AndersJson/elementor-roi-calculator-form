@@ -2189,7 +2189,67 @@ class ROI_Calculator_Widget extends Widget_Base {
         //Button link
         $button_target = $settings[ 'result_cta_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
         $button_nofollow = $settings[ 'result_cta_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
-        ?>
+
+        if ( Plugin::$instance->editor->is_edit_mode() ) : ?>
+            <script>
+                //Range-Class
+                class RangeInput {
+                constructor(inputId, valueId, color) {
+                    this.rangeinput = $(inputId);
+                    this.valueBubble = $(valueId);
+                    this.leftfill = color;
+                    this.value;
+                    this.events();
+                    this.setValue();
+                }
+                events() {
+                    this.rangeinput.on("input", this.setValue.bind(this));
+                }
+
+                setValue(){
+                //Set value for value-bubble
+                this.value = this.rangeinput.val();
+                let newValue = Number( (this.rangeinput.val() - this.rangeinput.attr("min")) * 100 / (this.rangeinput.attr("max") - this.rangeinput.attr("min")) );
+                let newPosition = 10 - (newValue * 0.2);
+                this.valueBubble.html(`<span>${this.value}</span>`);
+                this.valueBubble.css("left", `calc(${newValue}% + (${newPosition}px))`);
+
+                //Add background to fill leftside of thumb
+                let value = (this.rangeinput.val()-this.rangeinput.attr("min"))/(this.rangeinput.attr("max")-this.rangeinput.attr("min"))*100
+                this.rangeinput.css("background", `linear-gradient(to right, ${this.leftfill} 0%, ${this.leftfill} ${value}%, #fff ${value}%, white 100%)`);
+                }
+                }
+
+                const $ = jQuery;
+                $(function() {
+                    //Checkbox
+                    let checkboxes = $(".roi-checklist__checkbox");
+                    let rangewrappers = $(".checklist-rangewrapper");
+
+                    for (let i = 0; i < checkboxes.length; i++){
+                        $(checkboxes[i]).change(()=>{
+                            if ( $(checkboxes[i]).is(':checked') ){
+                                $(rangewrappers[i]).slideDown();
+                            }else{
+                                $(rangewrappers[i]).slideUp();
+                            }
+                        });
+                    }
+
+                    //Ranges
+                    const checklistRangeValues = $(".checklist-range-value");
+                    const checklistRangeInputs = $(".checklist-range__input");
+                    for (let i = 0; i < checklistRangeValues.length; i++){
+                        new RangeInput(`#${checklistRangeInputs[i].id}`, `#${checklistRangeValues[i].id}`, $(checklistRangeInputs[i]).data("fill"));
+                    }
+                    const moneyRange = $("#money-range");
+                    new RangeInput("#money-range", "#money-range__value", $(moneyRange).data("fill"));
+                })
+            </script>
+
+        <?php endif; ?>
+
+        
 
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
@@ -2220,7 +2280,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </span>
                                         </li>
                                     </label>
-                                    <div class="checklist-rangewrapper hidden">
+                                        <div class="checklist-rangewrapper hidden">
                                         <div class="flex flex-column flex-end mb-medium">
                                             <div class="range__header mb-medium inset-small" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
                                             <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
@@ -2349,7 +2409,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </div>    
                     </form>
             <!-- End of form / Start of result -->
-            <section id="roi-results" class="flex flex-center">
+            <?php echo '<section id="roi-results" class="flex flex-center ' . ( Plugin::$instance->editor->is_edit_mode() ? '' : 'hidden' ) .'">' ?>
                 <div class="roi-inner-wrapper__small">
                     <h1 id="roi-result-heading" class="heading--primary flex flex-center"><?php echo $settings[ 'result_main_heading' ] ?></h1>
                     <section class="tabs__wrapper">
