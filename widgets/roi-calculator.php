@@ -1240,7 +1240,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->start_controls_tab(
             'result_cando_tab',
             [
-                'label' => __( 'Can-do', 'roi-calculator-widget' ),
+                'label' => __( 'Could-do', 'roi-calculator-widget' ),
             ]
         );
 
@@ -1354,6 +1354,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'condition' => [
                     'show_cando_price_money' => 'price'
                 ],
+                'description' => 'Specify the single unit price in order to calculate the amount of the chosen product you could buy with all the money that you save:<br>eg. How much does a single cup of coffee cost?'
             ]
         );
 
@@ -1370,6 +1371,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'condition' => [
                     'show_cando_price_money' => 'time'
                 ],
+                'description' => 'Specify how many minutes a single occasion takes in order to calculate how many occasions of the chosen activity you could do for all the saved time:<br>eg. How many minutes for a single occasion of a sleep-in?'
             ]
         );
 
@@ -1425,7 +1427,7 @@ class ROI_Calculator_Widget extends Widget_Base {
         $this->add_control(
             'cando_boxes',
             [
-                'label' => __( 'Can-do List', 'roi-calculator-widget' ),
+                'label' => __( 'Could-do List', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $candorepeater->get_controls(),
                 'default' => [
