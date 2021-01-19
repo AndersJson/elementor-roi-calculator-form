@@ -1281,6 +1281,20 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        // Icon Color 
+        $this->add_control(
+            'cando_icon_color',
+            [
+                'label' => __( 'Icon Color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#2AAECD',
+                'description' => 'Default: ( #2AAECD ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .could-do__icon i' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
         $this->add_control(
 			'cando_boxes_hr',
 			[
@@ -1289,14 +1303,14 @@ class ROI_Calculator_Widget extends Widget_Base {
         );
         
 
-        // List Repeater
+        // Can-do Repeater
         $candorepeater = new \Elementor\Repeater();
         $candorepeater->add_control(
             'cando_title',
             [
-                'label' => __( 'Title', 'plugin-domain' ),
+                'label' => __( 'Title', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( '' , 'plugin-domain' ),
+                'default' => __( '' , 'roi-calculator-widget' ),
                 'label_block' => true,
             ]
         );
@@ -1312,30 +1326,17 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
-        // Icon Color 
-        $candorepeater->add_control(
-            'cando_icon_color',
-            [
-                'label' => __( 'Icon Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#2AAECD',
-                'description' => 'Default: ( #2AAECD ) ',
-                'selectors' => [
-                    '{{WRAPPER}} .could-do__icon' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
 
         // Can-do time or price
         $candorepeater->add_control(
 			'show_cando_price_money',
 			[
-				'label' => __( 'Calculate using:', 'plugin-domain' ),
+				'label' => __( 'Calculate using:', 'roi-calculator-widget' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'price',
 				'options' => [
-					'price'  => __( 'Price', 'plugin-domain' ),
-					'time' => __( 'Time', 'plugin-domain' ),
+					'price'  => __( 'Price', 'roi-calculator-widget' ),
+					'time' => __( 'Time', 'roi-calculator-widget' ),
 				],
 			]
 		);
@@ -1420,20 +1421,21 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+
         $this->add_control(
             'cando_boxes',
             [
-                'label' => __( 'Repeater List', 'plugin-domain' ),
+                'label' => __( 'Can-do List', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $candorepeater->get_controls(),
                 'default' => [
                     [
-                        'cando_title' => __( 'Coffee', 'plugin-domain' ),
+                        'cando_title' => __( 'Coffee', 'roi-calculator-widget' ),
                     ],
                 ],
                 'title_field' => '{{{ cando_title }}}',
             ]
-        );
+        );        
         
 
         $this->end_controls_tab();
@@ -1558,9 +1560,28 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'selector' => '{{WRAPPER}} #roi-result-cta-button',
                 'condition' => [
                     'show_result_summary_cta' => 'yes'
-                ]
+                ],
 			]
         );
+
+        // CTA-button link
+        $this->add_control(
+			'result_cta_button_link',
+			[
+				'label' => __( 'Link', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'roi-calculator-widget' ),
+				'show_external' => true,
+				'default' => [
+					'url' => '',
+					'is_external' => false,
+					'nofollow' => true,
+                ],
+                'condition' => [
+                    'show_result_summary_cta' => 'yes'
+                ],
+			]
+		);
 
         $this->end_controls_tab();
 
@@ -1898,32 +1919,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Calculate-button', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
-        );
-
-        $this->add_control(
-            'more_options_submit_button_base',
-            [
-                'label' => __( 'Basic Styles', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        // Submit-button border Color
-        $this->add_control(
-            'submit_button_border_color',
-            [
-                'label' => __( 'Button border Color', 'roi-calculator-widget' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#2AAECD',
-                'description' => 'Default: ( #2AAECD ) ',
-                'selectors' => [
-                    '{{WRAPPER}} #roi-submit-button ' => 'border-color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        
+        );        
 
             $this->add_control(
                 'more_options_submit_button_hover',
@@ -1947,6 +1943,21 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Default Style', 'roi-calculator-widget' ),
                 ]
             );
+
+                // Submit-button border Color
+                $this->add_control(
+                    'submit_button_default_border_color',
+                    [
+                        'label' => __( 'Border Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button ' => 'border-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
                 // Submit-button Background Color
                 $this->add_control(
                     'submit_button_background_color',
@@ -1965,7 +1976,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 $this->add_control(
                     'submit_button_text_color',
                     [
-                        'label' => __( 'Button Text Color', 'roi-calculator-widget' ),
+                        'label' => __( 'Text Color', 'roi-calculator-widget' ),
                         'type' => \Elementor\Controls_Manager::COLOR,
                         'default' => '#2AAECD',
                         'description' => 'Default: ( #2AAECD ) ',
@@ -1986,6 +1997,21 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Hover-Style', 'roi-calculator-widget' ),
                 ]
             );
+
+                // Submit-button border Color
+                $this->add_control(
+                    'submit_button_hover_border_color',
+                    [
+                        'label' => __( 'Border Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-submit-button:hover ' => 'border-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
                 // Background Color
                 $this->add_control(
                     'submit_button_hover_bg_color',
@@ -2019,29 +2045,150 @@ class ROI_Calculator_Widget extends Widget_Base {
             $this->end_controls_tabs();
 
         $this->end_controls_section();
+
+
+        // cta-button Style Settings
+        $this->start_controls_section(
+            'cta_button_style_section',
+            [
+                'label' => __( 'CTA-button', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );        
+
+            $this->add_control(
+                'more_options_cta_button_hover',
+                [
+                    'label' => __( 'Default/Hover Styles', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::HEADING,
+                    'separator' => 'before'
+                ]
+            );
+
+            // cta-Button Tabs
+            $this->start_controls_tabs(
+                'cta_button_style_tabs'
+            );
+
+            /* ********** NORMAL STATE BEGIN ************* */
+
+            $this->start_controls_tab(
+                'cta_button_normal_state',
+                [
+                    'label' => __( 'Default Style', 'roi-calculator-widget' ),
+                ]
+            );
+
+                // cta-button border Color 
+                $this->add_control(
+                    'cta_button_default_border_color',
+                    [
+                        'label' => __( 'Border Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button ' => 'border-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+                // cta-button Background Color
+                $this->add_control(
+                    'cta_button_background_color',
+                    [
+                        'label' => __( 'Background Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#FFFFFF',
+                        'description' => 'Default: ( #FFFFFF ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button ' => 'background-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+                //cta-button text-color
+                $this->add_control(
+                    'cta_button_text_color',
+                    [
+                        'label' => __( 'Text Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button' => 'color: {{VALUE}};',
+                        ],
+                    ]
+                );
+
+            $this->end_controls_tab();
+            /* ********** NORMAL STATE END ************* */
+
+            /* ********** HOVER STATE BEGIN ************* */
+
+            $this->start_controls_tab(
+                'cta_button_hover_state',
+                [
+                    'label' => __( 'Hover-Style', 'roi-calculator-widget' ),
+                ]
+            );
+
+                // cta-button border Color 
+                $this->add_control(
+                    'cta_button_hover_border_color',
+                    [
+                        'label' => __( 'Border Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button:hover ' => 'border-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+                // Background Color
+                $this->add_control(
+                    'cta_button_hover_bg_color',
+                    [
+                        'label' => __( 'Background Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#2AAECD',
+                        'description' => 'Default: ( #2AAECD ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button:hover' => 'background-color: {{VALUE}}',
+                        ],
+                    ]
+                );
+                // Text Color
+                $this->add_control(
+                    'cta_button_hover_text_color',
+                    [
+                        'label' => __( 'Text Color', 'roi-calculator-widget' ),
+                        'type' => \Elementor\Controls_Manager::COLOR,
+                        'default' => '#FFFFFF',
+                        'description' => 'Default: ( #FFFFFF ) ',
+                        'selectors' => [
+                            '{{WRAPPER}} #roi-result-cta-button:hover' => 'color: {{VALUE}}',
+                        ],
+                    ]
+                );
+
+            $this->end_controls_tab();
+            /* ********** HOVER STATE END ************* */
+            
+            $this->end_controls_tabs();
+
+        $this->end_controls_section();
     }
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        // Button
-        //$button_target = $settings[ 'submit_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
-        //$button_nofollow = $settings[ 'submit_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
-        /*
-        $this->add_render_attribute(
-            'roi_calculator_options',
-            [
-                'id'          => 'logo-carousel-' . $this->get_id(),
-                'data-loop'   => $settings[ 'loop' ],
-                'data-dots'   => $settings[ 'dots' ],
-                'data-navs'   => $settings[ 'navs' ],
-                'data-margin' => $settings[ 'margin' ],
-            ]
-        );
-    */
+        //Button link
+        $button_target = $settings[ 'result_cta_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
+        $button_nofollow = $settings[ 'result_cta_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
         ?>
 
-
-        <!-- *********************** -->
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
                     <form class="roi-display-section mb-large" id="roi-calculation-form">                    
@@ -2275,7 +2422,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                             <?php if ($settings[ 'show_result_summary_cta' ] == 'yes' ) : ?>
                             <div class="roi-row flex-center">
-                                <button class="roi-button roi-button--primary" id="roi-result-cta-button"><?php echo $settings[ 'result_cta_button_text' ] ?></button>
+                                <a href="<?php echo esc_url( $settings[ 'result_cta_button_link' ][ 'url' ] ); ?>" <?php echo $button_target; ?> <?php echo $button_nofollow ?>>
+                                    <button class="roi-button roi-button--primary" id="roi-result-cta-button"><?php echo $settings[ 'result_cta_button_text' ] ?></button>
+                                </a>
                             </div>
                             <?php endif; ?>
                         </section>
