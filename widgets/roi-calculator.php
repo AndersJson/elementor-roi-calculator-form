@@ -2196,13 +2196,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <form class="roi-display-section mb-large" id="roi-calculation-form">                    
                         <div class="roi-row flex-space-between">
                             <label class="roi-left">
-                            <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
-                            <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
-                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
-                                <span class="roi-tip checklist-tip">
-                                    <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
-                                </span>
-                            <?php endif; ?>
+                                <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
+                                <?php if( $settings[ 'show_checklist_label_tip' ] == 'yes') : ?>
+                                    <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                    <span class="roi-tip checklist-tip">
+                                        <p><?php echo $settings[ 'checklist_tip_text' ]; ?></p>
+                                    </span>
+                                <?php endif; ?>
                             </label>
                             <div class="roi-right">
                                 <ul class="roi-checklist">
@@ -2439,18 +2439,259 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     protected function _content_template() {
-    //    <#
-    //        view.addRenderAttribute(
-    //            'roi_calculator_options',
-    //            {
-    //                'id': 'roi-calculator-id',
-    //                'data-loop': settings.loop,
-    //                'data-dots': settings.dots,
-    //                'data-navs': settings.navs,
-    //                'data-margin': settings.margin
-    //            }
-    //        );
-    //    #>
+    ?>
+    <#
+        var image_target = settings.result_cta_button_link.is_external ? ' target="_blank"' : '';
+		var image_nofollow = settings.result_cta_button_link.nofollow ? ' rel="nofollow"' : '';
+
+        var link_target = settings.button_link.is_external ? ' target="_blank"' : '';
+		var link_nofollow = settings.button_link.nofollow ? ' rel="nofollow"' : '';
+    #>
+        <div class="roi-outer-wrapper">
+            <section class="roi-inner-wrapper">
+                        <form class="roi-display-section mb-large" id="roi-calculation-form">                    
+                            <div class="roi-row flex-space-between">
+                                <label class="roi-left">
+                                    <p class="roi-left__label checklist-label">{{{ settings.checklist_label_text }}}</p>
+                                    <#if( $settings[ 'show_checklist_label_tip' ] == 'yes') { #>
+                                        <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                        <span class="roi-tip checklist-tip">
+                                            <p>{{{ settings.checklist_tip_text }}}</p>
+                                        </span>
+                                    <# } #>
+                                </label>
+                                <div class="roi-right">
+                                    <ul class="roi-checklist">
+                                    <?php
+                                    $checklist_count = 1;
+                                    foreach( $settings[ 'checklist' ] as $item ) : ?>
+                                        <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
+                                            <li class="roi-checklist__item">
+                                                <input type="checkbox" name="struggles[]" id="checklist-checkbox_<?php echo $checklist_count ?>" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>" data-save="<?php echo $item[ 'checklist_save_percent' ] ?>">
+                                                <span class="roi-checklist__icon flex-center">
+                                                    <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                                </span>
+                                                <span class="roi-checklist__labeltext">
+                                                    <?php echo $item[ 'checklist_text' ]; ?>
+                                                </span>
+                                            </li>
+                                        </label>
+                                        <div class="checklist-rangewrapper hidden">
+                                            <div class="flex flex-column flex-end mb-medium">
+                                                <div class="range__header mb-medium inset-small" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
+                                                <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
+                                                    <div class="range__value checklist-range-value" id="amountvalue_<?php echo $checklist_count ?>"></div>
+                                                    <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_amount_range_min' ]; ?>" max="<?php echo $item[ 'checklist_amount_range_max' ]; ?>" step="<?php echo $item[ 'checklist_amount_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_amount_range_color' ]; ?>">
+                                                    <?php if( $item[ 'show_checklist_amount_range_labels' ] == 'yes' ) : ?>
+                                                    <ul id="amountlabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist mb-small">
+                                                    <?php
+                                                        //Dynamic cheklist amount-range labels
+                                                        $amountmin = (float)$item [ 'checklist_amount_range_min' ];
+                                                        $amountmax = (float)$item [ 'checklist_amount_range_max' ];
+                                                        $amountinterval = ($amountmax - $amountmin) / 5;
+                                                        $amountnextstep = $amountmin;
+                                                        $amountvalue = $amountmin;
+
+                                                        for ($y = 0; $y < 6; $y++){
+                                                            if ($y == 5){ 
+                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $amountvalue . ($item[ 'show_checklist_amount_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                            }
+                                                            else{
+                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $amountvalue . '</li>';
+                                                            }
+                                                            $amountnextstep = $amountnextstep + $amountinterval;
+                                                            $amountvalue = number_format(ceil($amountnextstep), 0, ',', '.');
+                                                        }
+                                                    ?>
+                                                    </ul>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="range__header mb-medium inset-small" id="timeheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_time_range_header_text' ] ?></p></div>
+                                                <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
+                                                    <div class="range__value checklist-range-value" id="timevalue_<?php echo $checklist_count ?>"></div>
+                                                    <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
+                                                    <?php if( $item[ 'show_checklist_time_range_labels' ] == 'yes' ) : ?>
+                                                    <ul id="timelabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist">
+                                                    <?php
+                                                        //Dynamic cheklist time-range labels
+                                                        $timemin = (float)$item [ 'checklist_time_range_min' ];
+                                                        $timemax = (float)$item [ 'checklist_time_range_max' ];
+                                                        $timeinterval = ($timemax - $timemin) / 5;
+                                                        $timenextstep = $timemin;
+                                                        $timevalue = $timemin;
+
+                                                        for ($z = 0; $z < 6; $z++){
+                                                            if ($z == 5){ 
+                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $timevalue . ($item[ 'show_checklist_time_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                            }
+                                                            else{
+                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $timevalue . '</li>';
+                                                            }
+                                                            $timenextstep = $timenextstep + $timeinterval;
+                                                            $timevalue = number_format(ceil($timenextstep), 0, ',', '.');
+                                                        }
+                                                    ?>
+                                                    </ul>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php 
+                                        $checklist_count++;
+                                        endforeach; 
+                                    ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="roi-row flex-space-between">
+                                <label class="roi-left">
+                                    <p class="roi-left__label money-range-label">{{{ settings.money_range_label_text }}}</p>
+                                    <# if( settings.show_money_range_label_tip == 'yes') { #>
+                                        <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                        <span class="roi-tip money-range-tip">
+                                            <p>{{{ settings.money_range_tip_text }}}</p>
+                                        </span>
+                                    <# } #>
+                                </label>
+                                <div class="roi-right">
+                                    <div class="range__wrapper money-range-wrapper">
+                                            <div class="range__value money-range-value" id="money-range__value"></div>
+                                            <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
+                                            <?php if( $settings[ 'show_money_range_labels' ] == 'yes' ) : ?>
+                                                <ul id="range__labellist" class="money-range-labellist">
+                                                <?php
+                                                    //Dynamic money-range labels
+                                                    $min = (float)$settings [ 'money_range_min' ];
+                                                    $max = (float)$settings [ 'money_range_max' ];
+                                                    $interval = ($max - $min) / 5;
+                                                    $nextstep = $min;
+                                                    $value = $min;
+
+                                                    for ($x = 0; $x < 6; $x++){
+                                                        if ($x == 5){ 
+                                                            echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $value . ($settings[ 'show_money_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                        }
+                                                        else{
+                                                            echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
+                                                        }
+                                                        $nextstep = $nextstep + $interval;
+                                                        $value = number_format(ceil($nextstep), 0, ',', '.');
+                                                    }
+                                                ?>
+                                                </ul>
+                                            <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>                    
+                            <div class="roi-row flex-space-between">
+                                <label class="roi-left">
+                                    <p class="roi-left__label form-label"><?php echo $settings[ 'form_label_text' ]; ?></p>
+                                        <?php if( $settings[ 'show_form_label_tip' ] == 'yes') : ?>
+                                                <span class="roi-tip-trigger flex-center"><p>?</p></span>
+                                                <span class="roi-tip form-tip">
+                                                    <p><?php echo $settings[ 'form_tip_text' ]; ?></p>
+                                                </span>
+                                            <?php endif; ?>
+                                </label>
+                                <div class="roi-right">
+                                    <input class="roi-form__textinput" name="firstname" placeholder="<?php echo $settings[ 'firstname_placeholder_text' ] ?>">
+                                    <input class="roi-form__textinput" name="lastname" placeholder="<?php echo $settings[ 'lastname_placeholder_text' ] ?>">
+                                    <input class="roi-form__textinput" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
+                                    <input class="roi-form__textinput" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
+                                </div>
+                            </div>
+                            <div class="roi-row flex-center">
+                                <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
+                            </div>    
+                        </form>
+                <!-- End of form / Start of result -->
+                <section id="roi-results" class="flex flex-center">
+                    <div class="roi-inner-wrapper__small">
+                        <h1 id="roi-result-heading" class="heading--primary flex flex-center"><?php echo $settings[ 'result_main_heading' ] ?></h1>
+                        <section class="tabs__wrapper">
+                                <ul class="tabs__nav text-center">
+                                    <li class="tabs__link tabs__link--active" data-time="12">
+                                        <h3 id="tabs-one-year">1 Month</h3>
+                                    </li>
+                                    <li class="tabs__link tabs__link--inactive" data-time="36">
+                                        <h3 id="tabs-three-year">1 Year</h3>
+                                    </li>
+                                    <li class="tabs__link tabs__link--inactive" data-time="60">
+                                        <h3 id="tabs-five-year">5 Years</h3>
+                                    </li>
+                                </ul>
+                            </section>
+                        <div class="roi-result-wrapper">
+                            <section class="roi-display-section" id="roi-calculation-result">
+                                <div class="roi-row roi-row--border">
+                                    <div class="result-box result-box--border-right max-half-col flex flex-column flex-center">
+                                        <h1 class="result-box__saved">
+                                        <?php if ($settings[ 'show_saved_money_dollar_prefix' ] == 'yes') : ?>
+                                            <span class="result-box__dollar">$</span>
+                                        <?php endif; ?>
+                                        <span id="money-saved">5</span></h1>
+                                        <span class="result-box__text">
+                                        <?php echo $settings[ 'saved_money_sub_text' ] ?>
+                                        <?php if ($settings[ 'show_saved_money_tip_trigger' ]) : ?> 
+                                            <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
+                                            <span class="result-box__tip">
+                                                <p><?php echo $settings[ 'saved_money_tip_text' ] ?></p>
+                                            </span>
+                                        <?php endif; ?>
+                                        </span>
+                                    </div>
+                                    <div class="result-box max-half-col flex flex-column flex-center">
+                                        <h1 class="result-box__saved" id="hours-saved">20</h1>
+                                        <span class="result-box__text"><?php echo $settings[ 'saved_time_sub_text' ] ?>
+                                        <?php if ($settings[ 'show_saved_time_tip_trigger' ]) : ?> 
+                                            <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
+                                            <span class="result-box__tip">
+                                                <p><?php echo $settings[ 'saved_time_tip_text' ] ?></p>
+                                            </span>
+                                        <?php endif; ?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr class="roi-divider" />
+                                <div class="roi-row flex-center">
+                                    <h2 id="roi-result-could-do-heading" class="heading--primary"><?php echo $settings[ 'result_cando_heading_text' ] ?></h2>
+                                </div>
+                                <div class="roi-row flex-start">   
+                                <?php foreach( $settings[ 'cando_boxes' ] as $candoitem  ) : ?>
+                                    <div class="result-box max-third-col">
+                                        <span class="could-do__icon flex flex-center">
+                                            <?php \Elementor\Icons_Manager::render_icon( $candoitem['cando_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                        </span>
+                                        <p class="could-do__text">
+                                            <span class="could-do__pre-text"><?php echo $candoitem[ 'cando_pre_amount_text' ] ?></span>
+                                            <?php
+                                                echo '<span class="could-do__cost"' . ($candoitem[ 'show_cando_price_money' ] == 'price' ?  'data-cost="' . $candoitem[ 'cando_price' ] .'">' : 'data-time="' . $candoitem[ 'cando_time' ] . '">') . '</span>';
+                                            ?>
+                                            <span class="could-do__sub-text"><?php echo $candoitem[ 'cando_after_amount_text' ] ?></span>
+                                        </p>
+                                    </div>
+                                <?php endforeach; ?>
+                                </div>
+                                <div class="roi-row flex-center">
+                                    <div class="result-summary flex flex-column flex-center">
+                                        <h1 id="roi-result-summary-heading" class="heading--primary"><?php echo $settings[ 'result_summary_heading_text' ] ?></h1>
+                                        <p id="roi-result-summary-text" class="result-summary__text"><?php echo $settings[ 'result_summary_text' ] ?></p>
+                                    </div>
+                                </div>
+                                <?php if ($settings[ 'show_result_summary_cta' ] == 'yes' ) : ?>
+                                <div class="roi-row flex-center">
+                                    <a href="<?php echo esc_url( $settings[ 'result_cta_button_link' ][ 'url' ] ); ?>" <?php echo $button_target; ?> <?php echo $button_nofollow ?>>
+                                        <button class="roi-button roi-button--primary" id="roi-result-cta-button"><?php echo $settings[ 'result_cta_button_text' ] ?></button>
+                                    </a>
+                                </div>
+                                <?php endif; ?>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    <?php
         }
 
 }
