@@ -2464,7 +2464,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <ul class="roi-checklist">
                                     <#
                                     let checklist_count = 1;
-                                    _.each( settings.checklist, function (item) ) { #>
+                                    _.each( settings.checklist, function(item) { #>
                                         <label class="roi-checklist__label" id="checklist-item_{{ checklist_count }} ">
                                             <li class="roi-checklist__item">
                                                 <input type="checkbox" name="struggles[]" id="checklist-checkbox_{{ checklist_count }}" class="roi-checklist__checkbox" value="{{ item.checklist_text }}" data-save="{{ item.checklist_save_percent }}">
@@ -2522,25 +2522,37 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                     <input class="checklist-range__input" id="timeinput_{{ checklist_count }}" type="range" min="{{ item.checklist_time_range_min }}" max="{{ item.checklist_time_range_max }}" step="{{ item.checklist_time_range_step }}" data-fill="{{ item.checklist_time_range_color }}">
                                                     <# if( item.show_checklist_time_range_labels == 'yes' ) { #>
                                                     <ul id="timelabellist_{{ checklist_count }}" class="checklist-range-labellist">
-                                                    <?php
-                                                        //Dynamic cheklist time-range labels
-                                                        $timemin = (float)$item [ 'checklist_time_range_min' ];
-                                                        $timemax = (float)$item [ 'checklist_time_range_max' ];
-                                                        $timeinterval = ($timemax - $timemin) / 5;
-                                                        $timenextstep = $timemin;
-                                                        $timevalue = $timemin;
+                                                    <#
+                                                        let timemin = Number(item.checklist_time_range_min);
+                                                        let timemax = Number(item.checklist_time_range_max);
+                                                        let timeinterval = (timemax - timemin) / 5;
+                                                        let timenextstep = timemin;
+                                                        let timevalue = timemin;
 
-                                                        for ($z = 0; $z < 6; $z++){
-                                                            if ($z == 5){ 
-                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $timevalue . ($item[ 'show_checklist_time_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                        for (let j = 0; j < 6; j++){
+                                                            if (j == 5){ 
+                                                                if ( item.show_checklist_time_range_dollar_prefix == 'yes' ) {
+                                                                    if ( item.show_checklist_time_range_max_suffix == 'yes') {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ timevalue }}}&#43;</li>       
+                                                                <# } #>
+                                                                <li class="range__label">&#36;{{{ timevalue }}}</li>       
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ timevalue }}}</li>       
+                                                                <# }
                                                             }
                                                             else{
-                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $timevalue . '</li>';
+                                                                if ( item.show_checklist_time_range_dollar_prefix == 'yes' ) {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ $timevalue }}}</li>
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ timevalue }}}</li>
+                                                            <#  }
                                                             }
-                                                            $timenextstep = $timenextstep + $timeinterval;
-                                                            $timevalue = number_format(ceil($timenextstep), 0, ',', '.');
+                                                            timenextstep = timenextstep + timeinterval;
+                                                            timevalue = Math.ceil(timenextstep);
                                                         }
-                                                    ?>
+                                                    #>
                                                     </ul>
                                                     <# } #>
                                                 </div>
@@ -2548,7 +2560,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         </div>
                                     <# 
                                         checklist_count++;
-                                        } 
+                                        }) 
                                     #>
                                     </ul>
                                 </div>
@@ -2566,28 +2578,40 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <div class="roi-right">
                                     <div class="range__wrapper money-range-wrapper">
                                             <div class="range__value money-range-value" id="money-range__value"></div>
-                                            <input id="money-range" type="range" min="<?php echo $settings[ 'money_range_min' ]; ?>" max="<?php echo $settings[ 'money_range_max' ]; ?>" step="<?php echo $settings[ 'money_range_step' ]; ?>" data-fill="<?php echo $settings[ 'money_range_color' ]; ?>">
+                                            <input id="money-range" type="range" min="{{ settings.money_range_min}}" max="{{ settings.money_range_max }}" step="{{ settings.money_range_step }}" data-fill="{{ settings.money_range_color }}">
                                             <# if( settings.show_money_range_labels == 'yes' ) { #>
                                                 <ul id="range__labellist" class="money-range-labellist">
-                                                <?php
-                                                    //Dynamic money-range labels
-                                                    $min = (float)$settings [ 'money_range_min' ];
-                                                    $max = (float)$settings [ 'money_range_max' ];
-                                                    $interval = ($max - $min) / 5;
-                                                    $nextstep = $min;
-                                                    $value = $min;
+                                                <#
+                                                        let moneymin = Number(item.money_range_min);
+                                                        let moneymax = Number(item.money_range_max);
+                                                        let moneyinterval = (moneymax - moneymin) / 5;
+                                                        let moneynextstep = moneymin;
+                                                        let moneyvalue = moneymin;
 
-                                                    for ($x = 0; $x < 6; $x++){
-                                                        if ($x == 5){ 
-                                                            echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $value . ($settings[ 'show_money_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                        for (let i = 0; i < 6; i++){
+                                                            if (i == 5){ 
+                                                                if ( item.show_money_range_dollar_prefix == 'yes' ) {
+                                                                    if ( item.show_money_range_max_suffix == 'yes') {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ moneyvalue }}}&#43;</li>       
+                                                                <# } #>
+                                                                <li class="range__label">&#36;{{{ moneyvalue }}}</li>       
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ moneyvalue }}}</li>       
+                                                                <# }
+                                                            }
+                                                            else{
+                                                                if ( item.show_money_range_dollar_prefix == 'yes' ) {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ $moneyvalue }}}</li>
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ moneyvalue }}}</li>
+                                                            <#  }
+                                                            }
+                                                            moneynextstep = moneynextstep + moneyinterval;
+                                                            moneyvalue = Math.ceil(moneynextstep);
                                                         }
-                                                        else{
-                                                            echo '<li class="range__label">' . ($settings[ 'show_money_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $value . '</li>';
-                                                        }
-                                                        $nextstep = $nextstep + $interval;
-                                                        $value = number_format(ceil($nextstep), 0, ',', '.');
-                                                    }
-                                                ?>
+                                                    #>
                                                 </ul>
                                             <# } #>
                                     </div>
@@ -2667,20 +2691,22 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <h2 id="roi-result-could-do-heading" class="heading--primary">{{{ settings.result_cando_heading_text }}}</h2>
                                 </div>
                                 <div class="roi-row flex-start">   
-                                <# _.each( settings.cando_boxes, function (candoitem) ) { #>
+                                <# _.each( settings.cando_boxes, function(candoitem) { #>
                                     <div class="result-box max-third-col">
                                         <span class="could-do__icon flex flex-center">
                                         <i class="{{ item.cando_icon }}" aria-hidden="true"></i>
                                         </span>
                                         <p class="could-do__text">
                                             <span class="could-do__pre-text">{{{ candoitem.cando_pre_amount_text }}}</span>
-                                            <?php
-                                                echo '<span class="could-do__cost"' . ($candoitem[ 'show_cando_price_money' ] == 'price' ?  'data-cost="' . $candoitem[ 'cando_price' ] .'">' : 'data-time="' . $candoitem[ 'cando_time' ] . '">') . '</span>';
-                                            ?>
-                                            <span class="could-do__sub-text"><?php echo $candoitem[ 'cando_after_amount_text' ] ?></span>
+                                            <# if ( candoitem.show_cando_price_money == 'price' ) { #>
+                                                <span class="could-do__cost" data-cost="{{ candoitem.cando_price }}"></span>
+                                            <# } else { #>
+                                                <span class="could-do__cost" data-time="{{ candoitem.cando_time }}"></span>
+                                            <# } #>
+                                            <span class="could-do__sub-text">{{{ candoitem.cando_after_amount_text }}}</span>
                                         </p>
                                     </div>
-                                <# } #>
+                                <# }) #>
                                 </div>
                                 <div class="roi-row flex-center">
                                     <div class="result-summary flex flex-column flex-center">
