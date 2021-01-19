@@ -2482,25 +2482,37 @@ class ROI_Calculator_Widget extends Widget_Base {
                                                     <input class="checklist-range__input" id="amountinput_{{ checklist_count }}" type="range" min="{{ item.checklist_amount_range_min }}" max="{{ item.checklist_amount_range_max }}" step="{{ item.checklist_amount_range_step }}" data-fill="{{ item.checklist_amount_range_color }}">
                                                     <# if( item.show_checklist_amount_range_labels == 'yes' ) { #>
                                                     <ul id="amountlabellist_{{ checklist_count }}" class="checklist-range-labellist mb-small">
-                                                    <?php
-                                                        //Dynamic cheklist amount-range labels
-                                                        $amountmin = (float)$item [ 'checklist_amount_range_min' ];
-                                                        $amountmax = (float)$item [ 'checklist_amount_range_max' ];
-                                                        $amountinterval = ($amountmax - $amountmin) / 5;
-                                                        $amountnextstep = $amountmin;
-                                                        $amountvalue = $amountmin;
+                                                    <#
+                                                        let amountmin = Number(item.checklist_amount_range_min);
+                                                        let amountmax = Number(item.checklist_amount_range_max);
+                                                        let amountinterval = (amountmax - amountmin) / 5;
+                                                        let amountnextstep = amountmin;
+                                                        let amountvalue = amountmin;
 
-                                                        for ($y = 0; $y < 6; $y++){
-                                                            if ($y == 5){ 
-                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $amountvalue . ($item[ 'show_checklist_amount_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                        for (let i = 0; i < 6; i++){
+                                                            if (i == 5){ 
+                                                                if ( item.show_checklist_amount_range_dollar_prefix == 'yes' ) {
+                                                                    if ( item.show_checklist_amount_range_max_suffix == 'yes') {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ amountvalue }}}&#43;</li>       
+                                                                <# } #>
+                                                                <li class="range__label">&#36;{{{ amountvalue }}}</li>       
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ amountvalue }}}</li>       
+                                                                <# }
                                                             }
                                                             else{
-                                                                echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $amountvalue . '</li>';
+                                                                if ( item.show_checklist_amount_range_dollar_prefix == 'yes' ) {
+                                                            #>
+                                                                <li class="range__label">&#36;{{{ $amountvalue }}}</li>
+                                                                <# } else{ #>
+                                                                <li class="range__label">{{{ amountvalue }}}</li>
+                                                            <#  }
                                                             }
-                                                            $amountnextstep = $amountnextstep + $amountinterval;
-                                                            $amountvalue = number_format(ceil($amountnextstep), 0, ',', '.');
+                                                            amountnextstep = amountnextstep + amountinterval;
+                                                            amountvalue = Math.ceil(amountnextstep);
                                                         }
-                                                    ?>
+                                                    #>
                                                     </ul>
                                                     <# } #>
                                                 </div>
