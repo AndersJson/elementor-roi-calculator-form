@@ -2284,8 +2284,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <div class="flex flex-column flex-end mb-medium">
                                             <div class="range__header mb-medium inset-small" id="amountheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_amount_range_header_text' ] ?></p></div>
                                             <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-amountrange_<?php echo $checklist_count ?>">
-                                                <div class="range__value checklist-range-value" id="amountvalue_<?php echo $checklist_count ?>"></div>
-                                                <input class="checklist-range__input" id="amountinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_amount_range_min' ]; ?>" max="<?php echo $item[ 'checklist_amount_range_max' ]; ?>" step="<?php echo $item[ 'checklist_amount_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_amount_range_color' ]; ?>">
+                                                <div class="range__value checklist-range-value checklist-range-value__amount" id="amountvalue_<?php echo $checklist_count ?>"></div>
+                                                <input class="checklist-range__input checklist-range__amount" id="amountinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_amount_range_min' ]; ?>" max="<?php echo $item[ 'checklist_amount_range_max' ]; ?>" step="<?php echo $item[ 'checklist_amount_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_amount_range_color' ]; ?>">
                                                 <?php if( $item[ 'show_checklist_amount_range_labels' ] == 'yes' ) : ?>
                                                 <ul id="amountlabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist mb-small">
                                                 <?php
@@ -2312,8 +2312,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             </div>
                                             <div class="range__header mb-medium inset-small" id="timeheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_time_range_header_text' ] ?></p></div>
                                             <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
-                                                <div class="range__value checklist-range-value" id="timevalue_<?php echo $checklist_count ?>"></div>
-                                                <input class="checklist-range__input" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
+                                                <div class="range__value checklist-range-value checklist-range-value__time" id="timevalue_<?php echo $checklist_count ?>"></div>
+                                                <input class="checklist-range__input checklist-range__time" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
                                                 <?php if( $item[ 'show_checklist_time_range_labels' ] == 'yes' ) : ?>
                                                 <ul id="timelabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist">
                                                 <?php
@@ -2398,10 +2398,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <?php endif; ?>
                             </label>
                             <div class="roi-right">
-                                <input class="roi-form__textinput" name="firstname" placeholder="<?php echo $settings[ 'firstname_placeholder_text' ] ?>">
-                                <input class="roi-form__textinput" name="lastname" placeholder="<?php echo $settings[ 'lastname_placeholder_text' ] ?>">
-                                <input class="roi-form__textinput" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
-                                <input class="roi-form__textinput" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" id="roi-input__firstname" name="firstname" placeholder="<?php echo $settings[ 'firstname_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" id="roi-input__lastname" name="lastname" placeholder="<?php echo $settings[ 'lastname_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" id="roi-input__email" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
+                                <input class="roi-form__textinput" id="roi-input__phone" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
                             </div>
                         </div>
                         <div class="roi-row flex-center">

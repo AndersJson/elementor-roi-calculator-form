@@ -56,13 +56,42 @@ $(function() {
   //Checklist
   const checklist = new Checklist();
   //Ranges
-  const checklistRangeValues = $(".checklist-range-value");
-  const checklistRangeInputs = $(".checklist-range__input");
-  for (let i = 0; i < checklistRangeValues.length; i++){
-    new RangeInput(`#${checklistRangeInputs[i].id}`, `#${checklistRangeValues[i].id}`, $(checklistRangeInputs[i]).data("fill"));
+  const moneyRangeElement = $("#money-range");
+  const moneyRange = new RangeInput("#money-range", "#money-range__value", $(moneyRangeElement).data("fill"));
+
+  const checklistRangeValueAmount = $(".checklist-range-value__amount");
+  const checklistRangeInputAmount = $(".checklist-range__amount");
+  const checklistRangeValueTime = $(".checklist-range-value__time");
+  const checklistRangeInputTime = $(".checklist-range__time");
+
+  const timeRanges = [];
+  const amountRanges = [];
+
+  for (let i = 0; i < checklistRangeValueAmount.length; i++){
+    timeRanges.push( new RangeInput(`#${checklistRangeInputTime[i].id}`, `#${checklistRangeValueTime[i].id}`, $(checklistRangeInputTime[i]).data("fill")) );
+    amountRanges.push( new RangeInput(`#${checklistRangeInputAmount[i].id}`, `#${checklistRangeValueAmount[i].id}`, $(checklistRangeInputAmount[i]).data("fill")) );
   }
-  const moneyRange = $("#money-range");
-  new RangeInput("#money-range", "#money-range__value", $(moneyRange).data("fill"));
+
+  //Text-inputs
+  const inputFirstname = $("#roi-input__firstname")[0];
+  const inputLastname = $("#roi-input__lastname")[0];
+  const inputEmail = $("#roi-input__email")[0];
+  const inputPhone = $("#roi-input__phone")[0];
+  
+
+
+
+  console.log(checklist.checkboxes[0].checked);
+  console.log(moneyRange.value);
+  console.log(timeRanges[0].value);
+  console.log(amountRanges[0].value);
+  console.log(inputPhone.value == "" ? false : true);
+  console.log(inputEmail.value == "" ? false : true);
+  console.log(inputLastname.value == "" ? false : true);
+  console.log(inputFirstname.value == "" ? false : true);
+
+
+
 });
 
 
