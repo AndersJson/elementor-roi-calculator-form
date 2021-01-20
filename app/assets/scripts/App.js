@@ -59,6 +59,7 @@ import '../styles/styles.css';
         this.lastname = $("#roi-input__lastname")[0];
         this.email = $("#roi-input__email")[0];
         this.phone = $("#roi-input__phone")[0];
+        this.yearTabs = $(".tabs__link");
         this.checkboxes = checklist;
         this.moneyRange = money;
         this.amountRanges = amount;
@@ -68,11 +69,15 @@ import '../styles/styles.css';
         this.minuteSalary;
         this.timeSaved;
         this.moneySaved;
+        this.months = 12;
         this.events();
       }
   
       events(){
         this.calculateButton.on("click", this.validateForm.bind(this));
+        for (let i = 0; i < this.yearTabs.length; i++){
+          $(this.yearTabs[i]).on("click", this.changeResultTab.bind(this));
+        }
       }
   
       validateForm(e){
@@ -85,12 +90,30 @@ import '../styles/styles.css';
       calculate(){
         this.minuteSalary = (this.moneyRange.value)/60;
         console.log(this.minuteSalary);
-        
+
         for (let checkbox of this.checkboxes){
           console.log(checkbox.checked);
         }
       }
+
+      changeResultTab(e){
+        for (let i = 0; i < this.yearTabs.length; i++){
+          if ($(this.yearTabs[i]).hasClass("tabs__link--active")){
+            setTimeout( () => {
+            $(this.yearTabs[i]).removeClass("tabs__link--active");
+            $(this.yearTabs[i]).addClass("tabs__link--inactive");
+            }, 200 );
+          }
+      }
+      if (e.target.localName !== "li"){
+        $(e.target).parent().removeClass("tabs__link--inactive");
+        $(e.target).parent().addClass("tabs__link--active");
+      } else{
+        $(e.target).removeClass("tabs__link--inactive");
+        $(e.target).addClass("tabs__link--active");
+      }
     }
+  }
 
 
 const $ = jQuery;
