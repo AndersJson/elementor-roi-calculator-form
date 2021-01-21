@@ -89,7 +89,6 @@ import '../styles/styles.css';
 
       calculate(e){
         this.minuteSalary = (this.moneyRange.value)/60;
-        console.log(this.minuteSalary);
 
         for (let checkbox of this.checkboxes){
           console.log(checkbox.checked);
@@ -118,11 +117,11 @@ import '../styles/styles.css';
 
     insertData(e){
       $.ajax({
-        url : roi_ajax_script.ajax_url,
+        url : roi_ajax_script.ajaxurl,
         type : 'get',
         data : {
             action : 'insert_user_data',
-            nonce : $(e.target).data("check")
+            nonce : $(e.target).data("nonce")
         }
       }).done( function( response ) {
           alert( response );
