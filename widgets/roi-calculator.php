@@ -2432,10 +2432,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                             <div class="roi-row roi-row--border">
                                 <div class="result-box result-box--border-right max-half-col flex flex-column flex-center">
                                     <h1 class="result-box__saved">
-                                    <?php if ($settings[ 'show_saved_money_dollar_prefix' ] == 'yes') : ?>
-                                        <span class="result-box__dollar">$</span>
-                                    <?php endif; ?>
-                                    <span id="money-saved">5</span></h1>
+                                        <?php if ($settings[ 'show_saved_money_dollar_prefix' ] == 'yes') : ?>
+                                            <span class="result-box__dollar">$</span>
+                                        <?php endif; ?>
+                                        <span id="money-saved">5</span>
+                                    </h1>
                                     <span class="result-box__text">
                                     <?php echo $settings[ 'saved_money_sub_text' ] ?>
                                     <?php if ($settings[ 'show_saved_money_tip_trigger' ]) : ?> 

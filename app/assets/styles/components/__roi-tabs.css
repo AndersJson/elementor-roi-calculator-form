@@ -1,7 +1,4 @@
 .tabs {
-	&__wrapper {
-	}
-
 	&__nav {
 		position: relative;
 		list-style-type: none !important;
