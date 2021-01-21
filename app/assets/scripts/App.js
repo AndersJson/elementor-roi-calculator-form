@@ -116,12 +116,20 @@ import '../styles/styles.css';
     }
 
     insertData(e){
+      let formdata = {
+        firstname: this.firstname.value,
+        lastname: this.lastname.value,
+        email: this.email.value,
+        phone: this.phone.value,
+        time: new Date()
+      }
       $.ajax({
         url : roi_ajax_script.ajaxurl,
-        type : 'get',
+        type : 'post',
         data : {
             action : 'insert_user_data',
-            nonce : $(e.target).data("nonce")
+            nonce : $(e.target).data("nonce"),
+            formdata : formdata
         }
       }).done( function( response ) {
           alert( response );
@@ -134,6 +142,7 @@ import '../styles/styles.css';
 
 const $ = jQuery;
 $(function() {
+  console.log(new Date());
   //Checklist
   const checklist = new Checklist();
   //Ranges
