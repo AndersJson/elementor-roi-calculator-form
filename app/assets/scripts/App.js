@@ -120,9 +120,9 @@ import '../styles/styles.css';
         firstname: this.firstname.value,
         lastname: this.lastname.value,
         email: this.email.value,
-        phone: this.phone.value,
-        time: new Date()
+        phone: this.phone.value      
       }
+
       $.ajax({
         url : roi_ajax_script.ajaxurl,
         type : 'post',
@@ -142,7 +142,6 @@ import '../styles/styles.css';
 
 const $ = jQuery;
 $(function() {
-  console.log(new Date());
   //Checklist
   const checklist = new Checklist();
   //Ranges

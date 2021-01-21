@@ -149,26 +149,27 @@ final class ROI_Calculator_Widget
             if ( !wp_verify_nonce( $_REQUEST['nonce'], "roi_nonce")) {
                 exit("Security-issue");
             }
+            
+            $tz = 'Europe/Stockholm';
+            $timestamp = time();
+            $dt = new DateTime("now", new DateTimeZone($tz));
+            $dt->setTimestamp($timestamp);
 
+            $time = $dt->format('Y-m-d H:i:s');
             $firstname = htmlentities($_POST["formdata"]["firstname"]);
             $lastname = htmlentities($_POST["formdata"]["lastname"]);
             $email = htmlentities($_POST["formdata"]["email"]);
             $phone = htmlentities($_POST["formdata"]["phone"]);
-            $time = date("Y-m-d H:i:s");
 
-            /*
+            
             global $wpdb;
             $table_name = $wpdb->prefix . "roi_formsubscribers";
 
             $wpdb->insert(
                 $table_name, // Tabell att spara i
-                $wpdb->prepare(array('time' => $time, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'phone' => $phone), // Data att spara i databasen
-                array('%s', '%s', '%s', '%s', '%s')) // Format att spara i SQL-databasen. %d = int, %s = string, %f = float
+                array('time' => $time, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'phone' => $phone), // Data att spara i databasen
+                array('%s', '%s', '%s', '%s', '%s') //  %d = int, %s = string, %f = float
             );
-
-            */
-            
-            echo $firstname . $lastname . $email . $phone . $time;
 
             die();
         }
