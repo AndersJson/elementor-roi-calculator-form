@@ -74,7 +74,7 @@ final class ROI_Calculator_Widget
         wp_register_style('roi-calc-style', ROI_PLUGIN_URL . 'docs/styles.min.css', [], rand(), 'all');
         wp_register_script('roi-calc-script', ROI_PLUGIN_URL . 'docs/bundled.min.js', ['jquery'], rand(), true);
 
-
+        wp_localize_script('roi-calc-script', 'roi_ajax_script', array('ajaxurl' => admin_url('admin-ajax.php')));
         wp_enqueue_style('roi-calc-style');
         wp_enqueue_script('roi-calc-script');
     }
@@ -141,6 +141,11 @@ final class ROI_Calculator_Widget
             <?php
         }
 
+        //Init Ajax-functions
+        add_action('wp_ajax_nopriv_more_post_ajax', [$this, 'insert_user_data']);
+        add_action('wp_ajax_more_post_ajax', [$this, 'insert_user_data']);
+
+        //Init widgets
         add_action('elementor/init', [$this, 'init_category']);
         add_action('elementor/widgets/widgets_registered', [$this, 'init_widgets']);
     }
@@ -168,6 +173,23 @@ final class ROI_Calculator_Widget
             ],
             1
         );
+    }
+
+    /**
+     * Ajax
+     * Insert data in sql-db via ajax
+     * @since 1.0.0
+     */
+    public function insert_user_data()
+    {
+        // nonce check for an extra layer of security, the function will exit if it fails
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "roi_nonce")) {
+            exit();
+        }
+        
+        echo "hello from insert_user_data";
+
+        die();
     }
 
 

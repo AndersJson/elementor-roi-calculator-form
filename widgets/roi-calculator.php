@@ -2186,6 +2186,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
+        $nonce = wp_create_nonce("roi_nonce");
         //Button link
         $button_target = $settings[ 'result_cta_button_link' ][ 'is_external' ] ? ' target="_blank"' : '';
         $button_nofollow = $settings[ 'result_cta_button_link' ][ 'nofollow' ] ? ' rel="nofollow"' : '';
@@ -2405,7 +2406,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </div>
                         <div class="roi-row flex-center">
-                            <button type="submit" class="roi-button roi-button--primary" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
+                            <button type="submit" class="roi-button roi-button--primary" data-nonce="<?php echo esc_attr( $nonce ); ?>" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
                         </div>    
                     </form>
             <!-- End of form / Start of result -->

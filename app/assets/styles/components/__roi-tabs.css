@@ -1,66 +1,65 @@
-.tabs{
-  &__wrapper{
-  }
+.tabs {
+	&__wrapper {
+	}
 
-  &__nav{
-    position: relative;
-    list-style-type: none !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-end;
-    margin: 1.625em 0 -1px;
-    z-index: 2;
+	&__nav {
+		position: relative;
+		list-style-type: none !important;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-end;
+		margin: 1.625em 0 -1px;
+		z-index: 2;
 
-    @mixin phone{
-      flex-direction: column;
-    }
-  }
+		@mixin phone {
+			flex-direction: column;
+		}
+	}
 
-  &__link{
-    border-right: 1px solid #e7e7e7;
-    border-left: 1px solid #e7e7e7;
-    border-top: 1px solid #e7e7e7;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    background-color: #fff;
-    width: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .3s ease;
-    cursor: pointer;
+	&__link {
+		border-right: 1px solid #e7e7e7;
+		border-left: 1px solid #e7e7e7;
+		border-top: 1px solid #e7e7e7;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		background-color: #fff;
+		width: 25%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 100ms ease;
+		cursor: pointer;
 
-    &:not(:last-child){
-      margin-right: .5em;
-    }
+		&:not(:last-child) {
+			margin-right: 0.5em;
+		}
 
-    &--active{
-      height: 6em;
-      border-bottom: 0;
-    }
+		&--active {
+			height: 6em;
+			border-bottom: 0;
+		}
 
-    &--inactive{
-      background-color: #e7e7e7;
-      height: 5em;
-      border-bottom: 0;
-    }
+		&--inactive {
+			background-color: #e7e7e7;
+			height: 5em;
+			border-bottom: 0;
+		}
 
-    @mixin phone{
-      width: 100%;
+		@mixin phone {
+			width: 100%;
 
-      &:not(:last-child){
-        margin-right: 0;
-      }
+			&:not(:last-child) {
+				margin-right: 0;
+			}
 
-      &--active{
-        height: 3em;
-      }
+			&--active {
+				height: 3em;
+			}
 
-      &--inactive{
-        height: 3em;
-      }
-    }
-  }
-
+			&--inactive {
+				height: 3em;
+			}
+		}
+	}
 }

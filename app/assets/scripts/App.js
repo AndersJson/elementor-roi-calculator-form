@@ -84,16 +84,18 @@ import '../styles/styles.css';
         e.preventDefault();
         //check for valid form and run calculation
 
-        this.calculate();
+        this.calculate(e);
       }
 
-      calculate(){
+      calculate(e){
         this.minuteSalary = (this.moneyRange.value)/60;
         console.log(this.minuteSalary);
 
         for (let checkbox of this.checkboxes){
           console.log(checkbox.checked);
         }
+
+        this.insertData(e);
       }
 
       changeResultTab(e){
@@ -102,7 +104,7 @@ import '../styles/styles.css';
             setTimeout( () => {
             $(this.yearTabs[i]).removeClass("tabs__link--active");
             $(this.yearTabs[i]).addClass("tabs__link--inactive");
-            }, 200 );
+            }, 100 );
           }
       }
       if (e.target.localName !== "li"){
@@ -112,6 +114,21 @@ import '../styles/styles.css';
         $(e.target).removeClass("tabs__link--inactive");
         $(e.target).addClass("tabs__link--active");
       }
+    }
+
+    insertData(e){
+      $.ajax({
+        url : roi_ajax_script.ajax_url,
+        type : 'get',
+        data : {
+            action : 'insert_user_data',
+            nonce : $(e.target).data("check")
+        }
+      }).done( function( response ) {
+          alert( response );
+        }).fail(function() {
+          alert( "error" );
+        })
     }
   }
 
