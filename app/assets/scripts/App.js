@@ -67,9 +67,12 @@ import '../styles/styles.css';
         this.calculateButton = $("#roi-submit-button");
         //Data-properties
         this.minuteSalary = 0;
-        this.monthlyTimeSaved = 0;
-        this.moneySaved = 0;
-        this.months = 12;
+        this.oneYearHoursSaved = 0;
+        this.threeYearHoursSaved = 0;
+        this.fiveYearHoursSaved = 0;
+        this.oneYearMoneySaved = 0;
+        this.threeYearMoneySaved = 0;
+        this.threeYearMoneySaved = 0;
         this.events();
       }
   
@@ -163,19 +166,23 @@ import '../styles/styles.css';
       }
 
       calculate(e){
-        console.log(this.minuteSalary);
         if (this.minuteSalary == 0){
           this.minuteSalary = (this.moneyRange.value)/60;
         }
 
         for (let i = 0; i < this.checkboxes.length; i++){
-          if (this.checkboxes[i].checked){
-            //calculate time saved in hours for current tab of years
-            this.monthlyTimeSaved += Math.floor(((this.timeRanges[i] * this.amountRanges[i]) * this.months) / 60);
-          }
-          console.log(this.monthlyTimeSaved);
-        }
 
+          if (this.checkboxes[i].checked){
+            let savePercent = $(this.checkboxes[i]).data("save")/100;
+            //calculate time saved in hours for current tab of years
+            this.oneYearHoursSaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) / 60) * savePercent);
+            this.threeYearHoursSaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36) / 60)* savePercent);
+            this.fiveYearHoursSaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60) / 60)* savePercent);
+          }
+        }
+        console.log(this.oneYearHoursSaved);
+        console.log(this.threeYearHoursSaved);
+        console.log(this.fiveYearHoursSaved);
         //this.insertData(e);
       }
 
