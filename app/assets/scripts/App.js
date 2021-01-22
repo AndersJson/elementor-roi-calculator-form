@@ -66,9 +66,9 @@ import '../styles/styles.css';
         this.timeRanges = time;
         this.calculateButton = $("#roi-submit-button");
         //Data-properties
-        this.minuteSalary;
-        this.timeSaved;
-        this.moneySaved;
+        this.minuteSalary = 0;
+        this.monthlyTimeSaved = 0;
+        this.moneySaved = 0;
         this.months = 12;
         this.events();
       }
@@ -93,17 +93,17 @@ import '../styles/styles.css';
       validateForm(e){
         e.preventDefault();
         //check for valid form and run calculation
-        if (this.validChecklist() &&this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
-         console.log("all inputs are valid");
-          // this.calculate(e);
+        if (this.validChecklist() && this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
+          this.calculate(e);
         } else {
-          console.log("incomplete form");
+          return;
         }
       }
 
       validChecklist(){
         for (let checkbox of this.checkboxes){
           if (!checkbox.checked){
+            console.log("checkbox not checked")
             checkbox.focus();
             return false;
           }
@@ -119,7 +119,18 @@ import '../styles/styles.css';
         if (this.lastname.value == ""){
           this.lastname.focus();
           return false;
-        } 
+        }
+        
+        if (!/^[-\sa-zA-Z]+$/.test(this.firstname.value)){
+          this.firstname.focus();
+          return false;
+        }
+
+        if (!/^[-\sa-zA-Z]+$/.test(this.lastname.value)){
+          this.lastname.focus();
+          return false;
+        }
+
         return true; 
       }
 
@@ -128,6 +139,12 @@ import '../styles/styles.css';
           this.email.focus();
           return false;
         }
+
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(this.email.value)){
+          this.email.focus();
+          return false;
+        }
+
         return true;
       }
 
@@ -136,17 +153,30 @@ import '../styles/styles.css';
           this.phone.focus();
           return false;
         }
+
+        if (this.phone.value.length < 6){
+          this.phone.focus();
+          return false;
+        }
+
         return true;
       }
 
       calculate(e){
-        this.minuteSalary = (this.moneyRange.value)/60;
-
-        for (let checkbox of this.checkboxes){
-          console.log(checkbox.checked);
+        console.log(this.minuteSalary);
+        if (this.minuteSalary == 0){
+          this.minuteSalary = (this.moneyRange.value)/60;
         }
 
-        this.insertData(e);
+        for (let i = 0; i < this.checkboxes.length; i++){
+          if (this.checkboxes[i].checked){
+            //calculate time saved in hours for current tab of years
+            this.monthlyTimeSaved += Math.floor(((this.timeRanges[i] * this.amountRanges[i]) * this.months) / 60);
+          }
+          console.log(this.monthlyTimeSaved);
+        }
+
+        //this.insertData(e);
       }
 
       changeResultTab(e){
