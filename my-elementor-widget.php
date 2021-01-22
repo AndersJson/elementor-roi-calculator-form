@@ -149,6 +149,18 @@ final class ROI_Calculator_Widget
             if ( !wp_verify_nonce( $_REQUEST['nonce'], "roi_nonce")) {
                 exit("Security-issue");
             }
+
+            if ($_POST['formdata']['firstname'] == "" || 
+                $_POST['formdata']['lastname'] == "" ||
+                $_POST['formdata']['email'] == "" ||
+                $_POST['formdata']['phone'] == "" ||
+                !isset($_POST['formdata']['firstname']) || 
+                !isset($_POST['formdata']['lastname']) ||
+                !isset($_POST['formdata']['email']) ||
+                !isset($_POST['formdata']['phone'])
+            ){
+                exit("Invalid data");
+            }
             
             $tz = 'Europe/Stockholm';
             $timestamp = time();

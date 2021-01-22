@@ -74,17 +74,69 @@ import '../styles/styles.css';
       }
   
       events(){
+        $(this.phone).on("keydown", this.isInputNumber);
         this.calculateButton.on("click", this.validateForm.bind(this));
         for (let i = 0; i < this.yearTabs.length; i++){
           $(this.yearTabs[i]).on("click", this.changeResultTab.bind(this));
+        }
+      }
+
+      isInputNumber(e) {
+        let event = String.fromCharCode(e.which);
+        if (e.which < 96 || e.keyCode > 105) {
+          if (!/[0-9]/.test(event) && e.which !== 8 && e.which !== 189) {
+            e.preventDefault();
+          }
         }
       }
   
       validateForm(e){
         e.preventDefault();
         //check for valid form and run calculation
+        if (this.validChecklist() &&this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
+         console.log("all inputs are valid");
+          // this.calculate(e);
+        } else {
+          console.log("incomplete form");
+        }
+      }
 
-        this.calculate(e);
+      validChecklist(){
+        for (let checkbox of this.checkboxes){
+          if (!checkbox.checked){
+            checkbox.focus();
+            return false;
+          }
+          return true;
+        }
+      }
+
+      validOnlyLetters(){
+        if (this.firstname.value == ""){
+          this.firstname.focus();
+          return false;
+        }
+        if (this.lastname.value == ""){
+          this.lastname.focus();
+          return false;
+        } 
+        return true; 
+      }
+
+      validEmail(){
+        if (this.email.value == "") {
+          this.email.focus();
+          return false;
+        }
+        return true;
+      }
+
+      validPhone(){
+        if (this.phone.value == ""){
+          this.phone.focus();
+          return false;
+        }
+        return true;
       }
 
       calculate(e){
