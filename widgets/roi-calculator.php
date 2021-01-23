@@ -450,7 +450,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Min-value', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 0,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 0,
                 ]
@@ -463,7 +463,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Max-value', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 1,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 10,
                 ]
@@ -476,7 +476,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Step', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 1,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 1,
                 ]
@@ -526,19 +526,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             ); 
 
-            // Checklist Amount-Range dollar-prefix
-            $repeater->add_control(
-                'show_checklist_amount_range_dollar_prefix',
-                [
-                    'label' => __( 'Show Prefixes: $ ', 'roi-calculator-widget' ),
-                    'type' => \Elementor\Controls_Manager::SWITCHER,
-                    'label_on' => __( 'Show', 'roi-calculator-widget' ),
-                    'label_off' => __( 'Hide', 'roi-calculator-widget' ),
-                    'return_value' => 'yes',
-                    'default' => 'no',
-                ]
-            );
-
             $repeater->add_control(
                 'more_options_checklist_time_range',
                 [
@@ -567,9 +554,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Min-value', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 0,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 0,
+                    'description' => 'Min-value in <strong><u>minutes</u></strong>.'
                 ]
             );
 
@@ -580,9 +568,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Max-value', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 1,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 10,
+                    'description' => 'Max-value in <strong><u>minutes</u></strong>.'
                 ]
             );
 
@@ -593,7 +582,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'label' => __( 'Step', 'roi-calculator-widget' ),
                     'type' => \Elementor\Controls_Manager::NUMBER,
                     'min' => 1,
-                    'max' => 1000000000,
+                    'max' => 100000000,
                     'step' => 1,
                     'default' => 1,
                 ]
@@ -642,19 +631,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                     ]
                 ]
             ); 
-
-            // Checklist Time-Range dollar-prefix
-            $repeater->add_control(
-                'show_checklist_time_range_dollar_prefix',
-                [
-                    'label' => __( 'Show Prefixes: $ ', 'roi-calculator-widget' ),
-                    'type' => \Elementor\Controls_Manager::SWITCHER,
-                    'label_on' => __( 'Show', 'roi-calculator-widget' ),
-                    'label_off' => __( 'Hide', 'roi-calculator-widget' ),
-                    'return_value' => 'yes',
-                    'default' => 'no',
-                ]
-            );
 
             $this->add_control(
                 'checklist',
@@ -736,9 +712,10 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'label' => __( 'Min-value', 'roi-calculator-widget' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => 0,
-				'max' => 1000000000,
+				'max' => 100000000,
 				'step' => 1,
-				'default' => 0,
+                'default' => 0,
+                'description' => 'Min-salary per <strong><u>hour</u></strong>.'
 			]
         );
         
@@ -749,9 +726,10 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'label' => __( 'Max-value', 'roi-calculator-widget' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
-				'max' => 1000000000,
+				'max' => 100000000,
 				'step' => 1,
-				'default' => 10,
+                'default' => 10,
+                'description' => 'Max-salary per <strong><u>hour</u></strong>.'
 			]
         );
 
@@ -762,7 +740,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'label' => __( 'Step', 'roi-calculator-widget' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
-				'max' => 1000000000,
+				'max' => 100000000,
 				'step' => 1,
 				'default' => 1,
 			]
@@ -1348,7 +1326,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Price per each:', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
-                'max' => 1000000000,
+                'max' => 100000000,
                 'step' => 1,
                 'default' => 1,
                 'condition' => [
@@ -1365,13 +1343,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label' => __( 'Time spent in minutes per each:', 'roi-calculator-widget' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
-                'max' => 1000000000,
+                'max' => 100000000,
                 'step' => 1,
                 'default' => 1,
                 'condition' => [
                     'show_cando_price_money' => 'time'
                 ],
-                'description' => 'Specify how many minutes a single occasion takes in order to calculate how many occasions of the chosen activity you could do for all the saved time:<br>eg. How many minutes for a single occasion of a sleep-in?'
+                'description' => 'Specify how many <strong><u>minutes</u></strong> a single occasion takes in order to calculate how many occasions of the chosen activity you could do for all the saved time:<br>eg. How many minutes for a single occasion of a sleep-in?'
             ]
         );
 
@@ -2299,10 +2277,10 @@ class ROI_Calculator_Widget extends Widget_Base {
 
                                                     for ($y = 0; $y < 6; $y++){
                                                         if ($y == 5){ 
-                                                            echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $amountvalue . ($item[ 'show_checklist_amount_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                            echo '<li class="range__label">' . $amountvalue . ($item[ 'show_checklist_amount_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
                                                         }
                                                         else{
-                                                            echo '<li class="range__label">' . ($item[ 'show_checklist_amount_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $amountvalue . '</li>';
+                                                            echo '<li class="range__label">' . $amountvalue . '</li>';
                                                         }
                                                         $amountnextstep = $amountnextstep + $amountinterval;
                                                         $amountvalue = number_format(ceil($amountnextstep), 0, ',', '.');
@@ -2327,10 +2305,10 @@ class ROI_Calculator_Widget extends Widget_Base {
 
                                                     for ($z = 0; $z < 6; $z++){
                                                         if ($z == 5){ 
-                                                            echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ?  '&#36;' : '') . $timevalue . ($item[ 'show_checklist_time_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
+                                                            echo '<li class="range__label">' . $timevalue . ($item[ 'show_checklist_time_range_max_suffix' ] == 'yes' ? '&#43;' : '') .'</li>';       
                                                         }
                                                         else{
-                                                            echo '<li class="range__label">' . ($item[ 'show_checklist_time_range_dollar_prefix' ] == 'yes' ? '&#36;' : '') . $timevalue . '</li>';
+                                                            echo '<li class="range__label">' . $timevalue . '</li>';
                                                         }
                                                         $timenextstep = $timenextstep + $timeinterval;
                                                         $timevalue = number_format(ceil($timenextstep), 0, ',', '.');
