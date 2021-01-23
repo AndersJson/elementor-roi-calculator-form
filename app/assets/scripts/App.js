@@ -172,6 +172,13 @@ import '../styles/styles.css';
       }
 
       calculate(e){
+        this.oneYearMinutesSaved = 0;
+        this.threeYearMinutesSaved = 0;
+        this.fiveYearMinutesSaved = 0;
+        this.oneYearMoneySavedPerMinute = 0;
+        this.threeYearMoneySavedPerMinute = 0;
+        this.fiveYearMoneySavedPerMinute = 0;
+
         if (this.minuteSalary == 0){
           this.minuteSalary = (this.moneyRange.value)/60;
         }
