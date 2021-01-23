@@ -60,6 +60,7 @@ import '../styles/styles.css';
         this.email = $("#roi-input__email")[0];
         this.phone = $("#roi-input__phone")[0];
         this.yearTabs = $(".tabs__link");
+        this.trapInput = $("#city-input")[0];
         this.checkboxes = checklist;
         this.moneyRange = money;
         this.amountRanges = amount;
@@ -73,6 +74,9 @@ import '../styles/styles.css';
         this.oneYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
+        this.oneYearMoneySavedPerMinute = 0;
+        this.threeYearMoneySavedPerMinute = 0;
+        this.fiveYearMoneySavedPerMinute = 0;
         this.events();
       }
   
@@ -95,6 +99,10 @@ import '../styles/styles.css';
   
       validateForm(e){
         e.preventDefault();
+        //trap-input
+        if (this.trapInput.value !== ""){
+          return;
+        }
         //check for valid form and run calculation
         if (this.validChecklist() && this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
           this.calculate(e);
@@ -105,13 +113,11 @@ import '../styles/styles.css';
 
       validChecklist(){
         for (let checkbox of this.checkboxes){
-          if (!checkbox.checked){
-            console.log("checkbox not checked")
-            checkbox.focus();
-            return false;
+          if (checkbox.checked){
+            return true;
           }
-          return true;
         }
+        return false;
       }
 
       validOnlyLetters(){
@@ -178,15 +184,31 @@ import '../styles/styles.css';
             this.oneYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent);
             this.threeYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent);
             this.fiveYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent);
+
+            //calculate money saved for current tab of years
+            this.oneYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
+            this.threeYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
+            this.fiveYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
           }
         }
+
         console.log(this.oneYearMinutesSaved);
         console.log(this.threeYearMinutesSaved);
         console.log(this.fiveYearMinutesSaved);
+        console.log("Money:");
+        console.log(this.oneYearMoneySavedPerMinute);
+        console.log(this.threeYearMoneySavedPerMinute);
+        console.log(this.fiveYearMoneySavedPerMinute);
         //this.insertData(e);
       }
 
       changeResultTab(e){
+        if (e.target.localName !== "li" && $(e.target).parent().hasClass("tabs__link--active")){
+          return;
+        } else if (e.target.localName == "li" && $(e.target).hasClass("tabs__link--active")){
+          return;
+        }
+
         for (let i = 0; i < this.yearTabs.length; i++){
           if ($(this.yearTabs[i]).hasClass("tabs__link--active")){
             setTimeout( () => {
