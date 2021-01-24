@@ -2440,8 +2440,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                         </div>    
                     </form>
             <!-- End of form / Start of result -->
-            <?php /* echo '<section id="roi-results" class="flex flex-center ' . ( Plugin::$instance->editor->is_edit_mode() ? '' : 'hidden' ) .'">' */?>
-            <section id="roi-results" class="flex flex-center">
+            <?php echo '<section id="roi-results" class="flex flex-center ' . ( Plugin::$instance->editor->is_edit_mode() ? '' : 'hidden' ) .'">'; ?>
                 <div class="roi-inner-wrapper__small">
                     <h1 id="roi-result-heading" class="heading--primary flex flex-center"><?php echo $settings[ 'result_main_heading' ] ?></h1>
                     <section class="tabs__wrapper">

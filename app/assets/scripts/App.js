@@ -64,6 +64,8 @@ import '../styles/styles.css';
         this.moneySavedSpan = $("#roi-money-saved")[0];
         this.hoursSavedSpan = $("#roi-hours-saved")[0];
         this.coulddoCostSpans = $(".could-do__cost");
+        this.roiResult = $("#roi-results");
+        this.resultHeading = $("#roi-result-heading")[0];
         this.checkboxes = checklist;
         this.moneyRange = money;
         this.amountRanges = amount;
@@ -172,6 +174,11 @@ import '../styles/styles.css';
         return true;
       }
 
+      firstLetterCapitol(string){
+        let output = string.toLowerCase();
+        return output.charAt(0).toUpperCase() + output.slice(1);
+      }
+
       calculate(e){
         this.oneYearMinutesSaved = 0;
         this.threeYearMinutesSaved = 0;
@@ -204,16 +211,18 @@ import '../styles/styles.css';
         this.displayTimeSaved(1);
         this.displayCouldDo(1);
 
-        //this.insertData(e);
+        this.insertData(e);
       }
 
       insertData(e){
       let formdata = {
-        firstname: this.firstname.value,
-        lastname: this.lastname.value,
-        email: this.email.value,
+        firstname: this.firstLetterCapitol(this.firstname.value),
+        lastname: this.firstLetterCapitol(this.lastname.value),
+        email: this.email.value.toLowerCase(),
         phone: this.phone.value      
       }
+
+      let myClass = this;
 
       $.ajax({
         url : roi_ajax_script.ajaxurl,
@@ -224,10 +233,14 @@ import '../styles/styles.css';
             formdata : formdata
         }
       }).done( function( response ) {
-          alert( response );
-          $(this.calculateButton).html($(this.calculateButton).data("default"));
-        }).fail(function() {
-          alert( "error" );
+          $(myClass.roiResult).removeClass("hidden");
+          $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
+          //Scroll down to result
+          $("html, body").animate({
+            scrollTop: $(myClass.resultHeading).offset().top
+          }, 1000 );
+        }).fail(function(response) {
+          console.log(response);
         })
     }
 
