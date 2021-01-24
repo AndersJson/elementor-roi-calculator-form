@@ -61,6 +61,9 @@ import '../styles/styles.css';
         this.phone = $("#roi-input__phone")[0];
         this.yearTabs = $(".tabs__link");
         this.trapInput = $("#city-input")[0];
+        this.moneySavedSpan = $("#roi-money-saved")[0];
+        this.hoursSavedSpan = $("#roi-hours-saved")[0];
+        this.coulddoCostSpans = $(".could-do__cost");
         this.checkboxes = checklist;
         this.moneyRange = money;
         this.amountRanges = amount;
@@ -74,9 +77,6 @@ import '../styles/styles.css';
         this.oneYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
-        this.oneYearMoneySavedPerMinute = 0;
-        this.threeYearMoneySavedPerMinute = 0;
-        this.fiveYearMoneySavedPerMinute = 0;
         this.events();
       }
   
@@ -175,9 +175,9 @@ import '../styles/styles.css';
         this.oneYearMinutesSaved = 0;
         this.threeYearMinutesSaved = 0;
         this.fiveYearMinutesSaved = 0;
-        this.oneYearMoneySavedPerMinute = 0;
-        this.threeYearMoneySavedPerMinute = 0;
-        this.fiveYearMoneySavedPerMinute = 0;
+        this.oneYearMoneySaved = 0;
+        this.threeYearMoneySaved = 0;
+        this.fiveYearMoneySaved = 0;
 
         if (this.minuteSalary == 0){
           this.minuteSalary = (this.moneyRange.value)/60;
@@ -189,25 +189,43 @@ import '../styles/styles.css';
             let savePercent = $(this.checkboxes[i]).data("save")/100;
             //calculate time saved in hours for current tab of years
             this.oneYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent);
-            this.threeYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent);
-            this.fiveYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent);
+            this.threeYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36) * savePercent);
+            this.fiveYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60) * savePercent);
 
             //calculate money saved for current tab of years
-            this.oneYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
-            this.threeYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
-            this.fiveYearMoneySavedPerMinute += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
+            this.oneYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
+            this.threeYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
+            this.fiveYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
           }
         }
 
-        console.log(this.oneYearMinutesSaved);
-        console.log(this.threeYearMinutesSaved);
-        console.log(this.fiveYearMinutesSaved);
-        console.log("Money:");
-        console.log(this.oneYearMoneySavedPerMinute);
-        console.log(this.threeYearMoneySavedPerMinute);
-        console.log(this.fiveYearMoneySavedPerMinute);
+        this.displayMoneySaved(1);
+
         //this.insertData(e);
       }
+
+      insertData(e){
+      let formdata = {
+        firstname: this.firstname.value,
+        lastname: this.lastname.value,
+        email: this.email.value,
+        phone: this.phone.value      
+      }
+
+      $.ajax({
+        url : roi_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'insert_user_data',
+            nonce : $(e.target).data("nonce"),
+            formdata : formdata
+        }
+      }).done( function( response ) {
+          alert( response );
+        }).fail(function() {
+          alert( "error" );
+        })
+    }
 
       changeResultTab(e){
         if (e.target.localName !== "li" && $(e.target).parent().hasClass("tabs__link--active")){
@@ -231,30 +249,62 @@ import '../styles/styles.css';
         $(e.target).removeClass("tabs__link--inactive");
         $(e.target).addClass("tabs__link--active");
       }
+
+      //display result-data for the clicked year-tab
+      if (e.target.localName !== "li"){
+        if ($(e.target).parent().data("time") == "12"){
+          this.displayMoneySaved(1);
+        }else if ($(e.target).parent().data("time") == "36"){
+          this.displayMoneySaved(3);
+        }else if ($(e.target).parent().data("time") == "60"){
+          this.displayMoneySaved(5);
+        }
+      }
+      else{
+        if ($(e.target).data("time") == "12"){
+          this.displayMoneySaved(1);
+        }else if ($(e.target).data("time") == "36"){
+          this.displayMoneySaved(3);
+        }else if ($(e.target).data("time") == "60"){
+          this.displayMoneySaved(5);
+        }
+      } 
     }
 
-    insertData(e){
-      let formdata = {
-        firstname: this.firstname.value,
-        lastname: this.lastname.value,
-        email: this.email.value,
-        phone: this.phone.value      
+    displayMoneySaved(years){
+      let output;
+
+      if (years == 1){ 
+        if (this.oneYearMoneySaved >= 1000){
+          output = `${Number((this.oneYearMoneySaved/1000).toFixed(1))}k`
+        }else{
+          output = this.oneYearMoneySaved;
+        }
+        
+        $(this.moneySavedSpan).html(output);
       }
 
-      $.ajax({
-        url : roi_ajax_script.ajaxurl,
-        type : 'post',
-        data : {
-            action : 'insert_user_data',
-            nonce : $(e.target).data("nonce"),
-            formdata : formdata
+      if (years == 3){ 
+        if (this.threeYearMoneySaved >= 1000){
+          output = `${Number((this.threeYearMoneySaved/1000).toFixed(1))}k`
+        }else{
+          output = this.threeYearMoneySaved;
         }
-      }).done( function( response ) {
-          alert( response );
-        }).fail(function() {
-          alert( "error" );
-        })
+        
+        $(this.moneySavedSpan).html(output);
+      }
+
+      if (years == 5){ 
+        if (this.fiveYearMoneySaved >= 1000){
+          output = `${Number((this.fiveYearMoneySaved/1000).toFixed(1))}k`
+        }else{
+          output = this.fiveYearMoneySaved;
+        }
+        
+        $(this.moneySavedSpan).html(output);
+      }
     }
+
   }
 
 

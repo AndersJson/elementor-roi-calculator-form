@@ -2396,10 +2396,10 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <section class="tabs__wrapper">
                             <ul class="tabs__nav text-center">
                                 <li class="tabs__link tabs__link--active" data-time="12">
-                                    <h3 id="tabs-one-year">1 Month</h3>
+                                    <h3 id="tabs-one-year">1 Year</h3>
                                 </li>
                                 <li class="tabs__link tabs__link--inactive" data-time="36">
-                                    <h3 id="tabs-three-year">1 Year</h3>
+                                    <h3 id="tabs-three-year">3 Years</h3>
                                 </li>
                                 <li class="tabs__link tabs__link--inactive" data-time="60">
                                     <h3 id="tabs-five-year">5 Years</h3>
@@ -2414,7 +2414,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <?php if ($settings[ 'show_saved_money_dollar_prefix' ] == 'yes') : ?>
                                             <span class="result-box__dollar">$</span>
                                         <?php endif; ?>
-                                        <span id="money-saved">5</span>
+                                        <span id="roi-money-saved">5k</span>
                                     </h1>
                                     <span class="result-box__text">
                                     <?php echo $settings[ 'saved_money_sub_text' ] ?>
@@ -2427,7 +2427,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </span>
                                 </div>
                                 <div class="result-box max-half-col flex flex-column flex-center">
-                                    <h1 class="result-box__saved" id="hours-saved">20</h1>
+                                    <h1 class="result-box__saved" id="roi-hours-saved">20</h1>
                                     <span class="result-box__text"><?php echo $settings[ 'saved_time_sub_text' ] ?>
                                     <?php if ($settings[ 'show_saved_time_tip_trigger' ]) : ?> 
                                         <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
