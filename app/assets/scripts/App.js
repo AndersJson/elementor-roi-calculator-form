@@ -202,6 +202,7 @@ import '../styles/styles.css';
 
         this.displayMoneySaved(1);
         this.displayTimeSaved(1);
+        this.displayCouldDo(1);
 
         //this.insertData(e);
       }
@@ -258,24 +259,30 @@ import '../styles/styles.css';
         if ($(e.target).parent().data("time") == "12"){
           this.displayMoneySaved(1);
           this.displayTimeSaved(1);
+          this.displayCouldDo(1);
         }else if ($(e.target).parent().data("time") == "36"){
           this.displayMoneySaved(3);
           this.displayTimeSaved(3);
+          this.displayCouldDo(3);
         }else if ($(e.target).parent().data("time") == "60"){
           this.displayMoneySaved(5);
           this.displayTimeSaved(5);
+          this.displayCouldDo(5);
         }
       }
       else{
         if ($(e.target).data("time") == "12"){
           this.displayMoneySaved(1);
           this.displayTimeSaved(1);
+          this.displayCouldDo(1);
         }else if ($(e.target).data("time") == "36"){
           this.displayMoneySaved(3);
           this.displayTimeSaved(3);
+          this.displayCouldDo(3);
         }else if ($(e.target).data("time") == "60"){
           this.displayMoneySaved(5);
           this.displayTimeSaved(5);
+          this.displayCouldDo(5);
         }
       } 
     }
@@ -327,18 +334,53 @@ import '../styles/styles.css';
       let output;
 
       if (years == 1){ 
-        output = (this.oneYearMinutesSaved / 60);        
+        output = Math.round(this.oneYearMinutesSaved / 60);        
         $(this.hoursSavedSpan).html(output);
       }
 
       if (years == 3){ 
-        output = (this.threeYearMinutesSaved / 60);        
+        output = Math.round(this.threeYearMinutesSaved / 60);        
         $(this.hoursSavedSpan).html(output);
       }
 
       if (years == 5){ 
-        output = (this.fiveYearMinutesSaved / 60);        
+        output = Math.round(this.fiveYearMinutesSaved / 60);        
         $(this.hoursSavedSpan).html(output);
+      }
+    }
+
+    displayCouldDo(years){
+      let output;
+      if (years == 1){ 
+        for (let i = 0; i < this.coulddoCostSpans.length; i++){
+          if ($(this.coulddoCostSpans[i]).data("cost") !== undefined){
+            output = Math.round(this.oneYearMoneySaved / Number($(this.coulddoCostSpans[i]).data("cost")));
+          }else{
+            output = Math.round(this.oneYearMinutesSaved / Number($(this.coulddoCostSpans[i]).data("time")));  
+          }
+
+          $(this.coulddoCostSpans[i]).html(output);
+        }
+      }else if (years == 3){ 
+        for (let i = 0; i < this.coulddoCostSpans.length; i++){
+          if ($(this.coulddoCostSpans[i]).data("cost") !== undefined){
+            output = Math.round(this.threeYearMoneySaved / Number($(this.coulddoCostSpans[i]).data("cost")));
+          }else{
+            output = Math.round(this.threeYearMinutesSaved / Number($(this.coulddoCostSpans[i]).data("time")));  
+          }
+          
+          $(this.coulddoCostSpans[i]).html(output);
+        }
+      }else if (years == 5){ 
+        for (let i = 0; i < this.coulddoCostSpans.length; i++){
+          if ($(this.coulddoCostSpans[i]).data("cost") !== undefined){
+            output = Math.round(this.fiveYearMoneySaved / Number($(this.coulddoCostSpans[i]).data("cost")));
+          }else{
+            output = Math.round(this.fiveYearMinutesSaved / Number($(this.coulddoCostSpans[i]).data("time")));  
+          }
+          
+          $(this.coulddoCostSpans[i]).html(output);
+        }
       }
     }
 
