@@ -106,6 +106,7 @@ import '../styles/styles.css';
         //check for valid form and run calculation
         if (this.validChecklist() && this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
           this.calculate(e);
+          $(this.calculateButton).html($(this.calculateButton).data("loading"));
         } else {
           return;
         }
@@ -200,6 +201,7 @@ import '../styles/styles.css';
         }
 
         this.displayMoneySaved(1);
+        this.displayTimeSaved(1);
 
         //this.insertData(e);
       }
@@ -222,6 +224,7 @@ import '../styles/styles.css';
         }
       }).done( function( response ) {
           alert( response );
+          $(this.calculateButton).html($(this.calculateButton).data("default"));
         }).fail(function() {
           alert( "error" );
         })
@@ -254,19 +257,25 @@ import '../styles/styles.css';
       if (e.target.localName !== "li"){
         if ($(e.target).parent().data("time") == "12"){
           this.displayMoneySaved(1);
+          this.displayTimeSaved(1);
         }else if ($(e.target).parent().data("time") == "36"){
           this.displayMoneySaved(3);
+          this.displayTimeSaved(3);
         }else if ($(e.target).parent().data("time") == "60"){
           this.displayMoneySaved(5);
+          this.displayTimeSaved(5);
         }
       }
       else{
         if ($(e.target).data("time") == "12"){
           this.displayMoneySaved(1);
+          this.displayTimeSaved(1);
         }else if ($(e.target).data("time") == "36"){
           this.displayMoneySaved(3);
+          this.displayTimeSaved(3);
         }else if ($(e.target).data("time") == "60"){
           this.displayMoneySaved(5);
+          this.displayTimeSaved(5);
         }
       } 
     }
@@ -276,7 +285,10 @@ import '../styles/styles.css';
 
       if (years == 1){ 
         if (this.oneYearMoneySaved >= 1000){
-          output = `${Number((this.oneYearMoneySaved/1000).toFixed(1))}k`
+          output = `${Number((this.oneYearMoneySaved/1000).toFixed(1))}k`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.oneYearMoneySaved/1000).toFixed(0)}k`; 
+          }
         }else{
           output = this.oneYearMoneySaved;
         }
@@ -286,7 +298,10 @@ import '../styles/styles.css';
 
       if (years == 3){ 
         if (this.threeYearMoneySaved >= 1000){
-          output = `${Number((this.threeYearMoneySaved/1000).toFixed(1))}k`
+          output = `${Number((this.threeYearMoneySaved/1000).toFixed(1))}k`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.threeYearMoneySaved/1000).toFixed(0)}k`; 
+          }
         }else{
           output = this.threeYearMoneySaved;
         }
@@ -296,12 +311,34 @@ import '../styles/styles.css';
 
       if (years == 5){ 
         if (this.fiveYearMoneySaved >= 1000){
-          output = `${Number((this.fiveYearMoneySaved/1000).toFixed(1))}k`
+          output = `${Number((this.fiveYearMoneySaved/1000).toFixed(1))}k`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.fiveYearMoneySaved/1000).toFixed(0)}k`; 
+          }
         }else{
           output = this.fiveYearMoneySaved;
         }
         
         $(this.moneySavedSpan).html(output);
+      }
+    }
+
+    displayTimeSaved(years){
+      let output;
+
+      if (years == 1){ 
+        output = (this.oneYearMinutesSaved / 60);        
+        $(this.hoursSavedSpan).html(output);
+      }
+
+      if (years == 3){ 
+        output = (this.threeYearMinutesSaved / 60);        
+        $(this.hoursSavedSpan).html(output);
+      }
+
+      if (years == 5){ 
+        output = (this.fiveYearMinutesSaved / 60);        
+        $(this.hoursSavedSpan).html(output);
       }
     }
 

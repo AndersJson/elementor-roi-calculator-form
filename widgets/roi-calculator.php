@@ -927,6 +927,19 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
 
+        // Submit-button Loading-Text
+        $this->add_control(
+            'submit_button_loading_text',
+            [
+                'label' => __( 'Button Text(Loading)', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Calculating...', 'roi-calculator-widget' ),
+                'label_block' => true,
+                'placeholder' => __( 'Enter loading-text here', 'roi-calculator-widget' ),
+                'description' => 'Text to be displayed while calculating result.'
+            ]
+        );
+
         // Submit-button Typography
         $this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
@@ -1006,6 +1019,42 @@ class ROI_Calculator_Widget extends Widget_Base {
             'result_year_tabs_tab',
             [
                 'label' => __( 'Year-tabs', 'roi-calculator-widget' ),
+            ]
+        );
+
+        // Result-years one year-text 
+        $this->add_control(
+            'result_one_year_text',
+            [
+                'label' => __( 'One year tab-text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '1 Year' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter tab-text', 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+        // Result-years three year-text 
+        $this->add_control(
+            'result_three_year_text',
+            [
+                'label' => __( 'Three year tab-text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '3 Years' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter tab-text', 'roi-calculator-widget' ),
+                'label_block' => true,
+            ]
+        );
+
+        // Result-years five year-text 
+        $this->add_control(
+            'result_five_year_text',
+            [
+                'label' => __( 'Five year tab-text', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( '5 Years' , 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter tab-text', 'roi-calculator-widget' ),
+                'label_block' => true,
             ]
         );
 
@@ -1349,7 +1398,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'condition' => [
                     'show_cando_price_money' => 'time'
                 ],
-                'description' => 'Specify how many <strong><u>minutes</u></strong> a single occasion takes in order to calculate how many occasions of the chosen activity you could do for all the saved time:<br>eg. How many minutes for a single occasion of a sleep-in?'
+                'description' => 'Specify how many <strong><u>minutes</u></strong> a single occasion takes in order to calculate how many occasions of the chosen activity you could do with all the saved time:<br>eg. How many minutes for a single occasion of a sleep-in?'
             ]
         );
 
@@ -1361,6 +1410,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( '' , 'roi-calculator-widget' ),
                 'label_block' => true,
+                'description' => 'This text will be displayed right before the automatically calculated amount you could do with all the saved time/money.'
             ]
         );
 
@@ -1372,6 +1422,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( '' , 'roi-calculator-widget' ),
                 'label_block' => true,
+                'description' => 'This text will be displayed right after the automatically calculated amount you could do with all the saved time/money.'
             ]
         );
 
@@ -2385,7 +2436,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                             </div>
                         </div>
                         <div class="roi-row flex-center">
-                            <button type="submit" class="roi-button roi-button--primary" data-nonce="<?php echo esc_attr( $nonce ); ?>" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
+                            <button type="submit" class="roi-button roi-button--primary" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-default="<?php echo $settings[ 'submit_button_text' ] ?>" data-loading="<?php echo $settings[ 'submit_button_loading_text' ] ?>" id="roi-submit-button"><?php echo $settings[ 'submit_button_text' ] ?></button>
                         </div>    
                     </form>
             <!-- End of form / Start of result -->
@@ -2396,13 +2447,13 @@ class ROI_Calculator_Widget extends Widget_Base {
                     <section class="tabs__wrapper">
                             <ul class="tabs__nav text-center">
                                 <li class="tabs__link tabs__link--active" data-time="12">
-                                    <h3 id="tabs-one-year">1 Year</h3>
+                                    <h3 id="tabs-one-year"><?php echo $settings[ 'result_one_year_text' ] ?></h3>
                                 </li>
                                 <li class="tabs__link tabs__link--inactive" data-time="36">
-                                    <h3 id="tabs-three-year">3 Years</h3>
+                                    <h3 id="tabs-three-year"><?php echo $settings[ 'result_three_year_text' ] ?></h3>
                                 </li>
                                 <li class="tabs__link tabs__link--inactive" data-time="60">
-                                    <h3 id="tabs-five-year">5 Years</h3>
+                                    <h3 id="tabs-five-year"><?php echo $settings[ 'result_five_year_text' ] ?></h3>
                                 </li>
                             </ul>
                         </section>
@@ -2451,7 +2502,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <p class="could-do__text">
                                         <span class="could-do__pre-text"><?php echo $candoitem[ 'cando_pre_amount_text' ] ?></span>
                                         <?php
-                                            echo '<span class="could-do__cost"' . ($candoitem[ 'show_cando_price_money' ] == 'price' ?  'data-cost="' . $candoitem[ 'cando_price' ] .'">' : 'data-time="' . $candoitem[ 'cando_time' ] . '">') . '</span>';
+                                            echo '<span class="could-do__cost"' . ($candoitem[ 'show_cando_price_money' ] == 'price' ?  'data-cost="' . $candoitem[ 'cando_price' ] .'">' : 'data-time="' . $candoitem[ 'cando_time' ] . '">') . '100</span>';
                                         ?>
                                         <span class="could-do__sub-text"><?php echo $candoitem[ 'cando_after_amount_text' ] ?></span>
                                     </p>
