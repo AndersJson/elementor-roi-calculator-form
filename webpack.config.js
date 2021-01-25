@@ -5,14 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fse = require('fs-extra');
 
-/* CREATED PLUGINS */
-//class RunAfterCompile {
-//  apply(compiler) {
-//    compiler.hooks.done.tap('Copy images', () => {
-//      fse.copySync('./app/assets/images', './docs/assets/images');
-//    });
-//  }
-//}
 
 /* VARIABLES */
 const POSTCSSPlugins = [
@@ -57,55 +49,6 @@ const config = {
   module: {
     rules: [cssConfig]
   },
-
-// Generate POT file
-//    makepot: {
-//      target: {
-//        options: {
-//          domainPath: '/languages/',
-//          potFilename: 'roi-elementor-widget',
-//          type: 'wp-plugin',
-//        }
-//      }
-//    },
-//    // Generate Text Domain
-//    addtextdomain: {
-//      options: {
-//          textdomain: 'roi-elementor-widget',
-//          updateDomains: [ 'roi-elementor-widget' ]
-//      },
-//      target: {
-//        files: {
-//          src: [
-//            '*.php',
-//            '**/*.php',
-//          '!node_modules/**',
-//          '!tests/**'
-//          ]
-//        }
-//      },
-//    }
-//
-//};
-
-/* DEVELOPMENT MODE */
-//if (currentTask == 'dev') {
-//  cssConfig.use.unshift('style-loader');
-//  config.mode = 'development';
-
-//  config.output = {
-//    filename: 'bundled.js',
-//    path: path.resolve(__dirname, 'app')
-//  };
-
-  
-// config.devServer = {
-//    contentBase: path.join(__dirname, 'app'),
-//    hot: true,
-//    before: function(app, server) {
-//      server._watch('./app/**/*.html');
-//    }
-//  };
 }
 
 
@@ -127,20 +70,14 @@ if (currentTask == 'build') {
 
   config.output = {
     filename: 'bundled.min.js',
-//    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'docs')
   };
 
   config.mode = 'production';
 
-//  config.optimization = {
-//    splitChunks: { chunks: 'all' }
-//  };
-
   config.plugins.push(
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.min.css' }) //    new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
-//    new RunAfterCompile()
+    new MiniCssExtractPlugin({ filename: 'styles.min.css' }) 
   );
 }
 

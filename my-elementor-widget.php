@@ -79,13 +79,6 @@ final class ROI_Calculator_Widget
         wp_enqueue_script('roi-calc-script');
     }
 
-    /**
-     * Load Text Domain
-     * @since 1.0.0
-     */
-    //    public function i18n() {
-    //       load_plugin_textdomain( 'roi-calculator-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-    //    }
 
     /**
      * Initialize the plugin
@@ -110,21 +103,17 @@ final class ROI_Calculator_Widget
         }
 
         //Ladda CSS till back-end
-        //function priskalkyl_back_scripts(){
-        //    wp_enqueue_media();
-        //    wp_register_style('priskalkyl_back_style', plugins_url('./css/backend_style.css', __FILE__));
-        //    wp_enqueue_style('priskalkyl_back_style');
-        //
-        //    wp_register_script('priskalkyl_back_script', plugins_url('./js/backend_script.js', __FILE__), array('jquery'), '1.0');
-        //    wp_enqueue_script('priskalkyl_back_script');
-        //
-        //    wp_register_style('google_fonts_admin', 'https://fonts.googleapis.com/css?family=Catamaran:500,700&display=swap|Exo+2:500,700&display=swap');
-        //    wp_enqueue_style( 'google_fonts_admin');
-        //}
+        function roi_calculator_admin_scripts(){
+            wp_enqueue_media();
+            wp_register_style('roi_calc_admin_style', ROI_PLUGIN_URL . 'app/admin_styles.min.css', [], rand(), 'all');
+            wp_enqueue_style('roi_calc_admin_style');
         
-        //Ladda CSS JS till back-end när admin-scripts laddas
+            wp_register_style('google_fonts_admin', 'https://fonts.googleapis.com/css?family=Catamaran:500,700&display=swap|Exo+2:500,700&display=swap');
+            wp_enqueue_style( 'google_fonts_admin');
+        }
         
-        //add_action('admin_enqueue_scripts', 'priskalkyl_back_scripts');
+        //Ladda CSS JS till back-end när admin-scripts laddas        
+        add_action('admin_enqueue_scripts', 'roi_calculator_admin_scripts');
 
         //Skapar meny i wp-admin för att komma åt admin-gränssnitt och registrerar settings i options
         function roi_calculator_create_menu(){
@@ -136,9 +125,42 @@ final class ROI_Calculator_Widget
 
         //Funktion för att visa admin-gränssnittet
         function roi_settings_page(){
-            ?>
-            <h1>Hello from Roi-admin!</h1>
-            <?php
+            if ( ! defined( 'ABSPATH' ) ) {
+                exit;
+            }
+
+            if ( is_admin() && is_user_logged_in() ){
+                global $wpdb;
+
+                $table = $wpdb->prefix . "roi_formsubscribers";
+                $subscribers = $wpdb->get_results("SELECT * FROM $table");
+                ?>
+                <div class="roi-admin-header">
+                    <h1>ROI-Calculator</h1>
+                    <p>Listing data from users who has submitted the ROI-calculator.</p>
+                    <p><i>(Time of the submitted form is in local Europe/Stockholm-timezone)</i></p>
+                </div>
+                <div class="roi-admin-wrapper">
+                    <div class="roi-admin-table">
+                <?php
+                    echo '<div class="roi-admin-table__row">';
+                    echo '<div class="roi-admin-table__cell"><h4>Time</h4></div><div class="roi-admin-table__cell"><h4>Firstname</h4></div><div class="roi-admin-table__cell"><h4>Lastname</h4></div><div class="roi-admin-table__cell"><h4>Email</h4></div><div class="roi-admin-table__cell"><h4>Phone</h4></div>';
+                    echo '</div>';
+                    foreach ( $subscribers as $subscriber ) {
+                        echo '<div class="roi-admin-table__row">';
+                            echo '<div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p><a href="mailto:' . $subscriber->email . '">' . $subscriber->email . '</a></p></div><div class="roi-admin-table__cell"><p><a href="callto:' . $subscriber->phone . '">' . $subscriber->phone . '</a></p></div>';
+                        echo '</div>';
+                    }
+                ?>
+                    </div>
+                </div>
+                <?php
+            }else{
+                ?>
+                <p>You need to login...</p>
+                <?php
+            }
+            
         }
 
         
