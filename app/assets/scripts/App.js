@@ -237,9 +237,10 @@ import '../styles/styles.css';
           $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
           //Scroll down to result
           $("html, body").animate({
-            scrollTop: $(myClass.resultHeading).offset().top
+            scrollTop: ($(myClass.resultHeading).offset().top) - 50
           }, 1000 );
         }).fail(function(response) {
+          $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
           console.log(response);
         })
     }
