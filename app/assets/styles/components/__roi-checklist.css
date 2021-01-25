@@ -40,6 +40,8 @@
 
 	&__checkmark{
 		fill: currentColor;
+		stroke: currentColor;
+		stroke-width: 1px;
 		height: 20px;
 
 		@mixin phone{
