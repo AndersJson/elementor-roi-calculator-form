@@ -397,18 +397,6 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
-            $repeater->add_control(
-                'checklist_icon',
-                [
-                    'label' => __( 'Checklist Icon', 'roi-calculator-widget' ),
-                    'type' => \Elementor\Controls_Manager::ICONS,
-                    'default' => [
-                        'value' => 'fas fa-check',
-                        'library' => 'regular',
-                    ],
-                ]
-            );
-
             // Checklist Save Percent
             $repeater->add_control(
                 'checklist_save_percent',
@@ -1771,7 +1759,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'default' => '#2AAECD',
                 'description' => 'Default: ( #2AAECD ) ',
                 'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'fill: {{VALUE}}',
                 ],
             ]
         );
@@ -2302,9 +2290,9 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
                                         <li class="roi-checklist__item">
                                             <input type="checkbox" name="struggles[]" id="checklist-checkbox_<?php echo $checklist_count ?>" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>" data-save="<?php echo $item[ 'checklist_save_percent' ] ?>">
-                                            <span class="roi-checklist__icon flex-center">
-                                                <?php \Elementor\Icons_Manager::render_icon( $item['checklist_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-                                            </span>
+                                            <svg class="roi-checklist__icon flex-center">
+                                                <?php echo '<use xlink:href="' . esc_url( plugins_url( 'app/sprite.svg#icon-checkmark', dirname(__FILE__) ) ) . '"></use>'; ?>  
+                                            </svg>
                                             <span class="roi-checklist__labeltext">
                                                 <?php echo $item[ 'checklist_text' ]; ?>
                                             </span>
