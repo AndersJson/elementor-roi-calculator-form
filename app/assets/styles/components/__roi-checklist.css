@@ -36,12 +36,14 @@
 		&:hover {
 			transform: scale(1.1);
 		}
+	}
 
-		& i {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: inherit;
+	&__checkmark{
+		fill: currentColor;
+		height: 20px;
+
+		@mixin phone{
+			height: 16px;
 		}
 	}
 }

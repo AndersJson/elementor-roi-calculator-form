@@ -1759,7 +1759,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'default' => '#2AAECD',
                 'description' => 'Default: ( #2AAECD ) ',
                 'selectors' => [
-                    '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .roi-checklist__checkbox:checked + .roi-checklist__icon ' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -2290,9 +2290,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     <label class="roi-checklist__label" id="checklist-item_<?php echo $checklist_count ?>">
                                         <li class="roi-checklist__item">
                                             <input type="checkbox" name="struggles[]" id="checklist-checkbox_<?php echo $checklist_count ?>" class="roi-checklist__checkbox" value="<?php echo $item[ 'checklist_text' ]; ?>" data-save="<?php echo $item[ 'checklist_save_percent' ] ?>">
-                                            <svg class="roi-checklist__icon flex-center">
-                                                <?php echo '<use xlink:href="' . esc_url( plugins_url( 'app/sprite.svg#icon-checkmark', dirname(__FILE__) ) ) . '"></use>'; ?>  
-                                            </svg>
+                                            <span class="roi-checklist__icon flex-center">   
+                                                <svg class="roi-checklist__checkmark">
+                                                    <?php echo '<use xlink:href="' . esc_url( plugins_url( 'app/sprite.svg#icon-checkmark', dirname(__FILE__) ) ) . '"></use>'; ?>  
+                                                </svg>
+                                            </span>
                                             <span class="roi-checklist__labeltext">
                                                 <?php echo $item[ 'checklist_text' ]; ?>
                                             </span>
