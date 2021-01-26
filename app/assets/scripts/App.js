@@ -32,6 +32,7 @@ import '../styles/styles.css';
     class Checklist {
       constructor() {
         this.checkboxes = $(".roi-checklist__checkbox");
+        this.checklistWrapper = $("#roi-checklist-wrapper");
         this.rangewrappers = $(".checklist-rangewrapper");
         this.events();
       }
@@ -41,6 +42,9 @@ import '../styles/styles.css';
             {
               if ($(this.checkboxes[i]).is(':checked') ){
                   $(this.rangewrappers[i]).slideDown();
+                  if ($(this.checklistWrapper).hasClass("roi-invalid")){
+                    $(this.checklistWrapper).removeClass("roi-invalid");
+                  }
                 }else{
                   $(this.rangewrappers[i]).slideUp();
                 }
@@ -71,14 +75,27 @@ import '../styles/styles.css';
         this.amountRanges = amount;
         this.timeRanges = time;
         this.calculateButton = $("#roi-submit-button");
+        this.checklistWrapper = $("#roi-checklist-wrapper");
         //Data-properties
         this.minuteSalary = 0;
+        this.hourSalary = 0;
         this.oneYearMinutesSaved = 0;
         this.threeYearMinutesSaved = 0;
         this.fiveYearMinutesSaved = 0;
         this.oneYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
+        this.oneYearHoursDisplay = 0;
+        this.threeYearHoursDisplay = 0;
+        this.fiveYearHoursDisplay = 0;
+        this.oneYearMoneyDisplay = 0;
+        this.threeYearMoneyDisplay = 0;
+        this.fiveYearMoneyDisplay = 0;
+        this.oneYearHoursDisplay = 0;
+        this.threeYearHoursDisplay = 0;
+        this.fiveYearHoursDisplay = 0;
+
+
         this.events();
       }
   
@@ -105,6 +122,12 @@ import '../styles/styles.css';
         if (this.trapInput.value !== ""){
           return;
         }
+
+        let invalid = $(".roi-invalid");
+        for (let i = 0; i < invalid.length; i++){
+          $(invalid[i]).removeClass("roi-invalid");
+        }
+
         //check for valid form and run calculation
         if (this.validChecklist() && this.validOnlyLetters() && this.validOnlyLetters() && this.validEmail() && this.validPhone() ){
           this.calculate(e);
@@ -120,26 +143,31 @@ import '../styles/styles.css';
             return true;
           }
         }
+        $(this.checklistWrapper).addClass("roi-invalid");
         return false;
       }
 
       validOnlyLetters(){
         if (this.firstname.value == ""){
           this.firstname.focus();
+          $(this.firstname).addClass("roi-invalid");
           return false;
         }
         if (this.lastname.value == ""){
           this.lastname.focus();
+          $(this.lastname).addClass("roi-invalid");
           return false;
         }
         
         if (!/^[-\sa-zA-Z]+$/.test(this.firstname.value)){
           this.firstname.focus();
+          $(this.firstname).addClass("roi-invalid");
           return false;
         }
 
         if (!/^[-\sa-zA-Z]+$/.test(this.lastname.value)){
           this.lastname.focus();
+          $(this.lastname).addClass("roi-invalid");
           return false;
         }
 
@@ -149,11 +177,13 @@ import '../styles/styles.css';
       validEmail(){
         if (this.email.value == "") {
           this.email.focus();
+          $(this.email).addClass("roi-invalid");
           return false;
         }
 
         if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(this.email.value)){
           this.email.focus();
+          $(this.email).addClass("roi-invalid");
           return false;
         }
 
@@ -163,11 +193,13 @@ import '../styles/styles.css';
       validPhone(){
         if (this.phone.value == ""){
           this.phone.focus();
+          $(this.phone).addClass("roi-invalid");
           return false;
         }
 
         if (this.phone.value.length < 6){
           this.phone.focus();
+          $(this.phone).addClass("roi-invalid");
           return false;
         }
 
@@ -186,9 +218,17 @@ import '../styles/styles.css';
         this.oneYearMoneySaved = 0;
         this.threeYearMoneySaved = 0;
         this.fiveYearMoneySaved = 0;
+        this.oneYearMoneyDisplay = 0;
+        this.threeYearMoneyDisplay = 0;
+        this.threeYearMoneyDisplay = 0;
+        this.oneYearHoursDisplay = 0;
+        this.threeYearHoursDisplay = 0;
+        this.fiveYearHoursDisplay = 0;
+
 
         if (this.minuteSalary == 0){
           this.minuteSalary = (this.moneyRange.value)/60;
+          this.hourSalary = this.moneyRange.value;
         }
 
         for (let i = 0; i < this.checkboxes.length; i++){
@@ -204,8 +244,20 @@ import '../styles/styles.css';
             this.oneYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
             this.threeYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
             this.fiveYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
+          
+            //hours to display
+            this.oneYearHoursDisplay += Math.round(this.oneYearMinutesSaved/60);
+            this.threeYearHoursDisplay += Math.round(this.threeYearMinutesSaved/60);
+            this.fiveYearHoursDisplay += Math.round(this.fiveYearMinutesSaved/60);
+
+            //money to display
+            this.oneYearMoneyDisplay += Math.round(this.oneYearHoursDisplay * this.hourSalary);
+            this.threeYearMoneyDisplay += Math.round(this.threeYearHoursDisplay * this.hourSalary);
+            this.fiveYearMoneyDisplay += Math.round(this.fiveYearHoursDisplay * this.hourSalary);
+
           }
         }
+
 
         this.displayMoneySaved(1);
         this.displayTimeSaved(1);
@@ -234,11 +286,14 @@ import '../styles/styles.css';
         }
       }).done( function( response ) {
           $(myClass.roiResult).removeClass("hidden");
-          $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
           //Scroll down to result
-          $("html, body").animate({
-            scrollTop: ($(myClass.resultHeading).offset().top) - 50
-          }, 1000 );
+          setTimeout( () =>{
+            $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
+            $("html, body").animate({
+              scrollTop: ($(myClass.resultHeading).offset().top) - 50
+            }, 1000 );
+          }, 600 );
+          
         }).fail(function(response) {
           $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
           console.log(response);
@@ -305,39 +360,39 @@ import '../styles/styles.css';
       let output;
 
       if (years == 1){ 
-        if (this.oneYearMoneySaved >= 1000){
-          output = `${Number((this.oneYearMoneySaved/1000).toFixed(1))}k`;
+        if (this.oneYearMoneyDisplay >= 1000){
+          output = `${Number((this.oneYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
-            output = `${(this.oneYearMoneySaved/1000).toFixed(0)}k`; 
+            output = `${(this.oneYearMoneyDisplay/1000).toFixed(0)}k`; 
           }
         }else{
-          output = this.oneYearMoneySaved;
+          output = this.oneYearMoneyDisplay;
         }
         
         $(this.moneySavedSpan).html(output);
       }
 
       if (years == 3){ 
-        if (this.threeYearMoneySaved >= 1000){
-          output = `${Number((this.threeYearMoneySaved/1000).toFixed(1))}k`;
+        if (this.threeYearMoneyDisplay >= 1000){
+          output = `${Number((this.threeYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
-            output = `${(this.threeYearMoneySaved/1000).toFixed(0)}k`; 
+            output = `${(this.threeYearMoneyDisplay/1000).toFixed(0)}k`; 
           }
         }else{
-          output = this.threeYearMoneySaved;
+          output = this.threeYearMoneyDisplay;
         }
         
         $(this.moneySavedSpan).html(output);
       }
 
       if (years == 5){ 
-        if (this.fiveYearMoneySaved >= 1000){
-          output = `${Number((this.fiveYearMoneySaved/1000).toFixed(1))}k`;
+        if (this.fiveYearMoneyDisplay >= 1000){
+          output = `${Number((this.fiveYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
-            output = `${(this.fiveYearMoneySaved/1000).toFixed(0)}k`; 
+            output = `${(this.fiveYearMoneyDisplay/1000).toFixed(0)}k`; 
           }
         }else{
-          output = this.fiveYearMoneySaved;
+          output = this.fiveYearMoneyDisplay;
         }
         
         $(this.moneySavedSpan).html(output);
@@ -348,17 +403,17 @@ import '../styles/styles.css';
       let output;
 
       if (years == 1){ 
-        output = Math.round(this.oneYearMinutesSaved / 60);        
+        output = this.oneYearHoursDisplay;        
         $(this.hoursSavedSpan).html(output);
       }
 
       if (years == 3){ 
-        output = Math.round(this.threeYearMinutesSaved / 60);        
+        output = this.threeYearHoursDisplay;        
         $(this.hoursSavedSpan).html(output);
       }
 
       if (years == 5){ 
-        output = Math.round(this.fiveYearMinutesSaved / 60);        
+        output = this.fiveYearHoursDisplay;        
         $(this.hoursSavedSpan).html(output);
       }
     }

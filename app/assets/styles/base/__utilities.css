@@ -66,3 +66,9 @@
 		width: 100%;
 	}
 }
+
+.roi-invalid {
+	border-radius: 2px;
+	border-bottom: 2px solid rgba(244, 76, 76, 0.651) !important;
+	border-left: 2px solid rgba(244, 76, 76, 0.651) !important;
+}

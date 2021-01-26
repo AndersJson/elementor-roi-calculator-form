@@ -2271,7 +2271,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
-                    <form class="roi-display-section mb-large" id="roi-calculation-form">                    
+                    <form class="roi-display-section mb-large" id="roi-calculation-form" autocomplete="off">                    
                         <div class="roi-row flex-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
@@ -2282,7 +2282,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                     </span>
                                 <?php endif; ?>
                             </label>
-                            <div class="roi-right">
+                            <div class="roi-right" id="roi-checklist-wrapper">
                                 <ul class="roi-checklist">
                                 <?php
                                 $checklist_count = 1;
