@@ -1305,7 +1305,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'default' => '#2AAECD',
                 'description' => 'Default: ( #2AAECD ) ',
                 'selectors' => [
-                    '{{WRAPPER}} .could-do__icon i' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .could-do__icon' => 'fill: {{VALUE}}',
                 ],
             ]
         );
@@ -1329,17 +1329,51 @@ class ROI_Calculator_Widget extends Widget_Base {
                 'label_block' => true,
             ]
         );
+        
+        //Can-do SVG-icon anchor
         $candorepeater->add_control(
             'cando_icon',
-            [
-                'label' => __( 'Icon', 'text-domain' ),
-                'type' => \Elementor\Controls_Manager::ICONS,
-                'default' => [
-                    'value' => 'fas fa-coffee',
-                    'library' => 'solid',
-                ],
-            ]
-        );
+			[
+				'label' => __( 'Icon:', 'roi-calculator-widget' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'icon-coffee',
+				'options' => [
+                    'icon-alarmclock' => __( 'Alarmclock', 'roi-calculator-widget' ),
+                    'icon-bed' => __( 'Bed', 'roi-calculator-widget' ),
+					'icon-bike' => __( 'Bike', 'roi-calculator-widget' ),
+                    'icon-book' => __( 'Book', 'roi-calculator-widget' ),
+                    'icon-car' => __( 'Car', 'roi-calculator-widget' ),
+					'icon-apparel' => __( 'Clothes', 'roi-calculator-widget' ),
+                    'icon-coctail' => __( 'Coctail', 'roi-calculator-widget' ),
+                    'icon-coffee'  => __( 'Coffee', 'roi-calculator-widget' ),
+                    'icon-coffee-takeaway' => __( 'Coffee-to-go', 'roi-calculator-widget' ),
+					'icon-drink' => __( 'Drink', 'roi-calculator-widget' ),
+                    'icon-bowl' => __( 'Food', 'roi-calculator-widget' ),
+					'icon-gift' => __( 'Gift', 'roi-calculator-widget' ),
+					'icon-golf' => __( 'Golf', 'roi-calculator-widget' ),
+					'icon-child' => __( 'Human', 'roi-calculator-widget' ),
+					'icon-icecream' => __( 'Icecream', 'roi-calculator-widget' ),
+                    'icon-lamp' => __( 'Lamp', 'roi-calculator-widget' ),
+					'icon-laptop' => __( 'Laptop', 'roi-calculator-widget' ),
+					'icon-moneybag' => __( 'Moneybag', 'roi-calculator-widget' ),
+                    'icon-motorcycle' => __( 'Motorcycle', 'roi-calculator-widget' ),
+					'icon-shipping' => __( 'Packages', 'roi-calculator-widget' ),
+					'icon-mobile' => __( 'Phone', 'roi-calculator-widget' ),
+                    'icon-aircraft-take-off' => __( 'Plane', 'roi-calculator-widget' ),
+					'icon-road' => __( 'Road', 'roi-calculator-widget' ),
+                    'icon-address' => __( 'Sign', 'roi-calculator-widget' ),
+                    'icon-stats' => __( 'Stats', 'roi-calculator-widget' ),
+					'icon-suitcase' => __( 'Suitcase', 'roi-calculator-widget' ),
+                    'icon-sunglasses' => __( 'Sunglasses', 'roi-calculator-widget' ),
+                    'icon-tablet' => __( 'Tablet', 'roi-calculator-widget' ),
+					'icon-ticket' => __( 'Ticket', 'roi-calculator-widget' ),
+					'icon-tools' => __( 'Tools', 'roi-calculator-widget' ),                    
+                    'icon-tv' => __( 'TV', 'roi-calculator-widget' ),
+					'icon-weights' => __( 'Weights', 'roi-calculator-widget' ),
+					'icon-accessibility' => __( 'Workout', 'roi-calculator-widget' ),                  
+				],
+			]
+		);
 
 
         // Can-do time or price
@@ -2483,10 +2517,14 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <h2 id="roi-result-could-do-heading" class="heading--primary"><?php echo $settings[ 'result_cando_heading_text' ] ?></h2>
                             </div>
                             <div class="roi-row flex-start">   
-                            <?php foreach( $settings[ 'cando_boxes' ] as $candoitem  ) : ?>
+                            <?php foreach( $settings[ 'cando_boxes' ] as $candoitem  ) :
+                                $iconURL = 'app/sprite.svg#' . $candoitem[ 'cando_icon' ];
+                                ?>
                                 <div class="result-box max-third-col">
-                                    <span class="could-do__icon flex flex-center">
-                                        <?php \Elementor\Icons_Manager::render_icon( $candoitem['cando_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                                    <span class="could-do__icon-wrapper flex flex-center">
+                                        <svg class="could-do__icon">
+                                            <?php echo '<use xlink:href="' . esc_url( plugins_url( $iconURL, dirname(__FILE__) ) ) . '"></use>'; ?>  
+                                        </svg>
                                     </span>
                                     <p class="could-do__text">
                                         <span class="could-do__pre-text"><?php echo $candoitem[ 'cando_pre_amount_text' ] ?></span>
