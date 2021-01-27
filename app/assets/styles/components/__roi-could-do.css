@@ -1,28 +1,25 @@
-.could-do{
-  &__icon{
-    width: 100%;
+.could-do {
+	&__iconwrapper {
+		width: 100%;
 
-    @mixin phone{
-      width: 70%;
-    }
+		@mixin phone {
+			width: 70%;
+		}
+	}
 
-    & i{
-      font-size: 68px;
+	&__icon {
+		height: 85px;
+	}
 
-      @mixin phone{
-        font-size: 54px;
-      }
-    }
-  }
-  &__text{
-    margin: 10px 0;
-    padding: 6px 0;
-    border-top: 2px solid #e7e7e7;
-    width: 100%;
-    text-align: center;
+	&__text {
+		margin: 10px 0;
+		padding: 6px 0;
+		border-top: 2px solid #e7e7e7;
+		width: 100%;
+		text-align: center;
 
-    @mixin phone{
-      width: 70%;
-    }
-  }
+		@mixin phone {
+			width: 70%;
+		}
+	}
 }

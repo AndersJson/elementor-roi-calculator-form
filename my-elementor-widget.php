@@ -192,7 +192,7 @@ final class ROI_Calculator_Widget
                 global $wpdb;
 
                 $table = $wpdb->prefix . "roi_formsubscribers";
-                $subscribers = $wpdb->get_results("SELECT * FROM $table");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC");
                 ?>
                 <div class="roi-admin-header">
                     <h1>ROI-Calculator</h1>
