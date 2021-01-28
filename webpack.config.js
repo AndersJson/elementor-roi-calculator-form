@@ -45,7 +45,7 @@ const cssConfig = {
  /* SETTING UP THE CONFIG OBJECT WHICH ARE EXTRACTED */
 const config = {
   entry: {
-    app: './app/assets/scripts/App.js'
+    app: './app/assets/scripts/App.js',
     admin: './app/assets/scripts/Admin.js'
   },
   plugins: pages,
@@ -72,7 +72,7 @@ if (currentTask == 'build') {
   });
 
   config.output = {
-    filename: 'bundled.min.js',
+    filename: '[name].min.js',
     path: path.resolve(__dirname, 'docs')
   };
 
@@ -80,7 +80,7 @@ if (currentTask == 'build') {
 
   config.plugins.push(
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles.min.css' }) 
+    new MiniCssExtractPlugin({ filename: '[name]styles.min.css' }) 
   );
 }
 

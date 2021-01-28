@@ -133,8 +133,8 @@ final class ROI_Calculator_Widget
      */
     public function scripts_styles()
     {
-        wp_register_style('roi-calc-style', ROI_PLUGIN_URL . 'docs/styles.min.css', [], rand(), 'all');
-        wp_register_script('roi-calc-script', ROI_PLUGIN_URL . 'docs/bundled.min.js', ['jquery'], rand(), true);
+        wp_register_style('roi-calc-style', ROI_PLUGIN_URL . 'docs/appstyles.min.css', [], rand(), 'all');
+        wp_register_script('roi-calc-script', ROI_PLUGIN_URL . 'docs/app.min.js', ['jquery'], rand(), true);
 
         wp_localize_script('roi-calc-script', 'roi_ajax_script', array('ajaxurl' => admin_url('admin-ajax.php')));
         wp_enqueue_style('roi-calc-style');
@@ -164,11 +164,14 @@ final class ROI_Calculator_Widget
             return;
         }
 
-        //Ladda CSS till back-end *****CHANGE URL TO 'DOCS' INSTEAD OF 'APP'
+        //Ladda CSS till back-end
         function roi_calculator_admin_scripts(){
             wp_enqueue_media();
-            wp_register_style('roi_calc_admin_style', ROI_PLUGIN_URL . 'app/admin_styles.min.css', [], rand(), 'all');
-            wp_enqueue_style('roi_calc_admin_style');
+            wp_register_style('roi-calc-admin-style', ROI_PLUGIN_URL . 'docs/adminstyles.min.css', [], rand(), 'all');
+            wp_register_script('roi-calc-admin-script', ROI_PLUGIN_URL . 'docs/admin.min.js', ['jquery'], rand(), true);
+
+            wp_enqueue_style('roi-calc-admin-style');
+            wp_enqueue_script('roi-calc-admin-script');
         }
         
         //Ladda CSS JS till back-end när admin-scripts laddas        
