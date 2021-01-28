@@ -44,7 +44,10 @@ const cssConfig = {
 
  /* SETTING UP THE CONFIG OBJECT WHICH ARE EXTRACTED */
 const config = {
-  entry: './app/assets/scripts/App.js',
+  entry: {
+    app: './app/assets/scripts/App.js'
+    admin: './app/assets/scripts/Admin.js'
+  },
   plugins: pages,
   module: {
     rules: [cssConfig]
