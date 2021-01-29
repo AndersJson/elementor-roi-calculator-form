@@ -1149,7 +1149,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 				'name' => 'result_saved_text_typography',
 				'label' => __( 'Sub-text Typography', 'roi-calculator-widget' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .result-box__text',
+                'selector' => '{{WRAPPER}} .result-box__text h5',
 			]
         );
 
@@ -2491,7 +2491,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                         <span id="roi-money-saved">5k</span>
                                     </h1>
                                     <span class="result-box__text">
-                                    <?php echo $settings[ 'saved_money_sub_text' ] ?>
+                                    <h5><?php echo $settings[ 'saved_money_sub_text' ] ?></h5>
                                     <?php if ($settings[ 'show_saved_money_tip_trigger' ]) : ?> 
                                         <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
                                         <span class="result-box__tip">
@@ -2502,7 +2502,8 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 </div>
                                 <div class="result-box max-half-col flex flex-column flex-center">
                                     <h1 class="result-box__saved" id="roi-hours-saved">20</h1>
-                                    <span class="result-box__text"><?php echo $settings[ 'saved_time_sub_text' ] ?>
+                                    <span class="result-box__text">
+                                    <h5><?php echo $settings[ 'saved_time_sub_text' ] ?></h5>
                                     <?php if ($settings[ 'show_saved_time_tip_trigger' ]) : ?> 
                                         <span class="result-box__tip-trigger flex flex-center"><p>?</p></span>
                                         <span class="result-box__tip">
