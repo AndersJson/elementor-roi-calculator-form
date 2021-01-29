@@ -12,11 +12,12 @@
   align-items: flex-start;
   padding: 1em 4em;
   background: #fff;
+
+  & p{
+    margin: 0;
+  }
 }
 
-.roi-admin-header p{
-  margin: 0;
-}
 
 .roi-admin-table{
   display: flex;
@@ -35,8 +36,13 @@
 
   &__cell{
     flex: 1;
-    &:not(:last-child){
-      margin-right: 5px;
-    }
+  }
+
+  &__check-cell{
+    flex: 0 0 30px;
+  }
+
+  &__options-cell{
+    flex: 0 0 80px;
   }
 }
