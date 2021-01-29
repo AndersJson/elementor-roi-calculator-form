@@ -198,22 +198,33 @@ final class ROI_Calculator_Widget
                 $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC");
                 ?>
                 <div class="roi-admin-header">
+                <div class="roi-admin-header__title">
                     <h1>ROI-Calculator</h1>
-                    <p>Listing data from users who has submitted the ROI-calculator.</p>
-                    <p><i>(Time of the submitted form is in local Europe/Stockholm-timezone)</i></p>
+                    <div class="roi-admin-header__description">
+                        <p class="roi-admin-header__subtitle">Listing data from users who has submitted the ROI-calculator.</p>
+                        <p class="roi-admin-header__timezone">(Time of the submitted form is in local Europe/Stockholm-timezone)</p>
+                    </div>
+                </div>
+                <div class="roi-admin-header__tools">
+                    <span class="roi-admin-header__count">150/150</span>
+                    <span class="roi-admin-header__delete">Delete selected <span id="delete-count">(5)</span></span>
+                </div>
+                    
                 </div>
                 <div class="roi-admin-wrapper">
-                    <div class="roi-admin-table">
-                <?php
-                    echo '<div class="roi-admin-table__row">';
-                    echo '<div class="roi-admin-table__cell"><div class="roi-admin-table__check-cell"></div><h4>Time</h4></div><div class="roi-admin-table__cell"><h4>Firstname</h4></div><div class="roi-admin-table__cell"><h4>Lastname</h4></div><div class="roi-admin-table__cell"><h4>Email</h4></div><div class="roi-admin-table__cell"><h4>Phone</h4></div><div class="roi-admin-table__options-cell"></div>';
-                    echo '</div>';
-                    foreach ( $subscribers as $subscriber ) {
-                        echo '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
-                            echo '<div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" /></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p><a href="mailto:' . $subscriber->email . '">' . $subscriber->email . '</a></p></div><div class="roi-admin-table__cell"><p><a href="callto:' . $subscriber->phone . '">' . $subscriber->phone . '</a></p></div><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper" id="roi-edit"><svg class="roi-options__icon"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-pencil', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-confirm"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-cancel"><svg class="roi-options__icon"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-close', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    <div class="roi-admin-inner-wrapper">
+                        <div class="roi-admin-table">
+                    <?php
+                        echo '<div class="roi-admin-table__row">';
+                        echo '<div class="roi-admin-table__check-cell"></div><div class="roi-admin-table__cell"><h4>Time</h4></div><div class="roi-admin-table__cell"><h4>Firstname</h4></div><div class="roi-admin-table__cell"><h4>Lastname</h4></div><div class="roi-admin-table__cell"><h4>Email</h4></div><div class="roi-admin-table__cell"><h4>Phone</h4></div><div class="roi-admin-table__options-cell"></div>';
                         echo '</div>';
-                    }
-                ?>
+                        foreach ( $subscribers as $subscriber ) {
+                            echo '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
+                                echo '<div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" /></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p><a href="mailto:' . $subscriber->email . '">' . $subscriber->email . '</a></p></div><div class="roi-admin-table__cell"><p><a href="callto:' . $subscriber->phone . '">' . $subscriber->phone . '</a></p></div><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                            echo '</div>';
+                        }
+                    ?>
+                        </div>
                     </div>
                 </div>
                 <?php

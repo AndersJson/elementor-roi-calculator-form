@@ -1,0 +1,40 @@
+.roi-admin-header {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 1em 4em;
+	background: #fff;
+
+	&__title{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-bottom: 30px;
+	}
+
+	&__description{
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__timezone{
+		text-decoration: italic;
+	}
+
+	&__tools{
+		display: flex;
+	}
+
+	&__count{
+
+	}
+
+	&__delete{
+
+	}
+
+	& p {
+		margin: 0;
+	}
+}

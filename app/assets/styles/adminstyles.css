@@ -1,3 +1,10 @@
 @import "./abstracts/__mixins.css";
 @import "./abstracts/__vars.css";
-@import "./admin/__roi-admin.css";
+@import "./admin/__admin-global.css";
+@import "./admin/__admin-inner-wrapper.css";
+@import "./admin/__admin-header.css";
+@import "./admin/__admin-table.css";
+@import "./admin/__admin-options.css";
+
+
+

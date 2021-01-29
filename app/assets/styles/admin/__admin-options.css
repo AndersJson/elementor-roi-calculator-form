@@ -1,0 +1,24 @@
+.roi-options{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+
+  &__iconwrapper{
+    &:not(:last-child){
+      margin-right: 5px;
+    }
+  }
+
+  &__icon{
+    width: 20px;
+    display: block;
+    height: 20px;
+    cursor: pointer;
+    fill: #ccc;
+
+    &:hover{
+      fill: #000;
+    }
+  }
+}

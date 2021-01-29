@@ -1,0 +1,12 @@
+.roi-admin-wrapper *,
+.roi-admin-wrapper *::before,
+.roi-admin-wrapper *::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: inherit;
+	line-height: inherit;
+}
+
+.roi-admin-wrapper {
+	width: 100%;
+}

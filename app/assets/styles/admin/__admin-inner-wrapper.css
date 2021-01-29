@@ -1,0 +1,9 @@
+.roi-admin-inner-wrapper {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 60vh;
+}
