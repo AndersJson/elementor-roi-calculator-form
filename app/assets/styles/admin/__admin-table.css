@@ -7,8 +7,19 @@
 	&__row {
 		display: flex;
 		align-items: center;
-		height: 30px;
-		border-bottom: 1px solid #e7e7e7;
+		padding: .6em 0;
+
+		&:not(:first-child){
+			border-bottom: 2px solid #e7e7e7;
+
+			&:hover{
+				border-bottom: 2px solid #000;
+			}
+		}
+
+		&:hover > .roi-admin-table__options-cell{
+			color: #000;
+		}
 	}
 
 	&__cell {
@@ -21,5 +32,6 @@
 
 	&__options-cell {
 		width: 30px;
+		color: #ccc;
 	}
 }

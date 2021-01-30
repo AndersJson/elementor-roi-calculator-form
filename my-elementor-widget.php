@@ -206,7 +206,10 @@ final class ROI_Calculator_Widget
                     </div>
                 </div>
                 <div class="roi-admin-header__tools">
-                    <span class="roi-admin-header__count">150/150</span>
+                    <div class="roi-admin-header__display">
+                        <span>Showing posts:</span>
+                        <span class="roi-admin-header__count">150/150</span>
+                    </div>
                     <span class="roi-admin-header__delete">Delete selected <span id="delete-count">(5)</span></span>
                 </div>
                     
@@ -216,7 +219,7 @@ final class ROI_Calculator_Widget
                         <div class="roi-admin-table">
                     <?php
                         echo '<div class="roi-admin-table__row">';
-                        echo '<div class="roi-admin-table__check-cell"></div><div class="roi-admin-table__cell"><h4>Time</h4></div><div class="roi-admin-table__cell"><h4>Firstname</h4></div><div class="roi-admin-table__cell"><h4>Lastname</h4></div><div class="roi-admin-table__cell"><h4>Email</h4></div><div class="roi-admin-table__cell"><h4>Phone</h4></div><div class="roi-admin-table__options-cell"></div>';
+                        echo '<div class="roi-admin-table__check-cell"></div><div class="roi-admin-table__cell"><h3>Time</h3></div><div class="roi-admin-table__cell"><h3>Firstname</h3></div><div class="roi-admin-table__cell"><h3>Lastname</h3></div><div class="roi-admin-table__cell"><h3>Email</h3></div><div class="roi-admin-table__cell"><h3>Phone</h3></div><div class="roi-admin-table__options-cell"></div>';
                         echo '</div>';
                         foreach ( $subscribers as $subscriber ) {
                             echo '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';

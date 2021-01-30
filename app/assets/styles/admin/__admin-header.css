@@ -4,17 +4,18 @@
 	align-items: flex-start;
 	padding: 1em 4em;
 	background: #fff;
+	border-bottom: 2px solid #ccc;
 
 	&__title{
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 		width: 100%;
 		margin-bottom: 30px;
 	}
 
 	&__description{
 		display: flex;
+		margin-left: 50px;
 		flex-direction: column;
 	}
 
@@ -23,15 +24,28 @@
 	}
 
 	&__tools{
+		width: 100%;
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__display{
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__count{
-
+		font-size: 16px;
+		margin-top: 5px;
 	}
 
 	&__delete{
-
+		color: #ccc;
+		margin-left: 50px;
+		border: 2px solid #ccc;
+		border-radius: 3px;
+		padding: 1em 2em;
 	}
 
 	& p {
