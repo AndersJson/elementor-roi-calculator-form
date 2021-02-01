@@ -175,6 +175,7 @@ final class ROI_Calculator_Widget
             wp_register_style('roi-calc-admin-style', ROI_PLUGIN_URL . 'docs/adminstyles.min.css', [], rand(), 'all');
             wp_register_script('roi-calc-admin-script', ROI_PLUGIN_URL . 'docs/admin.min.js', ['jquery'], rand(), true);
 
+            wp_localize_script('roi-calc-admin-script', 'roi_admin_ajax_script', array('ajaxurl' => admin_url('admin-ajax.php')));
             wp_enqueue_style('roi-calc-admin-style');
             wp_enqueue_script('roi-calc-admin-script');
         }
@@ -196,12 +197,9 @@ final class ROI_Calculator_Widget
                 exit;
             }
 
-            if ( is_admin() && is_user_logged_in() ){
-                global $wpdb;
-
-                $table = $wpdb->prefix . "roi_formsubscribers";
-                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC");
-                ?>
+            if ( is_admin() && is_user_logged_in() ){ 
+                $nonce = wp_create_nonce("roi_admin_nonce");
+            ?>
                 <div class="roi-admin-header">
                 <div class="roi-admin-header__title">
                     <h1>ROI-Calculator</h1>
@@ -227,20 +225,23 @@ final class ROI_Calculator_Widget
                 </div>
                 <div class="roi-admin-wrapper">
                     <div class="roi-admin-inner-wrapper">
-                        <div class="roi-admin-table">
+                    <!--
+                    <div class="roi-admin-loading">
+                        <div class="roi-admin-loading__icon">
+
+                        </div>
+                    </div>
+                    -->
+                        <div class="roi-admin-table" id="roi-table">
                     <?php
                         echo '<div class="roi-admin-table__row">';
                         echo '<div class="roi-admin-table__check-cell"><label><input type="checkbox" id="checkbox-select-all" class="checkbox__input--select-all" name="selected-all" value="selected-all" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></label></div><div class="roi-admin-table__cell"><h3>Time</h3></div><div class="roi-admin-table__cell"><h3>Firstname</h3></div><div class="roi-admin-table__cell"><h3>Lastname</h3></div><div class="roi-admin-table__cell"><h3>Email</h3></div><div class="roi-admin-table__cell"><h3>Phone</h3></div><div class="roi-admin-table__options-cell"></div>';
                         echo '</div>';
-                        foreach ( $subscribers as $subscriber ) {
-                            echo '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
-                                echo '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
-                            echo '</div>';
-                        }
+                        
                     ?>
                         </div>
                         <div class="roi-admin-footer">
-                            <div class="show-more" id="roi-show-more">
+                            <div class="show-more" id="roi-show-more" data-nonce="<?php echo esc_attr( $nonce ); ?>">
                                 <span class="show-more__text">Show more</span>
                                 <?php
                                 echo '<span class="show-more__iconwrapper"><svg class="show-more__icon"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-chevron-thin-down', dirname(__FILE__) ) ) . '"></use></svg></span>';
@@ -258,6 +259,32 @@ final class ROI_Calculator_Widget
             
         }
 
+
+        // Get data in admin Ajax
+        function get_user_data(){
+        /*    
+            // nonce check for an extra layer of security, the function will exit if it fails
+            if ( !wp_verify_nonce( $_REQUEST['nonce'], "roi_admin_nonce")) {
+                exit("Security-issue");
+            }
+        */    
+            global $wpdb;
+            $table = $wpdb->prefix . "roi_formsubscribers";
+
+            // Initialize
+            if ( isset($_POST['init']) ){
+                $subscribers = stripslashes_deep($wpdb->get_results("SELECT * FROM $table ORDER BY time DESC LIMIT 10")); 
+                
+                foreach ( $subscribers as $subscriber ) {                    
+                    echo '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
+                    echo '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    echo '</div>';                                    
+                }          
+            }
+
+            die();
+        }
+        
         
         // Insert data in sql-db via ajax
         function insert_user_data()
@@ -306,6 +333,8 @@ final class ROI_Calculator_Widget
         //Init Ajax-functions
         add_action('wp_ajax_nopriv_insert_user_data', 'insert_user_data');
         add_action('wp_ajax_insert_user_data', 'insert_user_data');
+        //Admin Ajax
+        add_action('wp_ajax_get_user_data', 'get_user_data');
 
         //Init widgets
         add_action('elementor/init', [$this, 'init_category']);
