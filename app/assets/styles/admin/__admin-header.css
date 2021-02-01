@@ -26,12 +26,18 @@
 	&__tools{
 		width: 100%;
 		display: flex;
+		flex-wrap: wrap-reverse;
 		align-items: center;
 		justify-content: space-between;
 	}
 
 	&__show{
 		display: flex;
+
+		@media only screen and (max-width: 1120px){
+			width: 100%;
+			margin-top: 10px;
+		}
 	}
 
 	&__display{
@@ -44,8 +50,19 @@
 		margin-top: 5px;
 	}
 
+	&__filter{
+		display: flex;
+		align-items: center;
+		margin-left: 30px;
+	}
+
 	&__controls{
 		display: flex;
+
+		@media only screen and (max-width: 1120px){
+			width: 100%;
+			justify-content: flex-end;
+		}
 	}
 
 	&__button{
