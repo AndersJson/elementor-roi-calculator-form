@@ -1,0 +1,36 @@
+.checkbox{
+  &__input{
+    display: none !important;
+
+    &:checked + .checkbox__icon > .checkbox__checkmark{
+      height: 16px;
+    }
+
+    &--select-all{
+      display: none !important;
+
+      &:checked + .checkbox__icon > .checkbox__checkmark{
+        height: 16px;
+      }
+    }
+
+  }
+
+  &__icon{
+    color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2AAECD;
+    border-radius: 50%;
+  }
+
+  &__checkmark{
+    height: 0px;
+    width: 16px;
+    fill: currentColor;
+    transition: 200ms all;
+  }
+}
