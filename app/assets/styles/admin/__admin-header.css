@@ -30,6 +30,10 @@
 		justify-content: space-between;
 	}
 
+	&__show{
+		display: flex;
+	}
+
 	&__display{
 		display: flex;
 		flex-direction: column;
@@ -40,12 +44,17 @@
 		margin-top: 5px;
 	}
 
-	&__delete{
+	&__controls{
+		display: flex;
+	}
+
+	&__button{
 		color: #ccc;
 		margin-left: 50px;
 		border: 2px solid #ccc;
 		border-radius: 3px;
 		padding: 1em 2em;
+		cursor: pointer;
 	}
 
 	& p {

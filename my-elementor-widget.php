@@ -206,11 +206,17 @@ final class ROI_Calculator_Widget
                     </div>
                 </div>
                 <div class="roi-admin-header__tools">
-                    <div class="roi-admin-header__display">
-                        <span>Showing posts:</span>
-                        <span class="roi-admin-header__count">150/150</span>
+                    <div class="roi-admin-header__show">
+                        <div class="roi-admin-header__display">
+                            <span>Showing posts:</span>
+                            <span class="roi-admin-header__count">150/150</span>
+                        </div>
+                        <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
                     </div>
-                    <span class="roi-admin-header__delete">Delete selected <span id="delete-count">(5)</span></span>
+                    <div class="roi-admin-header__controls">
+                        <span class="roi-admin-header__button">Mail selected <span id="roi-mail-count">(15)</span></span>
+                        <span class="roi-admin-header__button">Delete selected <span id="roi-delete-count">(5)</span></span>
+                    </div>
                 </div>
                     
                 </div>
