@@ -234,6 +234,14 @@ final class ROI_Calculator_Widget
                         }
                     ?>
                         </div>
+                        <div class="roi-admin-footer">
+                            <div class="show-more" id="roi-show-more">
+                                <span class="show-more__text">Show more</span>
+                                <?php
+                                echo '<span class="show-more__iconwrapper"><svg class="show-more__icon"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-chevron-thin-down', dirname(__FILE__) ) ) . '"></use></svg></span>';
+                                ?>
+                            </div> 
+                        </div>
                     </div>
                 </div>
                 <?php

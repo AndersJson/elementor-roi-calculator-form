@@ -1,11 +1,14 @@
 @import "./abstracts/__mixins.css";
-@import "./abstracts/__vars.css";
 @import "./admin/__admin-global.css";
 @import "./admin/__admin-inner-wrapper.css";
 @import "./admin/__admin-header.css";
 @import "./admin/__admin-table.css";
 @import "./admin/__admin-options.css";
 @import "./admin/__admin-checkbox.css";
+@import "./admin/__admin-footer.css";
+@import "./admin/__admin-show-more.css";
+
+
 
 
 
