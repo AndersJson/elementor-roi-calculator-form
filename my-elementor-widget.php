@@ -165,7 +165,12 @@ final class ROI_Calculator_Widget
         }
 
         //Ladda CSS till back-end
-        function roi_calculator_admin_scripts(){
+        function roi_calculator_admin_scripts($hook){ 
+
+            if ( 'toplevel_page_roi-elementor-widget/my-elementor-widget' != $hook ) {
+                return;
+            }
+            
             wp_enqueue_media();
             wp_register_style('roi-calc-admin-style', ROI_PLUGIN_URL . 'docs/adminstyles.min.css', [], rand(), 'all');
             wp_register_script('roi-calc-admin-script', ROI_PLUGIN_URL . 'docs/admin.min.js', ['jquery'], rand(), true);
