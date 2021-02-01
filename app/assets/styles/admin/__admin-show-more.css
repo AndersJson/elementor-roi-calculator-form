@@ -3,6 +3,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: 300ms all;
+
+  &:hover{
+    transform: scale(1.1);
+  }
 
   &__text{
     text-transform: uppercase;
