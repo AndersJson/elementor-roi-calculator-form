@@ -198,7 +198,6 @@ final class ROI_Calculator_Widget
             }
 
             if ( is_admin() && is_user_logged_in() ){ 
-                $nonce = wp_create_nonce("roi_admin_nonce");
             ?>
                 <div class="roi-admin-header">
                 <div class="roi-admin-header__title">
@@ -250,7 +249,7 @@ final class ROI_Calculator_Widget
                     ?>
                         </div>
                         <div class="roi-admin-footer">
-                            <div class="show-more" id="roi-show-more" data-nonce="<?php echo esc_attr( $nonce ); ?>">
+                            <div class="show-more" id="roi-show-more">
                                 <span class="show-more__text">Show more</span>
                                 <?php
                                 echo '<span class="show-more__iconwrapper"><svg class="show-more__icon"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-chevron-thin-down', dirname(__FILE__) ) ) . '"></use></svg></span>';
@@ -273,7 +272,7 @@ final class ROI_Calculator_Widget
         function get_user_data(){           
             
             // Initialize
-            if ( isset($_POST['init']) ){
+            if ( isset($_POST['init']) &&  $_POST['init'] == 'yes'){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
 
@@ -292,14 +291,19 @@ final class ROI_Calculator_Widget
                 
                 echo json_encode($output);
                 die();
-            }
+            
+            } else if ( $_POST['unique'] == 'yes'){
+                $output["message"] = "unique";
+                echo json_encode($output);
 
-            /*    
-            // nonce check for an extra layer of security, the function will exit if it fails
-            if ( !wp_verify_nonce( $_REQUEST['nonce'], "roi_admin_nonce")) {
-                exit("Security-issue");
-            }
-        */    
+                die();
+
+            }else if ( $_POST['unique'] == 'no'){
+                $output["message"] = "All";
+                echo json_encode($output);
+
+                die();
+            } 
             
         }
         
