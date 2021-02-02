@@ -64,7 +64,6 @@ import '../styles/styles.css';
         this.email = $("#roi-input__email")[0];
         this.phone = $("#roi-input__phone")[0];
         this.yearTabs = $(".tabs__link");
-        this.trapInput = $("#city-input")[0];
         this.moneySavedSpan = $("#roi-money-saved")[0];
         this.hoursSavedSpan = $("#roi-hours-saved")[0];
         this.coulddoCostSpans = $(".could-do__cost");
@@ -118,10 +117,6 @@ import '../styles/styles.css';
   
       validateForm(e){
         e.preventDefault();
-        //trap-input
-        if (this.trapInput.value !== ""){
-          return;
-        }
 
         let invalid = $(".roi-invalid");
         for (let i = 0; i < invalid.length; i++){
