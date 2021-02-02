@@ -2305,7 +2305,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
-                    <form class="roi-display-section mb-large" id="roi-calculation-form" autocomplete="off">                    
+                    <form class="roi-display-section mb-large" id="roi-calculation-form">                    
                         <div class="roi-row flex-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
@@ -2456,7 +2456,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                 <input class="roi-form__textinput" id="roi-input__lastname" name="lastname" placeholder="<?php echo $settings[ 'lastname_placeholder_text' ] ?>">
                                 <input class="roi-form__textinput" id="roi-input__email" name="email" placeholder="<?php echo $settings[ 'email_placeholder_text' ] ?>">
                                 <input class="roi-form__textinput" id="roi-input__phone" name="phone" placeholder="<?php echo $settings[ 'phone_placeholder_text' ] ?>">
-                                <input class="form__textinput" id="city-input" name="city">
+                                <input class="form__textinput" id="city-input" name="city" autocomplete="off">
                             </div>
                         </div>
                         <div class="roi-row flex-center">

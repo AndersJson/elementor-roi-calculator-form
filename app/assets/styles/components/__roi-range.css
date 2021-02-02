@@ -91,6 +91,9 @@
 		font-size: 20px;
 		line-height: 33px;
 		border-radius: 2px;
+		outline: 1px solid transparent;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
