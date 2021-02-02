@@ -109,7 +109,7 @@ class Admin{
           $(this.deleteCount).html(this.selectedCount);
           if (this.selectedCount == 1) {
             $(this.headerButtons).removeClass("roi-hidden");
-            console.log(this.selectedMail);
+            
           }
         }else{
           let index = this.selected.indexOf(this.checkboxes[i].value);
@@ -126,7 +126,7 @@ class Admin{
             $(this.mailCount).html("this.selectedCount");
             $(this.deleteCount).html("this.selectedCount");
           }, 300);
-          console.log(this.selectedMail);
+          
           
         }
       });
@@ -136,9 +136,11 @@ class Admin{
   toggleSelectAll(){
     if (this.selectAll.checked){
       this.selected = [];
+      this.selectedMail = [];
       for (let i = 0; i < this.checkboxes.length; i++){
         this.checkboxes[i].checked = true;
         this.selected.push(this.checkboxes[i].value);
+        this.selectedMail.push($(this.checkboxes[i]).data("mail"));        
       }
       $(this.mailCount).html(this.loadedData);
       $(this.deleteCount).html(this.loadedData);
@@ -146,7 +148,8 @@ class Admin{
         $(this.headerButtons).removeClass("roi-hidden");
       }
       this.selectedCount = this.loadedData;
-
+      
+      
     }else{
       for (let i = 0; i < this.checkboxes.length; i++){
         this.checkboxes[i].checked = false;
@@ -156,11 +159,13 @@ class Admin{
       }
       this.selectedCount = 0;
       this.selected = [];
+      this.selectedMail = [];
       
       setTimeout(()=>{
           $(this.mailCount).html("0");
           $(this.deleteCount).html("0");
         }, 500);
+        
     }
   }
 
