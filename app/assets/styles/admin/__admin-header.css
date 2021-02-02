@@ -67,12 +67,20 @@
 	}
 
 	&__button{
-		color: #ccc;
+		color: #54595f;
 		margin-left: 50px;
-		border: 2px solid #ccc;
-		border-radius: 3px;
-		padding: 1em 2em;
+		border: 2px solid #54595f;
+		border-radius: 7px;
+		padding: .8em 1.8em;
 		cursor: pointer;
+		text-transform: uppercase;
+		transition: all 200ms;
+		font-weight: 600;
+
+		&:hover{
+			color: #fff;
+			background-color: #54595f;
+		}
 	}
 
 	& p {

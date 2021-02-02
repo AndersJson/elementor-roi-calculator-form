@@ -8,6 +8,7 @@ class Admin{
     this.showingCount = $("#roi-showing-count");
     this.totalCount = $("#roi-total-count");
     this.filter = $("#roi-filter-unique");
+    this.selectAll = $("#checkbox-select-all")[0];
     this.checkboxes;
     this.headerButtons = $("#roi-admin-controls");
     this.mailCount = $("#roi-mail-count");
@@ -31,6 +32,7 @@ class Admin{
   events(){
     $(this.filter).change(this.toggleUnique.bind(this));
     $(this.showMore).click(this.loadMore.bind(this));
+    $(this.selectAll).change(this.toggleSelectAll.bind(this));
   }
 
   init(){
@@ -114,12 +116,43 @@ class Admin{
             $(this.headerButtons).addClass("roi-hidden");
           }
           setTimeout(()=>{
-            $(this.mailCount).html(this.selectedCount);
-            $(this.deleteCount).html(this.selectedCount);
-          }, 200);
+            $(this.mailCount).html("this.selectedCount");
+            $(this.deleteCount).html("this.selectedCount");
+          }, 300);
           
         }
       });
+    }
+  }
+
+  toggleSelectAll(){
+    if (this.selectAll.checked){
+      this.selected = [];
+      for (let i = 0; i < this.checkboxes.length; i++){
+        this.checkboxes[i].checked = true;
+        this.selected.push(this.checkboxes[i].value);
+      }
+      $(this.mailCount).html(this.loadedData);
+      $(this.deleteCount).html(this.loadedData);
+      if (this.selectedCount == 0) {
+        $(this.headerButtons).removeClass("roi-hidden");
+      }
+      this.selectedCount = this.loadedData;
+
+    }else{
+      for (let i = 0; i < this.checkboxes.length; i++){
+        this.checkboxes[i].checked = false;
+      }
+      if (this.selectedCount != 0) {
+        $(this.headerButtons).addClass("roi-hidden");
+      }
+      this.selectedCount = 0;
+      this.selected = [];
+      
+      setTimeout(()=>{
+          $(this.mailCount).html("0");
+          $(this.deleteCount).html("0");
+        }, 300);
     }
   }
 

@@ -212,8 +212,8 @@ final class ROI_Calculator_Widget
                         <div class="roi-admin-header__display">
                             <span>Showing posts:</span>
                             <span class="roi-admin-header__count">
-                                <span id="roi-showing-count">100</span> / 
-                                <span id="roi-total-count">150</span>
+                                <span id="roi-showing-count">0</span> / 
+                                <span id="roi-total-count">0</span>
                             </span>
                         </div>
                         <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
