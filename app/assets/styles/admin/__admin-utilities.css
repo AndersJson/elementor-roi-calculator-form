@@ -1,8 +1,12 @@
-.flex{
+.roi-flex{
   display: flex;
 }
 
-.flex-center{
+.roi-flex-center{
   align-items: center;
   justify-content: center;
+}
+
+.roi-hidden{
+  visibility: hidden;
 }

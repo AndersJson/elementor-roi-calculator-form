@@ -9,8 +9,13 @@ class Admin{
     this.totalCount = $("#roi-total-count");
     this.filter = $("#roi-filter-unique");
     this.checkboxes;
+    this.headerButtons = $("#roi-admin-controls");
+    this.mailCount = $("#roi-mail-count");
+    this.deleteCount = $("#roi-delete-count");
     
     //data
+    this.selected = [];
+    this.selectedCount = 0;
     this.checkboxIndex = 0;
     this.unique = 'no';
     this.lastId = 0;
@@ -94,9 +99,25 @@ class Admin{
     for (let i = this.checkboxIndex; i < this.checkboxes.length; i++){
       $(this.checkboxes[i]).on("change", () => {
         if (this.checkboxes[i].checked){
-          console.log("is checked");
+          this.selected.push(this.checkboxes[i].value);
+          this.selectedCount +=1;
+          $(this.mailCount).html(this.selectedCount);
+          $(this.deleteCount).html(this.selectedCount);
+          if (this.selectedCount == 1) {
+            $(this.headerButtons).removeClass("roi-hidden");
+          }
         }else{
-          console.log("not checked");
+          let index = this.selected.indexOf(this.checkboxes[i].value);
+          this.selected.splice(index, 1);
+          this.selectedCount -=1;
+          if (this.selectedCount == 0) {
+            $(this.headerButtons).addClass("roi-hidden");
+          }
+          setTimeout(()=>{
+            $(this.mailCount).html(this.selectedCount);
+            $(this.deleteCount).html(this.selectedCount);
+          }, 200);
+          
         }
       });
     }

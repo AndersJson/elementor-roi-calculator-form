@@ -218,15 +218,15 @@ final class ROI_Calculator_Widget
                         </div>
                         <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
                         <div class="roi-admin-header__filter">
-                            <label class="flex flex-center">
+                            <label class="roi-flex roi-flex-center">
                                 <input type="checkbox" id="roi-filter-unique" name="filter-unique" value="filter-unique" />
                                 <span class="roi-admin-header__checkbox-text">Filter by unique email</span>
                             </label>
                         </div>
                     </div>
-                    <div class="roi-admin-header__controls">
-                        <span class="roi-admin-header__button">Mail selected <span id="roi-mail-count">(15)</span></span>
-                        <span class="roi-admin-header__button">Delete selected <span id="roi-delete-count">(5)</span></span>
+                    <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
+                        <span class="roi-admin-header__button">Mail selected (<span id="roi-mail-count"></span>)</span>
+                        <span class="roi-admin-header__button">Delete selected (<span id="roi-delete-count"></span>)</span>
                     </div>
                 </div>
                     
