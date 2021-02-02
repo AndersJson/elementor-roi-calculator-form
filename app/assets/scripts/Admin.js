@@ -8,8 +8,10 @@ class Admin{
     this.showingCount = $("#roi-showing-count");
     this.totalCount = $("#roi-total-count");
     this.filter = $("#roi-filter-unique");
-
+    this.checkboxes;
+    
     //data
+    this.checkboxIndex = 0;
     this.unique = 'no';
     this.lastId = 0;
     this.subscribers;
@@ -45,6 +47,9 @@ class Admin{
           myClass.loadedData += myClass.limit;
           myClass.lastId = Number(result["last"]["id"]);
           myClass.updateCount();
+          myClass.checkboxes = $(".checkbox__input");
+          myClass.addCheckboxEventListener();
+          myClass.checkboxIndex = myClass.limit;
         }).fail(function(response) {
           console.log(response);
         })
@@ -83,6 +88,18 @@ class Admin{
 
   toggleUnique(){
     this.unique == 'yes' ? this.unique = 'no' : this.unique = 'yes';
+  }
+
+  addCheckboxEventListener(){
+    for (let i = this.checkboxIndex; i < this.checkboxes.length; i++){
+      $(this.checkboxes[i]).on("change", () => {
+        if (this.checkboxes[i].checked){
+          console.log("is checked");
+        }else{
+          console.log("not checked");
+        }
+      });
+    }
   }
 
 }
