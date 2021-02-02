@@ -152,7 +152,7 @@ class Admin{
       setTimeout(()=>{
           $(this.mailCount).html("0");
           $(this.deleteCount).html("0");
-        }, 300);
+        }, 500);
     }
   }
 
