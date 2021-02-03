@@ -287,12 +287,13 @@ final class ROI_Calculator_Widget
                 echo json_encode($output);
                 die();
             
-            } else if ( isset($_POST['showmore']) &&  $_POST['showmore'] == 'yes'){
+            } else if ( isset($_POST['showmore']) &&  $_POST['showmore'] == 'yes' && isset($_POST['id'])){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
+                $id = $_POST['id'];
 
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC LIMIT 10");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY time DESC LIMIT 10");
                 
                 foreach ( $subscribers as $subscriber ) {                    
                     $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
@@ -302,7 +303,6 @@ final class ROI_Calculator_Widget
 
                 $output['subscribers'] = $subscribers;
                 $output['last'] = end($subscribers);     
-                
                 echo json_encode($output);
                 die();
             

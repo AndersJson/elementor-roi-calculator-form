@@ -72,7 +72,8 @@ class Admin{
         data : {
             action : 'get_user_data',
             datatype: 'json',
-            showmore : 'yes'
+            showmore : 'yes',
+            id : Number(myClass.lastId)
         }
       }).done( function( response ) {
           let result = $.parseJSON(response);
@@ -82,7 +83,6 @@ class Admin{
           myClass.lastId = Number(result["last"]["id"]);
           myClass.updateShowingCount();
         }).fail(function(response) {
-          console.log(response);
         })
   }
 
@@ -91,7 +91,7 @@ class Admin{
   }
 
   updateShowingCount(){
-    if (this.loadedData > this.totalData){
+    if (this.loadedData >= this.totalData){
       $(this.showMore).addClass("roi-hidden");
       $(this.showingCount).html(this.totalData);
     }else{
