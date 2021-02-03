@@ -217,12 +217,7 @@ final class ROI_Calculator_Widget
                             </span>
                         </div>
                         <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
-                        <div class="roi-admin-header__filter">
-                            <label class="roi-flex roi-flex-center">
-                                <input type="checkbox" id="roi-filter-unique" name="filter-unique" value="filter-unique" />
-                                <span class="roi-admin-header__checkbox-text">Filter by unique email</span>
-                            </label>
-                        </div>
+                        <span class="roi-admin-header__button" id="roi-filter-unique">Clear duplicate emails</span>
                     </div>
                     <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
                         <span class="roi-admin-header__button">Mail selected (<span id="roi-mail-count"></span>)</span>
@@ -292,18 +287,26 @@ final class ROI_Calculator_Widget
                 echo json_encode($output);
                 die();
             
-            } else if ( $_POST['unique'] == 'yes'){
-                $output["message"] = "unique";
+            } else if ( isset($_POST['showmore']) &&  $_POST['showmore'] == 'yes'){
+                global $wpdb;
+                $table = $wpdb->prefix . "roi_formsubscribers";
+
+                $output['output'] = ''; 
+                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC LIMIT 10");
+                
+                foreach ( $subscribers as $subscriber ) {                    
+                    $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
+                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    $output['output'] .= '</div>';                                    
+                }
+
+                $output['subscribers'] = $subscribers;
+                $output['last'] = end($subscribers);     
+                
                 echo json_encode($output);
-
                 die();
-
-            }else if ( $_POST['unique'] == 'no'){
-                $output["message"] = "All";
-                echo json_encode($output);
-
-                die();
-            } 
+            
+            }
             
         }
         

@@ -6,24 +6,24 @@
 	background: #fff;
 	border-bottom: 2px solid #ccc;
 
-	&__title{
+	&__title {
 		display: flex;
 		align-items: center;
 		width: 100%;
 		margin-bottom: 30px;
 	}
 
-	&__description{
+	&__description {
 		display: flex;
 		margin-left: 50px;
 		flex-direction: column;
 	}
 
-	&__timezone{
+	&__timezone {
 		text-decoration: italic;
 	}
 
-	&__tools{
+	&__tools {
 		width: 100%;
 		display: flex;
 		flex-wrap: wrap-reverse;
@@ -31,53 +31,47 @@
 		justify-content: space-between;
 	}
 
-	&__show{
+	&__show {
 		display: flex;
 
-		@media only screen and (max-width: 1120px){
+		@media only screen and (max-width: 1255px) {
 			width: 100%;
 			margin-top: 10px;
 		}
 	}
 
-	&__display{
+	&__display {
 		display: flex;
 		flex-direction: column;
 	}
 
-	&__count{
+	&__count {
 		font-size: 16px;
 		margin-top: 5px;
 	}
 
-	&__filter{
-		display: flex;
-		align-items: center;
-		margin-left: 30px;
-	}
-
-	&__controls{
+	&__controls {
 		display: flex;
 		transition: all 200ms;
 
-		@media only screen and (max-width: 1120px){
+		@media only screen and (max-width: 1255px) {
 			width: 100%;
 			justify-content: flex-end;
 		}
 	}
 
-	&__button{
+	&__button {
 		color: #54595f;
 		margin-left: 50px;
 		border: 2px solid #54595f;
 		border-radius: 7px;
-		padding: .8em 1.8em;
+		padding: 0.8em 1.8em;
 		cursor: pointer;
 		text-transform: uppercase;
 		transition: all 200ms;
 		font-weight: 600;
 
-		&:hover{
+		&:hover {
 			color: #fff;
 			background-color: #54595f;
 		}

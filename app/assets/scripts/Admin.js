@@ -7,7 +7,7 @@ class Admin{
     this.showMore = $("#roi-show-more");
     this.showingCount = $("#roi-showing-count");
     this.totalCount = $("#roi-total-count");
-    this.filter = $("#roi-filter-unique");
+    this.clearDuplicatesButton = $("#roi-filter-unique");
     this.selectAll = $("#checkbox-select-all")[0];
     this.checkboxes;
     this.headerButtons = $("#roi-admin-controls");
@@ -19,7 +19,6 @@ class Admin{
     this.selectedMail = [];
     this.selectedCount = 0;
     this.checkboxIndex = 0;
-    this.unique = 'no';
     this.lastId = 0;
     this.subscribers;
     this.loadedData = 0;
@@ -31,7 +30,7 @@ class Admin{
   }
 
   events(){
-    $(this.filter).change(this.toggleUnique.bind(this));
+    $(this.clearDuplicatesButton).click(this.clearDuplicates.bind(this));
     $(this.showMore).click(this.loadMore.bind(this));
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
   }
@@ -54,7 +53,8 @@ class Admin{
           myClass.totalData = Number(result["count"]);
           myClass.loadedData += myClass.limit;
           myClass.lastId = Number(result["last"]["id"]);
-          myClass.updateCount();
+          myClass.updateTotalCount();
+          myClass.updateShowingCount();
           myClass.checkboxes = $(".checkbox__input");
           myClass.addCheckboxEventListener();
           myClass.checkboxIndex = myClass.limit;
@@ -63,7 +63,7 @@ class Admin{
         })
   }
 
-  loadMore(e){
+  loadMore(){
     let myClass = this;
 
       $.ajax({
@@ -72,30 +72,36 @@ class Admin{
         data : {
             action : 'get_user_data',
             datatype: 'json',
-            unique : myClass.unique
+            showmore : 'yes'
         }
       }).done( function( response ) {
-        console.log(response);
-        /*
           let result = $.parseJSON(response);
           myClass.table.append(result["output"]);
           myClass.subscribers.push(result["subscribers"]);
           myClass.loadedData += myClass.limit;
           myClass.lastId = Number(result["last"]["id"]);
-          myClass.updateCount();
-        */
+          myClass.updateShowingCount();
         }).fail(function(response) {
-          //console.log(response);
+          console.log(response);
         })
   }
 
-  updateCount(){
-    $(this.showingCount).html(this.loadedData);
+  updateTotalCount(){
     $(this.totalCount).html(this.totalData);
   }
 
-  toggleUnique(){
-    this.unique == 'yes' ? this.unique = 'no' : this.unique = 'yes';
+  updateShowingCount(){
+    if (this.loadedData > this.totalData){
+      $(this.showMore).addClass("roi-hidden");
+      $(this.showingCount).html(this.totalData);
+    }else{
+      $(this.showingCount).html(this.loadedData);
+    }
+  }
+
+  clearDuplicates(){
+    // clear list of duplicate emails
+    console.log("Clear list");
   }
 
   addCheckboxEventListener(){
