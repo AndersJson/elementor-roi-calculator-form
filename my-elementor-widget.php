@@ -235,6 +235,18 @@ final class ROI_Calculator_Widget
                         </div>
                     </div>
                     -->
+                    <div class="roi-admin-modal">
+                        <div class="roi-admin-modal__inner-wrapper">
+                            <span class="roi-admin-modal__close">X</span>
+                            <div class="roi-delete-modal">
+                                <span class="roi-delete-modal__text">Are you sure you want to delete the selected row(s)?</span>
+                                <div class="roi-delete-modal__buttons">
+                                    <span class="admin-button admin-button--confirm">Yes</span>
+                                    <span class="admin-button admin-button--confirm">No</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <div class="roi-admin-table" id="roi-table">
                     <?php
                         echo '<div class="roi-admin-table__row">';

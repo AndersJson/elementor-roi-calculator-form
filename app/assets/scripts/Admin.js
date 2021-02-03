@@ -121,6 +121,7 @@ class Admin{
             $(this.headerButtons).removeClass("roi-hidden");
             
           }
+          
         }else{
           let index = this.selected.indexOf(this.checkboxes[i].value);
           this.selected.splice(index, 1);

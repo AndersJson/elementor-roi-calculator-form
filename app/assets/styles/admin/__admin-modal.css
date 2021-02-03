@@ -1,0 +1,30 @@
+.roi-admin-modal{
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255,255,255, .7);
+
+  &__inner-wrapper{
+    padding: 2em 3em;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 300ms all;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+  }
+
+  &__close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    color: #54595f;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
