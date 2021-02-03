@@ -57,7 +57,7 @@ class Admin{
           myClass.updateShowingCount();
           myClass.checkboxes = $(".checkbox__input");
           myClass.addCheckboxEventListener();
-          myClass.checkboxIndex = myClass.limit;
+          myClass.checkboxIndex = myClass.loadedData;
         }).fail(function(response) {
           console.log(response);
         })
@@ -81,8 +81,12 @@ class Admin{
           myClass.subscribers.push(result["subscribers"]);
           myClass.loadedData += myClass.limit;
           myClass.lastId = Number(result["last"]["id"]);
+          myClass.checkboxes = $(".checkbox__input");
           myClass.updateShowingCount();
+          myClass.addCheckboxEventListener();
+          myClass.checkboxIndex = myClass.loadedData;
         }).fail(function(response) {
+          console.log(response);
         })
   }
 
