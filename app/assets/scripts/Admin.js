@@ -51,7 +51,7 @@ class Admin{
           myClass.table.append(result["output"]);
           myClass.subscribers = result["subscribers"];
           myClass.totalData = Number(result["count"]);
-          myClass.loadedData += myClass.limit;
+          myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
           myClass.updateTotalCount();
           myClass.updateShowingCount();
@@ -79,7 +79,7 @@ class Admin{
           let result = $.parseJSON(response);
           myClass.table.append(result["output"]);
           myClass.subscribers.push(result["subscribers"]);
-          myClass.loadedData += myClass.limit;
+          myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
           myClass.checkboxes = $(".checkbox__input");
           myClass.updateShowingCount();
@@ -97,10 +97,8 @@ class Admin{
   updateShowingCount(){
     if (this.loadedData >= this.totalData){
       $(this.showMore).addClass("roi-hidden");
-      $(this.showingCount).html(this.totalData);
-    }else{
-      $(this.showingCount).html(this.loadedData);
     }
+      $(this.showingCount).html(this.loadedData);
   }
 
   clearDuplicates(){
