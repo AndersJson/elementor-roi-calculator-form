@@ -199,57 +199,52 @@ final class ROI_Calculator_Widget
 
             if ( is_admin() && is_user_logged_in() ){ 
             ?>
-                <div class="roi-admin-header">
-                <div class="roi-admin-header__title">
-                    <h1>ROI-Calculator</h1>
-                    <div class="roi-admin-header__description">
-                        <p class="roi-admin-header__subtitle">Listing data from users who has submitted the ROI-calculator.</p>
-                        <p class="roi-admin-header__timezone">(Time of the submitted form is in local Europe/Stockholm-timezone)</p>
-                    </div>
-                </div>
-                <div class="roi-admin-header__tools">
-                    <div class="roi-admin-header__show">
-                        <div class="roi-admin-header__display">
-                            <span>Showing posts:</span>
-                            <span class="roi-admin-header__count">
-                                <span id="roi-showing-count">0</span> / 
-                                <span id="roi-total-count">0</span>
-                            </span>
-                        </div>
-                        <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
-                        <span class="roi-admin-header__button" id="roi-filter-unique">Clear duplicate emails</span>
-                    </div>
-                    <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
-                        <span class="roi-admin-header__button">Mail selected (<span id="roi-mail-count"></span>)</span>
-                        <span class="roi-admin-header__button">Delete selected (<span id="roi-delete-count"></span>)</span>
-                    </div>
-                </div>
-                    
-                </div>
+                
                 <div class="roi-admin-wrapper">
-                    <div class="roi-admin-inner-wrapper">
-                    <!--
-                    <div class="roi-admin-loading">
-                        <div class="roi-admin-loading__icon">
-
-                        </div>
-                    </div>
-                    -->
-                    <div class="roi-admin-modal" id="admin-modal">
-                        <div class="roi-admin-modal__inner-modal in-right" id="delete-modal">
-                            <div class="roi-delete-modal">
-                                <span class="roi-delete-modal__text">Are you sure you want to delete the selected row(s)?</span>
-                                <div class="roi-delete-modal__buttons">
-                                    <div class="roi-delete-modal__button-wrapper">
-                                        <span class="admin-button admin-button--confirm" id="roi-delete-confirm">Yes</span>
-                                    </div>
-                                    <div class="roi-delete-modal__button-wrapper">
-                                        <span class="admin-button admin-button--decline" id="roi-delete-decline">No</span>
-                                    </div>
+                <!-- Modals -->
+                <div class="roi-admin-modal roi-hidden" id="admin-modal">
+                    <div class="roi-admin-modal__inner-modal" id="delete-modal">
+                        <div class="roi-delete-modal">
+                            <span class="roi-delete-modal__text">Are you sure you want to delete the selected row(s)?</span>
+                            <div class="roi-delete-modal__buttons">
+                                <div class="roi-delete-modal__button-wrapper">
+                                    <span class="admin-button admin-button--confirm" id="roi-delete-confirm">Yes</span>
+                                </div>
+                                <div class="roi-delete-modal__button-wrapper">
+                                    <span class="admin-button admin-button--decline" id="roi-delete-decline">No</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- -->
+                    <div class="roi-admin-header">
+                        <div class="roi-admin-header__title">
+                            <h1>ROI-Calculator</h1>
+                            <div class="roi-admin-header__description">
+                                <p class="roi-admin-header__subtitle">Listing data from users who has submitted the ROI-calculator.</p>
+                                <p class="roi-admin-header__timezone">(Time of the submitted form is in local Europe/Stockholm-timezone)</p>
+                            </div>
+                        </div>
+                        <div class="roi-admin-header__tools">
+                            <div class="roi-admin-header__show">
+                                <div class="roi-admin-header__display">
+                                    <span>Showing posts:</span>
+                                    <span class="roi-admin-header__count">
+                                        <span id="roi-showing-count">0</span> / 
+                                        <span id="roi-total-count">0</span>
+                                    </span>
+                                </div>
+                                <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
+                                <span class="roi-admin-header__button" id="roi-filter-unique">Clear duplicate emails</span>
+                            </div>
+                            <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
+                                <span class="roi-admin-header__button" id="roi-mail-selected">Mail selected (<span id="roi-mail-count"></span>)</span>
+                                <span class="roi-admin-header__button"id="roi-delete-selected">Delete selected (<span id="roi-delete-count"></span>)</span>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="roi-admin-inner-wrapper">
                         <div class="roi-admin-table" id="roi-table">
                     <?php
                         echo '<div class="roi-admin-table__row">';
@@ -292,7 +287,7 @@ final class ROI_Calculator_Widget
                 
                 foreach ( $subscribers as $subscriber ) {                    
                     $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
-                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><a href="callto:' . $subscriber->phone . '"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span></a><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><a href="callto:' . $subscriber->phone . '"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span></a><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-delete" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
                     $output['output'] .= '</div>';                                    
                 }
 
@@ -312,7 +307,7 @@ final class ROI_Calculator_Widget
                 
                 foreach ( $subscribers as $subscriber ) {                    
                     $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
-                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper" id="roi-delete"><svg class="roi-options__icon" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><a href="callto:' . $subscriber->phone . '"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span></a><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-delete" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
                     $output['output'] .= '</div>';                                    
                 }
 

@@ -10,6 +10,7 @@ class Admin{
     this.clearDuplicatesButton = $("#roi-filter-unique");
     this.selectAll = $("#checkbox-select-all")[0];
     this.checkboxes;
+    this.deleteIcons;
     this.headerButtons = $("#roi-admin-controls");
     this.mailCount = $("#roi-mail-count");
     this.deleteCount = $("#roi-delete-count");
@@ -18,12 +19,15 @@ class Admin{
     this.deleteDecline = $("#roi-delete-decline");
     this.modalLayer = $("#admin-modal");
     this.deleteModal = $("#delete-modal");
+    this.deleteSelectedButton = $("#roi-delete-selected");
+    this.mailSelectedButtons = $("#roi-mail-selected");
     
     //data
     this.selected = [];
     this.selectedMail = [];
+    this.trashCan = [];
     this.selectedCount = 0;
-    this.checkboxIndex = 0;
+    this.currentIndex = 0;
     this.lastId = 0;
     this.subscribers;
     this.loadedData = 0;
@@ -39,6 +43,7 @@ class Admin{
     $(this.showMore).click(this.loadMore.bind(this));
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
+    $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
   }
 
   init(){
@@ -62,8 +67,11 @@ class Admin{
           myClass.updateTotalCount();
           myClass.updateShowingCount();
           myClass.checkboxes = $(".checkbox__input");
+          myClass.deleteIcons = $(".roi-icon-delete");
           myClass.addCheckboxEventListener();
-          myClass.checkboxIndex = myClass.loadedData;
+          myClass.addDeleteIconsEventListener();
+          myClass.currentIndex = myClass.loadedData;
+          
         }).fail(function(response) {
           console.log(response);
         })
@@ -87,10 +95,13 @@ class Admin{
           myClass.subscribers.push(result["subscribers"]);
           myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
-          myClass.checkboxes = $(".checkbox__input");
           myClass.updateShowingCount();
+          myClass.checkboxes = $(".checkbox__input");
+          myClass.deleteIcons = $(".roi-icon-delete");
           myClass.addCheckboxEventListener();
-          myClass.checkboxIndex = myClass.loadedData;
+          myClass.addDeleteIconsEventListener();
+          myClass.currentIndex = myClass.loadedData;
+          
         }).fail(function(response) {
           console.log(response);
         })
@@ -114,7 +125,7 @@ class Admin{
   }
 
   addCheckboxEventListener(){
-    for (let i = this.checkboxIndex; i < this.checkboxes.length; i++){
+    for (let i = this.currentIndex; i < this.checkboxes.length; i++){
       $(this.checkboxes[i]).on("change", () => {
         if (this.checkboxes[i].checked){
           this.selected.push(this.checkboxes[i].value);
@@ -137,17 +148,25 @@ class Admin{
           this.selectedCount -=1;
           $(this.mailCount).html(this.selectedCount);
           $(this.deleteCount).html(this.selectedCount);
-          
+
           if (this.selectedCount == 0) {
             $(this.headerButtons).addClass("roi-hidden");
             setTimeout(()=>{
             $(this.mailCount).html(this.selectedCount);
             $(this.deleteCount).html(this.selectedCount);
           }, 300);
-          }         
-          
+          }          
         }
       });
+    }
+  }
+
+  addDeleteIconsEventListener(){
+    for (let i = this.currentIndex; i < this.deleteIcons.length; i++){
+      $(this.deleteIcons[i]).on("click", () => {
+        this.showDeleteModal();
+        this.trashCan.push($(this.deleteIcons[i]).data("id"));
+          });
     }
   }
 
@@ -187,13 +206,21 @@ class Admin{
     }
   }
 
+  showDeleteModal(){
+      $(this.modalLayer).removeClass("roi-hidden");
+      setTimeout(()=>{     
+        $(this.deleteModal).css("right", "10%");
+      }, 100);
+  }
+
   hideDeleteModal(){
-    $(this.deleteModal).removeClass("in-right");
-    $(this.deleteModal).addClass("out-right");
+    if (this.trashCan.length){
+      this.trashCan = [];
+    }
+    $(this.deleteModal).css("right", "-110%");
     setTimeout(()=>{
       $(this.modalLayer).addClass("roi-hidden");
-    }, 100)
-
+    }, 100);
   }
 
 }
