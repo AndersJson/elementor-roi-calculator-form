@@ -13,6 +13,7 @@ class Admin{
     this.headerButtons = $("#roi-admin-controls");
     this.mailCount = $("#roi-mail-count");
     this.deleteCount = $("#roi-delete-count");
+    this.showAllButton = $("#roi-show-all");
     
     //data
     this.selected = [];
@@ -97,6 +98,7 @@ class Admin{
   updateShowingCount(){
     if (this.loadedData >= this.totalData){
       $(this.showMore).addClass("roi-hidden");
+      $(this.showAllButton).addClass("roi-hidden");
     }
       $(this.showingCount).html(this.loadedData);
   }

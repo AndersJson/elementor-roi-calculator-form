@@ -1,0 +1,30 @@
+.admin-button{
+  padding: .4em 1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  transition: all 200ms;
+  font-size: 600;
+
+  &--confirm{
+    border-color: #2AAECD;
+    color: #2AAECD;
+
+    &:hover{
+      color: #fff;
+      background-color: #2AAECD; 
+    } 
+  }
+
+  &--decline{
+    border-color: #E23F3F;
+    color: #E23F3F;
+
+    &:hover{
+      color: #fff;
+      background-color: #E23F3F;
+    } 
+  }
+}
