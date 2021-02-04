@@ -135,14 +135,16 @@ class Admin{
           this.selectedMail.splice(mailIndex, 1);
 
           this.selectedCount -=1;
+          $(this.mailCount).html(this.selectedCount);
+          $(this.deleteCount).html(this.selectedCount);
+          
           if (this.selectedCount == 0) {
             $(this.headerButtons).addClass("roi-hidden");
-          }
-          setTimeout(()=>{
-            $(this.mailCount).html("this.selectedCount");
-            $(this.deleteCount).html("this.selectedCount");
+            setTimeout(()=>{
+            $(this.mailCount).html(this.selectedCount);
+            $(this.deleteCount).html(this.selectedCount);
           }, 300);
-          
+          }         
           
         }
       });

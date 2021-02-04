@@ -8,7 +8,7 @@
 }
 
 .roi-hidden{
-  visibility: hidden;
+  display: none;
 }
 
 .out-right{
