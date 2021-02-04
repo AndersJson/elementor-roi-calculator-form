@@ -14,6 +14,10 @@ class Admin{
     this.mailCount = $("#roi-mail-count");
     this.deleteCount = $("#roi-delete-count");
     this.showAllButton = $("#roi-show-all");
+    this.deleteConfirm = $("#roi-delete-confirm");
+    this.deleteDecline = $("#roi-delete-decline");
+    this.modalLayer = $("#admin-modal");
+    this.deleteModal = $("#delete-modal");
     
     //data
     this.selected = [];
@@ -34,6 +38,7 @@ class Admin{
     $(this.clearDuplicatesButton).click(this.clearDuplicates.bind(this));
     $(this.showMore).click(this.loadMore.bind(this));
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
+    $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
   }
 
   init(){
@@ -178,6 +183,15 @@ class Admin{
         }, 500);
         
     }
+  }
+
+  hideDeleteModal(){
+    $(this.deleteModal).removeClass("in-right");
+    $(this.deleteModal).addClass("out-right");
+    setTimeout(()=>{
+      $(this.modalLayer).addClass("roi-hidden");
+    }, 100)
+
   }
 
 }

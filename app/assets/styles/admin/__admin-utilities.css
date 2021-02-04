@@ -10,3 +10,11 @@
 .roi-hidden{
   visibility: hidden;
 }
+
+.out-right{
+  right: -60%;
+}
+
+.in-right{
+  right: 10%;
+}

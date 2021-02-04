@@ -23,6 +23,10 @@
 			color: #000;
 		}
 
+		&:hover > .roi-admin-table__options-cell a{
+			color: #000;
+		}
+
 		&--label {
 			display: flex;
 			align-items: center;
@@ -44,6 +48,10 @@
 		justify-content: space-between;
 		flex-wrap: nowrap;
 		width: 100px;
+		color: #ccc;
+	}
+
+	&__options-cell a{
 		color: #ccc;
 	}
 }
