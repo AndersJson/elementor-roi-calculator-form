@@ -21,6 +21,7 @@ class Admin{
     this.deleteModal = $("#delete-modal");
     this.deleteSelectedButton = $("#roi-delete-selected");
     this.mailSelectedButtons = $("#roi-mail-selected");
+    this.deleteText = $("#roi-delete-modal-text");
     
     //data
     this.selected = [];
@@ -29,7 +30,7 @@ class Admin{
     this.selectedCount = 0;
     this.currentIndex = 0;
     this.lastId = 0;
-    this.subscribers;
+    this.subscribers = {};
     this.loadedData = 0;
     this.totalData = 0;
     this.limit = 10;
@@ -60,7 +61,8 @@ class Admin{
       }).done( function( response ) {
           let result = $.parseJSON(response);
           myClass.table.append(result["output"]);
-          myClass.subscribers = result["subscribers"];
+          myClass.pushSubscribers(result["subscribers"]);
+          //myClass.subscribers = result["subscribers"];
           myClass.totalData = Number(result["count"]);
           myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
@@ -71,7 +73,6 @@ class Admin{
           myClass.addCheckboxEventListener();
           myClass.addDeleteIconsEventListener();
           myClass.currentIndex = myClass.loadedData;
-          
         }).fail(function(response) {
           console.log(response);
         })
@@ -92,7 +93,7 @@ class Admin{
       }).done( function( response ) {
           let result = $.parseJSON(response);
           myClass.table.append(result["output"]);
-          myClass.subscribers.push(result["subscribers"]);
+          myClass.pushSubscribers(result["subscribers"]);
           myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
           myClass.updateShowingCount();
@@ -101,10 +102,21 @@ class Admin{
           myClass.addCheckboxEventListener();
           myClass.addDeleteIconsEventListener();
           myClass.currentIndex = myClass.loadedData;
-          
         }).fail(function(response) {
           console.log(response);
         })
+  }
+
+  pushSubscribers(data){
+    for (let i = 0; i < data.length; i++){
+      this.subscribers[data[i].id] = {
+        time: data[i].time,
+        firstname: data[i].firstname,
+        lastname: data[i].lastname,
+        email: data[i].email,
+        phone: data[i].phone
+      }
+    }
   }
 
   updateTotalCount(){
@@ -164,8 +176,8 @@ class Admin{
   addDeleteIconsEventListener(){
     for (let i = this.currentIndex; i < this.deleteIcons.length; i++){
       $(this.deleteIcons[i]).on("click", () => {
-        this.showDeleteModal();
         this.trashCan.push($(this.deleteIcons[i]).data("id"));
+        this.showDeleteModal();
           });
     }
   }
@@ -207,6 +219,17 @@ class Admin{
   }
 
   showDeleteModal(){
+    if (this.trashCan.length){
+      let firstname = this.subscribers[this.trashCan[0]]["firstname"];
+      let lastname = this.subscribers[this.trashCan[0]]["lastname"];
+      let email = this.subscribers[this.trashCan[0]]["email"];
+      let output = `Are you sure you want to delete:
+      <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
+      this.deleteText.append(output);
+
+    }else {
+      console.log("selected")
+    }
       $(this.modalLayer).removeClass("roi-hidden");
       setTimeout(()=>{     
         $(this.deleteModal).css("right", "10%");
@@ -220,6 +243,8 @@ class Admin{
     $(this.deleteModal).css("right", "-110%");
     setTimeout(()=>{
       $(this.modalLayer).addClass("roi-hidden");
+      this.deleteText.html("");
+
     }, 100);
   }
 

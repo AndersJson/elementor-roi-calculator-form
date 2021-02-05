@@ -7,6 +7,14 @@
   &__text{
     font-size: 16px;
     font-weight: 600;
+
+    &--data{
+      display: block;
+      margin-top: 10px;
+      font-family: Courier, monospace;
+      font-weight: 400;
+      font-size: 14px;
+    }
   }
 
   &__button-wrapper{

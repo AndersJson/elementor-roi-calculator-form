@@ -205,7 +205,7 @@ final class ROI_Calculator_Widget
                 <div class="roi-admin-modal roi-hidden" id="admin-modal">
                     <div class="roi-admin-modal__inner-modal" id="delete-modal">
                         <div class="roi-delete-modal">
-                            <span class="roi-delete-modal__text">Are you sure you want to delete the selected row(s)?</span>
+                            <span class="roi-delete-modal__text" id="roi-delete-modal-text"></span>
                             <div class="roi-delete-modal__buttons">
                                 <div class="roi-delete-modal__button-wrapper">
                                     <span class="admin-button admin-button--confirm" id="roi-delete-confirm">Yes</span>
