@@ -34,6 +34,7 @@ class Admin{
     this.loadedData = 0;
     this.totalData = 0;
     this.limit = 10;
+    this.deleteIds = [];
 
     this.init();
     this.events();
@@ -45,6 +46,7 @@ class Admin{
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
     $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
+    $(this.deleteConfirm).click(this.deleteData.bind(this));
   }
 
   init(){
@@ -226,7 +228,7 @@ class Admin{
       let output = `Are you sure you want to delete:
       <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
       this.deleteText.append(output);
-
+      this.deleteIds.push(this.trashCan[0]);
     }else if (this.selected.length == 1){
       let firstname = this.subscribers[this.selected[0]]["firstname"];
       let lastname = this.subscribers[this.selected[0]]["lastname"];
@@ -234,12 +236,15 @@ class Admin{
       let output = `Are you sure you want to delete:
       <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
       this.deleteText.append(output);
+      this.deleteIds.push(this.selected[0]);
     }else if ((this.loadedData >= this.totalData) && (this.loadedData == this.selected.length)){
       let output = `Are you sure you want to delete ALL rows?`;
       this.deleteText.append(output);
+      this.deleteIds = this.selected;
     }else {
       let output = `Are you sure you want to delete (${this.selected.length}) selected rows?`;
       this.deleteText.append(output);
+      this.deleteIds = this.selected;
     }
       $(this.modalLayer).removeClass("roi-hidden");
       setTimeout(()=>{     
@@ -250,6 +255,10 @@ class Admin{
   hideDeleteModal(){
     if (this.trashCan.length){
       this.trashCan = [];
+      this.deleteIds = [];
+    }
+    if (this.selected.length){
+      this.deleteIds = [];
     }
     $(this.deleteModal).css("right", "-110%");
     setTimeout(()=>{
@@ -257,6 +266,16 @@ class Admin{
       this.deleteText.html("");
 
     }, 100);
+  }
+
+  deleteData(){
+    let span = "single";
+    if ((this.deleteIds.length == this.loadedData) && (this.deleteIds.length !== this.totalData)){
+      span = "between";
+    }else if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
+      span = "all";
+    }
+    
   }
 
 }
