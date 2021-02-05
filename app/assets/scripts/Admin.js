@@ -227,8 +227,16 @@ class Admin{
       <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
       this.deleteText.append(output);
 
+    }else if (this.selected.length == 1){
+      let firstname = this.subscribers[this.selected[0]]["firstname"];
+      let lastname = this.subscribers[this.selected[0]]["lastname"];
+      let email = this.subscribers[this.selected[0]]["email"];
+      let output = `Are you sure you want to delete:
+      <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
+      this.deleteText.append(output);
     }else {
-      console.log("selected")
+      let output = `Are you sure you want to delete (${this.selected.length}) selected rows?`;
+      this.deleteText.append(output);
     }
       $(this.modalLayer).removeClass("roi-hidden");
       setTimeout(()=>{     
