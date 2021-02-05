@@ -234,6 +234,9 @@ class Admin{
       let output = `Are you sure you want to delete:
       <span class="roi-delete-modal__text--data">${firstname} ${lastname} ${email}</span>`;
       this.deleteText.append(output);
+    }else if ((this.loadedData >= this.totalData) && (this.loadedData == this.selected.length)){
+      let output = `Are you sure you want to delete ALL rows?`;
+      this.deleteText.append(output);
     }else {
       let output = `Are you sure you want to delete (${this.selected.length}) selected rows?`;
       this.deleteText.append(output);
