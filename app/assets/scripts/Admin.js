@@ -270,12 +270,49 @@ class Admin{
 
   deleteData(){
     let span = "single";
+    let from = '';
+    let to = '';
+
     if ((this.deleteIds.length == this.loadedData) && (this.deleteIds.length !== this.totalData)){
       span = "between";
+      this.deleteIds.sort( (a,b) => a-b );
+      from = this.deleteIds[0];
+      to = this.deleteIds[this.deleteIds.length-1];
     }else if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
       span = "all";
     }
-    
+
+    let id = this.deleteIds.join(",");
+
+    let myClass = this;
+      $.ajax({
+        url : roi_admin_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'delete_user_data',
+            span : span,
+            id : id,
+            from: from,
+            to: to
+        }
+      }).done( function( response ) {
+        console.log(response);
+        /*
+          let result = $.parseJSON(response);
+          myClass.table.append(result["output"]);
+          myClass.pushSubscribers(result["subscribers"]);
+          myClass.loadedData += Number(result["subscribers"].length);
+          myClass.lastId = Number(result["last"]["id"]);
+          myClass.updateShowingCount();
+          myClass.checkboxes = $(".checkbox__input");
+          myClass.deleteIcons = $(".roi-icon-delete");
+          myClass.addCheckboxEventListener();
+          myClass.addDeleteIconsEventListener();
+          myClass.currentIndex = myClass.loadedData;
+        */
+        }).fail(function(response) {
+          console.log(response);
+        })
   }
 
 }

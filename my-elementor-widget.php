@@ -319,6 +319,32 @@ final class ROI_Calculator_Widget
             }
             
         }
+
+        // Get data in admin Ajax
+        function delete_user_data(){  
+            $span = htmlentities($_POST['span']);
+            $from = htmlentities($_POST['from']);
+            $to = htmlentities($_POST['to']); 
+            $id = htmlentities($_POST['id']);         
+
+            $output = '';
+
+            // Delete single
+            if ( isset($_POST['span']) &&  $_POST['span'] == 'single'){
+                global $wpdb;
+                $table = $wpdb->prefix . "roi_formsubscribers";
+
+                //$wpdb::delete($table, array('id' => $id), array('%s'));  
+                
+                echo "Great!";
+
+                die();
+            }
+            else{
+                echo $span . ' / ' . $from . ' / ' . $to . ' / ' . $id;
+                die();
+            }             
+        }
         
         
         // Insert data in sql-db via ajax
@@ -370,6 +396,7 @@ final class ROI_Calculator_Widget
         add_action('wp_ajax_insert_user_data', 'insert_user_data');
         //Admin Ajax
         add_action('wp_ajax_get_user_data', 'get_user_data');
+        add_action('wp_ajax_delete_user_data', 'delete_user_data');
 
         //Init widgets
         add_action('elementor/init', [$this, 'init_category']);
