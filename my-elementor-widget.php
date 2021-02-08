@@ -283,7 +283,7 @@ final class ROI_Calculator_Widget
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
 
-                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table ORDER BY id DESC LIMIT 10"));
+                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table"));
                 $output['output'] = ''; 
                 $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT 10");
                 
@@ -327,7 +327,7 @@ final class ROI_Calculator_Widget
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
 
-                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table ORDER BY id DESC LIMIT $limit"));
+                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table"));
                 $output['output'] = ''; 
                 $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
                 
@@ -347,7 +347,7 @@ final class ROI_Calculator_Widget
             
         }
 
-        // Get data in admin Ajax
+        // Delete data in admin Ajax
         function delete_user_data(){  
             $span = htmlentities($_POST['span']);
             $id = $_POST['id']; 
@@ -376,7 +376,8 @@ final class ROI_Calculator_Widget
                 }
   
                 die();
-            }
+            } 
+            // Delete ALL
             if ( isset($_POST['span']) &&  $_POST['span'] == 'all'){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
@@ -384,9 +385,9 @@ final class ROI_Calculator_Widget
                 $delete = $wpdb->query("TRUNCATE TABLE $table");
 
                 if ($delete){
-                    echo 'Deleted ' . $count . ' row(s) from database.';
+                    echo 'Deleted all row(s) from database.';
                 }else{
-                    echo 'Unable to delete ' . $count . ' row(s) from database.';
+                    echo 'Unable to delete all row(s) from database.';
                 }
 
                 die();
