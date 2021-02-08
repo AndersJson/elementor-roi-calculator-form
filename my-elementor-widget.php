@@ -323,25 +323,47 @@ final class ROI_Calculator_Widget
         // Get data in admin Ajax
         function delete_user_data(){  
             $span = htmlentities($_POST['span']);
-            $from = htmlentities($_POST['from']);
-            $to = htmlentities($_POST['to']); 
-            $id = htmlentities($_POST['id']);         
-
-            $output = '';
+            $id = $_POST['id']; 
+            $count = 0;        
 
             // Delete single
-            if ( isset($_POST['span']) &&  $_POST['span'] == 'single'){
+            if ( isset($span) &&  $_POST['span'] == 'single'){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
 
-                //$wpdb::delete($table, array('id' => $id), array('%s'));  
-                
-                echo "Great!";
+                for ($i = 0; $i < count($id); $i++){
+                    $deleteId = htmlentities($id[$i]);
+                    $delete = $wpdb->delete($table, array(
+                        'id' => $deleteId
+                    ), array(
+                        '%s'
+                    ));  
 
+                    $count++;
+                }
+
+                if ($delete){
+                    echo 'Deleted ' . $count . ' rows from database.';
+                }else{
+                    echo 'Unable to delete ' . $count . ' rows from database.';
+                }
+
+       
                 die();
             }
-            else{
-                echo $span . ' / ' . $from . ' / ' . $to . ' / ' . $id;
+            if ( isset($_POST['span']) &&  $_POST['span'] == 'all'){
+                global $wpdb;
+                $table = $wpdb->prefix . "roi_formsubscribers";
+
+                $delete = $wpdb->query("TRUNCATE TABLE $table");
+
+                if ($delete){
+                    echo 'Deleted ' . $count . ' rows from database.';
+                }else{
+                    echo 'Unable to delete ' . $count . ' rows from database.';
+                }
+
+                
                 die();
             }             
         }

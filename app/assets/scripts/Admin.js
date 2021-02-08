@@ -270,19 +270,10 @@ class Admin{
 
   deleteData(){
     let span = "single";
-    let from = '';
-    let to = '';
 
-    if ((this.deleteIds.length == this.loadedData) && (this.deleteIds.length !== this.totalData)){
-      span = "between";
-      this.deleteIds.sort( (a,b) => a-b );
-      from = this.deleteIds[0];
-      to = this.deleteIds[this.deleteIds.length-1];
-    }else if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
+    if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
       span = "all";
     }
-
-    let id = this.deleteIds.join(",");
 
     let myClass = this;
       $.ajax({
@@ -291,9 +282,7 @@ class Admin{
         data : {
             action : 'delete_user_data',
             span : span,
-            id : id,
-            from: from,
-            to: to
+            id : myClass.deleteIds,
         }
       }).done( function( response ) {
         console.log(response);
