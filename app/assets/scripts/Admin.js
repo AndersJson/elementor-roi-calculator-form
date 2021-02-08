@@ -95,6 +95,7 @@ class Admin{
       }).done( function( response ) {
           let result = $.parseJSON(response);
           myClass.table.append(result["output"]);
+          myClass.slideDownRows();
           myClass.pushSubscribers(result["subscribers"]);
           myClass.loadedData += Number(result["subscribers"].length);
           myClass.lastId = Number(result["last"]["id"]);
@@ -176,6 +177,15 @@ class Admin{
       }).fail(function(response) {
         console.log(response);
       })
+  }
+
+  slideDownRows(){
+    let rows = $(".roi-admin-table__row--wrapper");
+
+    for (let i = this.currentIndex; i < rows.length; i++){
+      $(rows[i]).slideDown();
+    }
+
   }
 
   pushSubscribers(data){
