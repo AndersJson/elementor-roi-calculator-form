@@ -245,9 +245,9 @@ final class ROI_Calculator_Widget
                         </div>  
                     </div>
                     <div class="roi-admin-inner-wrapper">
-                        <div class="roi-admin-table">
+                        <div class="roi-admin-table-header">
                     <?php
-                        echo '<div class="roi-admin-table__row">';
+                        echo '<div class="roi-admin-table-header__row">';
                         echo '<div class="roi-admin-table__check-cell"><label><input type="checkbox" id="checkbox-select-all" class="checkbox__input--select-all" name="selected-all" value="selected-all" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></label></div><div class="roi-admin-table__cell"><h3>Time</h3></div><div class="roi-admin-table__cell"><h3>Firstname</h3></div><div class="roi-admin-table__cell"><h3>Lastname</h3></div><div class="roi-admin-table__cell"><h3>Email</h3></div><div class="roi-admin-table__cell"><h3>Phone</h3></div><div class="roi-admin-table__options-cell"></div>';
                         echo '</div>';
                         
