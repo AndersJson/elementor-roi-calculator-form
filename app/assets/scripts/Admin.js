@@ -109,6 +109,75 @@ class Admin{
         })
   }
 
+  deleteData(){
+    let span = "single";
+
+    if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
+      span = "all";
+    }
+
+    let myClass = this;
+      $.ajax({
+        url : roi_admin_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'delete_user_data',
+            span : span,
+            id : myClass.deleteIds,
+        }
+      }).done( function() {
+          myClass.resetData();         
+        }).fail(function(response) {
+          console.log(response);
+        })
+  }
+
+  resetData(){
+    let myClass = this;
+
+    $.ajax({
+      url : roi_admin_ajax_script.ajaxurl,
+      type : 'post',
+      data : {
+          action : 'get_user_data',
+          datatype: 'json',
+          reset : 'yes',
+          limit: myClass.loadedData
+      }
+    }).done( function( response ) {
+        myClass.table.html("");
+        myClass.subscribers = {};
+        myClass.totalData = 0;
+        myClass.loadedData = 0;
+        myClass.lastId = 0;
+        myClass.currentIndex = 0;
+        myClass.selectedCount = 0;
+
+        let result = $.parseJSON(response);
+        myClass.table.append(result["output"]);
+        myClass.pushSubscribers(result["subscribers"]);
+        myClass.loadedData += Number(result["subscribers"].length);
+        myClass.totalData = Number(result["count"]);
+        myClass.lastId = Number(result["last"]["id"]);
+        myClass.updateShowingCount();
+        myClass.updateTotalCount();
+        myClass.checkboxes = $(".checkbox__input");
+        myClass.deleteIcons = $(".roi-icon-delete");
+        myClass.addCheckboxEventListener();
+        myClass.addDeleteIconsEventListener();
+        myClass.currentIndex = myClass.loadedData;
+        myClass.selectAll.checked = false;
+        $(myClass.headerButtons).addClass("roi-hidden");
+            setTimeout(()=>{
+            $(myClass.mailCount).html(myClass.selectedCount);
+            $(myClass.deleteCount).html(myClass.selectedCount);
+          }, 300);
+        myClass.hideDeleteModal();
+      }).fail(function(response) {
+        console.log(response);
+      })
+  }
+
   pushSubscribers(data){
     for (let i = 0; i < data.length; i++){
       this.subscribers[data[i].id] = {
@@ -268,41 +337,6 @@ class Admin{
     }, 100);
   }
 
-  deleteData(){
-    let span = "single";
-
-    if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
-      span = "all";
-    }
-
-    let myClass = this;
-      $.ajax({
-        url : roi_admin_ajax_script.ajaxurl,
-        type : 'post',
-        data : {
-            action : 'delete_user_data',
-            span : span,
-            id : myClass.deleteIds,
-        }
-      }).done( function( response ) {
-        console.log(response);
-        /*
-          let result = $.parseJSON(response);
-          myClass.table.append(result["output"]);
-          myClass.pushSubscribers(result["subscribers"]);
-          myClass.loadedData += Number(result["subscribers"].length);
-          myClass.lastId = Number(result["last"]["id"]);
-          myClass.updateShowingCount();
-          myClass.checkboxes = $(".checkbox__input");
-          myClass.deleteIcons = $(".roi-icon-delete");
-          myClass.addCheckboxEventListener();
-          myClass.addDeleteIconsEventListener();
-          myClass.currentIndex = myClass.loadedData;
-        */
-        }).fail(function(response) {
-          console.log(response);
-        })
-  }
 
 }
 

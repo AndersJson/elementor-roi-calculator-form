@@ -245,13 +245,15 @@ final class ROI_Calculator_Widget
                         </div>  
                     </div>
                     <div class="roi-admin-inner-wrapper">
-                        <div class="roi-admin-table" id="roi-table">
+                        <div class="roi-admin-table">
                     <?php
                         echo '<div class="roi-admin-table__row">';
                         echo '<div class="roi-admin-table__check-cell"><label><input type="checkbox" id="checkbox-select-all" class="checkbox__input--select-all" name="selected-all" value="selected-all" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></label></div><div class="roi-admin-table__cell"><h3>Time</h3></div><div class="roi-admin-table__cell"><h3>Firstname</h3></div><div class="roi-admin-table__cell"><h3>Lastname</h3></div><div class="roi-admin-table__cell"><h3>Email</h3></div><div class="roi-admin-table__cell"><h3>Phone</h3></div><div class="roi-admin-table__options-cell"></div>';
                         echo '</div>';
                         
                     ?>
+                        </div>
+                        <div class="roi-admin-table" id="roi-table">
                         </div>
                         <div class="roi-admin-footer">
                             <div class="show-more" id="roi-show-more">
@@ -276,14 +278,14 @@ final class ROI_Calculator_Widget
         // Get data in admin Ajax
         function get_user_data(){           
             
-            // Initialize
+            // INIT
             if ( isset($_POST['init']) &&  $_POST['init'] == 'yes'){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
 
-                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table ORDER BY time DESC LIMIT 10"));
+                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table ORDER BY id DESC LIMIT 10"));
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY time DESC LIMIT 10");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT 10");
                 
                 foreach ( $subscribers as $subscriber ) {                    
                     $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
@@ -297,13 +299,14 @@ final class ROI_Calculator_Widget
                 echo json_encode($output);
                 die();
             
-            } else if ( isset($_POST['showmore']) &&  $_POST['showmore'] == 'yes' && isset($_POST['id'])){
+            } //SHOW MORE
+            else if ( isset($_POST['showmore']) &&  $_POST['showmore'] == 'yes' && isset($_POST['id'])){
                 global $wpdb;
                 $table = $wpdb->prefix . "roi_formsubscribers";
                 $id = $_POST['id'];
 
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY time DESC LIMIT 10");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY id DESC LIMIT 10");
                 
                 foreach ( $subscribers as $subscriber ) {                    
                     $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
@@ -313,6 +316,30 @@ final class ROI_Calculator_Widget
 
                 $output['subscribers'] = $subscribers;
                 $output['last'] = end($subscribers);     
+                echo json_encode($output);
+                die();
+            
+            } //RESET
+            else if ( isset($_POST['reset']) &&  $_POST['reset'] == 'yes'){
+
+                $limit = htmlentities($_POST['limit']);
+
+                global $wpdb;
+                $table = $wpdb->prefix . "roi_formsubscribers";
+
+                $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table ORDER BY id DESC LIMIT $limit"));
+                $output['output'] = ''; 
+                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
+                
+                foreach ( $subscribers as $subscriber ) {                    
+                    $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
+                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '" /><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $subscriber->time . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><a href="callto:' . $subscriber->phone . '"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span></a><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-delete" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    $output['output'] .= '</div>';                                    
+                }
+
+                $output['subscribers'] = $subscribers;
+                $output['last'] = end($subscribers);     
+                
                 echo json_encode($output);
                 die();
             
