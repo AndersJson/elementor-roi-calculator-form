@@ -19,6 +19,7 @@ class Admin{
     this.deleteDecline = $("#roi-delete-decline");
     this.modalLayer = $("#admin-modal");
     this.deleteModal = $("#delete-modal");
+    this.deleteModalButtons = $("#delete-modal-buttons");
     this.deleteSelectedButton = $("#roi-delete-selected");
     this.mailSelectedButtons = $("#roi-mail-selected");
     this.deleteText = $("#roi-delete-modal-text");
@@ -111,6 +112,13 @@ class Admin{
   }
 
   deleteData(){
+    this.deleteModalButtons.css("visibility", "hidden");
+    setTimeout(()=>{
+      let output = 'Deleting...';
+      this.deleteText.html("");
+      this.deleteText.append(output);
+    }, 300);    
+
     let span = "single";
 
     if ((this.deleteIds.length == this.totalData) && (this.deleteIds.length == this.loadedData)){
@@ -173,9 +181,34 @@ class Admin{
             $(myClass.mailCount).html(myClass.selectedCount);
             $(myClass.deleteCount).html(myClass.selectedCount);
           }, 300);
-        myClass.hideDeleteModal();
+
+        setTimeout(()=>{
+          myClass.deleteText.html("");
+          let output = 'Data deleted successfully.';
+          myClass.deleteText.append(output);
+        }, 500);
+        setTimeout(()=>{
+          myClass.hideDeleteModal();
+        }, 2000);
+        setTimeout(()=>{
+          myClass.deleteText.html("");
+          myClass.deleteModalButtons.css("visibility", "visible");
+        }, 2500);
+        
       }).fail(function(response) {
         console.log(response);
+        setTimeout(()=>{
+          myClass.deleteText.html("");
+          let output = 'Unable to delete data, try again later.';
+          myClass.deleteText.append(output);
+        }, 500);
+        setTimeout(()=>{
+          myClass.hideDeleteModal();
+        }, 2000);
+        setTimeout(()=>{
+          myClass.deleteText.html("");
+          myClass.deleteModalButtons.css("visibility", "visible");
+        }, 2500);
       })
   }
 
