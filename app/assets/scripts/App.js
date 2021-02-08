@@ -109,7 +109,7 @@ import '../styles/styles.css';
       isInputNumber(e) {
         let event = String.fromCharCode(e.which);
         if (e.which < 96 || e.keyCode > 105) {
-          if (!/[0-9]/.test(event) && e.which !== 8 && e.which !== 189) {
+          if (!/[0-9]/.test(event) && e.which !== 8 && e.which !== 189 && e.which !== 37 && e.which !== 39 && e.which !== 46) {
             e.preventDefault();
           }
         }

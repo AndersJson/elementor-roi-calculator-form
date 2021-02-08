@@ -343,12 +343,11 @@ final class ROI_Calculator_Widget
                 }
 
                 if ($delete){
-                    echo 'Deleted ' . $count . ' rows from database.';
+                    echo 'Deleted ' . $count . ' row(s) from database.';
                 }else{
-                    echo 'Unable to delete ' . $count . ' rows from database.';
+                    echo 'Unable to delete ' . $count . ' row(s) from database.';
                 }
-
-       
+  
                 die();
             }
             if ( isset($_POST['span']) &&  $_POST['span'] == 'all'){
@@ -358,12 +357,11 @@ final class ROI_Calculator_Widget
                 $delete = $wpdb->query("TRUNCATE TABLE $table");
 
                 if ($delete){
-                    echo 'Deleted ' . $count . ' rows from database.';
+                    echo 'Deleted ' . $count . ' row(s) from database.';
                 }else{
-                    echo 'Unable to delete ' . $count . ' rows from database.';
+                    echo 'Unable to delete ' . $count . ' row(s) from database.';
                 }
 
-                
                 die();
             }             
         }
