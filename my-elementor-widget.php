@@ -447,6 +447,36 @@ final class ROI_Calculator_Widget
                 die();
             }             
         }
+
+        function send_user_mail() {
+
+            // if the submit button is clicked, send the email
+            if ( isset( $_POST['send'] ) && $_POST['send'] == 'yes' ) {
+        
+                // sanitize form values
+                $to    = htmlentities( $_POST["to"] );
+                $subject   = htmlentities( $_POST["subject"] );
+                $message = $_POST["message"];
+        
+                // get the blog administrator's email address
+                $from = get_option( 'admin_email' );
+        
+                $headers[] = "From: $from" . "\r\n";
+                $headers[] = 'Content-Type: text/html; charset=UTF-8';
+        
+                // If email has been process for sending, display a success message
+                if ( wp_mail( $to, $subject, $message, $headers ) ) {
+                    echo 'Email(s) sent successfully!';
+                } else {
+                    echo 'An unexpected error occurred';
+                }
+
+                die();
+            }
+            else{
+                die('No action initialized..');
+            }
+        }
         
         
         // Insert data in sql-db via ajax
@@ -498,7 +528,9 @@ final class ROI_Calculator_Widget
         add_action('wp_ajax_insert_user_data', 'insert_user_data');
         //Admin Ajax
         add_action('wp_ajax_get_user_data', 'get_user_data');
-        add_action('wp_ajax_delete_user_data', 'delete_user_data');
+        add_action('wp_ajax_delete_user_data', 'delete_user_data'); 
+        add_action('wp_ajax_send_user_mail', 'send_user_mail');
+        
 
         //Init widgets
         add_action('elementor/init', [$this, 'init_category']);

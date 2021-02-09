@@ -212,6 +212,26 @@ class Admin{
       })
   }
 
+  sendMail(){
+    let myClass = this;
+
+      $.ajax({
+        url : roi_admin_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'send_user_mail',
+            send : 'yes',
+            to : 'andersh_@hotmail.com',
+            subject : 'Testmail',
+            message : 'This is a testmail from Ajax-function'
+        }
+      }).done( function(response) {
+        console.log(response);
+      }).fail(function(response) {
+        console.log(response);
+      })
+  }
+
   slideDownRows(){
     let rows = $(".roi-admin-table__row--wrapper");
 
