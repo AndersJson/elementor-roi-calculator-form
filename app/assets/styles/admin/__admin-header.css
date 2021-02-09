@@ -11,6 +11,10 @@
 		align-items: center;
 		width: 100%;
 		margin-bottom: 30px;
+
+		& h1 {
+			line-height: 30px;
+		}
 	}
 
 	&__description {
@@ -34,9 +38,9 @@
 	&__show {
 		display: flex;
 
-		@media only screen and (max-width: 1255px) {
+		@mixin tab {
 			width: 100%;
-			margin-top: 10px;
+			margin-top: 20px;
 		}
 	}
 
@@ -54,9 +58,14 @@
 		display: flex;
 		transition: all 200ms;
 
-		@media only screen and (max-width: 1255px) {
+		@mixin tab {
 			width: 100%;
 			justify-content: flex-end;
+		}
+
+		@mixin phone {
+			width: 100%;
+			justify-content: space-around;
 		}
 	}
 

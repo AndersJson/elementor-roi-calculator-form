@@ -236,7 +236,6 @@ final class ROI_Calculator_Widget
                                     </span>
                                 </div>
                                 <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
-                                <span class="roi-admin-header__button" id="roi-filter-unique">Clear duplicate emails</span>
                             </div>
                             <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
                                 <span class="roi-admin-header__button" id="roi-mail-selected">Mail selected (<span id="roi-mail-count"></span>)</span>

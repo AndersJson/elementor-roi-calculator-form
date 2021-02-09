@@ -7,7 +7,6 @@ class Admin{
     this.showMore = $("#roi-show-more");
     this.showingCount = $("#roi-showing-count");
     this.totalCount = $("#roi-total-count");
-    this.clearDuplicatesButton = $("#roi-filter-unique");
     this.selectAll = $("#checkbox-select-all")[0];
     this.checkboxes;
     this.deleteIcons;
@@ -42,7 +41,6 @@ class Admin{
   }
 
   events(){
-    $(this.clearDuplicatesButton).click(this.clearDuplicates.bind(this));
     $(this.showMore).click(this.loadMore.bind(this));
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
@@ -243,11 +241,6 @@ class Admin{
       $(this.showAllButton).addClass("roi-hidden");
     }
       $(this.showingCount).html(this.loadedData);
-  }
-
-  clearDuplicates(){
-    // clear list of duplicate emails
-    console.log("Clear list");
   }
 
   addCheckboxEventListener(){
