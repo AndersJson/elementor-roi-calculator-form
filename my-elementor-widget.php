@@ -219,22 +219,27 @@ final class ROI_Calculator_Widget
                     </div>
                     <div class="roi-admin-modal__inner-modal" id="mail-modal">
                         <div class="roi-mail-modal">
-                            <form action="" method="post">
-                                <label>To:
-                                    <input type="email" name="roi-to" readonly />
-                                </label>
-                                <label>Subject:
-                                    <input type="text" name="roi-subject" />
-                                </label>
-                                <label>Your Message:
-                                    <textarea rows="10" cols="35" name="cf-message"></textarea>
-                                </label>
-                                <div class="roi-mail-modal__button-wrapper">
-                                    <span class="admin-button admin-button--confirm" id="roi-mail-confirm">Send</span>
+                            <form class="roi-mail-form">
+                                <div class="roi-mail-form__row">
+                                    <span class="roi-mail-form__label">To: <span class="roi-mail-form__to" id="roi-mail-to">anders@andersjson.com</span></span>
                                 </div>
-                                <div class="roi-mail-modal__button-wrapper">
-                                    <span class="admin-button admin-button--decline" id="roi-mail-decline">Cancel</span>
+                                <label class="roi-mail-form__row">
+                                    <span class="roi-mail-form__label">Subject:</span>
+                                    <input type="text" name="roi-subject" class="roi-mail-form__textinput" id="roi-mail-subject" />
+                                </label>
+                                <label class="roi-mail-form__row">
+                                    <span class="roi-mail-form__label">Message:</span>
+                                    <textarea class="roi-mail-form__textarea" id="roi-mail-message"></textarea>
+                                </label>
+                                <div class="roi-mail-form__row">
+                                    <div class="roi-mail-form__button-wrapper">
+                                        <span class="admin-button admin-button--confirm" id="roi-mail-confirm">Send</span>
+                                    </div>
+                                    <div class="roi-mail-form__button-wrapper">
+                                        <span class="admin-button admin-button--decline" id="roi-mail-decline">Cancel</span>
+                                    </div>
                                 </div>
+                                
                             </form>
                         </div>
                     </div>
