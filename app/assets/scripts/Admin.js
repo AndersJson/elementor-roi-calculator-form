@@ -10,6 +10,7 @@ class Admin{
     this.selectAll = $("#checkbox-select-all")[0];
     this.checkboxes;
     this.deleteIcons;
+    this.mailIcons;
     this.headerButtons = $("#roi-admin-controls");
     this.mailCount = $("#roi-mail-count");
     this.deleteCount = $("#roi-delete-count");
@@ -18,15 +19,20 @@ class Admin{
     this.deleteDecline = $("#roi-delete-decline");
     this.modalLayer = $("#admin-modal");
     this.deleteModal = $("#delete-modal");
+    this.mailModal = $("#mail-modal");
     this.deleteModalButtons = $("#delete-modal-buttons");
     this.deleteSelectedButton = $("#roi-delete-selected");
-    this.mailSelectedButtons = $("#roi-mail-selected");
+    this.mailSelectedButton = $("#roi-mail-selected");
     this.deleteText = $("#roi-delete-modal-text");
+    this.mailToText = $("#roi-mail-to");
+    this.mailCancelButton = $("#roi-mail-cancel");
+    this.mailSendButton = $("#roi-mail-send");
     
     //data
     this.selected = [];
     this.selectedMail = [];
     this.trashCan = [];
+    this.mailBox = [];
     this.selectedCount = 0;
     this.currentIndex = 0;
     this.lastId = 0;
@@ -46,6 +52,9 @@ class Admin{
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
     $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
     $(this.deleteConfirm).click(this.deleteData.bind(this));
+    $(this.mailSelectedButton).click(this.showMailModal.bind(this));
+    $(this.mailCancelButton).click(this.hideMailModal.bind(this));
+
   }
 
   init(){
@@ -71,8 +80,10 @@ class Admin{
           myClass.updateShowingCount();
           myClass.checkboxes = $(".checkbox__input");
           myClass.deleteIcons = $(".roi-icon-delete");
+          myClass.mailIcons = $(".roi-icon-mail");
           myClass.addCheckboxEventListener();
           myClass.addDeleteIconsEventListener();
+          myClass.addMailIconsEventListener();
           myClass.currentIndex = myClass.loadedData;
         }).fail(function(response) {
           console.log(response);
@@ -101,8 +112,10 @@ class Admin{
           myClass.updateShowingCount();
           myClass.checkboxes = $(".checkbox__input");
           myClass.deleteIcons = $(".roi-icon-delete");
+          myClass.mailIcons = $(".roi-icon-mail");
           myClass.addCheckboxEventListener();
           myClass.addDeleteIconsEventListener();
+          myClass.addMailIconsEventListener();
           myClass.currentIndex = myClass.loadedData;
         }).fail(function(response) {
           console.log(response);
@@ -172,8 +185,10 @@ class Admin{
         myClass.updateTotalCount();
         myClass.checkboxes = $(".checkbox__input");
         myClass.deleteIcons = $(".roi-icon-delete");
+        myClass.mailIcons = $(".roi-icon-mail");
         myClass.addCheckboxEventListener();
         myClass.addDeleteIconsEventListener();
+        myClass.addMailIconsEventListener();
         myClass.currentIndex = myClass.loadedData;
         myClass.selectAll.checked = false;
         $(myClass.headerButtons).addClass("roi-hidden");
@@ -278,7 +293,6 @@ class Admin{
             $(this.headerButtons).removeClass("roi-hidden");
             
           }
-          
         }else{
           let index = this.selected.indexOf(this.checkboxes[i].value);
           this.selected.splice(index, 1);
@@ -296,7 +310,7 @@ class Admin{
             $(this.mailCount).html(this.selectedCount);
             $(this.deleteCount).html(this.selectedCount);
           }, 300);
-          }          
+          } 
         }
       });
     }
@@ -307,6 +321,15 @@ class Admin{
       $(this.deleteIcons[i]).on("click", () => {
         this.trashCan.push($(this.deleteIcons[i]).data("id"));
         this.showDeleteModal();
+          });
+    }
+  }
+
+  addMailIconsEventListener(){
+    for (let i = this.currentIndex; i < this.mailIcons.length; i++){
+      $(this.mailIcons[i]).on("click", () => {
+        this.mailBox.push($(this.mailIcons[i]).data("mail"));
+        this.showMailModal();
           });
     }
   }
@@ -395,6 +418,35 @@ class Admin{
     }, 100);
   }
 
+  showMailModal(){
+    if (this.mailBox.length){
+      let to = this.mailBox[0];
+      this.mailToText.append(to);
+    }else if (this.selectedMail.length == 1){
+      let to = this.selectedMail[0];
+      this.mailToText.append(to);
+    }else{
+      let count = (this.selectedMail.length - 1);
+      let to = `${this.selectedMail[0]} (+${count} more)`;
+      this.mailToText.append(to);
+    }
+
+      $(this.modalLayer).removeClass("roi-hidden");
+      setTimeout(()=>{     
+        $(this.mailModal).css("right", "10%");
+      }, 100);
+  }
+
+  hideMailModal(){
+    if (this.mailBox.length){
+      this.mailBox = [];
+    }
+    $(this.mailModal).css("right", "-110%");
+    setTimeout(()=>{
+      $(this.modalLayer).addClass("roi-hidden");
+      this.mailToText.html("");
+    }, 100);
+  }
 
 }
 
