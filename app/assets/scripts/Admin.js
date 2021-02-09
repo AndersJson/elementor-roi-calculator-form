@@ -110,7 +110,8 @@ class Admin{
   }
 
   deleteData(){
-    this.deleteModalButtons.css("visibility", "hidden");
+    if (this.deleteIds.length) {
+      this.deleteModalButtons.css("visibility", "hidden");
     setTimeout(()=>{
       let output = 'Deleting...';
       this.deleteText.html("");
@@ -137,6 +138,7 @@ class Admin{
         }).fail(function(response) {
           console.log(response);
         })
+    }
   }
 
   resetData(){
