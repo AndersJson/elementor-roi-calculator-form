@@ -205,6 +205,10 @@ final class ROI_Calculator_Widget
                 <div class="roi-admin-modal roi-hidden" id="admin-modal">
                     <!-- Modals -->
                     <div class="roi-admin-modal__inner-modal" id="delete-modal">
+                        <div class="roi-modal-loading roi-hidden" id="delete-loading-layer">
+                            <span class="roi-modal-loading__text" id="delete-loading-text">
+                            </span>
+                        </div>
                         <div class="roi-delete-modal">
                             <span class="roi-delete-modal__text" id="roi-delete-modal-text"></span>
                             <div class="roi-delete-modal__buttons" id="delete-modal-buttons">
@@ -218,6 +222,10 @@ final class ROI_Calculator_Widget
                         </div>
                     </div>
                     <div class="roi-admin-modal__inner-modal" id="mail-modal">
+                        <div class="roi-modal-loading" id="mail-loading-layer">
+                            <span class="roi-modal-loading__text" id="mail-loading-text">
+                            </span>
+                        </div>
                         <div class="roi-mail-modal">
                             <form class="roi-mail-form">
                                 <div class="roi-mail-form__row">

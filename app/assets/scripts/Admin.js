@@ -27,6 +27,11 @@ class Admin{
     this.mailToText = $("#roi-mail-to");
     this.mailCancelButton = $("#roi-mail-cancel");
     this.mailSendButton = $("#roi-mail-send");
+    this.deleteLoadingLayer = $("#delete-loading-layer");
+    this.deleteLoadingText = $("#delete-loading-text");
+    this.mailLoadingLayer = $("#mail-loading-layer");
+    this.mailLoadingText = $("#mail-loading-text");
+
     
     //data
     this.selected = [];
@@ -124,11 +129,11 @@ class Admin{
 
   deleteData(){
     if (this.deleteIds.length) {
-      this.deleteModalButtons.css("visibility", "hidden");
+      this.deleteLoadingLayer.removeClass("roi-hidden");
     setTimeout(()=>{
       let output = 'Deleting...';
-      this.deleteText.html("");
-      this.deleteText.append(output);
+      this.deleteLoadingText.html("");
+      this.deleteLoadingText.append(output);
     }, 300);    
 
     let span = "single";
@@ -198,31 +203,30 @@ class Admin{
           }, 300);
 
         setTimeout(()=>{
-          myClass.deleteText.html("");
+          myClass.deleteLoadingText.html("");
           let output = 'Data deleted successfully.';
-          myClass.deleteText.append(output);
+          myClass.deleteLoadingText.append(output);
         }, 500);
         setTimeout(()=>{
           myClass.hideDeleteModal();
         }, 2000);
         setTimeout(()=>{
-          myClass.deleteText.html("");
-          myClass.deleteModalButtons.css("visibility", "visible");
+          myClass.deleteLoadingText.html("");
+          myClass.deleteLoadingLayer.addClass("roi-hidden");
         }, 2500);
         
       }).fail(function(response) {
         console.log(response);
         setTimeout(()=>{
-          myClass.deleteText.html("");
+          myClass.deleteLoadingText.html("");
           let output = 'Unable to delete data, try again later.';
-          myClass.deleteText.append(output);
+          myClass.deleteLoadingText.append(output);
         }, 500);
         setTimeout(()=>{
           myClass.hideDeleteModal();
         }, 2000);
         setTimeout(()=>{
-          myClass.deleteText.html("");
-          myClass.deleteModalButtons.css("visibility", "visible");
+          myClass.deleteLoadingText.html("");
         }, 2500);
       })
   }

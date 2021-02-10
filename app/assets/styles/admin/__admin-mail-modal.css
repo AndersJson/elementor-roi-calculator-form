@@ -1,3 +1,7 @@
+.roi-mail-modal{
+  position: relative;
+}
+
 .roi-mail-form{
   min-width: 350px;
 
