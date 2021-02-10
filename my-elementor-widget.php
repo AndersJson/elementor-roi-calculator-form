@@ -222,7 +222,7 @@ final class ROI_Calculator_Widget
                         </div>
                     </div>
                     <div class="roi-admin-modal__inner-modal" id="mail-modal">
-                        <div class="roi-modal-loading" id="mail-loading-layer">
+                        <div class="roi-modal-loading roi-hidden" id="mail-loading-layer">
                             <span class="roi-modal-loading__text" id="mail-loading-text">
                             </span>
                         </div>

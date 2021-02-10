@@ -3,7 +3,11 @@
 }
 
 .roi-mail-form{
-  min-width: 350px;
+  width: 500px;
+
+  @mixin phone{
+    width: 300px;
+  }
 
   &__row{
     width: 100%;
@@ -39,12 +43,13 @@
 
   &__textinput{
     flex: 1;
+    font-weight: 400;
   }
 
   &__textarea{
     flex: 1;
     min-height: 300px;
-
+    font-weight: 400;
   }
 
   &__button-wrapper{

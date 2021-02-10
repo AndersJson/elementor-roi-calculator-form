@@ -31,6 +31,9 @@ class Admin{
     this.deleteLoadingText = $("#delete-loading-text");
     this.mailLoadingLayer = $("#mail-loading-layer");
     this.mailLoadingText = $("#mail-loading-text");
+    this.mailSubject = $("#roi-mail-subject");
+    this.mailMessage = $("#roi-mail-message");
+
 
     
     //data
@@ -57,6 +60,7 @@ class Admin{
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
     $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
     $(this.deleteConfirm).click(this.deleteData.bind(this));
+    $(this.mailSendButton).click(this.sendMail.bind(this));
     $(this.mailSelectedButton).click(this.showMailModal.bind(this));
     $(this.mailCancelButton).click(this.hideMailModal.bind(this));
 
@@ -125,6 +129,68 @@ class Admin{
         }).fail(function(response) {
           console.log(response);
         })
+  }
+
+  sendMail(){
+    if (this.selectedMail.length || this.mailBox.length) {
+      this.mailLoadingLayer.removeClass("roi-hidden");
+      let output = 'Sending...';
+      this.mailLoadingText.html("");
+      this.mailLoadingText.append(output);  
+
+      let to = '';
+
+    if (this.mailBox.length){
+      to = this.mailBox[0];
+    }else if (this.selectedMail.length){
+      to = this.selectedMail.join(",");
+    }
+
+    let subject = $(this.mailSubject).val();
+    let message = $(this.mailMessage).val();
+
+    let myClass = this;
+      $.ajax({
+        url : roi_admin_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'send_user_mail',
+            send : 'yes',
+            to : to,
+            subject : subject,
+            message : message
+        }
+      }).done( function() {
+          setTimeout(()=>{
+          myClass.mailLoadingText.html("");
+          let output = 'Email(s) sent successfully!';
+          myClass.mailLoadingText.append(output);
+          }, 500);
+          setTimeout(()=>{
+            myClass.hideMailModal();
+          }, 2000);
+          setTimeout(()=>{
+            myClass.mailLoadingText.html("");
+            myClass.mailLoadingLayer.addClass("roi-hidden");
+          }, 2500);
+
+        }).fail(function(response) {
+          console.log(response);
+
+          setTimeout(()=>{
+          myClass.mailLoadingText.html("");
+          let output = 'Unable to send emails, try again later.';
+          myClass.mailLoadingText.append(output);
+          }, 500);
+          setTimeout(()=>{
+            myClass.hideMailModal();
+          }, 2000);
+          setTimeout(()=>{
+            myClass.mailLoadingText.html("");
+          }, 2500);
+        })
+
+    }
   }
 
   deleteData(){
@@ -228,26 +294,6 @@ class Admin{
         setTimeout(()=>{
           myClass.deleteLoadingText.html("");
         }, 2500);
-      })
-  }
-
-  sendMail(){
-    let myClass = this;
-
-      $.ajax({
-        url : roi_admin_ajax_script.ajaxurl,
-        type : 'post',
-        data : {
-            action : 'send_user_mail',
-            send : 'yes',
-            to : 'andersh_@hotmail.com',
-            subject : 'Testmail',
-            message : 'This is a testmail from Ajax-function'
-        }
-      }).done( function(response) {
-        console.log(response);
-      }).fail(function(response) {
-        console.log(response);
       })
   }
 
