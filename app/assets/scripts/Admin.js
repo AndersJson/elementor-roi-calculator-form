@@ -138,7 +138,6 @@ class Admin{
       let reset = 'no';
     if (this.showingUnique){
       reset = 'yes';
-      this.showingUnique = !this.showingUnique;
     }
 
     let myClass = this;
@@ -158,6 +157,10 @@ class Admin{
         if (myClass.showingUnique){
           myClass.table.html("");
           myClass.loadedData = 0;
+          myClass.currentIndex = 0;
+          myClass.subscribers = {};
+          myClass.showingUnique = !myClass.showingUnique;
+          myClass.selectAll.checked = false;
         }
         myClass.table.append(result["output"]);
         myClass.slideDownRows();
@@ -172,8 +175,6 @@ class Admin{
         myClass.addDeleteIconsEventListener();
         myClass.addMailIconsEventListener();
         myClass.currentIndex = myClass.loadedData;
-
-        console.log(result["subscribers"]);
 
       }).fail(function(response) {
         console.log(response);
@@ -200,9 +201,11 @@ class Admin{
         }
       }).done( function( response ) {
           myClass.loadedData = 0;
+          myClass.currentIndex = 0;
+          myClass.subscribers = {};
+          myClass.selectAll.checked = false;
 
           let result = $.parseJSON(response);
-          /*
           myClass.table.html("");
           myClass.table.append(result["output"]);
           myClass.slideDownRows();
@@ -216,10 +219,6 @@ class Admin{
           myClass.addDeleteIconsEventListener();
           myClass.addMailIconsEventListener();
           myClass.currentIndex = myClass.loadedData;
-          */
-          console.log(response["output"]);
-          console.log(response["subscribers"]);
-
         }).fail(function(response) {
           console.log(response);
         })
@@ -326,6 +325,11 @@ class Admin{
 
   resetData(){
     let myClass = this;
+    let unique = 'no';
+
+    if (this.showingUnique){
+      unique = 'yes'
+    }
 
     $.ajax({
       url : roi_admin_ajax_script.ajaxurl,
@@ -334,6 +338,7 @@ class Admin{
           action : 'get_user_data',
           datatype: 'json',
           reset : 'yes',
+          unique : unique,
           limit: myClass.loadedData
       }
     }).done( function( response ) {
@@ -425,10 +430,13 @@ class Admin{
     if (this.loadedData >= this.totalData){
       $(this.showMore).addClass("roi-hidden");
       $(this.showAllButton).addClass("roi-hidden");
-    }else if (this.showingUnique){
+    }
+    if (this.showingUnique){
       $(this.showAllUniqueButton).addClass("roi-hidden");
       $(this.showMore).addClass("roi-hidden");
-    }else if (!this.showingUnique && $(this.showAllUniqueButton).hasClass("roi-hidden") ){
+      $(this.showAllButton).removeClass("roi-hidden");
+    }
+    if (!this.showingUnique && $(this.showAllUniqueButton).hasClass("roi-hidden")){
       $(this.showAllUniqueButton).removeClass("roi-hidden");
     }
       $(this.showingCount).html(this.loadedData);

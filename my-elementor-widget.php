@@ -416,7 +416,7 @@ final class ROI_Calculator_Widget
                 $table = $wpdb->prefix . "roi_formsubscribers";
                 $output['output'] = ''; 
 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE email in (SELECT DISTINCT(email) from $table) GROUP BY id ORDER BY id DESC");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table GROUP BY email ORDER BY id DESC");
                 
                 foreach ( $subscribers as $subscriber ) {  
                     $date = $subscriber->time;  
@@ -448,7 +448,13 @@ final class ROI_Calculator_Widget
 
                 $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table"));
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
+
+                if ( isset($_POST['unique']) && $_POST['unique'] == 'yes' ){
+                    $subscribers = $wpdb->get_results("SELECT * FROM $table GROUP BY email ORDER BY id DESC LIMIT $limit");
+                } else if ( isset($_POST['unique']) && $_POST['unique'] == 'no' ){
+                    $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT $limit");
+                }
+
                 
                 foreach ( $subscribers as $subscriber ) {
                     $date = $subscriber->time;  
