@@ -34,10 +34,9 @@ class Admin{
     this.mailLoadingText = $("#mail-loading-text");
     this.mailSubject = $("#roi-mail-subject");
     this.mailMessage = $("#roi-mail-message");
-
-
     
     //data
+    this.showingUnique = false;
     this.selected = [];
     this.selectedMail = [];
     this.trashCan = [];
@@ -56,8 +55,9 @@ class Admin{
   }
 
   events(){
-    $(this.showMore).click(this.loadMore.bind(this));
+    $(this.showMore).click(this.loadMore.bind(this)); 
     $(this.showAllButton).click(this.showAll.bind(this));
+    $(this.showAllUniqueButton).click(this.showAllUnique.bind(this)); 
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
     $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
@@ -134,6 +134,13 @@ class Admin{
   }
 
   showAll(){
+    if (this.loadedData < this.totalData){
+      let reset = 'no';
+    if (this.showingUnique){
+      reset = 'yes';
+      this.showingUnique = !this.showingUnique;
+    }
+
     let myClass = this;
 
     $.ajax({
@@ -143,10 +150,15 @@ class Admin{
           action : 'get_user_data',
           datatype: 'json',
           showall : 'yes',
+          reset : reset,
           id : Number(myClass.lastId)
       }
     }).done( function( response ) {
         let result = $.parseJSON(response);
+        if (myClass.showingUnique){
+          myClass.table.html("");
+          myClass.loadedData = 0;
+        }
         myClass.table.append(result["output"]);
         myClass.slideDownRows();
         myClass.pushSubscribers(result["subscribers"]);
@@ -160,14 +172,66 @@ class Admin{
         myClass.addDeleteIconsEventListener();
         myClass.addMailIconsEventListener();
         myClass.currentIndex = myClass.loadedData;
+
+        console.log(result["subscribers"]);
+
       }).fail(function(response) {
         console.log(response);
       })
+    }else{
+      return;
+    }
+    
+  }
+
+  showAllUnique(){
+    if (!this.showingUnique){
+      this.showingUnique = !this.showingUnique
+
+      let myClass = this;
+
+      $.ajax({
+        url : roi_admin_ajax_script.ajaxurl,
+        type : 'post',
+        data : {
+            action : 'get_user_data',
+            datatype: 'json',
+            showunique : 'yes',
+        }
+      }).done( function( response ) {
+          myClass.loadedData = 0;
+
+          let result = $.parseJSON(response);
+          /*
+          myClass.table.html("");
+          myClass.table.append(result["output"]);
+          myClass.slideDownRows();
+          myClass.pushSubscribers(result["subscribers"]);
+          myClass.loadedData += Number(result["subscribers"].length);
+          myClass.updateShowingCount();
+          myClass.checkboxes = $(".checkbox__input");
+          myClass.deleteIcons = $(".roi-icon-delete");
+          myClass.mailIcons = $(".roi-icon-mail");
+          myClass.addCheckboxEventListener();
+          myClass.addDeleteIconsEventListener();
+          myClass.addMailIconsEventListener();
+          myClass.currentIndex = myClass.loadedData;
+          */
+          console.log(response["output"]);
+          console.log(response["subscribers"]);
+
+        }).fail(function(response) {
+          console.log(response);
+        })
+      }else{
+        return;
+      }
+    
   }
 
   sendMail(){
     if (this.selectedMail.length || this.mailBox.length) {
-      this.mailLoadingLayer.removeClass("roi-hidden");
+      this.mailLoadingLayer.css("display", "flex");
       let output = 'Sending...';
       this.mailLoadingText.html("");
       this.mailLoadingText.append(output);  
@@ -206,7 +270,7 @@ class Admin{
           }, 2000);
           setTimeout(()=>{
             myClass.mailLoadingText.html("");
-            myClass.mailLoadingLayer.addClass("roi-hidden");
+            myClass.mailLoadingLayer.css("display", "none");
           }, 2500);
 
         }).fail(function(response) {
@@ -230,7 +294,7 @@ class Admin{
 
   deleteData(){
     if (this.deleteIds.length) {
-      this.deleteLoadingLayer.removeClass("roi-hidden");
+      this.deleteLoadingLayer.css("display", "flex");
     setTimeout(()=>{
       let output = 'Deleting...';
       this.deleteLoadingText.html("");
@@ -313,7 +377,7 @@ class Admin{
         }, 2000);
         setTimeout(()=>{
           myClass.deleteLoadingText.html("");
-          myClass.deleteLoadingLayer.addClass("roi-hidden");
+          myClass.deleteLoadingLayer.css("display", "none");
         }, 2500);
         
       }).fail(function(response) {
@@ -361,6 +425,11 @@ class Admin{
     if (this.loadedData >= this.totalData){
       $(this.showMore).addClass("roi-hidden");
       $(this.showAllButton).addClass("roi-hidden");
+    }else if (this.showingUnique){
+      $(this.showAllUniqueButton).addClass("roi-hidden");
+      $(this.showMore).addClass("roi-hidden");
+    }else if (!this.showingUnique && $(this.showAllUniqueButton).hasClass("roi-hidden") ){
+      $(this.showAllUniqueButton).removeClass("roi-hidden");
     }
       $(this.showingCount).html(this.loadedData);
   }
