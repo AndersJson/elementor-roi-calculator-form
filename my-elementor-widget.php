@@ -272,6 +272,7 @@ final class ROI_Calculator_Widget
                                     </span>
                                 </div>
                                 <span class="roi-admin-header__button" id="roi-show-all">Show all</span>
+                                <span class="roi-admin-header__button" id="roi-show-all-unique">Show all unique</span>
                             </div>
                             <div class="roi-admin-header__controls roi-hidden" id="roi-admin-controls">
                                 <span class="roi-admin-header__button" id="roi-mail-selected">Mail selected (<span id="roi-mail-count"></span>)</span>
@@ -353,6 +354,36 @@ final class ROI_Calculator_Widget
 
                 $output['output'] = ''; 
                 $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY id DESC LIMIT 10");
+                
+                foreach ( $subscribers as $subscriber ) {  
+                    $date = $subscriber->time;  
+                    //converts date and time to seconds  
+                    $sec = strtotime($date);  
+                    //converts seconds into a specific dateformat  
+                    $newdate = date("Y-m-d", $sec); 
+                    //converts seconds into a specific timeformat  
+                    $newtime = date("H:i:s", $sec); 
+
+                    $output['output'] .= '<div class="roi-admin-table__row--wrapper roi-hidden">';                  
+                    $output['output'] .= '<div class="roi-admin-table__row"  data-id="' . $subscriber->id .'">';
+                    $output['output'] .= '<label class="roi-admin-table__row--label"><div class="roi-admin-table__check-cell"><input type="checkbox" id="checkbox-' . $subscriber->id . '" class="checkbox__input" name="selected-' . $subscriber->id .'" value="' . $subscriber->id .'" data-mail="' . $subscriber->email . '"/><span class="checkbox__icon"><svg class="checkbox__checkmark"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-check', dirname(__FILE__) ) ) . '"></use></svg></span></div><div class="roi-admin-table__cell"><p>' . $newdate . '<br>' . $newtime . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->firstname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->lastname . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->email . '</p></div><div class="roi-admin-table__cell"><p>' . $subscriber->phone . '</p></div></label><div class="roi-admin-table__options-cell"><a href="callto:' . $subscriber->phone . '"><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-phone" data-phone="' . $subscriber->phone . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-phone', dirname(__FILE__) ) ) . '"></use></svg></span></a><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-mail" data-mail="' . $subscriber->email . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-mail', dirname(__FILE__) ) ) . '"></use></svg></span><span class="roi-options__iconwrapper"><svg class="roi-options__icon roi-icon-delete" data-id="' . $subscriber->id . '"><use xlink:href="' . esc_url( plugins_url( 'roi-elementor-widget/app/adminsprite.svg#icon-trash', dirname(__FILE__) ) ) . '"></use></svg></span></div>';
+                    $output['output'] .= '</div>'; 
+                    $output['output'] .= '</div>';                                   
+                }
+
+                $output['subscribers'] = $subscribers;
+                $output['last'] = end($subscribers);     
+                echo json_encode($output);
+                die();
+            
+            } //SHOW ALL
+            else if ( isset($_POST['showall']) &&  $_POST['showall'] == 'yes' && isset($_POST['id'])){
+                global $wpdb;
+                $table = $wpdb->prefix . "roi_formsubscribers";
+                $id = $_POST['id'];
+
+                $output['output'] = ''; 
+                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY id");
                 
                 foreach ( $subscribers as $subscriber ) {  
                     $date = $subscriber->time;  

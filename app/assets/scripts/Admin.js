@@ -15,6 +15,7 @@ class Admin{
     this.mailCount = $("#roi-mail-count");
     this.deleteCount = $("#roi-delete-count");
     this.showAllButton = $("#roi-show-all");
+    this.showAllUniqueButton = $("#roi-show-all-unique");
     this.deleteConfirm = $("#roi-delete-confirm");
     this.deleteDecline = $("#roi-delete-decline");
     this.modalLayer = $("#admin-modal");
@@ -56,6 +57,7 @@ class Admin{
 
   events(){
     $(this.showMore).click(this.loadMore.bind(this));
+    $(this.showAllButton).click(this.showAll.bind(this));
     $(this.selectAll).change(this.toggleSelectAll.bind(this));
     $(this.deleteDecline).click(this.hideDeleteModal.bind(this));
     $(this.deleteSelectedButton).click(this.showDeleteModal.bind(this));
@@ -129,6 +131,38 @@ class Admin{
         }).fail(function(response) {
           console.log(response);
         })
+  }
+
+  showAll(){
+    let myClass = this;
+
+    $.ajax({
+      url : roi_admin_ajax_script.ajaxurl,
+      type : 'post',
+      data : {
+          action : 'get_user_data',
+          datatype: 'json',
+          showall : 'yes',
+          id : Number(myClass.lastId)
+      }
+    }).done( function( response ) {
+        let result = $.parseJSON(response);
+        myClass.table.append(result["output"]);
+        myClass.slideDownRows();
+        myClass.pushSubscribers(result["subscribers"]);
+        myClass.loadedData += Number(result["subscribers"].length);
+        myClass.lastId = Number(result["last"]["id"]);
+        myClass.updateShowingCount();
+        myClass.checkboxes = $(".checkbox__input");
+        myClass.deleteIcons = $(".roi-icon-delete");
+        myClass.mailIcons = $(".roi-icon-mail");
+        myClass.addCheckboxEventListener();
+        myClass.addDeleteIconsEventListener();
+        myClass.addMailIconsEventListener();
+        myClass.currentIndex = myClass.loadedData;
+      }).fail(function(response) {
+        console.log(response);
+      })
   }
 
   sendMail(){
