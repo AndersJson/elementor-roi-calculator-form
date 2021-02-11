@@ -147,7 +147,8 @@ class Admin{
     }
 
     let subject = $(this.mailSubject).val();
-    let message = $(this.mailMessage).val();
+    let rawMessage = $(this.mailMessage).val();
+    let message = rawMessage.replace(/\r\n|\r|\n/g, "<br>");
 
     let myClass = this;
       $.ajax({
