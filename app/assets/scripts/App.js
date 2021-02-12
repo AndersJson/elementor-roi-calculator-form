@@ -264,61 +264,59 @@ import '../styles/styles.css';
       }
 
     sendNotificationEmail(){
-      let firstname = this.firstLetterCapitol(this.firstname.value);
-      let lastname = this.firstLetterCapitol(this.lastname.value);
-      let email = this.email.value.toLowerCase();
-      let phone = this.phone.value;
-      let to = this.sendNotificationEmailAdresses;
+      if (this.sendNotificationEmailAdresses && this.sendNotificationEmailAdresses !== ''){
+        let testArray = this.sendNotificationEmailAdresses.replace(/\s+/g, '').split(",");
 
-      let subject = 'ROI Calculation submitted';
-      let message = `The ROI Calculation-form was submitted by:
-      ${firstname} ${lastname}
-      ${email}
-      ${phone}
-      
-      `;
-/*
-      let myClass = this;
-        $.ajax({
-          url : roi_admin_ajax_script.ajaxurl,
-          type : 'post',
-          data : {
-              action : 'send_user_mail',
-              send : 'yes',
-              to : to,
-              subject : subject,
-              message : message
+        for (let i = 0; i < testArray.length; i++){
+          if ( !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(testArray[i]) ){
+            console.log("Falsy email-adresses for notification.");
+            return false;
           }
-        }).done( function() {
-            setTimeout(()=>{
-            myClass.mailLoadingText.html("");
-            let output = 'Email(s) sent successfully!';
-            myClass.mailLoadingText.append(output);
-            }, 500);
-            setTimeout(()=>{
-              myClass.hideMailModal();
-            }, 2000);
-            setTimeout(()=>{
-              myClass.mailLoadingText.html("");
-              myClass.mailLoadingLayer.css("display", "none");
-            }, 2500);
+        }
+          
 
-          }).fail(function(response) {
-            console.log(response);
+        let firstname = this.firstLetterCapitol(this.firstname.value);
+        let lastname = this.firstLetterCapitol(this.lastname.value);
+        let email = this.email.value.toLowerCase();
+        let phone = this.phone.value;
+        let to = this.sendNotificationEmailAdresses;
 
-            setTimeout(()=>{
-            myClass.mailLoadingText.html("");
-            let output = 'Unable to send emails, try again later.';
-            myClass.mailLoadingText.append(output);
-            }, 500);
-            setTimeout(()=>{
-              myClass.hideMailModal();
-            }, 2000);
-            setTimeout(()=>{
-              myClass.mailLoadingText.html("");
-            }, 2500);
-          })
-  */
+        let subject = 'ROI Calculation-form submitted';
+        let rawMessage = `The ROI Calculation-form was just submitted by:
+
+        ${firstname} ${lastname}
+        ${email}
+        ${phone}
+
+        
+        This is an automatically sent notification to inform you that your ROI Calculator-form has been submitted.
+
+        <i>If you wish to change the email-adress or add more email-adresses to recieve these notification please go to the Elementor settings-screen of this widget.</i>
+        `;
+
+        let message = rawMessage.replace(/\r\n|\r|\n/g, "<br>");
+
+        let myClass = this;
+          $.ajax({
+            url : roi_ajax_script.ajaxurl,
+            type : 'post',
+            data : {
+                action : 'send_notification_mail',
+                send : 'yes',
+                to : to,
+                subject : subject,
+                message : message
+            }
+          }).done(function() {
+
+            }).fail(function(response) {
+              console.log(response);
+            })
+
+      }else{
+        return;
+      }
+      
     }
 
       insertData(e){
@@ -348,7 +346,7 @@ import '../styles/styles.css';
               scrollTop: ($(myClass.resultHeading).offset().top) - 50
             }, 1000 );
           }, 600 );
-          
+          myClass.sendNotificationEmail();
         }).fail(function(response) {
           $(myClass.calculateButton).html($(myClass.calculateButton).data("default"));
           console.log(response);

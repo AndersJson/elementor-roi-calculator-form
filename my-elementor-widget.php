@@ -532,7 +532,6 @@ final class ROI_Calculator_Widget
 
         function send_user_mail() {
 
-            // if the submit button is clicked, send the email
             if ( isset( $_POST['send'] ) && $_POST['send'] == 'yes' ) {
         
                 // sanitize form values
@@ -605,9 +604,38 @@ final class ROI_Calculator_Widget
             die();
         }
 
-        //Init Ajax-functions
+        //Send notification emails
+        function send_notification_mail(){
+            if ( isset( $_POST['send'] ) && $_POST['send'] == 'yes' ) {
+        
+                // sanitize form values
+                $to    = htmlentities( $_POST["to"] );
+                $subject   = htmlentities( $_POST["subject"] );
+                $message = $_POST["message"];
+        
+                $headers[] = "From: ROI Calculatior notification";
+                $headers[] = 'Content-Type: text/html; charset=UTF-8';
+        
+                // If email has been process for sending, display a success message
+                if ( wp_mail( $to, $subject, $message, $headers ) ) {
+                    echo 'Email(s) sent successfully!';
+                } else {
+                    echo 'An unexpected error occurred.';
+                }
+
+                die();
+            }
+            else{
+                die('No action initialized..');
+            }
+        }
+
+        //Init Ajax-functions 
         add_action('wp_ajax_nopriv_insert_user_data', 'insert_user_data');
         add_action('wp_ajax_insert_user_data', 'insert_user_data');
+        add_action('wp_ajax_nopriv_send_notification_mail', 'send_notification_mail');
+        add_action('wp_ajax_send_notification_mail', 'send_notification_mail');
+
         //Admin Ajax
         add_action('wp_ajax_get_user_data', 'get_user_data');
         add_action('wp_ajax_delete_user_data', 'delete_user_data'); 
