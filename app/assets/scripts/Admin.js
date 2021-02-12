@@ -47,7 +47,7 @@ class Admin{
     this.subscribers = {};
     this.loadedData = 0;
     this.totalData = 0;
-    this.limit = 10;
+    this.limit = 25;
     this.deleteIds = [];
 
     this.init();

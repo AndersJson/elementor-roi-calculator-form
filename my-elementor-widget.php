@@ -321,7 +321,7 @@ final class ROI_Calculator_Widget
 
                 $output['count'] = stripslashes_deep($wpdb->get_var("SELECT COUNT(*) FROM $table"));
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT 10");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table ORDER BY id DESC LIMIT 25");
                 
                 foreach ( $subscribers as $subscriber ) {  
                     $date = $subscriber->time;  
@@ -353,7 +353,7 @@ final class ROI_Calculator_Widget
                 $id = $_POST['id'];
 
                 $output['output'] = ''; 
-                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY id DESC LIMIT 10");
+                $subscribers = $wpdb->get_results("SELECT * FROM $table WHERE id < $id ORDER BY id DESC LIMIT 25");
                 
                 foreach ( $subscribers as $subscriber ) {  
                     $date = $subscriber->time;  
