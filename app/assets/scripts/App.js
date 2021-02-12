@@ -75,7 +75,9 @@ import '../styles/styles.css';
         this.timeRanges = time;
         this.calculateButton = $("#roi-submit-button");
         this.checklistWrapper = $("#roi-checklist-wrapper");
+
         //Data-properties
+        this.sendNotificationEmailAdresses = $("#roi-calculation-form").data("notification");
         this.minuteSalary = 0;
         this.hourSalary = 0;
         this.oneYearMinutesSaved = 0;
@@ -260,6 +262,64 @@ import '../styles/styles.css';
 
         this.insertData(e);
       }
+
+    sendNotificationEmail(){
+      let firstname = this.firstLetterCapitol(this.firstname.value);
+      let lastname = this.firstLetterCapitol(this.lastname.value);
+      let email = this.email.value.toLowerCase();
+      let phone = this.phone.value;
+      let to = this.sendNotificationEmailAdresses;
+
+      let subject = 'ROI Calculation submitted';
+      let message = `The ROI Calculation-form was submitted by:
+      ${firstname} ${lastname}
+      ${email}
+      ${phone}
+      
+      `;
+/*
+      let myClass = this;
+        $.ajax({
+          url : roi_admin_ajax_script.ajaxurl,
+          type : 'post',
+          data : {
+              action : 'send_user_mail',
+              send : 'yes',
+              to : to,
+              subject : subject,
+              message : message
+          }
+        }).done( function() {
+            setTimeout(()=>{
+            myClass.mailLoadingText.html("");
+            let output = 'Email(s) sent successfully!';
+            myClass.mailLoadingText.append(output);
+            }, 500);
+            setTimeout(()=>{
+              myClass.hideMailModal();
+            }, 2000);
+            setTimeout(()=>{
+              myClass.mailLoadingText.html("");
+              myClass.mailLoadingLayer.css("display", "none");
+            }, 2500);
+
+          }).fail(function(response) {
+            console.log(response);
+
+            setTimeout(()=>{
+            myClass.mailLoadingText.html("");
+            let output = 'Unable to send emails, try again later.';
+            myClass.mailLoadingText.append(output);
+            }, 500);
+            setTimeout(()=>{
+              myClass.hideMailModal();
+            }, 2000);
+            setTimeout(()=>{
+              myClass.mailLoadingText.html("");
+            }, 2500);
+          })
+  */
+    }
 
       insertData(e){
       let formdata = {

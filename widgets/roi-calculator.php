@@ -25,6 +25,44 @@ class ROI_Calculator_Widget extends Widget_Base {
     }
 
     public function _register_controls() {
+
+        $this->start_controls_section(
+            'general_using_settings',
+            [
+                'label' => __( 'General Settings', 'roi-calculator-widget' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'send_email_notification',
+            [
+                'label' => __( 'Send notification email', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'roi-calculator' ),
+                'label_off' => __( 'No', 'roi-calculator' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'notification_email',
+            [
+                'label' => __( 'Email(s): ', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'default' => __( get_option( 'admin_email' ), 'roi-calculator-widget' ),
+                'placeholder' => __( 'Enter email(s)', 'roi-calculator-widget' ),
+                'description' => 'Enter comma-separated list of emailadresses to recieve notification each time form is submitted.',
+                'condition' => [
+                    'send_email_notification' => 'yes'
+                ]
+            ]
+        );
+
+
+        $this->end_controls_section();
+
         // Typography Settings
         $this->start_controls_section(
             'typography_settings',
@@ -1330,7 +1368,7 @@ class ROI_Calculator_Widget extends Widget_Base {
             ]
         );
         
-        //Can-do SVG-icon anchor
+        //Can-do SVG-icon
         $candorepeater->add_control(
             'cando_icon',
 			[
@@ -2305,7 +2343,7 @@ class ROI_Calculator_Widget extends Widget_Base {
 
     <div class="roi-outer-wrapper">
         <section class="roi-inner-wrapper">
-                    <form class="roi-display-section mb-large" id="roi-calculation-form">                    
+                    <form class="roi-display-section mb-large" id="roi-calculation-form" data-notification="<?php echo $settings[ 'notification_email' ] ?>">                    
                         <div class="roi-row flex-space-between">
                             <label class="roi-left">
                                 <p class="roi-left__label checklist-label"><?php echo $settings[ 'checklist_label_text' ]; ?></p>
