@@ -279,7 +279,7 @@ import '../styles/styles.css';
         let lastname = this.firstLetterCapitol(this.lastname.value);
         let email = this.email.value.toLowerCase();
         let phone = this.phone.value;
-        let to = this.sendNotificationEmailAdresses;
+        let to = testArray.join(',');
 
         let subject = 'ROI Calculation-form submitted';
         let rawMessage = `The ROI Calculation-form was just submitted by:
