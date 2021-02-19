@@ -241,20 +241,19 @@ import '../styles/styles.css';
             this.oneYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
             this.threeYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
             this.fiveYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
-          
-            //hours to display
-            this.oneYearHoursDisplay += Math.round(this.oneYearMinutesSaved/60);
-            this.threeYearHoursDisplay += Math.round(this.threeYearMinutesSaved/60);
-            this.fiveYearHoursDisplay += Math.round(this.fiveYearMinutesSaved/60);
-
-            //money to display
-            this.oneYearMoneyDisplay += Math.round(this.oneYearHoursDisplay * this.hourSalary);
-            this.threeYearMoneyDisplay += Math.round(this.threeYearHoursDisplay * this.hourSalary);
-            this.fiveYearMoneyDisplay += Math.round(this.fiveYearHoursDisplay * this.hourSalary);
-
+           
           }
         }
 
+        //hours to display
+        this.oneYearHoursDisplay += Math.round(this.oneYearMinutesSaved/60);
+        this.threeYearHoursDisplay += Math.round(this.threeYearMinutesSaved/60);
+        this.fiveYearHoursDisplay += Math.round(this.fiveYearMinutesSaved/60);
+        
+        //money to display
+        this.oneYearMoneyDisplay = Math.round(this.oneYearHoursDisplay * this.hourSalary);
+        this.threeYearMoneyDisplay = Math.round(this.threeYearHoursDisplay * this.hourSalary);
+        this.fiveYearMoneyDisplay = Math.round(this.fiveYearHoursDisplay * this.hourSalary);
 
         this.displayMoneySaved(1);
         this.displayTimeSaved(1);
@@ -413,7 +412,12 @@ import '../styles/styles.css';
       let output;
 
       if (years == 1){ 
-        if (this.oneYearMoneyDisplay >= 1000){
+        if (this.oneYearMoneyDisplay >= 1000000){
+          output = `${Number((this.oneYearMoneyDisplay/1000000).toFixed(1))}M`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.oneYearMoneyDisplay/1000000).toFixed(0)}M`; 
+          }
+        }else if (this.oneYearMoneyDisplay >= 1000){
           output = `${Number((this.oneYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
             output = `${(this.oneYearMoneyDisplay/1000).toFixed(0)}k`; 
@@ -425,8 +429,13 @@ import '../styles/styles.css';
         $(this.moneySavedSpan).html(output);
       }
 
-      if (years == 3){ 
-        if (this.threeYearMoneyDisplay >= 1000){
+      if (years == 3){
+        if (this.threeYearMoneyDisplay >= 1000000){
+          output = `${Number((this.threeYearMoneyDisplay/1000000).toFixed(1))}M`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.threeYearMoneyDisplay/1000000).toFixed(0)}M`; 
+          }
+        }else if (this.threeYearMoneyDisplay >= 1000){
           output = `${Number((this.threeYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
             output = `${(this.threeYearMoneyDisplay/1000).toFixed(0)}k`; 
@@ -438,8 +447,13 @@ import '../styles/styles.css';
         $(this.moneySavedSpan).html(output);
       }
 
-      if (years == 5){ 
-        if (this.fiveYearMoneyDisplay >= 1000){
+      if (years == 5){
+        if (this.fiveYearMoneyDisplay >= 1000000){
+          output = `${Number((this.fiveYearMoneyDisplay/1000000).toFixed(1))}M`;
+          if (output[output.length - 1] == "0"){
+            output = `${(this.fiveYearMoneyDisplay/1000000).toFixed(0)}M`; 
+          }
+        }else if (this.fiveYearMoneyDisplay >= 1000){
           output = `${Number((this.fiveYearMoneyDisplay/1000).toFixed(1))}k`;
           if (output[output.length - 1] == "0"){
             output = `${(this.fiveYearMoneyDisplay/1000).toFixed(0)}k`; 

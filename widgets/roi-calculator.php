@@ -466,6 +466,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => __( 'Heading for Amount-range', 'roi-calculator-widget' ),
                     'label_block' => true,
                     'placeholder' => __( 'Header for amount-range', 'roi-calculator-widget' ),
+                    'description' => 'Set the span for the user to select the number of tasks/orders <strong>per month</strong>.'
                 ]
             );
 
@@ -570,6 +571,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => __( 'Heading for Time-range', 'roi-calculator-widget' ),
                     'label_block' => true,
                     'placeholder' => __( 'Header for Time-range', 'roi-calculator-widget' ),
+                    'description' => 'Set the span for the user to select the time spent <strong>in minutes per each</strong> task/order.'
                 ]
             );
 
