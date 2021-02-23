@@ -571,11 +571,11 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'default' => __( 'Heading for Time-range', 'roi-calculator-widget' ),
                     'label_block' => true,
                     'placeholder' => __( 'Header for Time-range', 'roi-calculator-widget' ),
-                    'description' => 'Set the span for the user to select the time spent <strong>in minutes per each</strong> task/order.'
+                    'description' => 'Set the span for the user to select the time spent per each task/order.'
                 ]
             );
 
-            // Checklist minutes or hours anchor
+            // Checklist minutes or hours 
             $repeater->add_control(
                 'checklist_time_range_minutes_hours',
                 [
@@ -599,7 +599,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'max' => 100000000,
                     'step' => 1,
                     'default' => 0,
-                    'description' => 'Min-value in <strong><u>minutes</u></strong>.'
+                    'description' => 'Min-value of the span.'
                 ]
             );
 
@@ -613,7 +613,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                     'max' => 100000000,
                     'step' => 1,
                     'default' => 10,
-                    'description' => 'Max-value in <strong><u>minutes</u></strong>.'
+                    'description' => 'Max-value of the span.'
                 ]
             );
 
@@ -1822,6 +1822,20 @@ class ROI_Calculator_Widget extends Widget_Base {
             [
                 'label' => __( 'Checklist', 'roi-calculator-widget' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Checklist Text Color 
+        $this->add_control(
+            'checklist_text_color',
+            [
+                'label' => __( 'Checklist Text-color', 'roi-calculator-widget' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#54595f',
+                'description' => 'Default: ( #54595f ) ',
+                'selectors' => [
+                    '{{WRAPPER}} .roi-checklist__labeltext ' => 'color: {{VALUE}}',
+                ],
             ]
         );
 
