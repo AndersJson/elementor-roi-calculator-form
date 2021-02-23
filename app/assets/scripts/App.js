@@ -228,19 +228,28 @@ import '../styles/styles.css';
           this.hourSalary = this.moneyRange.value;
         }
 
+        let timeSpent;
+
         for (let i = 0; i < this.checkboxes.length; i++){
 
           if (this.checkboxes[i].checked){
             let savePercent = $(this.checkboxes[i]).data("save")/100;
+
+            if ($(this.timeRanges[i]["rangeinput"]).data("timeformat") == "hours"){
+              timeSpent = ( Number(this.timeRanges[i].value) * 60 );
+            }else{
+              timeSpent = Number(this.timeRanges[i].value);
+            }
+            
             //calculate time saved in hours for current tab of years
-            this.oneYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent);
-            this.threeYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36) * savePercent);
-            this.fiveYearMinutesSaved += Math.floor(((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60) * savePercent);
+            this.oneYearMinutesSaved += Math.floor(((timeSpent * Number(this.amountRanges[i].value)) * 12) * savePercent);
+            this.threeYearMinutesSaved += Math.floor(((timeSpent * Number(this.amountRanges[i].value)) * 36) * savePercent);
+            this.fiveYearMinutesSaved += Math.floor(((timeSpent * Number(this.amountRanges[i].value)) * 60) * savePercent);
 
             //calculate money saved for current tab of years
-            this.oneYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
-            this.threeYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
-            this.fiveYearMoneySaved += Math.floor((((Number(this.timeRanges[i].value) * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
+            this.oneYearMoneySaved += Math.floor((((timeSpent * Number(this.amountRanges[i].value)) * 12) * savePercent) * this.minuteSalary );
+            this.threeYearMoneySaved += Math.floor((((timeSpent * Number(this.amountRanges[i].value)) * 36)* savePercent) * this.minuteSalary );
+            this.fiveYearMoneySaved += Math.floor((((timeSpent * Number(this.amountRanges[i].value)) * 60)* savePercent) * this.minuteSalary );
            
           }
         }
@@ -255,6 +264,7 @@ import '../styles/styles.css';
         this.threeYearMoneyDisplay = Math.round(this.threeYearHoursDisplay * this.hourSalary);
         this.fiveYearMoneyDisplay = Math.round(this.fiveYearHoursDisplay * this.hourSalary);
 
+        
         this.displayMoneySaved(1);
         this.displayTimeSaved(1);
         this.displayCouldDo(1);

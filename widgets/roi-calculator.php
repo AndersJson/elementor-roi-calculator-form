@@ -575,6 +575,20 @@ class ROI_Calculator_Widget extends Widget_Base {
                 ]
             );
 
+            // Checklist minutes or hours anchor
+            $repeater->add_control(
+                'checklist_time_range_minutes_hours',
+                [
+                    'label' => __( 'Timeformat on range-scale:', 'roi-calculator-widget' ),
+                    'type' => \Elementor\Controls_Manager::SELECT,
+                    'default' => 'minutes',
+                    'options' => [
+                        'minutes'  => __( 'Minutes', 'roi-calculator-widget' ),
+                        'hours' => __( 'Hours', 'roi-calculator-widget' ),
+                    ],
+                ]
+            );
+
             // Checklist Time-Range Min
             $repeater->add_control(
                 'checklist_time_range_min',
@@ -2407,7 +2421,7 @@ class ROI_Calculator_Widget extends Widget_Base {
                                             <div class="range__header mb-medium inset-small" id="timeheader_<?php echo $checklist_count ?>"><p><?php echo $item[ 'checklist_time_range_header_text' ] ?></p></div>
                                             <div class="range__wrapper checklist-range-wrapper inset-small mb-small" id="checklist-timerange_<?php echo $checklist_count ?>">
                                                 <div class="range__value checklist-range-value checklist-range-value__time" id="timevalue_<?php echo $checklist_count ?>"></div>
-                                                <input class="checklist-range__input checklist-range__time" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>">
+                                                <input class="checklist-range__input checklist-range__time" id="timeinput_<?php echo $checklist_count ?>" type="range" min="<?php echo $item[ 'checklist_time_range_min' ]; ?>" max="<?php echo $item[ 'checklist_time_range_max' ]; ?>" step="<?php echo $item[ 'checklist_time_range_step' ]; ?>" data-fill="<?php echo $item[ 'checklist_time_range_color' ]; ?>" data-timeformat="<?php echo $item[ 'checklist_time_range_minutes_hours' ];  ?>">
                                                 <?php if( $item[ 'show_checklist_time_range_labels' ] == 'yes' ) : ?>
                                                 <ul id="timelabellist_<?php echo $checklist_count ?>" class="checklist-range-labellist">
                                                 <?php
