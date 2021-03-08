@@ -156,13 +156,13 @@ import '../styles/styles.css';
           return false;
         }
         
-        if (!/^[-\sa-zA-ZåäöÅÄÖ]+$/.test(this.firstname.value)){
+        if (!/^[-\sa-zA-ZåäöÅÄÖüæøÜÆØ]+$/.test(this.firstname.value)){
           this.firstname.focus();
           $(this.firstname).addClass("roi-invalid");
           return false;
         }
 
-        if (!/^[-\sa-zA-ZåäöÅÄÖ]+$/.test(this.lastname.value)){
+        if (!/^[-\sa-zA-ZåäöÅÄÖüæøÜÆØ]+$/.test(this.lastname.value)){
           this.lastname.focus();
           $(this.lastname).addClass("roi-invalid");
           return false;
